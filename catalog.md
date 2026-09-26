@@ -7,6 +7,7 @@ quant-research/
 ├── THIRD_PARTY_NOTICES.md                          # 依赖许可与 PyBroker Commons Clause 声明。
 ├── .agents/skills/                                # 随项目分发的 quant-backtest、data-update、quant-tidy。
 ├── outputs/                                       # 本机示例产物，运行时生成并由 Git 忽略。
+├── .gitattributes                                 # 保持冻结数据与第三方许可文本的原始字节。
 ├── .gitignore                                      # 忽略本机环境、示例结果和未来运行产物；随包数据进入版本管理。
 ├── worktrees/                                      # 可见的轻量 Agent 工作树；只隔离执行，不保存唯一报告或数据副本。
 ├── AGENTS.md                                       # Agent 分流、并行隔离、run 恢复和数据边界的统一入口。
