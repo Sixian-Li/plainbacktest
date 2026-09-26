@@ -2,8 +2,6 @@
 
 [English](README.md) | **中文**
 
-**说清策略，严谨回测。**
-
 用日常语言说清策略，让 Agent 把想法变成明确的交易规则并执行回测。PlainBacktest 用独立账本核对逐笔订单和每日账户，保留成交时序、数据与代码哈希，以及可复现的报告，让结果经得起检查。
 
 源码与随包数据：[Sixian-Li/plainbacktest](https://github.com/Sixian-Li/plainbacktest)。

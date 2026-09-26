@@ -7,3 +7,4 @@
 - 公开发布至 `Sixian-Li/quant-research`，代码、三项 Skill 与数据一同版本化；Git checkout 保留冻结数据原始字节。
 - 仓库首页改为英文，新增独立中文 README，顶部通过 English / 中文链接互相切换。
 - 项目更名 PlainBacktest，采用“说清策略，严谨回测”定位；统一中英首页、仓库地址、数据署名与本地目录。
+- 中英文统一使用 PlainBacktest 名称，移除中文页的独立口号，保留双语说明和切换链接。
