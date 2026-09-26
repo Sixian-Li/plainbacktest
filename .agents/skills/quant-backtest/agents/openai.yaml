@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quant Backtest"
+  short_description: "Run verified interruption-safe Quant backtests"
+  default_prompt: "Use $quant-backtest to resume or build a verified program-classified experiment, publish a strategy-first report, and synchronize its combined and per-program evolution histories."

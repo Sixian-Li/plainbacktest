@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_sma_three_conditions_ablation_full_history_v1",
+  "created_at_utc": "2026-08-13T12:30:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "close_confirmed_sma_three_condition_regime",
+    "description": "QQQ 初始空仓。每个交易日收盘后检查三个持仓条件：Close 高于 SMA200；SMA30、SMA200、SMA250、SMA300 每一条都连续三个交易日严格增加；SMA200 严格高于 SMA250 且 SMA250 严格高于 SMA300。只有全部条件成立才目标持有，否则目标空仓；条件状态改变后的下一交易日 Open 全仓切换。同时运行完整规则与逐一移除条件 1、2、3 的三个消融版本。",
+    "buy_rule": "空仓且当日完成 Close 计算出的全部启用条件为真时产生买入信号；这是条件状态，不要求从假到真的穿越事件。完整策略启用三项条件；三个消融 case 各关闭且仅关闭一项。",
+    "sell_rule": "持仓且当日完成 Close 计算出的任一启用条件为假时产生卖出信号；下一交易日 Open 全仓卖出。最后一个数据日只盯市，不虚构数据范围外成交。",
+    "signal_time": "每个交易日常规时段 Close 完成后。SMA 使用含当日 Close 的已完成日线；连续三个交易日增加定义为 SMA(t)>SMA(t-1)>SMA(t-2)>SMA(t-3)，四条指定 SMA 必须各自同时满足。",
+    "execution_time": "信号后的下一交易日常规时段 Open，按明确 Open 成交；不允许同日 Close 成交或 PyBroker 默认 middle price。",
+    "position_sizing": "long-only，初始 100,000 美元现金；目标持有时用全部可用现金买入，目标空仓时卖出全部持仓；允许小数股，不融资，现金不计息。",
+    "initial_position": "数据起点空仓；所有 case 共享 SMA300 加三次日变化所需的完整预热，预热结束前保持现金。"
+  },
+  "parameters": {
+    "requested_start": "1999-03-10",
+    "analysis_start": "shared first bar after SMA300 plus three completed daily increases",
+    "analysis_end": "2026-08-04",
+    "sma_windows": [
+      30,
+      200,
+      250,
+      300
+    ],
+    "price_sma_window": 200,
+    "ordering_windows": [
+      200,
+      250,
+      300
+    ],
+    "rising_sessions": 3,
+    "rising_definition": "strictly positive SMA first difference on each of the last three completed trading sessions for every one of SMA30, SMA200, SMA250 and SMA300",
+    "cases": {
+      "all_conditions": "conditions 1 + 2 + 3",
+      "without_condition_1": "conditions 2 + 3 only",
+      "without_condition_2": "conditions 1 + 3 only",
+      "without_condition_3": "conditions 1 + 2 only"
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the shared post-warmup analysis start, invest the same 100,000 USD in QQQ at the following trading day's Open, matching the close-signal/next-open timing convention; hold through 2026-08-04 Close without artificial final liquidation.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged: the accepted K-line controls and multi-series equity/drawdown controls cover this four-case ablation without a strategy-independent template change."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "The conjunction of price, multi-horizon slope persistence, and long-SMA ordering will prioritize drawdown control; single-condition ablations reveal which gate contributes most and what return is sacrificed.",
+    "primary_metric": "Maximum drawdown is the sole selection priority; also report total return, CAGR, Sharpe, exposure and order count for interpretability, together with same-period QQQ Buy & Hold.",
+    "selection_rule": "No parameter selection. Compare the predeclared full rule and exactly three single-condition removals; rank drawdown only by the least negative maximum drawdown, while disclosing every return curve.",
+    "validation_plan": "All four cases must use identical dates, capital, zero-cost next-Open execution and shared warmup; each PyBroker daily cash, shares, equity, order and closed-trade ledger must match an independent reference ledger within 1e-8 locally and 1e-6 at the formal gate.",
+    "promotion_criteria": "None. A full-history ablation is descriptive and cannot advance directly to paper trading; any chosen rule requires later out-of-sample or walk-forward validation with costs.",
+    "rejection_conditions": "Reject if condition 2 is not implemented as three positive differences for all four SMAs, if inequalities are not strict, if a signal uses future or incomplete data, if execution is not next Open, if case dates differ, or if either ledger comparison fails."
+  }
+}

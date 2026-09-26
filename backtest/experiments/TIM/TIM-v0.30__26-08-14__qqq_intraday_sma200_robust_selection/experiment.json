@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma200_robust_selection_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_dynamic_sma200_robust_ab_selection",
+    "description": "完全沿用既有盘前可解的动态 SMA200 双阈值交易语义，固定 c=d=5%、5 bps 单边成本，在 2000-01-03 至 2025-12-31 连续运行每组 a/b；持仓、现金、成本价和上次卖出价跨年份连续传递，再以滚动五年下四分位、空仓重启十年敏感性、局部平台、PBO 和 DSR 选择唯一稳健代表，同时详细展示全历史 CAGR 与 Sharpe 机械冠军作为参照。",
+    "buy_rule": "空仓普通入场：前一完成 Close 不高于前一完成 SMA200×(1+b%) 时保留向上穿越资格；当日价格达到 P=(1+b%)×(此前199个完成Close之和+P)/200 时买入。已有卖出时，同时放置上次计成本卖出成交价×1.05 的纠错买回线；两条向上触发线取较低者优先。",
+    "sell_rule": "持仓时常驻普通卖出线 P=(1-a%)×(此前199个完成Close之和+P)/200，同时放置上次计成本买入成交价×0.95 的纠错卖出线；两条向下触发线取较高者优先。",
+    "signal_time": "每个常规交易日开盘前，只使用截至前一交易日 Close 的完成历史与既有实际账户成交价，解出当日全部资格和触发价。",
+    "execution_time": "若常规时段 Open 已越过预挂触发线则按 Open 成交，否则调整后日线 OHLC 触及时按精确理论线成交；随后施加单边5 bps不利成本；每日最多一笔。",
+    "positioning": "long-only；2000-01-03 以100,000美元现金空仓开始；每次买入投入全部现金、每次卖出清空全部份额；允许小数股，不融资，现金不计息。",
+    "sma_window": 200
+  },
+  "parameters": {
+    "analysis_start": "2000-01-03",
+    "analysis_end": "2025-12-31",
+    "requested_interval": "2000-01-01 inclusive to 2026-01-01 exclusive; normalized to available QQQ sessions",
+    "state_continuity": "Each a/b case runs once from analysis_start through analysis_end. Cash, shares, effective cost basis and last effective sell fill are never reset at calendar or rolling-window boundaries.",
+    "a_pct_range": {
+      "start": -2.0,
+      "stop": 10.0,
+      "step": 0.25
+    },
+    "b_pct_range": {
+      "start": -25.0,
+      "stop": 10.0,
+      "step": 0.25
+    },
+    "correction_pct": 5.0,
+    "correction_constraint": "c=d=5% fixed; not optimized",
+    "combination_count": 6909,
+    "max_trades_per_session": 1,
+    "rolling_five_year": {
+      "calendar_windows": "2000-2004 through 2021-2025, advancing one calendar year at a time",
+      "window_count": 22,
+      "state_handling": "Performance is rebased at each window boundary but strategy state is inherited from the single continuous run.",
+      "primary_statistic": "25th percentile of the 22 rolling five-year CAGRs (S5)"
+    },
+    "identifiability_gate": {
+      "minimum_order_count": 20,
+      "minimum_buy_sma_count": 5,
+      "minimum_sell_sma_count": 5,
+      "purpose": "Exclude one-entry hold artifacts and cases in which the ordinary a/b rules were not meaningfully exercised. Correction counts are reported but not gated."
+    },
+    "restart_sensitivity": {
+      "start_years": [
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "duration": "ten calendar years inclusive, ending December 31 of start_year+9",
+      "initial_state": "Each sensitivity run independently restarts flat with 100,000 USD; pre-start data is warmup only.",
+      "statistic": "25th percentile of the 17 ten-year restart CAGRs (S10)",
+      "gate_quantile": 0.75,
+      "gate": "S10 must be strictly positive and at or above the 75th percentile among identifiable cases. This is a gate, not a weighted objective."
+    },
+    "stable_plateau": {
+      "top_quantile": 0.9,
+      "connectivity": "four-neighbor connectivity among restart-gated cases in the top decile of S5",
+      "component_rule": "Choose the largest component; ties prefer the higher component-median S5.",
+      "minimum_a_span_pct": 1.0,
+      "minimum_b_span_pct": 2.0,
+      "search_boundary_must_be_clear": true,
+      "local_a_radius_pct": 0.5,
+      "local_b_radius_pct": 1.0,
+      "local_score": "median S5 over a±0.5%, b±1.0% minus 0.5 times its population standard deviation",
+      "representative_tiebreakers": "higher S10, then closer to component geometric centroid, then higher point S5"
+    },
+    "pbo": {
+      "method": "Combinatorially Symmetric Cross-Validation over 12 contiguous approximately equal-bar blocks",
+      "block_count": 12,
+      "train_block_count": 6,
+      "split_count": 924,
+      "selection_metric": "annualized daily Sharpe reconstructed from block return moments",
+      "strategy_universe": "all full-history cases that pass the identifiability gate",
+      "overfit_event": "the in-sample Sharpe winner ranks at or below the median on the complementary blocks",
+      "maximum_pbo": 0.2
+    },
+    "dsr": {
+      "minimum_probability": 0.95,
+      "primary_trial_count": "correlation-adjusted effective number of identifiable strategies using 12-block log-return vectors",
+      "reported_sensitivities": [
+        "effective correlated trials",
+        "all 6,909 current-grid trials",
+        "473,487 conservative historical trial upper bound"
+      ],
+      "conservative_historical_trial_upper_bound": 473487,
+      "historical_count_basis": "three prior 155,526-case a/b/cost scans plus the current 6,909-case grid; deliberately conservative and not de-duplicated",
+      "candidate": "the single stable representative chosen before DSR is evaluated"
+    },
+    "reference_anchor": {
+      "a_pct": 3.0,
+      "b_pct": -12.75,
+      "purpose": "Predeclared comparison only; it receives no preference in selection."
+    },
+    "supplementary_metrics": {
+      "full_history_cagr": "Show the complete surface and formally verify its mechanical maximum; never replace S5 as the primary objective.",
+      "full_history_sharpe": "Show the complete surface and formally verify its mechanical maximum; never replace S5 as the primary objective.",
+      "rolling_five_year_sharpe": "Report lower quartile and median for interpretation only.",
+      "risk_and_activity": "Report maximum drawdown, exposure and all signal counts, but do not impose the previously rejected drawdown or longest-cash gates."
+    },
+    "final_decision": "The unique representative passes only if the plateau span/boundary test, PBO<=20%, and effective-trials DSR>=95% all pass. If any fails, conclude that no credible fixed a/b has yet been established; do not substitute the runner-up."
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Invest the same 100,000 USD at the 2000-01-03 regular-session Open with 5 bps adverse entry cost and hold QQQ through 2025-12-31. The benchmark is descriptive and does not enter parameter selection.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged. Build experiment-specific S5, S10, full-history CAGR and Sharpe heatmaps plus candidate/window diagnostics in the analyzer; do not promote those research-specific plots into the generic template.",
+    "report_title": "QQQ SMA200 a/b 全历史稳健选参",
+    "report_subtitle": "连续状态滚动五年下分位为主；十年空仓起点、局部平台、PBO/DSR 为门禁；全历史 CAGR 与 Sharpe 为详细参照。"
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "固定 c=d=5% 后，a 大约0%至6%、b 大约-20%至-10%附近可能存在一个不依赖单一历史起点、且在滚动五年下限与十年空仓重启中仍然稳定的宽参数平台。",
+    "primary_metric": "S5: the 25th percentile of 22 state-preserving rolling five-year CAGRs. Full-history CAGR and Sharpe are detailed supplementary surfaces and cannot override S5.",
+    "selection_rule": "Apply the declared activity gate; apply the positive/top-quartile S10 restart gate; take the largest four-neighbor component among gated top-decile S5 cells; require declared a/b spans and no search-boundary contact; select the highest declared local robustness score with frozen tie-breakers. Evaluate PBO and DSR only after this unique representative is fixed.",
+    "validation_plan": "Save all 6,909 full-history cases, all 22 rolling-window results, all 17 flat-restart results, all 924 CSCV splits and statistical summaries. Formally reconcile the unique representative, full-history CAGR maximum, full-history Sharpe maximum, S5 maximum, S10 maximum and predeclared anchor with PyBroker and the independent daily ledger within 1e-6. Require tests, source/artifact hashes, workspace audit and real Chrome report interaction.",
+    "promotion_criteria": "No direct promotion from this in-sample research. A fixed candidate is only nominated when the plateau structural gate, PBO<=20% and effective-trials DSR>=95% all pass; once frozen, 2026 onward remains the chronological forward period and may not be used to retune a/b.",
+    "rejection_conditions": "Reject the fixed-parameter claim if no identifiable cases survive, the stable component is too narrow or touches a search boundary, PBO exceeds 20%, effective-trials DSR is below 95%, the result depends on replacing the predeclared primary objective with full-history CAGR/Sharpe, or any accounting, timing, count, hash, test, audit or browser gate fails."
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_stochrsi_true124_position_gate_comparison_2015_2026_v1",
+  "created_at_utc": "2026-08-26T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_stochrsi_true124_position_gate_comparison",
+    "description": "Correct TIM-v0.80a.3's mother-selection mismatch and compare the user's true strategy 1, strategy 2 and strategy 4. Mother 1 is the frozen D0_F0_S0 accumulation and dual-pool process. Mother 2 is frozen D0_F1_S1, which adds the short- and long-period sparse recovery entries. Mother 4 is the pruned accumulation process: normal and extreme oversold entries are capped at 15% and 30% QQQ weight, two strict 0.20 recovery crossings buy remaining cash, Pool A is the sole staged exit mechanism, and a strict StochRSI100 downcross below 0.20 exits the residual position. Each mother produces three independent fixed-capital all-in-or-cash accounts based on whether the mother's completed same-Close QQQ weight is strictly greater than 70%, 80% or 90%.",
+    "buy_rule": "Mother 1 and Mother 2 preserve their frozen rules. Mother 4 buys 5% of remaining cash on each Close with both StochRSI42 and StochRSI100 below 0.20, capped at 15% QQQ weight; on the more extreme asymmetric 0.01/0.05 condition it instead buys 20% of remaining cash, capped at 30% total QQQ weight. It also buys 40% of remaining cash on a strict StochRSI42 upcross above 0.20 while StochRSI100 is above 0.20, or 50% on a strict StochRSI100 upcross above 0.20; the long-period 50% rule supersedes the short-period rule on the same Close. A gate buys all-in QQQ when its source mother's completed post-trade QQQ weight is strictly greater than its threshold.",
+    "sell_rule": "Mother 1 and Mother 2 preserve their frozen dual-pool exits. In Mother 4, every Close with StochRSI100 above 0.80 adds 1% of currently held shares to Pool A. After Pool A has started, a strict StochRSI100 downcross below 0.50 sells Pool A only and clears it. A strict downcross below 0.20 has priority, sells all remaining QQQ and clears Pool A. Any sale blocks same-Close buys. A gate sells all QQQ whenever the source mother's completed post-trade weight is not strictly greater than its threshold; equality is cash.",
+    "signal_time": "All StochRSI levels, strict crossings, position caps and mother post-trade QQQ weights use completed current adjusted-Close data. A gate reads its mother's deterministic completed post-trade weight on that same Close.",
+    "execution_time": "All Mother 4 and gate orders execute at the same adjusted Close that confirms the signal, with zero transaction cost. Mother 1 and Mother 2 retain their previously frozen execution rules, including their theoretical fast-drop exception; gates never inherit that theoretical price.",
+    "positioning": "Long-only fractional QQQ and cash. Every account starts with $100,000. Mother 1 and Mother 2 may add external cash only under their frozen minimum-buy rules and each is paired with contribution-matched QQQ Buy & Hold. Mother 4 and all nine gate accounts never add external cash. Gates copy only a binary position signal, not mother cash flows or position size.",
+    "plain_language": {
+      "summary": "纠正上一版的母策略编号，比较真正的策略1、策略2和精简后的累计仓位策略4，并把三者的仓位转换成全仓或空仓信号。",
+      "buy": "三条母策略按各自规则增加QQQ；九条独立择时账户只在对应母策略的QQQ仓位严格高于70%、80%或90%时全仓买入。",
+      "sell": "三条母策略按各自规则减仓；择时账户一旦不再严格高于门槛，就把QQQ全部卖出并持有现金。",
+      "execution": "当天收盘确认并按当天收盘成交；母策略先完成交易，择时账户再读取母策略当天收盘后的仓位。",
+      "position": "所有账户从10万美元开始；两个原累计策略的必要追加现金只同步进入各自基准，精简策略和九条全仓空仓账户不追加本金。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2015-01-02",
+    "analysis_end": "2026-08-04",
+    "mother_strategies": [
+      {
+        "mother_id": "M1_D0_F0_S0",
+        "definition": "TIM-v0.80a.2 D0_F0_S0"
+      },
+      {
+        "mother_id": "M2_D0_F1_S1",
+        "definition": "TIM-v0.80a.2 D0_F1_S1"
+      },
+      {
+        "mother_id": "M4_PRUNED_ACCUMULATION",
+        "definition": "Pruned accumulation with capped oversold entries, recovery entries, Pool A only and deep-failure exit"
+      }
+    ],
+    "pruned_accumulation": {
+      "stochrsi_periods": [
+        42,
+        100
+      ],
+      "normal_low_threshold": 0.2,
+      "normal_low_cash_fraction": 0.05,
+      "normal_low_position_cap": 0.15,
+      "extreme_low_short_threshold": 0.01,
+      "extreme_low_long_threshold": 0.05,
+      "extreme_low_cash_fraction": 0.2,
+      "extreme_low_position_cap": 0.3,
+      "short_recovery_threshold": 0.2,
+      "short_recovery_long_filter": 0.2,
+      "short_recovery_cash_fraction": 0.4,
+      "long_recovery_threshold": 0.2,
+      "long_recovery_cash_fraction": 0.5,
+      "same_close_buy_priority": [
+        "extreme_low_over_normal_low",
+        "long_recovery_over_short_recovery"
+      ],
+      "pool_a_arm_threshold": 0.8,
+      "pool_a_daily_add_fraction_of_current_shares": 0.01,
+      "pool_a_exit_threshold": 0.5,
+      "deep_failure_exit_threshold": 0.2,
+      "deep_failure_priority_over_pool_a_exit": true,
+      "ordinary_sale_blocks_same_close_buy": true,
+      "external_contributions": false,
+      "same_close_execution": true
+    },
+    "position_gate_thresholds": [
+      0.7,
+      0.8,
+      0.9
+    ],
+    "position_gate_operator": "strictly greater than",
+    "gate_signal_source": "mother post-trade QQQ market value divided by mother equity on the same Close",
+    "gate_capital_policy": "independent fixed $100,000 initial capital; no external contributions",
+    "strategy_path_count": 12,
+    "final_comparison_paths": "nine position gates plus naive QQQ Buy & Hold",
+    "holding_period_cagr": {
+      "definition": "geometric time compression of calendar CAGR over the fraction of trading sessions with shares greater than zero",
+      "formula": "(1 + calendar_cagr) ** (1 / holding_time_fraction) - 1",
+      "cash_return_assumption": 0.0,
+      "interpretation": "descriptive intensity metric, not a separately simulated return or subperiod IRR"
+    },
+    "performance_return_method_with_flows": "daily time-weighted returns; XIRR also reported"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000.0,
+  "financing": "No leverage or borrowing. Only Mother 1 and Mother 2's frozen minimum-buy shortfalls may add external cash; Mother 4 and all gates cannot.",
+  "benchmark": "Mother 1 and Mother 2 each have contribution-matched QQQ Buy & Hold. Mother 4 and all nine fixed-capital gates compare directly with naive QQQ Buy & Hold.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged. Add holding-period CAGR to the result table and preserve the mother-group equity, capital and final ten-line comparison panels."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "The user's pruned strategy 4 may preserve a cleaner trend-membership signal than the mistakenly substituted four-state process, and the holding-period CAGR can show the geometric return intensity of each binary gate while exposure remains explicit.",
+    "primary_metric": "For the nine fixed-capital gates: calendar CAGR, holding-period CAGR, holding-time fraction, Sharpe, maximum drawdown and average exposure versus naive QQQ. For Mother 1 and Mother 2: cash-flow-adjusted CAGR, Sharpe, drawdown and XIRR versus contribution-matched Buy & Hold.",
+    "selection_rule": "Report all 12 predeclared strategy paths without selecting a winner. The nine gates are the only common-capital final comparison. Holding-period CAGR must always be shown beside calendar CAGR and exposure and cannot be used alone to rank paths.",
+    "validation_plan": "Reconcile every mother and gate order, daily cash, shares, equity and FIFO trade against compiled PyBroker replay; verify Mother 4 caps, buy priority, Pool A exclusivity, deep-failure priority, strict gate equality, no gate contributions and the holding-period CAGR identity.",
+    "promotion_criteria": "A gate is a rotation-signal candidate only if its calendar return, drawdown, exposure and holding-period return intensity are jointly useful versus naive QQQ and it does not depend on external contributions.",
+    "rejection_conditions": "Reject any path if reconciliation fails, Mother 4 exceeds a frozen low-entry cap because of that entry, Mother 4 retains deleted Pool B or residual-sale logic, a gate receives external cash, equality enters QQQ, or holding-period CAGR is calculated from average dollar weight instead of time with any position."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

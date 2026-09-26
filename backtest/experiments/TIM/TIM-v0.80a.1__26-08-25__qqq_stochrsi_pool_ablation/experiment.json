@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_stochrsi_scaled_pool_structural_ablation_2015_2026_v1",
+  "created_at_utc": "2026-08-25T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_stochrsi_scaled_pool_structural_ablation",
+    "description": "Six zero-cost long-only QQQ cases over the same 2015-2026 window isolate Pool B, Pool A daily decay, the B1 a/4 floor, the B2 0.6b floor, and a deferred-entry alternative from the frozen TIM-v0.80 state machine. The FULL case is unchanged. In DEFERRED_BUY_CROSS_040, every B1/B2 signal computes the same virtual tranche sequence against virtual remaining cash, including a/b floors and B2 priority, but holds the notional pending rather than buying QQQ. Pending floor shortfalls are contributed only when raw StochRSI100 strictly crosses from <=0.40 to >0.40; the pending total then buys at that Close. Any actual sale cancels pending tranches and resets virtual cash, a, b, and B2 count. Other cases each disable exactly one named rule.",
+    "buy_rule": "FULL preserves the frozen B1/B2 rules. NO_POOL_B and NO_A_DAILY_DECAY change only sells. NO_B1_FLOOR removes max(5% cash,a/4) so B1 spends 5% cash. NO_B2_FLOOR removes the 0.6b minimum from B2 signals five onward while preserving the 20/30/40/30% sequence. DEFERRED_BUY_CROSS_040 queues each B1/B2 virtual notional, with B2 superseding B1, and executes one combined buy only on a strict raw StochRSI100 upcross from <=0.40 to >0.40; an ordinary sale blocks and cancels the queue, while the existing fast-drop sale can start a fresh queue after selling but cannot itself trigger the 0.40 upcross buy.",
+    "sell_rule": "FULL preserves both virtual-pool mechanisms. NO_POOL_B never accumulates or sells Pool B. NO_A_DAILY_DECAY does not sell 20% of Pool A in the 0.50-0.80 zone but retains Pool A accumulation and the armed downcross below 0.50 sale of all Pool A plus 65% of other shares. The other three cases preserve all frozen sell rules. Every positive sale resets a, b, B2 count, and any deferred queue.",
+    "signal_time": "All ordinary states, ablations, and the deferred 0.40 upcross use completed adjusted Close data. The unchanged fast-drop special case uses prior completed indicator state and its frozen provisional-price equation.",
+    "execution_time": "Ordinary sales and buys, including the deferred combined buy, fill at the same adjusted Close that confirms the signal. The unchanged strict fast-drop override fills at the theoretical StochRSI100=0.30 price without an OHLC-touch gate.",
+    "positioning": "Long-only fractional QQQ and cash from $100,000 initial capital. Each case has its own external cash path and its own contribution-matched Buy & Hold. The deferred case reserves virtual tranches without removing actual cash, contributes any accumulated floor shortfall only at the combined fill, and never spends more than actual cash plus that dated contribution.",
+    "plain_language": {
+      "summary": "用六个固定版本拆开检验原策略中哪些补仓和减仓模块真正改善收益与回撤。",
+      "buy": "五个版本沿用低位分批买入但各删除一个指定模块；第六个版本先累计计划买入金额，等长周期指标上穿0.4再一次买入。",
+      "sell": "卖出原则沿用原策略，只有删除Pool B或取消Pool A每日递减的版本不执行对应卖法。",
+      "execution": "当天收盘确认并按同一收盘价成交；原策略的快速下跌特例仍按指标0.30对应的理论价格先卖。",
+      "position": "每个版本独立持有QQQ和现金，必要追加本金分别同步给自己的Modified Buy & Hold作公平比较。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2015-01-02",
+    "analysis_end": "2026-08-04",
+    "stochrsi_periods": [
+      42,
+      100
+    ],
+    "ablation_cases": [
+      {
+        "case_id": "FULL",
+        "change": "none"
+      },
+      {
+        "case_id": "NO_POOL_B",
+        "change": "disable all Pool B accumulation and sales"
+      },
+      {
+        "case_id": "NO_A_DAILY_DECAY",
+        "change": "disable the daily 20% Pool A decay sale only"
+      },
+      {
+        "case_id": "NO_B1_FLOOR",
+        "change": "disable the B1 a/4 minimum"
+      },
+      {
+        "case_id": "NO_B2_FLOOR",
+        "change": "disable the B2 0.6b minimum"
+      },
+      {
+        "case_id": "DEFERRED_BUY_CROSS_040",
+        "change": "queue virtual B1/B2 notionals and combine-buy on strict StochRSI100 upcross above 0.40"
+      }
+    ],
+    "deferred_queue_sizing": "Virtual remaining cash follows the counterfactual immediate-buy cash path; a and b use queued dollar notionals. External cash is recognized only at the combined fill. Any actual sale cancels the queue.",
+    "same_close_execution": true,
+    "fast_drop_ignores_ohlc_touch": true,
+    "performance_return_method_with_flows": "daily time weighted returns; XIRR also reported"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000.0,
+  "financing": "No leverage or borrowing. Frozen minimum-buy shortfalls remain explicit external contributions except where the relevant floor is ablated; each flow is mirrored into that case's modified Buy & Hold.",
+  "benchmark": "Each strategy case is compared with its own contribution-matched QQQ Buy & Hold; naive Buy & Hold invests only the initial $100,000 at the first analysis Close.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged. The experiment-specific figures add a QQQ-position-value versus cash panel and expose position value and cash alongside strategy equity in the performance view."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "One or more structural simplifications can retain most of TIM-v0.80's drawdown improvement while reducing CAGR drag, turnover, or external-capital demand; deferred confirmation above 0.40 may improve entry timing without changing the frozen low-state sizing schedule.",
+    "primary_metric": "CAGR gap and maximum-drawdown improvement versus each case's contribution-matched Buy & Hold, interpreted with Sharpe, XIRR, external contributions, turnover, average QQQ weight, and order attribution",
+    "selection_rule": "Evaluate all six predeclared cases without post-result substitution. Prefer the Pareto set; do not name a single winner unless it has Sharpe at least matched Buy & Hold, drawdown improvement at least 8 percentage points, and CAGR gap no worse than -2 percentage points.",
+    "validation_plan": "Reconcile every case's orders, contributions, daily cash/shares/equity and FIFO trades against compiled PyBroker replay; audit the deferred queue and exact 0.40 crossings; treat the full interval as exploratory.",
+    "promotion_criteria": "A simpler or deferred case passes all ledgers and report gates and materially improves the frozen return/drawdown/capital-demand tradeoff without relying on the OHLC-unchecked fast-drop fill.",
+    "rejection_conditions": "Reject a case if reconciliation fails, virtual pools exceed shares, deferred pending notional is lost or double-counted, contributions are not mirrored, or improvement depends on an untriggered/idealized event."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

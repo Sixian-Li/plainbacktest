@@ -1,0 +1,635 @@
+{
+  "schema_version": 1,
+  "dataset_id": "subjective_spy_qqq_bear_market_candidates_v2",
+  "generated_at_utc": "2026-08-13T16:23:13.247935Z",
+  "description": "User-drawn subjective QQQ/SPY bear-market candidate windows refined into major and minor decline intervals.",
+  "subjective_boundaries_preserved": true,
+  "candidate_boundaries_preserved_as_fields": true,
+  "boundary_policy": {
+    "name": "preserve",
+    "rule": "preserve each user-drawn candidate window",
+    "never_expands_beyond_candidate_window": true,
+    "post_trough_rebound_excluded": false
+  },
+  "interval_semantics": "inclusive start and end trading sessions; refined intervals are sorted and non-overlapping",
+  "severity_policy": {
+    "major": "QQQ or SPY interval maximum drawdown is at least 20%",
+    "minor": "both QQQ and SPY interval maximum drawdowns are less than 20%",
+    "threshold": 0.2,
+    "uses_worst_of_symbols": [
+      "QQQ",
+      "SPY"
+    ]
+  },
+  "counts": {
+    "total": 12,
+    "major": 6,
+    "minor": 6
+  },
+  "source_export": {
+    "path": "../research/market_views/subjective_spy_qqq_bear_markets_source.json",
+    "sha256": "3c9006e55fb5c86106846f16d6b0cb5af17dea0c2c2dc0ad2c21f73c83c28e1f",
+    "view_id": "spy_qqq_bear_market_annotator_v1",
+    "exported_at": "2026-08-13T15:35:25.046Z"
+  },
+  "price_sources": {
+    "QQQ": {
+      "path": "../data/processed/daily/QQQ.csv",
+      "sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df"
+    },
+    "SPY": {
+      "path": "../data/processed/daily/SPY.csv",
+      "sha256": "6b07e1636b1ecc276f17d6d474bb9ec864f7efe829d955c1f83d9f84088f4313"
+    }
+  },
+  "intervals": [
+    {
+      "ordinal": 1,
+      "interval_id": "subjective_bear_01",
+      "source_interval_id": "bear-msro9inm-addcb1",
+      "source_label": "熊市 1",
+      "label": "大熊市 01",
+      "severity": "major",
+      "start": "2000-03-21",
+      "end": "2002-11-27",
+      "trading_sessions": 676,
+      "note": "",
+      "candidate_window": {
+        "start": "2000-03-21",
+        "end": "2002-11-27",
+        "trading_sessions": 676
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.8298197182614617,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 93.8149,
+        "end_close": 23.483175,
+        "total_return": -0.7496860839802633,
+        "max_drawdown": -0.8298197182614617,
+        "drawdown_peak_date": "2000-03-24",
+        "drawdown_trough_date": "2002-10-09",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 676
+      },
+      "SPY": {
+        "start_close": 93.715485,
+        "end_close": 61.118645,
+        "total_return": -0.34782768290640553,
+        "max_drawdown": -0.4751429461918568,
+        "drawdown_peak_date": "2000-03-24",
+        "drawdown_trough_date": "2002-10-09",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 676
+      }
+    },
+    {
+      "ordinal": 2,
+      "interval_id": "subjective_bear_02",
+      "source_interval_id": "bear-msro9oip-tkx3zp",
+      "source_label": "熊市 2",
+      "label": "大熊市 02",
+      "severity": "major",
+      "start": "2007-06-27",
+      "end": "2009-03-20",
+      "trading_sessions": 437,
+      "note": "",
+      "candidate_window": {
+        "start": "2007-06-27",
+        "end": "2009-03-20",
+        "trading_sessions": 437
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "SPY",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "SPY",
+        "worst_max_drawdown": -0.5518912082016887,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 40.71957,
+        "end_close": 25.165003,
+        "total_return": -0.38199241789635796,
+        "max_drawdown": -0.5340325433420552,
+        "drawdown_peak_date": "2007-10-31",
+        "drawdown_trough_date": "2008-11-20",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 437
+      },
+      "SPY": {
+        "start_close": 106.054405,
+        "end_close": 56.353218,
+        "total_return": -0.46863859167377353,
+        "max_drawdown": -0.5518912082016887,
+        "drawdown_peak_date": "2007-10-09",
+        "drawdown_trough_date": "2009-03-09",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 437
+      }
+    },
+    {
+      "ordinal": 3,
+      "interval_id": "subjective_bear_03",
+      "source_interval_id": "bear-msroetfo-rfd0ni",
+      "source_label": "熊市 3",
+      "label": "小熊市 03",
+      "severity": "minor",
+      "start": "2010-04-28",
+      "end": "2010-09-02",
+      "trading_sessions": 90,
+      "note": "",
+      "candidate_window": {
+        "start": "2010-04-28",
+        "end": "2010-09-02",
+        "trading_sessions": 90
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.15121579836680665,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 42.78742,
+        "end_close": 39.377277,
+        "total_return": -0.07969966406013729,
+        "max_drawdown": -0.15121579836680665,
+        "drawdown_peak_date": "2010-04-29",
+        "drawdown_trough_date": "2010-07-02",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 90
+      },
+      "SPY": {
+        "start_close": 89.46009,
+        "end_close": 82.42431,
+        "total_return": -0.07864713751126329,
+        "max_drawdown": -0.15036838694668397,
+        "drawdown_peak_date": "2010-04-29",
+        "drawdown_trough_date": "2010-07-02",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 90
+      }
+    },
+    {
+      "ordinal": 4,
+      "interval_id": "subjective_bear_04",
+      "source_interval_id": "bear-msrof4q0-7ohlcf",
+      "source_label": "熊市 4",
+      "label": "小熊市 04",
+      "severity": "minor",
+      "start": "2011-07-14",
+      "end": "2011-10-06",
+      "trading_sessions": 60,
+      "note": "",
+      "candidate_window": {
+        "start": "2011-07-14",
+        "end": "2011-10-06",
+        "trading_sessions": 60
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "SPY",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "SPY",
+        "worst_max_drawdown": -0.1789367895101116,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 50.067093,
+        "end_close": 47.82284,
+        "total_return": -0.04482491124459731,
+        "max_drawdown": -0.16099287888723424,
+        "drawdown_peak_date": "2011-07-26",
+        "drawdown_trough_date": "2011-08-19",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 60
+      },
+      "SPY": {
+        "start_close": 100.560165,
+        "end_close": 89.93244,
+        "total_return": -0.10568523828496101,
+        "max_drawdown": -0.1789367895101116,
+        "drawdown_peak_date": "2011-07-22",
+        "drawdown_trough_date": "2011-10-03",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 60
+      }
+    },
+    {
+      "ordinal": 5,
+      "interval_id": "subjective_bear_05",
+      "source_interval_id": "bear-msrofjtu-72xk6y",
+      "source_label": "熊市 5",
+      "label": "小熊市 05",
+      "severity": "minor",
+      "start": "2012-09-18",
+      "end": "2012-11-21",
+      "trading_sessions": 45,
+      "note": "",
+      "candidate_window": {
+        "start": "2012-09-18",
+        "end": "2012-11-21",
+        "trading_sessions": 45
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.11637929540988379,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 62.224216,
+        "end_close": 56.771584,
+        "total_return": -0.08762877783787593,
+        "max_drawdown": -0.11637929540988379,
+        "drawdown_peak_date": "2012-09-19",
+        "drawdown_trough_date": "2012-11-15",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 45
+      },
+      "SPY": {
+        "start_close": 115.00352,
+        "end_close": 109.963844,
+        "total_return": -0.04382192823315323,
+        "max_drawdown": -0.07181937394621296,
+        "drawdown_peak_date": "2012-10-17",
+        "drawdown_trough_date": "2012-11-15",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 45
+      }
+    },
+    {
+      "ordinal": 6,
+      "interval_id": "subjective_bear_06",
+      "source_interval_id": "bear-msrohq5p-h6eln3",
+      "source_label": "熊市 6",
+      "label": "小熊市 06",
+      "severity": "minor",
+      "start": "2015-07-27",
+      "end": "2015-09-25",
+      "trading_sessions": 44,
+      "note": "",
+      "candidate_window": {
+        "start": "2015-07-27",
+        "end": "2015-09-25",
+        "trading_sessions": 44
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.12614699711147903,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 101.53022,
+        "end_close": 95.070915,
+        "total_return": -0.06361953120952557,
+        "max_drawdown": -0.12614699711147903,
+        "drawdown_peak_date": "2015-08-05",
+        "drawdown_trough_date": "2015-08-25",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 44
+      },
+      "SPY": {
+        "start_close": 172.40755,
+        "end_close": 161.62158,
+        "total_return": -0.06256089132987497,
+        "max_drawdown": -0.11170665794302126,
+        "drawdown_peak_date": "2015-07-30",
+        "drawdown_trough_date": "2015-08-25",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 44
+      }
+    },
+    {
+      "ordinal": 7,
+      "interval_id": "subjective_bear_07",
+      "source_interval_id": "bear-msrohsst-l1l3x6",
+      "source_label": "熊市 7",
+      "label": "小熊市 07",
+      "severity": "minor",
+      "start": "2015-12-17",
+      "end": "2016-02-24",
+      "trading_sessions": 46,
+      "note": "",
+      "candidate_window": {
+        "start": "2015-12-17",
+        "end": "2016-02-24",
+        "trading_sessions": 46
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.1573053849781525,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 103.754036,
+        "end_close": 95.01874,
+        "total_return": -0.08419234891257632,
+        "max_drawdown": -0.1573053849781525,
+        "drawdown_peak_date": "2015-12-29",
+        "drawdown_trough_date": "2016-02-09",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 46
+      },
+      "SPY": {
+        "start_close": 171.68678,
+        "end_close": 162.87816,
+        "total_return": -0.05130633820495667,
+        "max_drawdown": -0.11832202236974843,
+        "drawdown_peak_date": "2015-12-29",
+        "drawdown_trough_date": "2016-02-11",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 46
+      }
+    },
+    {
+      "ordinal": 8,
+      "interval_id": "subjective_bear_08",
+      "source_interval_id": "bear-msroi1yh-xf2flq",
+      "source_label": "熊市 8",
+      "label": "大熊市 08",
+      "severity": "major",
+      "start": "2018-09-24",
+      "end": "2018-12-31",
+      "trading_sessions": 68,
+      "note": "",
+      "candidate_window": {
+        "start": "2018-09-24",
+        "end": "2018-12-31",
+        "trading_sessions": 68
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.22699587270164112,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 174.8223,
+        "end_close": 147.07256,
+        "total_return": -0.15873112297458625,
+        "max_drawdown": -0.22699587270164112,
+        "drawdown_peak_date": "2018-10-01",
+        "drawdown_trough_date": "2018-12-24",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 68
+      },
+      "SPY": {
+        "start_close": 258.82727,
+        "end_close": 223.57216,
+        "total_return": -0.136210956442109,
+        "max_drawdown": -0.1920308022770787,
+        "drawdown_peak_date": "2018-10-01",
+        "drawdown_trough_date": "2018-12-24",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 68
+      }
+    },
+    {
+      "ordinal": 9,
+      "interval_id": "subjective_bear_09",
+      "source_interval_id": "bear-msroi8rr-ixky4i",
+      "source_label": "熊市 9",
+      "label": "大熊市 09",
+      "severity": "major",
+      "start": "2020-02-10",
+      "end": "2020-03-31",
+      "trading_sessions": 36,
+      "note": "",
+      "candidate_window": {
+        "start": "2020-02-10",
+        "end": "2020-03-31",
+        "trading_sessions": 36
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "SPY",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "SPY",
+        "worst_max_drawdown": -0.33717380792910223,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 222.98396,
+        "end_close": 183.41399,
+        "total_return": -0.17745657580034002,
+        "max_drawdown": -0.28559369741546836,
+        "drawdown_peak_date": "2020-02-19",
+        "drawdown_trough_date": "2020-03-16",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 36
+      },
+      "SPY": {
+        "start_close": 305.065,
+        "end_close": 236.32344,
+        "total_return": -0.22533414190418433,
+        "max_drawdown": -0.33717380792910223,
+        "drawdown_peak_date": "2020-02-19",
+        "drawdown_trough_date": "2020-03-23",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 36
+      }
+    },
+    {
+      "ordinal": 10,
+      "interval_id": "subjective_bear_10",
+      "source_interval_id": "bear-msroim6z-9otbiw",
+      "source_label": "熊市 10",
+      "label": "大熊市 10",
+      "severity": "major",
+      "start": "2021-12-02",
+      "end": "2023-01-09",
+      "trading_sessions": 277,
+      "note": "",
+      "candidate_window": {
+        "start": "2021-12-02",
+        "end": "2023-01-09",
+        "trading_sessions": 277
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.3511878732724564,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 378.82297,
+        "end_close": 265.12292,
+        "total_return": -0.3001403267600167,
+        "max_drawdown": -0.3511878732724564,
+        "drawdown_peak_date": "2021-12-27",
+        "drawdown_trough_date": "2022-11-03",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 277
+      },
+      "SPY": {
+        "start_close": 428.86597,
+        "end_close": 370.86563,
+        "total_return": -0.13524118036224697,
+        "max_drawdown": -0.24496336225207693,
+        "drawdown_peak_date": "2022-01-03",
+        "drawdown_trough_date": "2022-10-12",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 277
+      }
+    },
+    {
+      "ordinal": 11,
+      "interval_id": "subjective_bear_11",
+      "source_interval_id": "bear-msroj3aj-8peqmb",
+      "source_label": "熊市 11",
+      "label": "大熊市 11",
+      "severity": "major",
+      "start": "2024-12-26",
+      "end": "2025-04-30",
+      "trading_sessions": 85,
+      "note": "",
+      "candidate_window": {
+        "start": "2024-12-26",
+        "end": "2025-04-30",
+        "trading_sessions": 85
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.22768359229336155,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 525.68634,
+        "end_close": 472.6599,
+        "total_return": -0.10087087292395691,
+        "max_drawdown": -0.22768359229336155,
+        "drawdown_peak_date": "2025-02-19",
+        "drawdown_trough_date": "2025-04-08",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 85
+      },
+      "SPY": {
+        "start_close": 591.2188,
+        "end_close": 546.84607,
+        "total_return": -0.07505297531133981,
+        "max_drawdown": -0.1875530874920368,
+        "drawdown_peak_date": "2025-02-19",
+        "drawdown_trough_date": "2025-04-08",
+        "drawdown_recovered_within_interval": false,
+        "trading_sessions": 85
+      }
+    },
+    {
+      "ordinal": 12,
+      "interval_id": "subjective_bear_12",
+      "source_interval_id": "bear-msrojgwr-686udc",
+      "source_label": "熊市 12",
+      "label": "小熊市 12",
+      "severity": "minor",
+      "start": "2026-01-22",
+      "end": "2026-04-17",
+      "trading_sessions": 60,
+      "note": "",
+      "candidate_window": {
+        "start": "2026-01-22",
+        "end": "2026-04-17",
+        "trading_sessions": 60
+      },
+      "boundary_adjustment": {
+        "policy": "preserve",
+        "driving_symbol": "QQQ",
+        "leading_sessions_removed": 0,
+        "trailing_sessions_removed": 0,
+        "rebound_excluded": false
+      },
+      "classification": {
+        "worst_symbol": "QQQ",
+        "worst_max_drawdown": -0.11723603873248645,
+        "threshold": 0.2
+      },
+      "QQQ": {
+        "start_close": 619.2975,
+        "end_close": 648.13727,
+        "total_return": 0.04656852320572891,
+        "max_drawdown": -0.11723603873248645,
+        "drawdown_peak_date": "2026-01-28",
+        "drawdown_trough_date": "2026-03-30",
+        "drawdown_recovered_within_interval": true,
+        "trading_sessions": 60
+      },
+      "SPY": {
+        "start_close": 685.3383,
+        "end_close": 708.3157,
+        "total_return": 0.033527091656777364,
+        "max_drawdown": -0.08884978267856858,
+        "drawdown_peak_date": "2026-01-27",
+        "drawdown_trough_date": "2026-03-30",
+        "drawdown_recovered_within_interval": true,
+        "trading_sessions": 60
+      }
+    }
+  ]
+}

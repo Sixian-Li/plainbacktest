@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_period_cross_locked_2016_2026_v1",
+  "created_at_utc": "2026-08-15T00:00:00+00:00",
+  "status": "locked_test",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_dynamic_independent_sma_period_cross_locked_2016_2026",
+    "description": "把 TIM-v0.50 在2000-2015探索期机械选出的历史诊断锚点完整冻结为 c=3%、d关闭、买入SMA310、卖出SMA190，并从2016年第一个交易日起以独立空仓状态运行到批准数据末日。另运行买入SMA270-350与卖出SMA150-230、步长10的81组预登记局部扰动，但这些扰动只描述锚点附近的稳定性，禁止根据2016年后的结果替换310/190。",
+    "buy_rule": "空仓时，若前一完成 Close <= 前一完成买入SMA，则在开盘前放置向上普通买单，动态价为 P=sum(previous buy_window-1 closes)/(buy_window-1)。若已有卖出，同时放置上次计成本卖出成交价×1.03的强制买回线；两条向上触发线取较低者优先。锁定锚点的买入SMA为310，扰动诊断为270至350、步长10。",
+    "sell_rule": "持仓时，若前一完成 Close >= 前一完成卖出SMA，则在开盘前放置向下普通卖单，动态价为 P=sum(previous sell_window-1 closes)/(sell_window-1)。d完全关闭，不放置成本止损或其他强制卖出线。锁定锚点的卖出SMA为190，扰动诊断为150至230、步长10。",
+    "signal_time": "每个常规交易日开盘前，只使用截至前一交易日 Close 的完成历史、前一完成SMA状态和既有实际账户成交价，冻结当日资格与触发价；2016年前数据只用于均线预热，窗口前禁止交易。",
+    "execution_time": "若常规时段 Open 已越过预挂触发线则按 Open 成交；否则调整后日线 OHLC 触及时按精确理论线成交；随后施加单边5 bps不利成本。每日最多一笔，不允许买入后同日卖出或卖出后同日买回。",
+    "positioning": "long-only；2016-01-04以100,000美元现金独立空仓开始；每次买入投入全部现金、每次卖出清空全部份额；允许小数股，不融资，现金不计息。",
+    "price_basis": "approved split-and-dividend-adjusted QQQ OHLC; an internally consistent total-return approximation, not an exact raw-price corporate-action account replay"
+  },
+  "parameters": {
+    "parent_experiment_id": "qqq_intraday_sma_period_cross_grid_1999_2015_v1",
+    "parent_run_id": "run_20260814T190632Z_a8335cff",
+    "parent_diagnostic_case_id": "CASE_17701",
+    "requested_data_start": "1999-03-10",
+    "analysis_start": "2016-01-04",
+    "analysis_end": "2026-08-04",
+    "warmup_policy": "Use approved QQQ history before 2016 only to complete all prior SMA and provisional-cross inputs. Start every case flat with 100,000 USD on 2016-01-04 and never inherit the parent run's position, cash, cost basis or sell anchor.",
+    "locked_anchor": {
+      "buy_window": 310,
+      "sell_window": 190,
+      "forced_rebuy_pct": 3.0,
+      "stop_loss_pct": null,
+      "selection_policy": "This is the sole locked test case. It was fixed from TIM-v0.50 before any 2016+ result is read and cannot be replaced by a perturbation winner."
+    },
+    "buy_sma_window_range": {
+      "start": 270,
+      "stop": 350,
+      "step": 10,
+      "count": 9
+    },
+    "sell_sma_window_range": {
+      "start": 150,
+      "stop": 230,
+      "step": 10,
+      "count": 9
+    },
+    "forced_rebuy_pct": [
+      3.0
+    ],
+    "stop_loss_pct": [
+      null
+    ],
+    "legacy_symbol_mapping": "forced_rebuy_pct is prior c; stop_loss_pct is prior d",
+    "combination_count": 81,
+    "cost_bps_per_side": 5.0,
+    "max_trades_per_session": 1,
+    "fixed_subperiods": [
+      {
+        "period_id": "P1_2016_2019",
+        "start": "2016-01-04",
+        "end": "2019-12-31"
+      },
+      {
+        "period_id": "P2_2020_2022",
+        "start": "2020-01-02",
+        "end": "2022-12-30"
+      },
+      {
+        "period_id": "P3_2023_2026",
+        "start": "2023-01-03",
+        "end": "2026-08-04"
+      }
+    ],
+    "subperiod_state_policy": "Run one continuous path from the common flat start. At fixed subperiod boundaries inherit the actual position and sell anchor, rebase equity at the boundary and never restart or peek.",
+    "identifiability_gate": {
+      "minimum_ordinary_buy_count": 3,
+      "minimum_ordinary_sell_count": 3,
+      "scope": "descriptive robustness only; it cannot select or replace the locked anchor"
+    },
+    "perturbation_protocol": {
+      "full_surface": "All 9x9 combinations are evaluated and reconciled. Report four metric heatmaps and distribution summaries without ranking a replacement.",
+      "buy_oat": "Hold sell_window=190 and inspect buy_window=270..350 step10.",
+      "sell_oat": "Hold buy_window=310 and inspect sell_window=150..230 step10.",
+      "local_3x3": "buy_window in 300/310/320 crossed with sell_window in 180/190/200.",
+      "winner_selection": "forbidden on 2016-2026 data"
+    },
+    "predeclared_diagnostic_gates": {
+      "anchor_effectiveness": {
+        "minimum_buy_hold_cagr_retention": 0.8,
+        "minimum_sharpe_advantage": 0.0,
+        "minimum_max_drawdown_improvement_percentage_points": 5.0
+      },
+      "local_3x3_stability": {
+        "require_all_identifiable": true,
+        "require_all_positive_cagr": true,
+        "minimum_median_cagr_fraction_of_anchor": 0.8,
+        "minimum_worst_sharpe_relative_to_anchor": -0.15,
+        "maximum_worst_drawdown_deterioration_percentage_points": 8.0
+      },
+      "interpretation": "Passing both gates supports local out-of-sample stability only. It does not promote the strategy because the parent exploratory search failed its PBO and DSR gates."
+    },
+    "formal_reconciliation": {
+      "cases": "all 81 predeclared combinations",
+      "requirement": "Every case must match both independently structured compiled ledgers and then match PyBroker plus the independent Python ledger in dates, sides, shares, fills, cash and equity within 1e-6."
+    },
+    "multiple_testing_policy": "Do not compute or use PBO/DSR to select among the 81 holdout perturbations. The only inferential case is the pre-locked 310/190 anchor; all other rows are descriptive sensitivity evidence."
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Invest the same 100,000 USD at the 2016-01-04 regular-session Open with 5 bps adverse entry cost and hold QQQ through 2026-08-04.",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "reuse_review": "Reuse v4 unchanged. Add locked-anchor performance, 9x9 metric heatmaps, two one-at-a-time slices, local-neighborhood diagnostics, inherited-state subperiods and the anchor market chart."
+  },
+  "research": {
+    "stage": "locked_test_with_predeclared_sensitivity",
+    "hypothesis": "The pre-2016 diagnostic anchor c=3%, d disabled, buy-SMA310/sell-SMA190 retains useful risk-adjusted performance on untouched 2016+ QQQ data and sits inside a locally stable buy/sell-period neighborhood rather than an isolated historical spike.",
+    "primary_metric": "The locked 310/190 anchor's complete-window CAGR, Sharpe and maximum drawdown versus identical-window QQQ Buy & Hold. The 81-case surface cannot change the primary case.",
+    "selection_rule": "None. Evaluate 310/190 as the only locked anchor. The other 80 combinations are predeclared perturbations for diagnostics only; do not call the best 2016-2026 row a selected, promoted or recommended parameter.",
+    "validation_plan": "Save all 81 complete-window and fixed-subperiod metrics, all orders/trades/daily states and the complete 9x9 surface. Require exact agreement between two compiled ledgers and formal PyBroker/Python reconciliation for all 81 cases, plus hashes, unit tests, catalog rebuild, workspace audit and real-browser report checks.",
+    "promotion_criteria": "No strategy promotion is authorized by this experiment. If the locked anchor passes the predeclared benchmark-effectiveness gate and its local 3x3 passes every stability gate, record supportive out-of-sample evidence while retaining the parent PBO/DSR failure as a blocking caveat.",
+    "rejection_conditions": "Reject the run if 310/190 or c=3/d关闭 changes, any perturbation replaces the anchor, any pre-2016 trade or inherited parent state occurs, the 81-case grid is incomplete, subperiods overlap or leave gaps, data is unapproved, a case trades more than once per day, strategy/benchmark windows differ, ledgers diverge, or any hash, test, audit, catalog, strategy-card or browser gate fails. A completed run may provide unfavorable evidence without being an engineering failure."
+  }
+}

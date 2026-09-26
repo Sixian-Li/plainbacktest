@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_p24_stricter_threshold_grid_2000_2015_v1",
+  "created_at_utc": "2026-08-28T04:00:00+00:00",
+  "status": "specification_frozen",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "traded_symbol": "QQQ",
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_p24_stricter_f2_f4_threshold_grid",
+    "description": "QQQ只在0%和100%仓位之间切换。价格必须高于SMA180；SMA180最近10个交易日的平均每日百分比涨幅必须严格高于待测长期门槛；SMA20最近10个完成值的OLS每日对数斜率乘R²再乘100必须严格高于待测短期门槛。长期门槛测试0.02%、0.03%、0.04%和0.05%每日，短期门槛测试0、0.02%、0.05%和0.10%每日，共16组；原P24的0.02%与0组合保留为对照。不使用风险因子或固定百分比止损。",
+    "buy_rule": "空仓时，完成Close高于SMA180、SMA180十日平均每日涨幅严格高于该组长期门槛、SMA20十日趋势质量严格高于该组短期门槛，三个条件必须连续2个完成交易日全部成立；达到确认后产生买入信号。卖出后不要求新的上穿事件，只要状态重新连续2日合格即可再入场。",
+    "sell_rule": "持仓时，只要完成Close不再高于SMA180，或SMA180十日平均每日涨幅不再严格高于长期门槛，或SMA20十日趋势质量不再严格高于短期门槛，当日收盘即产生清仓信号。没有盘中止损。",
+    "signal_time": "全部价格、SMA与趋势质量只使用当日常规时段完成Close及更早数据；当日Close完成后才确认资格、连续日计数和退出。",
+    "execution_time": "所有买卖信号最早在下一QQQ交易日的拆股及股息调整Open成交；每边成本作为买高卖低的成交价冲击，禁止同日Close成交和PyBroker默认middle price。",
+    "positioning": "long-only；初始100,000美元；QQQ仓位只能为0%或100%，每次买入使用全部现金、每次卖出清空全部份额；允许小数股，不融资、不做空，现金不计息。",
+    "initial_position": "2000-03-17前为空仓；1999-03-10起的数据只用于指标预热，不继承仓位、现金或连续确认计数。",
+    "reentry": "卖出后没有冷静期或新上穿要求；三个条件重新连续2个完成交易日全部成立，下一Open满仓买回。",
+    "plain_language": {
+      "summary": "把原P24的长短趋势门槛同时收紧，观察更少但更强的QQQ上涨区间能否换来更平滑的净值。",
+      "buy": "QQQ站在长期均线上方，而且长期均线与短期趋势都达到该组严格程度，连续两天成立后买入。",
+      "sell": "价格跌回长期均线下方，或长短趋势任意一项不再达到门槛，就全部卖出。",
+      "execution": "每天收盘后确认信号，产生的买卖决定在下一交易日开盘执行。",
+      "position": "持有时QQQ满仓，不满足条件时全部现金；不融资、不做空，现金不计息。"
+    }
+  },
+  "parameters": {
+    "warmup_start": "1999-03-10",
+    "training_window": {
+      "start": "2000-03-17",
+      "end": "2015-12-31"
+    },
+    "robustness_subwindows": [
+      {
+        "window_id": "W1_2000_2003",
+        "start": "2000-03-17",
+        "end": "2003-12-31"
+      },
+      {
+        "window_id": "W2_2004_2007",
+        "start": "2004-01-01",
+        "end": "2007-12-31"
+      },
+      {
+        "window_id": "W3_2008_2011",
+        "start": "2008-01-01",
+        "end": "2011-12-31"
+      },
+      {
+        "window_id": "W4_2012_2015",
+        "start": "2012-01-01",
+        "end": "2015-12-31"
+      }
+    ],
+    "fixed_parameters": {
+      "long_sma_window": 180,
+      "long_slope_lookback": 10,
+      "short_sma_window": 20,
+      "short_regression_window": 10,
+      "entry_confirmation_sessions": 2,
+      "relative_strength_lookback": 120
+    },
+    "threshold_grid": {
+      "long_slope_threshold_daily_pct": [
+        0.02,
+        0.03,
+        0.04,
+        0.05
+      ],
+      "short_quality_threshold_daily_pct": [
+        0.0,
+        0.02,
+        0.05,
+        0.1
+      ],
+      "combination_count_per_cost": 16
+    },
+    "original_p24": {
+      "long_slope_threshold_daily_pct": 0.02,
+      "short_quality_threshold_daily_pct": 0.0
+    },
+    "holding_diagnostics": {
+      "holding_sessions": "逐日账本中开盘成交后shares大于0的交易日数量",
+      "holding_years_252": "holding_sessions除以252",
+      "holding_cagr_pct": "若holding_sessions大于0，则(final_equity/initial_cash)^(252/holding_sessions)-1，再乘100；该值包含交易成本与全部账户收益，但压缩掉空仓日，只作为资金效率诊断"
+    },
+    "selection": {
+      "minimum_cagr_pct": 0.0,
+      "minimum_closed_trades": 6,
+      "minimum_full_period_exposure_pct": 10.0,
+      "require_positive_exposure_in_every_subwindow": true,
+      "plateau_drawdown_tolerance_pct_points": 1.0,
+      "minimum_connected_component_cases": 3,
+      "minimum_representative_plateau_neighbors": 2,
+      "prefer_non_boundary_candidate": true,
+      "primary": "在5bps的16组中最大化四个独立重置子窗口的最差最大回撤",
+      "secondary": [
+        "最大的二维Manhattan连通1个百分点平台",
+        "平台内非边界候选",
+        "更低完整期Ulcer Index",
+        "更高最差63日收益",
+        "更短最大水下持续时间",
+        "更高亏损月份规避率",
+        "更高日历CAGR"
+      ],
+      "holding_cagr_is_not_a_selection_metric": true
+    },
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero interest",
+  "benchmark": "QQQ buy and hold from 2000-03-17, with the same initial cash and per-side cost assumption",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "复用v5的人类语言策略流程、折叠技术附录、自包含Plotly、可见区间缩放、净值选择和打印隐藏规则；结果区新增16组持仓日、持仓占比和持仓CAGR诊断。"
+  },
+  "research": {
+    "stage": "exploratory_in_sample_threshold_robustness",
+    "hypothesis": "原P24的长期斜率门槛与短期趋势质量门槛仍接近已搜索边界；在不改变其他交易语义的前提下同时提高两项门槛，可能牺牲持仓时间与收益以进一步压低2000–2015各市场阶段回撤。",
+    "primary_metric": "四个预声明子窗口中最差最大回撤；其次为二维参数平台连通性、完整期Ulcer Index、最差63日收益、水下持续时间、亏损月份比例与日历CAGR。实际持仓日、持仓占比和持仓CAGR逐组报告，但持仓CAGR不参与选参。",
+    "selection_rule": "固定L180、K10、S20、W10、C2，完整运行4个长期门槛乘4个短期门槛。候选须5bps日历CAGR不低于0、至少6笔闭合交易、完整期持仓率至少10%且四个子窗口均有持仓；先按四窗最差最大回撤取最优值1个百分点带，再按二维单轴相邻索引选择最大连通分量，优先非边界点，并依次按Ulcer、最差63日收益、水下时间、亏损月份规避率和日历CAGR选代表。0bps只复核5bps冻结代表。",
+    "validation_plan": "16组在0/5bps下全部由PyBroker与独立账本核对逐日现金、份额、净值、订单日期、方向、份额与成交价。单测覆盖16组唯一网格、严格门槛、持仓CAGR公式、连续2日入场确认、任一条件单日退出、次日Open和全仓成交。2016年以后不得读取。",
+    "promotion_criteria": "只有5bps代表不触及网格边界、所在1pp连通分量至少3组且至少有2个直接邻居、日历CAGR为正、0bps方向不反转且全部工程门禁通过，才值得另建2016–2026锁定测试。",
+    "rejection_conditions": "若代表仍触及搜索边界或依赖孤立点，参数响应不连通，5bps日历CAGR不为正，完整期持仓率低于10%，四个子窗口任一无持仓，使用持仓CAGR代替日历CAGR选参，使用2016年后数据、未完成Close、同日Close成交、非0%/100%仓位，或PyBroker与独立账本差异超过1e-8，则拒绝晋级；负结果仍保存为validated研究证据。"
+  }
+}

@@ -1,0 +1,624 @@
+{
+  "acquired_date": "unknown",
+  "adjustment_guidance": {
+    "adjusted_ohlc_internal_consistency": "passed OHLC envelope checks in both packages",
+    "execution_price": "Unadjusted Close is the only explicitly unadjusted price. Complete unadjusted OHLC is unavailable.",
+    "formal_selection": "pending_review; both variants remain source candidates",
+    "future_dividend_restatement_risk": "Historical adjusted values may change after future distributions; freeze and hash the source snapshot for reproducibility.",
+    "indicator_price": "Choose split-only Close for ex-distribution price trend or split-and-dividend Close for total-return trend; record the choice.",
+    "total_return": "Split-and-dividend Close is only a vendor-derived approximation without an independent corporate-action ledger."
+  },
+  "approved": false,
+  "build_id": "600a0e5e3273f89c51ea6cc06e9f6130ceeee0ffbd8bfcee2bb3ca7091d489f8",
+  "builder": "backtest/quantkit/nasdaq100_data.py",
+  "builder_sha256": "fa9ea3326a36aa3a48da1866cd56e8151c94df6ef69ddd1eee545cc158ac97fa",
+  "coverage": {
+    "active_source_symbols_on_2026_08_04": [
+      "AAPL",
+      "ABNB",
+      "ADBE",
+      "ADI",
+      "ADP",
+      "ADSK",
+      "AEP",
+      "ALAB",
+      "ALNY",
+      "AMAT",
+      "AMD",
+      "AMGN",
+      "AMZN",
+      "APP",
+      "ARM",
+      "ASML",
+      "AVGO",
+      "AXON",
+      "BKNG",
+      "BKR",
+      "CCEP",
+      "CDNS",
+      "CEG",
+      "CMCSA",
+      "COST",
+      "CPRT",
+      "CRWD",
+      "CRWV",
+      "CSCO",
+      "CSX",
+      "CTAS",
+      "DASH",
+      "DDOG",
+      "DXCM",
+      "EA",
+      "EXC",
+      "FANG",
+      "FAST",
+      "FER",
+      "FTNT",
+      "GEHC",
+      "GILD",
+      "GOOG",
+      "GOOGL",
+      "HON",
+      "HONA",
+      "IDXX",
+      "INTC",
+      "INTU",
+      "ISRG",
+      "KDP",
+      "KHC",
+      "KLAC",
+      "LIN",
+      "LITE",
+      "LRCX",
+      "MAR",
+      "MCHP",
+      "MDLZ",
+      "MELI",
+      "META",
+      "MNST",
+      "MPWR",
+      "MRVL",
+      "MSFT",
+      "MSTR",
+      "MU",
+      "NBIS",
+      "NFLX",
+      "NVDA",
+      "NXPI",
+      "ODFL",
+      "ORLY",
+      "PANW",
+      "PAYX",
+      "PCAR",
+      "PDD",
+      "PEP",
+      "PLTR",
+      "PYPL",
+      "QCOM",
+      "REGN",
+      "RKLB",
+      "ROP",
+      "ROST",
+      "SBUX",
+      "SHOP",
+      "SNDK",
+      "SNPS",
+      "SPCX",
+      "STX",
+      "TER",
+      "TMUS",
+      "TRI",
+      "TSLA",
+      "TTWO",
+      "TXN",
+      "VRTX",
+      "WBD",
+      "WDAY",
+      "WDC",
+      "WMT",
+      "XEL"
+    ],
+    "days_above_100": 3102,
+    "days_below_100": 328,
+    "days_with_missing_member_prices": 27,
+    "direct_observation_count_distribution": {
+      "100": 4819,
+      "101": 980,
+      "102": 497,
+      "103": 767,
+      "104": 93,
+      "105": 128,
+      "106": 136,
+      "107": 381,
+      "108": 10,
+      "109": 109,
+      "95": 1,
+      "96": 44,
+      "97": 261,
+      "98": 4,
+      "99": 35
+    },
+    "direct_observation_maximum_member_count": 109,
+    "direct_observation_minimum_member_count": 95,
+    "first_membership_date": "1993-10-01",
+    "first_price_date": "1990-01-02",
+    "formal_research_gate": "not_ready_pending_provenance_identity_adjustment_and_early_history_review",
+    "last_membership_date": "2026-08-04",
+    "last_price_date": "2026-08-04",
+    "maximum_member_count": 109,
+    "member_count_distribution": {
+      "100": 4835,
+      "101": 981,
+      "102": 496,
+      "103": 768,
+      "104": 93,
+      "105": 128,
+      "106": 134,
+      "107": 383,
+      "108": 9,
+      "109": 110,
+      "96": 41,
+      "97": 265,
+      "98": 4,
+      "99": 18
+    },
+    "membership_change_dates_excluding_initial_snapshot": 223,
+    "membership_change_month_distribution": {
+      "01": 12,
+      "02": 13,
+      "03": 14,
+      "04": 11,
+      "05": 11,
+      "06": 17,
+      "07": 32,
+      "08": 14,
+      "09": 8,
+      "10": 23,
+      "11": 23,
+      "12": 45
+    },
+    "membership_change_shape": {
+      "add_and_delete": 183,
+      "add_only": 21,
+      "delete_only": 19
+    },
+    "membership_change_weekday_distribution": {
+      "Friday": 23,
+      "Monday": 98,
+      "Thursday": 35,
+      "Tuesday": 27,
+      "Wednesday": 40
+    },
+    "minimum_member_count": 96,
+    "missing_member_price_observations": 27,
+    "safe_machine_readable_range": [
+      "1993-10-01",
+      "2026-08-04"
+    ],
+    "sample_counts": {
+      "1993-10-01": 97,
+      "2000-01-03": 100,
+      "2010-01-04": 100,
+      "2020-01-02": 103,
+      "2026-08-04": 103
+    },
+    "sample_direct_observation_counts": {
+      "1993-10-01": 97,
+      "2000-01-03": 100,
+      "2010-01-04": 100,
+      "2020-01-02": 103,
+      "2026-08-04": 103
+    },
+    "survivorship_bias_assessment": "supports historical point-in-time membership and retains deleted/delisted records; avoids current-constituent lookback bias when used with the stated decision-time lag"
+  },
+  "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+  "extracted_evidence": {
+    "directory_hash_contract": "SHA256 over sorted UTF-8 records: relative_path NUL size_bytes NUL file_sha256 newline",
+    "directory_sha256": "83557b0f88fe7be490bf204c06888ee6040b1a2e2dfc879ef9a5c5467d498fbc",
+    "file_count": 480,
+    "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-拆股及股息调整_20260805",
+    "size_bytes": 242889069
+  },
+  "filename_snapshot_token": "20260805",
+  "generated_at_utc": "2026-08-26T07:20:58Z",
+  "identity_contract": {
+    "dated_suffix": "A trailing -YYYYMM is preserved in source_symbol and source_file and removed only for display_ticker. It is not treated as an index-exit date.",
+    "primary_record": "Each source CSV member is a separate candidate security record.",
+    "rename_policy": "Do not create AABA/YHOO, META/FB, BKNG/PCLN or other predecessor links without external primary evidence and explicit review.",
+    "security_id": "Deterministic SHA256-derived ID from the exact source filename; IDs do not imply corporate continuity.",
+    "share_class_policy": "Keep separate files and share classes separate, including GOOG and GOOGL. Same company name is not a merge key."
+  },
+  "license_or_authorization": "unknown",
+  "membership_contract": {
+    "allowed_values": [
+      0,
+      1
+    ],
+    "daily_representation": "The checked-in membership_intervals.csv plus data/processed/calendars/XNYS.csv unambiguously generates each daily member set.",
+    "historical_weights_available": false,
+    "interval_representation": "Maximal runs of observed InIndex=1 rows, preserving gaps in price observations as reported quality warnings.",
+    "left_censoring": "The first observed 1 does not prove the true admission date.",
+    "point_in_time_use": "Use the membership state known before the decision timestamp; absent independent announcement-time evidence, lag observed effective membership by one XNYS session.",
+    "right_censoring": "A final observed 1 is only valid through the source coverage end.",
+    "source_field": "InIndex"
+  },
+  "official_cross_checks": [
+    {
+      "actual_additions": [
+        "AEP",
+        "MRVL",
+        "MTCH",
+        "OKTA",
+        "PTON",
+        "TEAM"
+      ],
+      "actual_deletions": [
+        "BMRN",
+        "CTXS",
+        "EXPE",
+        "LBTYA",
+        "LBTYK",
+        "TTWO",
+        "ULTA"
+      ],
+      "effective_date": "2020-12-21",
+      "expected_additions": [
+        "AEP",
+        "MRVL",
+        "MTCH",
+        "OKTA",
+        "PTON",
+        "TEAM"
+      ],
+      "expected_deletions": [
+        "BMRN",
+        "CTXS",
+        "EXPE",
+        "LBTYA",
+        "LBTYK",
+        "TTWO",
+        "ULTA"
+      ],
+      "previous_session": "2020-12-18",
+      "status": "pass",
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-index-9"
+    },
+    {
+      "actual_additions": [
+        "ABNB",
+        "DDOG",
+        "FTNT",
+        "LCID",
+        "PANW",
+        "ZS"
+      ],
+      "actual_deletions": [
+        "CDW",
+        "CERN",
+        "CHKP",
+        "FOX",
+        "FOXA",
+        "INCY",
+        "TCOM"
+      ],
+      "effective_date": "2021-12-20",
+      "expected_additions": [
+        "ABNB",
+        "DDOG",
+        "FTNT",
+        "LCID",
+        "PANW",
+        "ZS"
+      ],
+      "expected_deletions": [
+        "CDW",
+        "CERN",
+        "CHKP",
+        "FOX",
+        "FOXA",
+        "INCY",
+        "TCOM"
+      ],
+      "previous_session": "2021-12-17",
+      "status": "pass",
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-indexr"
+    },
+    {
+      "actual_additions": [
+        "AXON",
+        "MSTR",
+        "PLTR"
+      ],
+      "actual_deletions": [
+        "ILMN",
+        "MRNA",
+        "SMCI"
+      ],
+      "effective_date": "2024-12-23",
+      "expected_additions": [
+        "AXON",
+        "MSTR",
+        "PLTR"
+      ],
+      "expected_deletions": [
+        "ILMN",
+        "MRNA",
+        "SMCI"
+      ],
+      "previous_session": "2024-12-20",
+      "status": "pass",
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-indexr-1"
+    },
+    {
+      "actual_additions": [
+        "ALNY",
+        "FER",
+        "INSM",
+        "MPWR",
+        "STX",
+        "WDC"
+      ],
+      "actual_deletions": [
+        "BIIB",
+        "CDW",
+        "GFS",
+        "LULU",
+        "ON",
+        "TTD"
+      ],
+      "effective_date": "2025-12-22",
+      "expected_additions": [
+        "ALNY",
+        "FER",
+        "INSM",
+        "MPWR",
+        "STX",
+        "WDC"
+      ],
+      "expected_deletions": [
+        "BIIB",
+        "CDW",
+        "GFS",
+        "LULU",
+        "ON",
+        "TTD"
+      ],
+      "previous_session": "2025-12-19",
+      "status": "pass",
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-indexr-2"
+    },
+    {
+      "actual_additions": [
+        "WMT"
+      ],
+      "actual_deletions": [
+        "AZN"
+      ],
+      "effective_date": "2026-01-20",
+      "expected_additions": [
+        "WMT"
+      ],
+      "expected_deletions": [
+        "AZN"
+      ],
+      "previous_session": "2026-01-16",
+      "status": "pass",
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/walmart-inc-join-nasdaq-100-indexr-beginning-january-20th-2026"
+    },
+    {
+      "actual_additions": [
+        "ALAB",
+        "CRWV",
+        "NBIS",
+        "RKLB",
+        "TER"
+      ],
+      "actual_deletions": [
+        "CHTR",
+        "CTSH",
+        "INSM",
+        "VRSK",
+        "ZS"
+      ],
+      "effective_date": "2026-06-22",
+      "expected_additions": [
+        "ALAB",
+        "CRWV",
+        "NBIS",
+        "RKLB",
+        "TER"
+      ],
+      "expected_deletions": [
+        "CHTR",
+        "CTSH",
+        "INSM",
+        "VRSK",
+        "ZS"
+      ],
+      "previous_session": "2026-06-18",
+      "status": "pass",
+      "url": "https://ir.nasdaq.com/node/110541"
+    },
+    {
+      "actual_additions": [
+        "SPCX"
+      ],
+      "actual_deletions": [],
+      "effective_date": "2026-07-07",
+      "expected_additions": [
+        "SPCX"
+      ],
+      "expected_deletions": [],
+      "previous_session": "2026-07-06",
+      "status": "pass",
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/space-exploration-technologies-corporation-join-nasdaq-100"
+    }
+  ],
+  "official_primary_sources": [
+    {
+      "reviewed_points": [
+        "multiple eligible share classes may each be included",
+        "Fast Entry and some quarterly additions may temporarily raise the security count above 100",
+        "spin-off securities may temporarily raise the security count above 100"
+      ],
+      "topic": "index_methodology",
+      "url": "https://indexes.nasdaqomx.com/docs/methodology_NDX.pdf"
+    },
+    {
+      "observed_as_of": "2026-07-23",
+      "observed_component_count": 103,
+      "topic": "official_component_count_snapshot",
+      "url": "https://indexes.nasdaqomx.com/Index/overview/NDX"
+    },
+    {
+      "index_membership_inference_only": true,
+      "observed_regular_trading_start": "2026-06-29",
+      "topic": "HONA_spin_off_trading_date",
+      "url": "https://www.nasdaq.com/press-release/honeywell-aerospace-completes-spin-honeywell-technologies-and-begins-trading-nasdaq"
+    }
+  ],
+  "outputs": {
+    "membership_changes": {
+      "path": "data/processed/universes/nasdaq100/pending_review/membership_changes.csv",
+      "sha256": "2698e4461dadb4d30bf16ea9e650762e4011416312eb3be893f4fc894fe57879"
+    },
+    "membership_daily_counts": {
+      "path": "data/processed/universes/nasdaq100/pending_review/membership_daily_counts.csv",
+      "sha256": "517cf100eceb66776c1f8059c8cab6c0efdca2f2df5b9ac8addc9fac49787975"
+    },
+    "membership_intervals": {
+      "path": "data/processed/universes/nasdaq100/pending_review/membership_intervals.csv",
+      "sha256": "fbef73e99b37e20f3226503bdcb10efb27868408c45a59e9a5b2580d5cccc967"
+    },
+    "security_master": {
+      "path": "data/processed/universes/nasdaq100/pending_review/security_master.csv",
+      "sha256": "66dd94849793cdb5283a15ce5d712b234a064817da36e908860ad0db8cb68223"
+    }
+  },
+  "package_comparison": {
+    "additional_manifest_or_metadata_members": 0,
+    "adjusted_ohlc_different_rows": 1490624,
+    "adjusted_ohlc_equal_rows": 928931,
+    "archive_test_results": {
+      "split_and_dividend_bad_member": null,
+      "split_only_bad_member": null
+    },
+    "close_different_rows": 1490624,
+    "close_max_absolute_difference": 67059.6,
+    "close_max_relative_difference": 0.9869936911690163,
+    "compared_files": 480,
+    "extracted_matches_archive": true,
+    "extracted_mismatch_examples": [],
+    "files_with_adjusted_value_differences": 273,
+    "high_different_rows": 1490624,
+    "high_max_absolute_difference": 68344.25,
+    "high_max_relative_difference": 0.9869936911690163,
+    "low_different_rows": 1490624,
+    "low_max_absolute_difference": 66474.48000000001,
+    "low_max_relative_difference": 0.9869936909521659,
+    "member_sets_identical": true,
+    "open_different_rows": 1490624,
+    "open_max_absolute_difference": 67059.6,
+    "open_max_relative_difference": 0.9869936911690163,
+    "package_in_index_mismatch": 0,
+    "package_row_key_mismatch": 0,
+    "package_unadjusted_close_mismatch": 0,
+    "schemas_identical": true,
+    "split_and_dividend_duplicate_content_groups": 0,
+    "split_and_dividend_member_count": 480,
+    "split_and_dividend_non_csv_member_count": 0,
+    "split_and_dividend_rows": 2419555,
+    "split_and_dividend_uncompressed_bytes": 242889069,
+    "split_duplicate_content_groups": 0,
+    "split_member_count": 480,
+    "split_non_csv_member_count": 0,
+    "split_rows": 2419555,
+    "split_uncompressed_bytes": 224299808,
+    "volume_different_rows": 1490624,
+    "volume_max_absolute_difference": 1442161600.0,
+    "volume_max_relative_difference": 0.9869936916659983
+  },
+  "packages": {
+    "split_and_dividend": {
+      "adjustment_status": "pending_review",
+      "archive_members": 480,
+      "declared_adjustment_from_filename": "split_and_dividend_adjusted",
+      "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-拆股及股息调整_20260805.zip",
+      "sha256": "f8ba17a64886d318e068dfbff734424c926a6858361504c2c87261eaea90ac89",
+      "size_bytes": 84579391,
+      "uncompressed_bytes": 242889069
+    },
+    "split_only": {
+      "adjustment_status": "pending_review",
+      "archive_members": 480,
+      "declared_adjustment_from_filename": "split_adjusted",
+      "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-仅拆股调整_20260805.zip",
+      "sha256": "3fc215759bcf3da8656b0fab6909cfe015c2182618007559a5c3d7ff02943968",
+      "size_bytes": 70905836,
+      "uncompressed_bytes": 224299808
+    }
+  },
+  "production_writes_enabled": false,
+  "promotion_policy": {
+    "auto_promote_to_approved": false,
+    "requires_explicit_user_authorization": true,
+    "requires_manual_acquisition_metadata_review": true,
+    "requires_manual_license_review": true,
+    "requires_manual_provider_review": true
+  },
+  "provider": "unknown",
+  "quality_report_json": "data/processed/universes/nasdaq100/pending_review/quality_report.json",
+  "quality_report_markdown": "data/processed/universes/nasdaq100/pending_review/quality_report.md",
+  "registry": "data/nasdaq100_history_registry.json",
+  "registry_sha256": "0c34f702a7fa01c982b102443cafaf27c5461bd3be87c4578f53eaf275f02a5e",
+  "review_status": "pending_review",
+  "schema_version": 1,
+  "snapshot_token_interpretation": "pending_review; the filename token is not treated as proven acquisition or market as-of metadata",
+  "source_inventory": [
+    {
+      "kind": "file",
+      "name": ".DS_Store",
+      "sha256": "2789dbc912ce26d0e75b9fe04c38a4c8e001bb4fd979442761cc179b0f14afdc",
+      "size_bytes": 6148
+    },
+    {
+      "kind": "file",
+      "name": "扫码添加企微，获取更多优惠.jpg",
+      "sha256": "45da56c477ca94e26f0944349c181445d77ae75d660e756c999f5e56e1ab111e",
+      "size_bytes": 154643
+    },
+    {
+      "kind": "file",
+      "name": "纳斯达克 100 成分股-仅拆股调整_20260805.zip",
+      "sha256": "3fc215759bcf3da8656b0fab6909cfe015c2182618007559a5c3d7ff02943968",
+      "size_bytes": 70905836
+    },
+    {
+      "directory_sha256": "83557b0f88fe7be490bf204c06888ee6040b1a2e2dfc879ef9a5c5467d498fbc",
+      "file_count": 480,
+      "kind": "directory",
+      "name": "纳斯达克 100 成分股-拆股及股息调整_20260805",
+      "size_bytes": 242889069
+    },
+    {
+      "kind": "file",
+      "name": "纳斯达克 100 成分股-拆股及股息调整_20260805.zip",
+      "sha256": "f8ba17a64886d318e068dfbff734424c926a6858361504c2c87261eaea90ac89",
+      "size_bytes": 84579391
+    }
+  ],
+  "source_root": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股",
+  "source_schema": [
+    "Date",
+    "CompanyName",
+    "Symbol",
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "Volume",
+    "Unadjusted Close",
+    "InIndex"
+  ],
+  "status": "candidate_pending_review"
+}

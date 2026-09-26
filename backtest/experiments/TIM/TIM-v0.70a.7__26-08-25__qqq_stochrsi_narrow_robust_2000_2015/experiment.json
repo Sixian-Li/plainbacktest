@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_dual_stochrsi_narrow_robust_2000_2015_v1",
+  "created_at_utc": "2026-08-25T09:00:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_dual_raw_stochrsi_cross_narrow_robust_2000_2015",
+    "description": "Use only 2000–2015 to compare every integer short period from 20 through 30 and long period from 85 through 95 under the fixed raw dual-StochRSI 0.20/0.80 CROSS rule, selecting for joint CAGR, Sharpe, benchmark wins, chronological stability, leave-year-out stability, and a complete 3x3 neighborhood.",
+    "buy_rule": "While flat, both completed prior StochRSI values are below 0.20 and both provisional same-session values cross to or above 0.20; buy at the larger joint solved trigger.",
+    "sell_rule": "While long, both completed prior StochRSI values are above 0.80 and both provisional same-session values cross to or below 0.80; sell at the smaller joint solved trigger.",
+    "signal_time": "Eligibility and exact trigger prices use completed prior data only; all selection windows end no later than 2015-12-31.",
+    "execution_time": "Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact trigger. High and Low are ignored.",
+    "positioning": "Every window is a separate long-only 0%/100% QQQ account with 100000 dollars, fractional shares, no leverage, and no cash interest.",
+    "plain_language": {
+      "summary": "只用2000至2015，在22/88和28/88附近寻找兼顾收益与稳定性的双周期。",
+      "buy": "两个周期先同时处于低位，随后一起向上越过0.20时买入QQQ。",
+      "sell": "两个周期先同时处于高位，随后一起向下跌破0.80时卖出QQQ。",
+      "execution": "前一日收盘后冻结触发价；跳空越线按开盘价成交，否则只按开盘到收盘方向检查触发价。",
+      "position": "每个窗口从10万美元现金独立开始，在满仓QQQ与现金之间切换，并与同期持有比较。"
+    }
+  },
+  "parameters": {
+    "research_start": "2000-01-03",
+    "selection_end": "2015-12-31",
+    "horizons_years": [
+      3,
+      5,
+      7
+    ],
+    "horizon_last_start": {
+      "3": "2012-12-31",
+      "5": "2010-12-31",
+      "7": "2008-12-31"
+    },
+    "expected_windows": {
+      "3": 52,
+      "5": 44,
+      "7": 36
+    },
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "short_period_start": 20,
+    "short_period_end": 30,
+    "long_period_start": 85,
+    "long_period_end": 95,
+    "period_step": 1,
+    "combination_count": 121,
+    "screen_cost_bps": 5,
+    "formal_costs_bps": [
+      0,
+      5,
+      10
+    ],
+    "chronological_blocks": [
+      [
+        2000,
+        2004
+      ],
+      [
+        2005,
+        2008
+      ],
+      [
+        2009,
+        2012
+      ]
+    ],
+    "local_radius_steps": 1,
+    "reference_pairs": [
+      [
+        22,
+        88
+      ],
+      [
+        28,
+        88
+      ]
+    ],
+    "gates": {
+      "minimum_worst_horizon_q25_joint_rank": 0.55,
+      "minimum_worst_time_block_median_joint_rank": 0.55,
+      "minimum_leave_one_start_year_out_q25_joint_rank": 0.5,
+      "minimum_worst_local_3x3_score": 0.45,
+      "minimum_cagr_win_rate_vs_buy_hold": 0.4,
+      "minimum_sharpe_win_rate_vs_buy_hold": 0.55,
+      "minimum_drawdown_win_rate_vs_buy_hold": 0.6
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5,
+    10
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ independently restarted in every training window",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged with a compact 11 by 11 robustness surface and window distributions."
+  },
+  "research": {
+    "stage": "narrow_grid_robust_training_exploration",
+    "hypothesis": "A compact neighborhood around 22/88 and 28/88 contains an interior pair that balances CAGR with cross-window and local stability in 2000–2015.",
+    "primary_metric": "Maximize the minimum of worst-horizon lower-quartile joint CAGR/Sharpe rank, worst chronological-block median rank, leave-one-start-year-out lower-quartile rank, and complete 3x3 neighborhood score, subject to all benchmark win-rate gates.",
+    "selection_rule": "Screen all 121 pairs at 5 bps on 132 windows ending by 2015. Exclude incomplete boundary neighborhoods, require all seven frozen gates, and rank passing pairs by maximin, Sharpe and CAGR benchmark win rates. If none passes, report no champion and choose a diagnostic near-miss first by number of gates passed, then maximin.",
+    "validation_plan": "Reconcile the selected champion or diagnostic near-miss plus 22/88 and 28/88 over all 132 windows at 0/5/10 bps. Do not inspect data after 2015 for selection or replacement.",
+    "promotion_criteria": "Only an interior pair passing all seven gates may be called the 2000–2015 robust champion; later data requires a separately frozen test.",
+    "rejection_conditions": "Do not name a champion for a boundary pair, any failed gate, ledger mismatch, cost fragility, or use of post-2015 data."
+  },
+  "active_run_id": null
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_recentered_local_plateau_full_history_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_recentered_local_plateau_full_history",
+    "description": "在上一轮最终参数局部高原检验后，将整套 QQQ 策略基线更新为 B=176、E=301、G=0.95%、H=264，保持 A=3、C=-0.25%、D=4、F=80±10、L=10%、R=0% 与强制买回开启不变；在完整批准历史中每次只扰动 B、E、F 中心、G、H 或 L 的一个维度，重新检查新联合基线附近的 CAGR 与 Sharpe 高原。",
+    "buy_rule": "空仓时 OR：已有卖出价后，价格重新达到该卖出成交价（R=0%）则强制买回；价格向上穿越动态 H 日 SMA；价格向上穿越以 F 为中心、固定间隔 10 的三条短 SMA 平均值下方 G%。没有历史卖出价时，强制买回不能产生第一笔买入。",
+    "sell_rule": "持仓时 OR：价格低于成本价 L%；三短 SMA 平均变化率连续 A=3 日为负且价格跌破 B 日 SMA；此前连续 D=4 日三线平均变化率为负且当日三条短 SMA 各自变化率全部不高于 C=-0.25%；价格向下穿越 E 日 SMA。",
+    "signal_time": "每个交易日开始前只使用截至前一交易日 Close 的完整历史解出当日条件单阈值；指标预热不足时对应规则不产生订单。",
+    "execution_time": "若前 Close 到当日常规时段 Open 已越过阈值，按当日 Open 成交；否则常规时段调整后 OHLC 触及预先解出的理论阈值时按该阈值成交；每天最多一笔。",
+    "position_sizing": "long-only；初始 100,000 美元现金，每次在全仓 QQQ 与全现金之间切换，允许小数股，不融资，现金不计息。",
+    "initial_position": "1999-03-10 起空仓等待第一笔普通买入；绩效从完整评价窗口起点计算，包含预热和等待首买的现金期。"
+  },
+  "parameters": {
+    "windows": [
+      {
+        "window_id": "FULL_HISTORY",
+        "analysis_start": "1999-03-10",
+        "analysis_end": "2026-08-04",
+        "warmup": "QQQ inception; no pre-listing history exists"
+      }
+    ],
+    "report_primary_window_id": "FULL_HISTORY",
+    "initial_position": "flat",
+    "evaluation_start": "analysis_start",
+    "C_fast_derivative_mode": "all_short_smas",
+    "max_trades_per_day": 1,
+    "search_method": "one_parameter_at_a_time_around_user_recentered_baseline",
+    "unique_case_count": 345,
+    "sweep_point_count": 350,
+    "baseline": {
+      "A_negative_days_slow": 3,
+      "B_slow_sma_window": 176,
+      "C_fast_derivative_pct": -0.25,
+      "D_negative_days_fast": 4,
+      "E_fallback_sma_window": 301,
+      "F_short_sma_center": 80,
+      "F_short_sma_spacing": 10,
+      "G_short_recovery_below_pct": 0.95,
+      "H_reentry_sma_window": 264,
+      "L_cost_stop_pct": 10.0,
+      "R_forced_rebuy_pct": 0.0,
+      "forced_reentry_enabled": true
+    },
+    "sweeps": [
+      {
+        "sweep_id": "B",
+        "parameter": "B_slow_sma_window",
+        "label": "B · 慢速卖出 SMA",
+        "start": 165,
+        "stop": 185,
+        "step": 1
+      },
+      {
+        "sweep_id": "E",
+        "parameter": "E_fallback_sma_window",
+        "label": "E · 兜底卖出 SMA",
+        "start": 285,
+        "stop": 325,
+        "step": 1
+      },
+      {
+        "sweep_id": "F_CENTER",
+        "parameter": "F_short_sma_center",
+        "label": "F 中心 · 三短均线中心（间隔固定 10）",
+        "start": 65,
+        "stop": 95,
+        "step": 1
+      },
+      {
+        "sweep_id": "G",
+        "parameter": "G_short_recovery_below_pct",
+        "label": "G · 短均线恢复折让 (%)",
+        "start": 0.4,
+        "stop": 1.6,
+        "step": 0.05
+      },
+      {
+        "sweep_id": "H",
+        "parameter": "H_reentry_sma_window",
+        "label": "H · 长均线买回 SMA",
+        "start": 200,
+        "stop": 330,
+        "step": 1
+      },
+      {
+        "sweep_id": "L",
+        "parameter": "L_cost_stop_pct",
+        "label": "L · 成本止损 (%)",
+        "start": 5,
+        "stop": 15,
+        "step": 0.1
+      }
+    ],
+    "fixed_parameters": {
+      "A_negative_days_slow": 3,
+      "C_fast_derivative_pct": -0.25,
+      "D_negative_days_fast": 4,
+      "F_short_sma_spacing": 10,
+      "R_forced_rebuy_pct": 0.0,
+      "forced_reentry_enabled": true
+    },
+    "plateau_diagnostic": {
+      "method": "connected_component_containing_baseline_under_two_metric_absolute_tolerances",
+      "cagr_tolerance_pct_points": 0.5,
+      "sharpe_tolerance": 0.03,
+      "interpretation": "A point remains on the baseline plateau only if CAGR is no more than 0.50 percentage points below baseline and Sharpe is no more than 0.03 below baseline; only consecutive qualifying points connected to the baseline count."
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the first regular-session Open of the common 1999-03-10 through 2026-08-04 evaluation window, invest the same 100,000 USD in QQQ and hold. Every OAT case and benchmark uses identical dates; the strategy's initial cash waiting period remains part of performance.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse the accepted v3 page and the existing generic OAT report builder unchanged; the side-by-side CAGR and Sharpe line-plus-marker figures already implement this experiment's needs.",
+    "report_title": "QQQ 重定基线后的全历史局部高原检验",
+    "report_subtitle": "联合基线 B=176 / E=301 / G=0.95% / H=264；每次只扰动一个维度，H 扩展为 200–330、步长 1。"
+  },
+  "research": {
+    "stage": "exploratory_local_robustness",
+    "hypothesis": "把几个参数同时移动到上一轮较稳定或较优的附近后，新联合基线仍应位于多数一维曲线的连续区域；扩大并加密 H 能区分宽高原、趋势漂移和孤立峰。",
+    "primary_metric": "For each B/E/F/G/H/L sweep, plot all full-history CAGR and Sharpe values and report the connected baseline plateau under the predeclared 0.50 percentage-point CAGR and 0.03 Sharpe tolerances.",
+    "selection_rule": "Do not automatically adopt a new winner. Screen all 345 unique OAT cases; formally reconcile the baseline plus the CAGR and Sharpe maximum from every curve, de-duplicated by case ID.",
+    "validation_plan": "Every formally selected case must match PyBroker and the independent pandas ledger on daily cash, shares, equity, order dates, sides, shares and fills within 1e-6; compiled screening metrics must match formal metrics; the first order must be an ordinary buy and daily trades must not exceed one.",
+    "promotion_criteria": "This diagnostic may describe the revised baseline's local shape but cannot promote the strategy. A favorable result requires broad connected neighborhoods rather than an isolated simultaneous CAGR/Sharpe peak, especially across the dense H sweep.",
+    "rejection_conditions": "Reject the robustness claim if important dimensions are narrow/spike classifications, if the expanded H curve peaks only at a boundary or collapses around H=264, if requested centers/ranges/steps are wrong, or if any accounting, timing, data, count, hash or browser gate fails."
+  }
+}

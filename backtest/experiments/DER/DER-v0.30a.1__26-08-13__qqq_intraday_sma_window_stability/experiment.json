@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_window_stability_v1",
+  "created_at_utc": "2026-08-13T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_local_parameter_window_stability",
+    "description": "以完整历史全局搜索赢家附近为预声明局部空间，保留全部短均线导数、成本止损、长期 SMA 兜底、长期 SMA/短均线恢复买入，并把强制买回作为可启用或完全关闭的离散模式。在 1999–2014、2005–2020、2010–2026 三个重叠窗口用同一候选全集分别优化 CAGR 与 Sharpe，再把每窗代表参数交叉应用到全部窗口，检查参数和排名是否稳定。",
+    "buy_rule": "初始空仓时由动态 H 日 SMA 上穿或价格上穿动态 F 三短均线平均值下方 G% 中任一规则全仓买入；强制买回模式开启且已有卖出价时，再加入卖出成交价上方 R% 买回，关闭时该规则完全不存在。",
+    "sell_rule": "持仓时 OR：成本价下方 L%；F 三短均线平均变化率连续 A 日为负且价格跌破动态 B 日 SMA；此前连续 D-1 日三短均线平均变化率为负且当日三条短 SMA 各自变化率均不高于 C%；动态 E 日 SMA 下穿。",
+    "signal_time": "每个交易日开始前，只用截至前一交易日 Close 的历史计算条件单；2005 与 2010 窗口使用窗口开始前的 QQQ 历史预热指标，但预热期禁止交易。1999 窗口从 QQQ 上市首日开始，因不存在上市前数据只能自然预热。",
+    "execution_time": "若前 Close 到当日 Open 已越过阈值，按当日常规时段 Open；否则常规时段调整后 OHLC 触及阈值时按精确理论阈值；零滑点、零费用；每天最多一笔成交。",
+    "position_sizing": "long-only，窗口开始时持有 100,000 美元现金；每次全仓持有或全现金，允许小数股，不融资，现金不计息。",
+    "initial_position": "每个窗口独立从空仓开始，等待该参数在该窗口的第一笔普通买入；策略和该参数的 Buy & Hold 都从同一笔成交开始计绩效。"
+  },
+  "parameters": {
+    "windows": [
+      {
+        "window_id": "W1999_2014",
+        "analysis_start": "1999-03-10",
+        "analysis_end": "2014-12-31",
+        "warmup": "QQQ inception; no pre-listing history exists"
+      },
+      {
+        "window_id": "W2005_2020",
+        "analysis_start": "2005-01-03",
+        "analysis_end": "2020-12-31",
+        "warmup": "use approved QQQ closes before 2005-01-03; no pre-window trades"
+      },
+      {
+        "window_id": "W2010_2026",
+        "analysis_start": "2010-01-04",
+        "analysis_end": "2026-08-04",
+        "warmup": "use approved QQQ closes before 2010-01-04; no pre-window trades"
+      }
+    ],
+    "initial_position": "flat",
+    "C_fast_derivative_mode": "all_short_smas",
+    "max_trades_per_day": 1,
+    "search_method": "shared_seeded_local_sample_then_each_window_frontier_mutation_then_shared_union_rescore",
+    "random_seed": 20260813,
+    "common_sample_count": 40000,
+    "refined_sample_count_per_window": 15000,
+    "frontier_parent_count_per_objective": 40,
+    "top_fraction_for_stability": 0.01,
+    "forced_reentry_modes": [
+      false,
+      true
+    ],
+    "search_space": {
+      "A_negative_days_slow": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "B_slow_sma_window": [
+        150,
+        160,
+        170,
+        180,
+        190,
+        200,
+        210,
+        220,
+        230
+      ],
+      "C_fast_derivative_pct": [
+        -0.15,
+        -0.2,
+        -0.25,
+        -0.3,
+        -0.35,
+        -0.4
+      ],
+      "D_negative_days_fast": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "E_fallback_sma_window": [
+        240,
+        250,
+        260,
+        270,
+        280,
+        290,
+        300,
+        310,
+        320,
+        330,
+        340,
+        350,
+        360
+      ],
+      "F_short_sma_center": [
+        60,
+        65,
+        70,
+        75,
+        80,
+        85,
+        90,
+        95,
+        100,
+        105,
+        110,
+        115,
+        120
+      ],
+      "F_short_sma_spacing": [
+        5,
+        10,
+        15,
+        20
+      ],
+      "G_short_recovery_below_pct": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1,
+        1.25,
+        1.5,
+        1.75,
+        2,
+        2.25,
+        2.5
+      ],
+      "H_reentry_sma_window": [
+        220,
+        230,
+        240,
+        250,
+        260,
+        270,
+        280,
+        290,
+        300,
+        310,
+        320,
+        330,
+        340
+      ],
+      "L_cost_stop_pct": [
+        5,
+        5.5,
+        6,
+        6.5,
+        7,
+        7.5,
+        8,
+        8.5,
+        9,
+        9.5,
+        10,
+        10.5,
+        11,
+        11.5,
+        12
+      ],
+      "R_forced_rebuy_pct": [
+        0,
+        0.5,
+        1,
+        1.5,
+        2,
+        2.5,
+        3
+      ]
+    },
+    "anchors": [
+      {
+        "A_negative_days_slow": 3,
+        "B_slow_sma_window": 190,
+        "C_fast_derivative_pct": -0.25,
+        "D_negative_days_fast": 4,
+        "E_fallback_sma_window": 290,
+        "F_short_sma_center": 80,
+        "F_short_sma_spacing": 10,
+        "G_short_recovery_below_pct": 1,
+        "H_reentry_sma_window": 270,
+        "L_cost_stop_pct": 8.5,
+        "R_forced_rebuy_pct": 0,
+        "forced_reentry_enabled": true
+      }
+    ]
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "For every parameter/window independently, invest the same 100,000 USD in QQQ at that case's first ordinary buy fill and hold through that window end.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse the accepted v3 controls unchanged. Build experiment-specific cross-window charts around the shared template; never render a per-order table, while retaining orders in machine ledgers and K-line marker hover."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "If the full-history winner represents a broad and persistent mechanism rather than one historical accident, overlapping windows should select nearby parameters, their top-1% parameter distributions should overlap, and each window's CAGR/Sharpe representative should retain a high rank when applied to the other windows.",
+    "primary_metric": "Independently optimize CAGR and Sharpe in each window; judge stability from exact winner distances, top-1% parameter distributions, cross-window CAGR/Sharpe rank percentiles, benchmark deltas, drawdown and turnover. Do not collapse the two objectives into one score.",
+    "selection_rule": "Generate 40,000 fixed-seed candidates in the declared local grid, score the same candidates in all three windows, generate 15,000 additional unique mutations around each window's four metric frontiers, merge and de-duplicate all candidates, then rescore the same merged universe in all three windows. Select each window's single CAGR winner and single Sharpe winner plus the declared prior full-history anchor; merge duplicates and formally cross-check every representative in every window.",
+    "validation_plan": "The compiled ledger must match the independent pandas ledger on a pre-window-warmup golden test. Every reported representative/window cross-case must match PyBroker on cash, shares, equity, dates, sides, shares and fills; formal metrics and first entry must reproduce the saved screening row within tolerance. All searches and ranks must be reproducible from the seed and saved universe.",
+    "promotion_criteria": "No automatic promotion. A useful result requires materially overlapping top-1% ranges and high cross-window ranks for at least one parameter family under both CAGR and Sharpe; even then it only justifies a later locked non-overlapping or walk-forward experiment.",
+    "rejection_conditions": "Reject the run if windows do not use exact available dates, pre-window rows create trades, candidates differ across final window comparisons, duplicate case/window rows exist, a representative cannot be found in every window, any first entry is an initial seed, daily trades exceed one, a disabled forced-reentry signal trades, or screening and formal ledgers disagree."
+  }
+}

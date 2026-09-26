@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "view_id": "spy_qqq_bear_market_annotator_v1",
+  "symbols": [
+    "QQQ",
+    "SPY"
+  ],
+  "price_field": "split-and-dividend-adjusted Close",
+  "actual_start": "1999-03-10",
+  "actual_end": "2026-08-04",
+  "trading_sessions": 6893,
+  "interaction": "horizontal drag creates an editable inclusive interval",
+  "persistence": "browser localStorage plus JSON/CSV export and JSON import",
+  "sources": {
+    "QQQ": {
+      "path": "../data/processed/daily/QQQ.csv",
+      "sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df"
+    },
+    "SPY": {
+      "path": "../data/processed/daily/SPY.csv",
+      "sha256": "6b07e1636b1ecc276f17d6d474bb9ec864f7efe829d955c1f83d9f84088f4313"
+    }
+  },
+  "output": "../research/market_views/spy_qqq_bear_market_annotator.html",
+  "output_sha256": "3f038048329eb4ba2fd4f122e42438ebbdb0b1d816e989f2244a7baf28ea13f4"
+}

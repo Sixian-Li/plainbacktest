@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "aapl_dual_sma_two_window_grid_v1",
+  "created_at_utc": "2026-08-30T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "AAPL"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "aapl_close_confirmed_dual_sma_state_grid",
+    "description": "In each independently restarted window, calculate simple moving averages from adjusted AAPL closes using pre-window history. At every completed regular-session close, target a full long position when the fast SMA is strictly above the slow SMA and target cash when it is at or below the slow SMA. Fill any required state change at the next regular-session open.",
+    "buy_rule": "flat and completed fast_sma > completed slow_sma",
+    "sell_rule": "long and completed fast_sma <= completed slow_sma",
+    "signal_time": "after the regular-session close, using only that completed close and earlier AAPL history",
+    "execution_time": "next regular-session open with an explicit adverse cost; a last-window-close signal has no later fill",
+    "positioning": "long-only, all cash or all invested in AAPL, fractional shares, no leverage, no cash interest; each window restarts from 100000 dollars",
+    "plain_language": {
+      "summary": "在两个互不重叠的五年窗口中，比较AAPL快慢均线状态策略的完整收益网格。",
+      "buy": "当天收盘后，如果快线严格高于慢线且账户空仓，策略准备满仓买入AAPL。",
+      "sell": "当天收盘后，如果快线等于或低于慢线且账户持仓，策略准备全部卖出AAPL。",
+      "execution": "信号只在收盘数据完整后确认，买卖统一在下一交易日开盘成交，并计入单边5个基点成本。",
+      "position": "每个窗口都从10万美元现金独立开始，只在满仓AAPL与现金之间切换，允许碎股且不融资。"
+    }
+  },
+  "parameters": {
+    "window_convention": "[calendar-year start inclusive, end-label-year start exclusive); each account uses the first and last available AAPL sessions inside that interval",
+    "windows": [
+      {
+        "window_id": "W2013_2018",
+        "label": "2013–2018",
+        "start_inclusive": "2013-01-01",
+        "end_exclusive": "2018-01-01"
+      },
+      {
+        "window_id": "W2018_2023",
+        "label": "2018–2023",
+        "start_inclusive": "2018-01-01",
+        "end_exclusive": "2023-01-01"
+      }
+    ],
+    "window_count": 2,
+    "fast_window_start": 1,
+    "fast_window_end": 50,
+    "fast_window_step": 1,
+    "slow_window_start": 15,
+    "slow_window_end": 250,
+    "slow_window_step": 1,
+    "role_constraint": "fast_window < slow_window",
+    "rectangular_cells_per_window": 11800,
+    "invalid_role_cells_per_window": 666,
+    "valid_pair_count": 11134,
+    "combination_count": 22268,
+    "formal_cost_bps": 5,
+    "derived_zero_cost_sensitivity": "Reuse the identical reconciled order schedule and remove adverse fill costs; do not treat it as a second formal engine block."
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "AAPL Buy & Hold independently restarted in each window; signal on the first window close and buy at the following regular-session open with the same 5 bps cost",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged. Its accepted strategy-first narrative, market overlays, performance controls, printing rules, and self-contained Plotly layout cover this two-surface diagnostic."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "If the dual-SMA state rule captures a persistent AAPL trend structure, neighboring fast/slow pairs should form broad high-return regions and the two non-overlapping five-year surfaces should retain meaningful rank and top-decile overlap rather than selecting unrelated isolated peaks.",
+    "primary_metric": "5 bps total return in each window, interpreted with the full same-scale surfaces, cross-window Spearman rank correlation, top-decile Jaccard overlap, AAPL Buy & Hold, Sharpe, maximum drawdown, exposure, turnover, and the derived zero-cost penalty.",
+    "selection_rule": "Do not name a deployable champion. For each window report the deterministic mechanical maximum and a descriptive complete-3x3-neighborhood representative maximizing neighborhood median minus half its standard deviation; lower fast then lower slow breaks exact ties.",
+    "validation_plan": "Run and reconcile all 22268 valid pair-window cases against an independent daily ledger at 5 bps; compare the two full parameter surfaces and retain any later candidate for a separately frozen experiment with unseen dates.",
+    "promotion_criteria": "Engineering and ledger gates pass; neither conclusion depends on a boundary or isolated point; broad neighboring regions persist across both windows; and a future locked period remains useful after costs relative to AAPL Buy & Hold.",
+    "rejection_conditions": "Reject stability if the two surface rankings are weakly related, top-decile overlap is small, maxima move to unrelated boundaries, most pairs trail Buy & Hold, cost sensitivity is material, or accounting and report gates do not pass."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

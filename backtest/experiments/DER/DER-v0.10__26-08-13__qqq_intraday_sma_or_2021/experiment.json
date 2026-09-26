@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_or_2021_v1",
+  "created_at_utc": "2026-08-13T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_or_guardrails",
+    "description": "从 2021-01-04 Open 持有 100 股 QQQ 出发，持仓时由成本止损、短均线慢性转弱、短均线快速转弱或 SMA200 下穿中的任一规则全仓卖出；空仓时由卖出价上方强制买回、SMA200 上穿或短均线恢复中的任一规则把全部现金买回。所有技术阈值只用前一交易日及更早的已完成 Close 推导，再用下一交易日复权 OHLC 判断是否触及。",
+    "buy_rule": "空仓时 OR：价格达到上次实际卖出价的 101.5%；前收盘位于前 SMA200 下方且当日价格向上穿越动态 SMA200；前收盘位于前短均线平均值下方 1% 且当日价格向上穿越该动态阈值。",
+    "sell_rule": "持仓时 OR：价格跌至本次成本的 98.5%；短均线平均变化率此前连续 6 日为负且当日仍为负并跌破动态 SMA130；此前连续 2 日为负且当日动态变化率达到 -0.15%；前收盘不低于前 SMA200 且当日价格向下穿越动态 SMA200。",
+    "signal_time": "每个交易日开始前，仅用截至前一交易日 Close 的历史计算该日条件单及动态阈值公式；盘中是否触发由该日常规时段调整后 OHLC 判定。",
+    "execution_time": "若前 Close 到当日 Open 已越过阈值，按当日 Open；否则常规时段 OHLC 触及阈值时按精确理论阈值；零滑点、零费用；每天最多一笔成交。",
+    "position_sizing": "long-only，全仓持有或全现金，允许小数股，不融资，现金不计息。",
+    "initial_position": "2021-01-04 Open 以 305.07175 美元持有 100 股 QQQ；该种子建仓计作当日唯一成交。"
+  },
+  "parameters": {
+    "analysis_start": "2021-01-04",
+    "analysis_end": "2026-08-04",
+    "initial_shares": 100,
+    "A_negative_days_slow": 7,
+    "B_slow_sma_window": 130,
+    "C_fast_derivative_pct": -0.15,
+    "D_negative_days_fast": 3,
+    "E_fallback_sma_window": 200,
+    "F_short_sma_center": 30,
+    "F_short_sma_spacing": 5,
+    "F_short_sma_windows": [
+      25,
+      30,
+      35
+    ],
+    "G_short_recovery_below_pct": 1.0,
+    "H_reentry_sma_window": 200,
+    "L_cost_stop_pct": 1.5,
+    "R_forced_rebuy_pct": 1.5,
+    "max_trades_per_day": 1
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 30507.175,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Hold the same initial 100 QQQ shares from 2021-01-04 Open through 2026-08-04 Close; mark adjusted Close daily and do not impose an artificial terminal sale.",
+  "reporting": {
+    "template_id": "interactive_research_v2",
+    "template_path": "backtest/report_templates/interactive_research_v2",
+    "reuse_review": "Reuse the accepted zoom, visible-window Y-axis, selectable-series, left-edge rebasing and DCA template. Extend the report builder, not the template assets, so this experiment can group SMA25/30/35, their average, four derivative lines, SMA70 through SMA450, and reason-labelled trades."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "The fixed OR-rule set can reduce QQQ drawdown without pathological churn, and no single safety or re-entry rule should accidentally dominate nearly every transition.",
+    "primary_metric": "First inspect accounting correctness, trade reasons, churn and rule dominance; then compare total return, CAGR, Sharpe and maximum drawdown with holding the same 100 QQQ shares.",
+    "selection_rule": "None. This first run uses exactly one frozen parameter set and performs no parameter search or post-result replacement.",
+    "validation_plan": "PyBroker and an independently coded cash/share ledger must match daily cash, shares, equity, every order and every closed trade. Delete-one-rule ablations are descriptive diagnostics only.",
+    "promotion_criteria": "No promotion in this run. A later experiment must predeclare parameter ranges, robustness criteria and walk-forward or locked out-of-sample evaluation before paper trading.",
+    "rejection_conditions": "Reject the implementation if it uses current Close to construct an earlier intraday trigger, fills an overnight gap at the threshold, trades more than once per day, diverges from the independent ledger, or reveals unintended extreme churn or a mechanically dominant rule."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "title": "Quant Research market-data snapshot (2026-09-26)",
+  "attribution": "Quant Research data contributors",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "rights_confirmation_date": "2026-09-26",
+  "rights_basis": "Project owner explicitly confirmed full copyright ownership of local data and authorized CC BY 4.0 distribution.",
+  "scope": "The data files listed under data/ in backtest/docs/release/source_snapshot.json; subsequent downloads are not automatically covered.",
+  "quality_status_unchanged": true
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_sma_regime_two_measure_ablation_two_periods_v1",
+  "created_at_utc": "2026-08-13T15:00:00+00:00",
+  "status": "exploratory_two_period_ablation",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "sma_regime_conditions_1_3_short_sma_rising_and_3pct_lockout_ablation",
+    "description": "以已经去掉旧条件 2 和旧 8% 止损的条件 1+3 策略为基础，做两个新措施的完整 2×2 消融。基础主条件是完成 Close 后 Close>SMA200 且 SMA200>SMA250>SMA300。措施 1 把 SMA25、SMA30、SMA35 各自严格高于前一交易日加入主条件，任一持平或下跌即不满足。措施 2 在单次持仓中用实际入场价及此前已完成 Close 维护盘前已知峰值；当日 Low 首次到达峰值下方 3% 时立即卖出，开盘跳空低于止损价则按 Open，否则按精确 3% 阈值。只有该 3% 卖出会进入特殊回买锁定：路径 A 是完成 Close 回到或高于实际卖出价且主条件全满足；否则路径 B 必须在止损后依次由完成 Close 下穿 SMA200、到达或低于 SMA200×95%、再从下方向上穿越 SMA200，之后主条件全满足。两个窗口和四个 case 均独立从现金开始。",
+    "buy_rule": "普通空仓且未处于 3% 止损锁定时，完成 Close 后主条件全部成立，下一交易日 Open 全仓买入。3% 止损锁定时，只有完成 Close>=该次实际止损卖出价且主条件全满足，或已依次完成 Close<SMA200、Close<=SMA200×95%、随后前 Close<=前 SMA200 且今 Close>SMA200 并且主条件全满足，才在下一交易日 Open 全仓买回。措施 1 启用时，主条件额外要求 SMA25(t)>SMA25(t-1)、SMA30(t)>SMA30(t-1)、SMA35(t)>SMA35(t-1)。",
+    "sell_rule": "持仓且完成 Close 后任一启用主条件不满足，则下一交易日 Open 全部卖出；这种主条件卖出不激活特殊回买锁定。措施 2 启用时，每个交易日前以实际入场价与此前完成 Close 的最大值为已知峰值，预先放置峰值×97%的当日止损；Open 已低于等于阈值则按 Open 卖出，否则 Low 触及阈值就按阈值当日卖出。止损卖出后激活特殊回买锁定。主条件次日 Open 卖出与当日盘中止损若竞争，以更早实际发生的次日 Open 主条件卖出为准。",
+    "signal_time": "主条件、卖价恢复和 SMA200 重置路径均在完成 Close 后判定。3% 盘中止损阈值在当日开盘前，只用实际入场价和此前完成 Close 计算；不使用当日 High 或未来数据。",
+    "execution_time": "主条件买卖和两条锁定回买路径均在下一交易日 Open 执行。3% 止损为同一交易日预放条件单：跳空按 Open，非跳空 Low 触及时按精确阈值。允许次日 Open 买回后同日盘中再次止损。",
+    "position_sizing": "long-only；每个 case-window 独立从 100,000 美元现金开始；买入使用全部现金，卖出清空；允许小数股，不融资，现金不计息。",
+    "initial_position": "每个窗口首日空仓；窗口前数据只预热 SMA，不继承任何仓位、现金、峰值、卖出价或重置阶段。"
+  },
+  "parameters": {
+    "base_conditions": [
+      "price_above_sma200",
+      "sma200_above_sma250_above_sma300"
+    ],
+    "measure_1_short_sma_windows": [
+      25,
+      30,
+      35
+    ],
+    "measure_1_operator": "each current SMA must be strictly greater than its own previous-session value",
+    "measure_2_drawdown_stop_pct": 3,
+    "measure_2_stop_peak": "maximum of actual entry fill and completed closes strictly before the current session",
+    "measure_2_recovery_operator": "completed Close >= actual 3% stop sell fill",
+    "measure_2_reset_sequence": [
+      "completed Close < SMA200",
+      "completed Close <= SMA200 * 0.95",
+      "completed Close crosses from <= SMA200 to > SMA200"
+    ],
+    "cases": {
+      "base": {
+        "measure_1": false,
+        "measure_2": false
+      },
+      "measure_1": {
+        "measure_1": true,
+        "measure_2": false
+      },
+      "measure_2": {
+        "measure_1": false,
+        "measure_2": true
+      },
+      "measures_1_2": {
+        "measure_1": true,
+        "measure_2": true
+      }
+    },
+    "windows": {
+      "2010_2015": {
+        "requested_start": "2010-01-01",
+        "end": "2015-12-31"
+      },
+      "2020_2026": {
+        "requested_start": "2020-01-01",
+        "end": "2026-08-04"
+      }
+    },
+    "windows_are_independent": true,
+    "old_8pct_stop": "removed and not tested"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "For each independent window, invest the same 100,000 USD in QQQ at the Open following the first completed window Close and hold through the window end Close without artificial liquidation.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged for the formal interactive run report. Additionally generate one print-specific HTML and one combined PDF whose first page states the tested rules before any results."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Measure 1, measure 2, or their combination can reduce maximum drawdown of the conditions 1+3 base strategy consistently in both independently initialized 2010–2015 and 2020–2026 windows.",
+    "primary_metric": "Maximum drawdown is primary. Total return, CAGR, Sharpe, exposure, orders, and stop/re-entry counts report the cost and mechanics; no parameter is selected.",
+    "selection_rule": "No selection or winner is promoted. Report all four predeclared cases in both windows and compare each measure case with the base in the same window.",
+    "validation_plan": "For each of eight case-window paths, reconcile PyBroker with an independent state-machine ledger in dates, sides, fill prices, cash, shares, equity, and closed trades. Add golden tests for strict short-SMA rises, gap/threshold 3% fills, both re-entry paths, ordered reset stages, and same-day buy then stop. Render one combined PDF and verify its page count, PDF header, and extracted first-page text.",
+    "promotion_criteria": "A measure is only a stronger follow-up candidate if it reduces maximum drawdown versus base in both windows without catastrophic return loss and without ledger divergence. Two retrospective windows are still insufficient for paper trading.",
+    "rejection_conditions": "Reject the run if the old 8% rule remains, measure 1 uses an average instead of all three separate strict rises, an equal/flat short SMA is accepted, the 3% stop uses current High to raise its threshold, the lock is activated by an ordinary main-condition exit, reset events occur out of order, windows inherit state, any case is omitted, the PDF starts with results rather than the strategy definition, or the two ledgers diverge."
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_no_fast_drop_train_oos_v1",
+  "created_at_utc": "2026-08-14T10:00:00+00:00",
+  "status": "exploratory_train_locked_test",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_no_fast_drop_train_locked_oos",
+    "description": "回到 QQQ 重新开发此前的日内动态 SMA 条件单策略，完全移除 C/D 快速导数卖出。只在共同预热后的 2000-07-27 至 2015-12-31 训练并以九维联合邻域的下四分位 CAGR/Sharpe 选择高原代表；参数锁定后仅运行一次 2016-01-04 至 2026-08-04 样本外回测，样本外结果不参与选参。",
+    "buy_rule": "初始空仓。普通买入为 OR：价格向上穿越动态 H 日 SMA；或价格向上穿越动态三短 SMA（F-spacing、F、F+spacing）平均值下方 G%。已有卖出成交价后，再加入达到卖出价上方 R% 的强制买回。多个买入阈值同时存在时，采用当天最先可能触及的最低向上阈值。",
+    "sell_rule": "持仓时 OR：价格跌至成本价下方 L%；三短 SMA 平均变化连续 A 个交易日为负且价格向下穿越动态 B 日 SMA；价格向下穿越动态 E 日 SMA。C/D 快速导数卖出明确关闭。多个卖出阈值同时存在时，采用当天最先可能触及的最高向下阈值。",
+    "signal_time": "每个交易日开始前只使用截至前一交易日 Close 的完整历史，解出当日动态条件单阈值；训练和样本外均可使用各自评价起点之前的 QQQ 历史做指标预热，但不能在评价起点前成交。",
+    "execution_time": "若前一 Close 到当日常规时段 Open 已越过阈值，按当日 Open 成交；否则当日调整后 OHLC 触及盘前解出的理论阈值时按该阈值成交。每天最多一笔，不使用 PyBroker middle price。",
+    "position_sizing": "long-only；初始 100,000 美元现金，每次在全仓 QQQ 与全现金之间切换，允许小数股，不融资，现金不计息。训练窗口与样本外窗口都独立从空仓重置。",
+    "initial_position": "训练评价从所有候选均完成最大 350 日预热后的首个可交易日开始；样本外在 2016-01-04 空仓等待第一笔普通买入。强制买回不能产生任何窗口的第一笔买入。"
+  },
+  "parameters": {
+    "indicator_history_start": "1999-03-10",
+    "train_start": "2000-07-27",
+    "train_end": "2015-12-31",
+    "locked_test_start": "2016-01-04",
+    "locked_test_end": "2026-08-04",
+    "evaluation_start": "analysis_start",
+    "initial_position": "flat",
+    "max_trades_per_day": 1,
+    "forced_reentry_enabled": true,
+    "fast_drop_enabled": false,
+    "legacy_disabled_rule_placeholders": {
+      "C_fast_derivative_pct": -0.1,
+      "D_negative_days_fast": 3,
+      "note": "仅为兼容通用账本的数据结构；fast_drop_enabled=false，因此它们不产生信号、不是自由参数。"
+    },
+    "search_ranges": {
+      "A_negative_days_slow": {
+        "start": 2,
+        "stop": 10,
+        "step": 1
+      },
+      "B_slow_sma_window": {
+        "start": 150,
+        "stop": 300,
+        "step": 1
+      },
+      "E_fallback_sma_window": {
+        "start": 100,
+        "stop": 330,
+        "step": 1
+      },
+      "F_short_sma_center": {
+        "start": 30,
+        "stop": 200,
+        "step": 1
+      },
+      "F_short_sma_spacing": {
+        "start": 5,
+        "stop": 20,
+        "step": 1
+      },
+      "G_short_recovery_below_pct": {
+        "start": 0,
+        "stop": 5,
+        "step": 0.05
+      },
+      "H_reentry_sma_window": {
+        "start": 200,
+        "stop": 350,
+        "step": 1
+      },
+      "L_cost_stop_pct": {
+        "start": 5,
+        "stop": 30,
+        "step": 0.25
+      },
+      "R_forced_rebuy_pct": {
+        "start": 0,
+        "stop": 30,
+        "step": 0.25
+      }
+    },
+    "search_method": "seeded_global_sampling_then_frontier_refinement_then_joint_neighborhood_plateau",
+    "random_seed": 20260814,
+    "search_anchors": [
+      {
+        "A_negative_days_slow": 3,
+        "B_slow_sma_window": 176,
+        "E_fallback_sma_window": 301,
+        "F_short_sma_center": 80,
+        "F_short_sma_spacing": 10,
+        "G_short_recovery_below_pct": 0.95,
+        "H_reentry_sma_window": 264,
+        "L_cost_stop_pct": 10,
+        "R_forced_rebuy_pct": 0,
+        "note": "上一轮 QQQ 重定基线，仅作为覆盖锚点；不享受选参优先级。"
+      }
+    ],
+    "global_sample_count": 100000,
+    "refined_sample_count": 80000,
+    "refinement_parent_count": 200,
+    "joint_anchor_count": 64,
+    "joint_cases_per_anchor": 512,
+    "joint_neighborhood_radii": {
+      "A_negative_days_slow": 1,
+      "B_slow_sma_window": 10,
+      "E_fallback_sma_window": 10,
+      "F_short_sma_center": 10,
+      "F_short_sma_spacing": 2,
+      "G_short_recovery_below_pct": 0.25,
+      "H_reentry_sma_window": 10,
+      "L_cost_stop_pct": 2,
+      "R_forced_rebuy_pct": 2
+    },
+    "local_parameter_band": {
+      "cagr_tolerance_pct_points": 0.75,
+      "sharpe_tolerance": 0.05
+    },
+    "formal_training_candidates": [
+      "joint_plateau_representative",
+      "maximum_cagr",
+      "maximum_sharpe"
+    ],
+    "locked_test_candidates": [
+      "joint_plateau_representative_only"
+    ]
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "训练与锁定样本外分别在各自共同评价起点的常规时段 Open 将同样的 100,000 美元全仓买入 QQQ 并持有。策略从同一日期的 100,000 美元现金开始等待信号，因此所有候选都包含初始等待现金期，不能通过推迟首买改变比较起点。",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "复用已验收的 v3 交互、可见区间 Y 轴、均线勾选、净值对齐与回撤控件；本实验只新增训练搜索、高原邻域和锁定样本外数据，不修改通用模板，也不生成逐笔交易表。",
+    "report_title": "QQQ 无 C/D 卖出：训练高原与锁定样本外回测"
+  },
+  "research": {
+    "stage": "exploratory_train_locked_test",
+    "hypothesis": "删除历史上没有独立贡献的 C/D 快速导数卖出后，QQQ 九个有效参数在 1999–2015 输入历史中仍存在一个多参数联合扰动后 CAGR 与 Sharpe 下四分位都较高的内部高原，并且该训练期高原代表在完全未参与选参的 2016–2026 保留风险调整优势。",
+    "primary_metric": "训练期先按 CAGR 与 Sharpe 中较弱的百分位筛选 64 个高分锚点；每个锚点联合扰动九个参数 512 次，以邻域 CAGR 下四分位和 Sharpe 下四分位中较弱的跨锚点百分位作为 joint_plateau_score，优先选择不触及全局边界的最高分锚点。样本外只报告，不参与选择。",
+    "selection_rule": "固定种子均匀抽样 100,000 组，再围绕训练期平衡前沿抽样 80,000 组。只使用训练结果选择 64 个锚点并生成 32,768 个联合邻域 case。若存在全维内部锚点，只能从内部锚点中选 joint_plateau_score 最高者；否则透明回退到边界最少者并否决高原晋级主张。CAGR/Sharpe 单点最高者仅作为训练诊断，不进入样本外。",
+    "validation_plan": "在打开锁定样本外之前，训练高原代表、训练最高 CAGR 和训练最高 Sharpe 均必须通过 PyBroker 与独立 pandas 账本逐日现金、持仓、净值、订单日期、方向、数量和成交价核对。随后只将训练高原代表原封不动用于 2016-01-04 至 2026-08-04，并再次双账本核对；不得根据测试结果调整参数。",
+    "promotion_criteria": "本轮只形成后续研究候选，不直接晋级模拟盘。训练期需找到非边界联合高原；锁定样本外需至少保持高于 Buy & Hold 的 Sharpe、较小的最大回撤，且 CAGR 不得显著依赖单一训练尖峰。规则消融和交易成本压力测试留待后续独立实验。",
+    "rejection_conditions": "若没有可用普通首买、选择使用了任何 2016 年后指标、代表参数触及搜索边界且没有双侧邻域、联合邻域下四分位明显坍塌、样本外风险调整表现不及基准、C/D 仍产生任何信号、每天超过一笔、数据未批准、筛选与正式账本不一致或报告/哈希/目录门禁失败，则否决相应高原或验证主张并保留全部结果。"
+  }
+}

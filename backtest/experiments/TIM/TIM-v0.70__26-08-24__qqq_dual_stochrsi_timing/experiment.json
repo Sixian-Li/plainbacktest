@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_dual_stochrsi_timing_v1",
+  "created_at_utc": "2026-08-24T00:00:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_dual_raw_stochrsi_intraday_timing",
+    "description": "Use raw unsmoothed Stochastic RSI with periods 42 and 100 as a joint all-in/all-out QQQ timing signal. Compare three paired semantics: joint oversold/overbought level states, joint rolling extrema, and recovery/reversal crossings. Each next-session trigger price is solved only from completed data through the prior close. An opening gap beyond the trigger fills at Open; otherwise the trigger fills only when it lies on the directed Open-to-Close path. The market chart displays Close only.",
+    "buy_rule": "LEVEL: flat and both provisional StochRSI(42) and StochRSI(100) become < 0.2 on a downward Open-to-Close path. EXTREME: flat and both become 0 on a downward path. CROSS: flat, both completed prior values are < 0.2, and both provisional values become >= 0.2 on an upward path.",
+    "sell_rule": "LEVEL: long and both provisional StochRSI(42) and StochRSI(100) become > 0.8 on an upward Open-to-Close path. EXTREME: long and both become 1 on an upward path. CROSS: long, both completed prior values are > 0.8, and both provisional values become <= 0.8 on a downward path.",
+    "signal_time": "Trigger prices and crossing eligibility are frozen before each regular session from adjusted daily data completed through the prior close.",
+    "execution_time": "Same regular session: Open when it has already gapped through the predeclared boundary; otherwise the exact boundary price only when the directed Open-to-Close segment reaches it. High and Low are not used to infer a touch.",
+    "positioning": "Long-only; 0% or 100% QQQ; fractional shares; no leverage, shorting, pyramiding, or cash interest; at most one order per session.",
+    "initial_position": "flat for all timing strategies and the SMA200 baseline; Buy & Hold enters at the first analysis-session Open",
+    "indicator_definition": "For each period p, Wilder RSI(p) is normalized by the rolling p-value minimum and maximum of that same RSI series; a zero range maps to 0.5; no K or D smoothing.",
+    "plain_language": {
+      "summary": "比较两个不同速度的 StochRSI 同时确认超买超卖时，三种进出场解释能否改善 QQQ 的持有体验。",
+      "buy": "两个周期都进入低位时买入；三种版本分别在进入低位、同时创滚动低点或从低位向上恢复时行动。",
+      "sell": "两个周期都进入高位时卖出；三种版本分别在进入高位、同时创滚动高点或从高位向下回落时行动。",
+      "execution": "每天开盘前用前一日及更早数据算好触发价；跳空越过就按开盘价成交，否则只有开盘到收盘的价格路径碰到触发价才按该价成交。",
+      "position": "策略只在满仓 QQQ 与持有现金之间切换，并与买入持有、SMA200 正负3%择时和报告中的等额定投情景比较。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2020-01-02",
+    "analysis_end": "2026-08-04",
+    "stochrsi_periods": [
+      42,
+      100
+    ],
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "strategy_modes": [
+      "LEVEL",
+      "EXTREME",
+      "CROSS"
+    ],
+    "sma_baseline_window": 200,
+    "sma_baseline_buy_buffer_pct": 3.0,
+    "sma_baseline_sell_buffer_pct": 3.0,
+    "intraday_path": "directed_open_to_close_only",
+    "gap_policy": "fill_at_open_when_open_is_already_beyond_trigger",
+    "combination_count_per_cost": 3
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ from the first analysis-session Open, plus a separate all-in/all-out dynamic SMA200 -3%/+3% timing baseline under the same Open-to-Close trigger model",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged: its human-language strategy flow, Close market panel, selectable equity series, visible-range rebasing, equal-installment DCA, collapsed technical appendix, and print rules cover this fixed-case comparison.",
+    "scenario_layer": "The equal-installment DCA control is browser-only, uses the visible-range Buy & Hold starting equity as total budget, invests at evenly spaced sessions, leaves undeployed cash non-interest-bearing, and does not mutate formal ledgers."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Joint 42/100-day StochRSI confirmation may reduce false single-horizon timing signals, and recovery/reversal crossings may behave differently from persistent level or exact-extreme states.",
+    "primary_metric": "CAGR and Sharpe for each fixed strategy, interpreted with maximum drawdown, exposure, order count, and both 0/5 bps costs",
+    "selection_rule": "Run and report all three predeclared paired semantics without selecting or retuning parameters; compare each with Buy & Hold and SMA200 +/-3% timing.",
+    "validation_plan": "Treat 2020-2026 as an exploratory comparison. Any promising semantics must be frozen before a separate earlier-history, later-forward, or cross-asset test.",
+    "promotion_criteria": "Both ledgers reconcile, all engineering/report gates pass, and a later predeclared validation retains an economically useful CAGR/Sharpe/drawdown tradeoff after 5 bps without changing periods or thresholds.",
+    "rejection_conditions": "Do not promote from this run alone; reject direct promotion for very few completed trades, cost fragility, materially worse return without meaningful risk improvement, ambiguous trigger reconstruction, or any ledger/report validation failure."
+  },
+  "active_run_id": null
+}

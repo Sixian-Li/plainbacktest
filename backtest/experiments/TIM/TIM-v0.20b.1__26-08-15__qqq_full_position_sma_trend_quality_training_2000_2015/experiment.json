@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_full_position_sma_trend_quality_training_2000_2015_v1",
+  "created_at_utc": "2026-08-15T00:00:00+00:00",
+  "status": "specification_frozen",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "traded_symbol": "QQQ",
+  "factor_only_symbol": "SPY",
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_full_position_sma_long_slope_short_trend_quality",
+    "description": "QQQ只在0%和100%仓位之间切换。基础价格状态要求完成Close高于长期SMA；因子2要求长期SMA在指定回看期内的平均每日百分比斜率严格高于门槛；因子4对短期SMA最近若干完成值的对数做OLS回归，以每日对数斜率乘R²衡量趋势方向和质量，并要求严格高于门槛。主策略P24同时启用因子2和4；因子5只在P245消融中要求QQQ/SPY比值的指定期对数动量严格为正。所有条件都是可重复进入的状态门槛，不要求每次重新上穿SMA；入场可要求连续若干日合格，任一已启用条件单日失效即退出。",
+    "buy_rule": "空仓且当日完成Close>SMA_L，并且本case启用的F2、F4、F5条件全部严格成立；该完整合格状态连续C个完成交易日成立后产生买入信号。F2=((SMA_L(t)/SMA_L(t-K))-1)/K×100。F4为最近W个log(SMA_S)对时间OLS的每日斜率×R²×100。F5=log((QQQ/SPY)(t)/(QQQ/SPY)(t-R))。信号后的下一共同交易日Open用全部现金买入QQQ。",
+    "sell_rule": "持仓时，只要Close<=SMA_L，或本case启用的F2<=门槛、F4<=门槛、F5<=0中的任一项成立，当日完成Close后产生卖出信号，下一共同交易日Open全部清仓。退出不等待C日确认；不使用3%或8%止损。",
+    "signal_time": "所有SMA、长期斜率、短趋势回归和QQQ/SPY相对强弱只使用当日常规时段完成Close及更早数据；当日Close完成后才能形成信号。",
+    "execution_time": "所有买卖信号最早在下一QQQ/SPY共同交易日的拆股及股息调整Open成交；每边成本作为买高卖低的成交价冲击，禁止同日Close成交和PyBroker默认middle price。",
+    "positioning": "long-only；初始100,000美元；QQQ仓位只能为0%或100%，每次买入使用全部现金、每次卖出清空全部份额；允许小数股，不融资、不做空，空仓现金不计息。SPY只计算因子5，从不交易。",
+    "initial_position": "2000年首个共同交易日前为空仓；更早数据只用于指标预热，不继承仓位、现金或确认计数。",
+    "reentry": "卖出后，只要全部启用状态重新连续C日成立即可下一Open满仓买回；不强制等待新的Close上穿SMA事件。"
+  },
+  "parameters": {
+    "warmup_start": "1999-03-10",
+    "training_window": {
+      "requested_start": "2000-01-03",
+      "end": "2015-12-31"
+    },
+    "robustness_subwindows": [
+      {
+        "window_id": "W1_2000_2003",
+        "start": "2000-01-03",
+        "end": "2003-12-31"
+      },
+      {
+        "window_id": "W2_2004_2007",
+        "start": "2004-01-01",
+        "end": "2007-12-31"
+      },
+      {
+        "window_id": "W3_2008_2011",
+        "start": "2008-01-01",
+        "end": "2011-12-31"
+      },
+      {
+        "window_id": "W4_2012_2015",
+        "start": "2012-01-01",
+        "end": "2015-12-31"
+      }
+    ],
+    "ablation_cases": {
+      "B0": [],
+      "B2": [
+        "F2_LONG_SMA_SLOPE"
+      ],
+      "B4": [
+        "F4_SHORT_TREND_QUALITY"
+      ],
+      "P24": [
+        "F2_LONG_SMA_SLOPE",
+        "F4_SHORT_TREND_QUALITY"
+      ],
+      "P245": [
+        "F2_LONG_SMA_SLOPE",
+        "F4_SHORT_TREND_QUALITY",
+        "F5_QQQ_SPY_RELATIVE_STRENGTH"
+      ]
+    },
+    "baseline": {
+      "long_sma_window": 200,
+      "long_slope_lookback": 20,
+      "long_slope_threshold_daily_pct": 0.0,
+      "short_sma_window": 30,
+      "short_regression_window": 10,
+      "short_quality_threshold_daily_pct": 0.0,
+      "entry_confirmation_sessions": 1,
+      "relative_strength_lookback": 60
+    },
+    "stage_1_oat_sweeps": [
+      {
+        "parameter": "long_sma_window",
+        "values": [
+          180,
+          190,
+          200,
+          210,
+          220
+        ]
+      },
+      {
+        "parameter": "long_slope_lookback",
+        "values": [
+          10,
+          15,
+          20,
+          30,
+          40
+        ]
+      },
+      {
+        "parameter": "long_slope_threshold_daily_pct",
+        "values": [
+          0.0,
+          0.005,
+          0.01,
+          0.02
+        ]
+      },
+      {
+        "parameter": "short_sma_window",
+        "values": [
+          20,
+          25,
+          30,
+          35,
+          40
+        ]
+      },
+      {
+        "parameter": "short_regression_window",
+        "values": [
+          5,
+          8,
+          10,
+          15
+        ]
+      },
+      {
+        "parameter": "short_quality_threshold_daily_pct",
+        "values": [
+          -0.02,
+          -0.01,
+          0.0,
+          0.01,
+          0.02
+        ]
+      },
+      {
+        "parameter": "entry_confirmation_sessions",
+        "values": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "stage_2": {
+      "stable_values_per_parameter": 3,
+      "maximum_joint_cases": 2200,
+      "stable_band_drawdown_tolerance_pct_points": 1.0,
+      "connected_values_required": 2,
+      "oat_retention_rule": "每个维度在闭合交易与四窗持仓活动门禁通过后，按最差分段最大回撤、完整期Ulcer Index和到中心距离依次排序，保留前三个值；1个百分点连续带只作响应形状诊断，不在联合搜索前硬删除维度。"
+    },
+    "relative_strength_ablation": {
+      "lookbacks": [
+        20,
+        40,
+        60,
+        90,
+        120
+      ],
+      "threshold_log_return": 0.0,
+      "core_parameters_frozen_before_ablation": true
+    },
+    "selection": {
+      "minimum_cagr_pct": 2.0,
+      "minimum_closed_trades": 6,
+      "require_positive_exposure_in_every_subwindow": true,
+      "plateau_drawdown_tolerance_pct_points": 1.0,
+      "primary": "maximize the minimum (least favorable) max_drawdown_pct across the four independent subwindows",
+      "secondary": [
+        "lower full-period ulcer_index_pct",
+        "higher worst_63_session_return_pct",
+        "shorter maximum drawdown duration",
+        "higher losing_month_avoidance_pct",
+        "connected local parameter plateau center"
+      ]
+    },
+    "formal_verification": "PyBroker independently verifies B0/B2/B4/P24/P245 at the frozen center and final P24 representative; the reference engine evaluates every screening case.",
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero interest",
+  "benchmark": "QQQ buy and hold from the same first common analysis session, with the same initial cash and per-side cost assumption",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "reuse_review": "复用v4的策略卡置顶、自包含Plotly、可见区间缩放、净值选择和性能控件；新增内容仅为本实验的OAT、局部平台、分段回撤、持仓区间与F5配对消融图。"
+  },
+  "research": {
+    "stage": "exploratory_in_sample_training",
+    "hypothesis": "在QQQ始终0%或100%仓位的约束下，Close>SMA长期状态叠加长期SMA正斜率和短SMA趋势质量，可以比单纯Close>SMA状态稳定地减轻2000–2015各市场阶段回撤；QQQ/SPY相对强弱可能提供额外但非必要的风险过滤。",
+    "primary_metric": "四个预声明子窗口中最差最大回撤，其次为完整训练期Ulcer Index、最差63日收益、水下持续时间和亏损月份比例；CAGR只作最低活动门禁而非优化目标。",
+    "selection_rule": "只在2000–2015内先做中心参数OAT。OAT阶段只要求至少6笔闭合交易且四个子窗口均有持仓；每个维度按四窗最差最大回撤、完整期Ulcer Index和到中心距离依次保留前三个值，1个百分点连续带只作响应形状诊断，随后运行不超过2,200个完整局部联合case。联合候选必须CAGR>=2%、至少6笔闭合交易且四个子窗口均有持仓；先最大化四窗最差最大回撤，再在1个百分点平台内按Ulcer Index、最差63日收益、水下时间、亏损月份规避率和到各维中位数距离选择平台中央。P24代表冻结后才运行F5窗口消融，F5不得反向改变P24参数。",
+    "validation_plan": "参考状态机保存全部OAT、局部联合和F5消融路径及分段指标；中心和最终代表的B0/B2/B4/P24/P245由PyBroker与独立账本核对逐日现金、份额、净值、订单日期/方向/份额/成交价和闭合交易。单测覆盖无未来数据、OLS×R²、严格阈值、连续入场确认、单日退出、次日Open、全仓份额、共同QQQ/SPY日历和可重复买回。主结果使用5bps，0bps只作成本敏感性。2016年以后不得用于选参或本实验结论。",
+    "promotion_criteria": "若最终P24代表相对B0在四个子窗口中的最差最大回撤至少改善3个百分点、完整期CAGR>=2%、不是搜索边界孤立峰、5bps不反转方向且全部工程门禁通过，则值得新建独立TIM子实验，将参数冻结到2016–2026机械测试；本训练实验本身不能晋级模拟盘。F5只有在冻结P24后同时改善最差分段回撤和完整期Ulcer Index且保持正CAGR时，才值得带入该后续实验。",
+    "rejection_conditions": "若无联合case通过CAGR与活动门禁，P24最终1个百分点平台依赖孤立点或搜索边界，P24相对B0的最差分段回撤改善不足3个百分点，5bps使结论反转，F5参与主参数选择，任何信号使用未完成Close或2016年后数据，订单早于下一Open，QQQ仓位不是0%/100%，或PyBroker与独立账本差异超过1e-8，则拒绝候选或实现。"
+  }
+}

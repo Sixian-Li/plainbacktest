@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma200_forced_sell_sensitivity_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_dynamic_sma200_asymmetric_forced_sell_sensitivity",
+    "description": "完全沿用盘前可解的动态 SMA200 双阈值、日内触线/跳空 Open、每日最多一笔和实际成交价纠错锚；不重新搜索 a/b，只比较两组预先冻结的 a/b 下，强制买回 c 与强制卖出 d 独立开关及 d 的宽步长敏感性。",
+    "buy_rule": "空仓普通入场：前一完成 Close 不高于前一完成 SMA200×(1+b%) 时保留向上穿越资格；当日价格达到盘前解出的动态线时买入。若 c 开启且已有卖出，则同时放置上次计成本卖出成交价×(1+c%) 的强制买回线；两条向上触发线取较低者优先。",
+    "sell_rule": "持仓时常驻盘前解出的普通 SMA200 卖出线。若 d 开启，则同时放置上次计成本买入成交价×(1-d%) 的强制卖出线；两条向下触发线取较高者优先。",
+    "signal_time": "每个常规交易日开盘前，只使用截至前一交易日 Close 的完成历史与既有实际账户成交价，解出当日所有资格和触发价。",
+    "execution_time": "若常规时段 Open 已越过预挂触发线则按 Open 成交，否则调整后日线 OHLC 触及时按精确理论线成交；随后施加单边5 bps不利成本；每日最多一笔。",
+    "positioning": "long-only；2000-01-03 以100,000美元现金空仓开始；每次买入投入全部现金、每次卖出清空全部份额；允许小数股，不融资，现金不计息。",
+    "sma_window": 200
+  },
+  "parameters": {
+    "analysis_start": "2000-01-03",
+    "analysis_end": "2025-12-31",
+    "requested_interval": "2000-01-01 inclusive to 2026-01-01 exclusive; normalized to available QQQ sessions",
+    "fixed_ab_pairs": [
+      {
+        "pair_id": "primary",
+        "a_pct": 3.75,
+        "b_pct": -12.75,
+        "purpose": "上一轮 S5 冠军及冻结观察候选"
+      },
+      {
+        "pair_id": "drawdown_reference",
+        "a_pct": 3.0,
+        "b_pct": -12.75,
+        "purpose": "上一轮最大回撤较低的预登记对照"
+      }
+    ],
+    "causal_ablation": [
+      {
+        "c_pct": null,
+        "d_pct": null
+      },
+      {
+        "c_pct": 5.0,
+        "d_pct": null
+      },
+      {
+        "c_pct": null,
+        "d_pct": 5.0
+      },
+      {
+        "c_pct": 5.0,
+        "d_pct": 5.0
+      }
+    ],
+    "d_sweep_with_c_fixed_pct": 5.0,
+    "d_sweep_pct": [
+      null,
+      2.5,
+      5.0,
+      7.5,
+      10.0,
+      12.5,
+      15.0
+    ],
+    "unique_cases_per_ab_pair": 9,
+    "combination_count": 18,
+    "restart_sensitivity": {
+      "start_years": [
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "duration": "ten calendar years inclusive, ending December 31 of start_year+9",
+      "initial_state": "Each sensitivity run independently restarts flat with 100,000 USD; pre-start data is warmup only."
+    },
+    "rolling_five_year": {
+      "calendar_windows": "2000-2004 through 2021-2025, advancing one calendar year at a time",
+      "state_handling": "Performance is rebased at each window boundary but strategy state is inherited from the single continuous run."
+    },
+    "event_attribution": {
+      "forward_sessions": [
+        20,
+        60
+      ],
+      "path_metrics": "For every primary SELL_CORRECTION, report the minimum QQQ Low and final Close relative to the raw sell fill over the next 20 and 60 available sessions beginning on the next trading session (excluding the sell bar), the next actual buy date/signal/fill, flat duration, and realized buyback slippage.",
+      "paired_counterfactual": "For each a/b and d-sweep case, compare the saved daily equity with its c=5,d=disabled control; report terminal, CAGR, Sharpe and maximum-drawdown deltas. This is a whole-path paired strategy comparison, not an isolated causal P&L for a single event."
+    },
+    "selection_rule": {
+      "primary": "Do not optimize a/b. For each frozen a/b, inspect whether d improves S5, S10, full-history CAGR, Sharpe and maximum drawdown jointly relative to c=5,d=disabled.",
+      "robust_plateau": "A useful d range must contain at least three adjacent enabled d values spaced 2.5 percentage points apart, and every point must avoid a material regression versus d-disabled: S5 and S10 no more than 0.50 percentage points lower, CAGR no more than 0.25 percentage points lower, Sharpe no more than 0.03 lower, and maximum drawdown no more than 2.0 percentage points worse. At least one point must strictly improve maximum drawdown by 1.0 percentage point or improve CAGR by 0.25 percentage points.",
+      "activity_gate": "Any enabled d point with fewer than 10 primary SELL_CORRECTION events across the full 26-year run is statistically underidentified and cannot nominate an optimized d; it remains a descriptive insurance setting only.",
+      "tie_breaker": "If a qualifying plateau exists, choose its median d; do not choose a mechanical single-point champion."
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Invest the same 100,000 USD at the 2000-01-03 regular-session Open with 5 bps adverse entry cost and hold QQQ through 2025-12-31.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged. Build experiment-specific c/d ablation, d-response, rolling/restart and forced-sell event diagnostics in the analyzer."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "在 b≈-12.75%的深跌入场之后，d=5%的强制卖出可能过紧；关闭或7.5%至10%附近可能减少V形反转中的低卖高买，同时保留部分尾部保护。",
+    "primary_metric": "Joint interpretation of S5, S10, full-history CAGR, Sharpe and maximum drawdown relative to the predeclared c=5,d-disabled control; forced-sell event count is a mandatory identifiability gate.",
+    "selection_rule": "Use the frozen rules in parameters.selection_rule. Full-history maxima are supplementary and cannot override the activity gate or three-point plateau requirement.",
+    "validation_plan": "Save all 18 continuous cases, all 22 rolling five-year windows, all 17 flat-restart ten-year windows, every daily state/order/trade/plan and every SELL_CORRECTION event attribution. Reconcile every case with PyBroker and the independent ledger within 1e-6; require unit tests, hashes, workspace audit and real Chrome report interaction.",
+    "promotion_criteria": "No direct promotion from this historical sensitivity run. It may only nominate a descriptive d range when the predeclared activity and plateau gates both pass; 2026 onward remains the chronological forward period.",
+    "rejection_conditions": "Do not optimize d if fewer than 10 forced-sell events identify it, if no three-point robust plateau exists, if results conflict materially between the two frozen a/b pairs or between S5 and S10, or if any accounting, timing, count, hash, test, audit or browser gate fails."
+  }
+}

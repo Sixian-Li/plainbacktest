@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "experiment_id": "bear_resilience_unified_trend_score_portfolio_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "specification_frozen",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "RESILIENCE_21"
+  ],
+  "excluded_symbols": {
+    "Q": "保留在候选清单和当前评分表中，但截至 2026-08-04 仅 193 根日线，达不到 252 根统一预热门槛，正式历史组合不会强行纳入。"
+  },
+  "strategy": {
+    "name": "bear_resilience_unified_trend_score_portfolio",
+    "description": "在此前当前成分股熊市事件研究得到的 13 个核心和 8 个近核心候选上，冻结一套不按个股寻优的牛熊评分。个股分由 Close 相对 SMA200 的一倍 ATR20 滞回状态、SMA200 二十日方向及 3/6/12 个月动量组成；总分再加入 SPY、QQQ 和当前成分股 SMA200 广度。底层使用可用标的 63 日逆波动风险预算，评分只做阶梯减仓，释放资金留现金。",
+    "buy_rule": "每周最后一个共同交易日 Close 后，对已完成 252 日预热的候选计算统一总分。先按 63 日实现波动率形成单标的最多 10% 的风险预算，再乘分数对应的 0%、15%、40%、75% 或 100% 持有倍率；TLT/GLD 的个股分低于 50 时目标强制为零。若目标股数高于当前股数，提交差额买单。",
+    "sell_rule": "同一周度信号日按相同目标权重重新计算；若目标股数低于当前股数，提交差额卖单。评分降低释放的预算保留现金，不在剩余标的间二次归一化；无止损、无做空、无融资。",
+    "signal_time": "每周最后一个共同交易日的常规时段 Close 完成后，只使用截至该 Close 的 OHLC、SMA、ATR、动量、波动率与市场广度；ATR 滞回带内保持此前状态。",
+    "execution_time": "信号后的下一共同交易日按拆股与股息调整 Open 成交；同日先卖后买，买单按固定字母序执行，单边成本作为买高卖低的成交价冲击。",
+    "position_sizing": "long-only；初始 100,000 美元现金；63 日逆波动预算最多 10%/标的，评分阶梯只下调预算且不重新归一化；允许小数股，现金不计息。",
+    "initial_position": "2007-01-03 起全现金，等待首个周度信号并在下一交易日开盘建立目标组合。"
+  },
+  "parameters": {
+    "analysis_start": "2007-01-03",
+    "analysis_end": "2026-08-04",
+    "candidate_symbols": [
+      "AZO",
+      "TLT",
+      "COR",
+      "EXE",
+      "DVA",
+      "SJM",
+      "SO",
+      "ED",
+      "GLD",
+      "CHD",
+      "HRL",
+      "GILD",
+      "Q",
+      "HSY",
+      "ORLY",
+      "MO",
+      "WRB",
+      "EQT",
+      "LMT",
+      "GIS",
+      "WEC"
+    ],
+    "core_symbols": [
+      "AZO",
+      "TLT",
+      "COR",
+      "EXE",
+      "DVA",
+      "SJM",
+      "SO",
+      "ED",
+      "GLD",
+      "CHD",
+      "HRL",
+      "GILD",
+      "Q"
+    ],
+    "near_core_symbols": [
+      "HSY",
+      "ORLY",
+      "MO",
+      "WRB",
+      "EQT",
+      "LMT",
+      "GIS",
+      "WEC"
+    ],
+    "defensive_assets": [
+      "TLT",
+      "GLD"
+    ],
+    "minimum_history_bars": 252,
+    "own_score": {
+      "price_vs_sma200_atr_hysteresis_weight": 0.3,
+      "sma200_slope_20_weight": 0.2,
+      "momentum_63_weight": 0.15,
+      "momentum_126_weight": 0.15,
+      "momentum_252_weight": 0.2,
+      "sma_window": 200,
+      "atr_window": 20,
+      "atr_band_multiple": 1.0,
+      "sma_slope_lookback": 20,
+      "momentum_windows": [
+        63,
+        126,
+        252
+      ],
+      "hysteresis_initial_state": 50.0
+    },
+    "market_score": {
+      "spy_weight": 0.4,
+      "qqq_weight": 0.3,
+      "breadth_weight": 0.3,
+      "breadth_definition": "当前 S&P 500 与 Nasdaq-100 股票并集里，已形成 SMA200 且 Close>SMA200 的比例；成分列表固定于 2026 快照，因此只作带生存偏差的探索性环境变量。",
+      "minimum_breadth_assets": 100
+    },
+    "combined_score": {
+      "own_weight": 0.7,
+      "market_weight": 0.3
+    },
+    "score_multipliers": [
+      {
+        "minimum_score": 80.0,
+        "multiplier": 1.0
+      },
+      {
+        "minimum_score": 65.0,
+        "multiplier": 0.75
+      },
+      {
+        "minimum_score": 45.0,
+        "multiplier": 0.4
+      },
+      {
+        "minimum_score": 30.0,
+        "multiplier": 0.15
+      },
+      {
+        "minimum_score": 0.0,
+        "multiplier": 0.0
+      }
+    ],
+    "defensive_minimum_own_score": 50.0,
+    "volatility_window": 63,
+    "maximum_single_asset_weight": 0.1,
+    "rebalance_frequency": "last_common_trading_session_of_each_week",
+    "unallocated_weight": "cash_without_interest",
+    "formal_cases": [
+      "unified_score",
+      "own_score_only",
+      "sma200_atr_only",
+      "risk_base_no_timing"
+    ],
+    "primary_case": "unified_score",
+    "execution_order": "sell_all_differences_then_buy_differences_in_symbol_ascending_order; order differences with absolute notional <= 1e-12 USD are treated as numerical zero during ledger reconciliation",
+    "numerical_zero_order_notional_usd": 1e-12,
+    "fractional_shares": true,
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "resilience_summary_source": "research/market_views/bear_market_resilience_current_constituents_summary.csv"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "主要机制基准为同一候选、同一动态可用性和同一 63 日逆波动预算但不做牛熊减仓的 risk_base_no_timing；另报告 SPY 在 2007-01-03 Open 一次买入并持有至 2026-08-04 Close。",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "复用 v3 的自包含 Plotly、净值区间对齐、定投和可见区间缩放控件；市场图改为 SPY/QQQ 与环境分，另加当前 21 标的评分/目标权重表和熊市分段比较。"
+  },
+  "research": {
+    "stage": "retrospective_exploratory_backtest",
+    "hypothesis": "统一且不按个股寻优的长期趋势评分，可以在核心/近核心抗跌候选组合中通过分层降仓减轻回撤，同时保留可接受比例的无择时风险预算收益。",
+    "primary_metric": "比较 unified_score 与 risk_base_no_timing 在单边 5 bps 下的最大回撤差；同时强制报告 CAGR 保留率、Sharpe、平均总敞口、换手、现金比例、每段手工熊市收益和最差单段结果。",
+    "selection_rule": "本实验不搜索参数也不从四个 case 中改选赢家；unified_score 是预声明主策略，其余三个 case 只用于分离市场环境、完整多因子和 SMA200 单因子的贡献。",
+    "validation_plan": "每个成本区块的四条组合路径都由 PyBroker 共享现金账户与独立 FIFO 多标的账本核对逐日现金、逐日净值、逐标的股数、订单日期/方向/股数/成交价；验证次日 Open、卖先买后、成本、权重不超过 100%、单标的不超过 10%、未来数据扰动不改变此前分数，并执行完整测试、来源哈希、工作区审计和真实 Chrome 交互门禁。",
+    "promotion_criteria": "仅当 5 bps 主策略相对不择时机制基准至少减轻 10 个百分点最大回撤、保留至少 70% CAGR、Sharpe 不下降，且没有工程门禁失败时，才值得进入使用历史时点成分股的新实验；本轮因候选与广度均来自当前成分股快照，即使达标也不能直接晋级模拟盘。",
+    "rejection_conditions": "若主策略在 5 bps 下最大回撤改善不足 5 个百分点、CAGR 保留率低于 60%、Sharpe 下降、交易成本使结论反转、任一目标权重或现金约束被破坏、存在同日收盘成交/未来数据泄漏、或 PyBroker 与独立账本任一核对差超过 1e-6，则拒绝当前实现或研究假设。"
+  }
+}

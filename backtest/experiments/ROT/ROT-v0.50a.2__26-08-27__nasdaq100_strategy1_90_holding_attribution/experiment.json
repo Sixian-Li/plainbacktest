@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_strategy1_90_holding_attribution_v1",
+  "created_at_utc": "2026-08-27T11:30:00+00:00",
+  "status": "exploratory_candidate_data",
+  "symbols": [
+    "NASDAQ100_STRATEGY1_90_ATTRIBUTION"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "nasdaq100_single_security_strategy1_90_gate_attribution",
+    "description": "复用父实验已冻结的逐证券Strategy1收盘后股票仓位分数和时点成员资格，对354只曾严格超过90%的历史Nasdaq-100证券分别建立独立的全仓或现金账户。某证券当日收盘分数严格高于90%时，下一可成交交易日Open全仓买入；分数不再严格高于90%时，下一可成交交易日Open全部卖出。报告逐证券的日历CAGR、按持仓时间几何压缩的持仓期间CAGR、持仓收益Sharpe、最大回撤、持仓时间、持仓段数，以及卖出后5/10/20/60个交易日的表现，用于判断90%门槛是否经常在反弹前退出。历史成分和个股行情仍是pending_review候选数据，因此只作探索性归因。",
+    "buy_rule": "对每个稳定security_id独立判断：若上一交易日已完成Close后的Strategy1股票仓位严格大于0.90，且该日已经按一交易日滞后的时点成员口径合格，则在本交易日有效Open把该证券账户从现金切换为100%股票。临时缺少真实信号栏或真实执行栏时冻结原仓位；禁止在合成carry栏买入。",
+    "sell_rule": "若上一交易日不在严格大于0.90的合格分数表中且该信号日有真实行情，则在本交易日有效Open把已有股票全部卖出。历史证券最后一个真实行情日后的首个终止结算代理Open只允许卖出；此后不允许买入。",
+    "signal_time": "复用父run在每个XNYS交易日完成后的拆股及股息调整Close、Strategy1收盘后仓位分数和滞后一交易日的历史成分状态；没有重算StochRSI或修改资格。",
+    "execution_time": "收盘信号在下一XNYS交易日的拆股及股息调整Open成交；分别按单边0和5bps不利冲击，允许小数股。",
+    "positioning": "每只证券是互相独立的10万美元虚拟账户，只能处于100%该证券或100%现金，不融资、不做空、现金不计息；结果不是把354只同时组成一个真实组合。",
+    "plain_language": {
+      "summary": "逐只检查Strategy1仓位超过90%时持有该股票，是否真的抓住了高质量上涨区间。",
+      "buy": "某只股票的Strategy1仓位在收盘后超过90%时，下一交易日开盘把它自己的虚拟账户全部买入该股票。",
+      "sell": "这只股票的Strategy1仓位不再超过90%时，下一交易日开盘把它自己的虚拟账户全部转回现金。",
+      "execution": "信号只在收盘后确认，订单在下一交易日开盘成交；缺少真实行情时先保持原仓位，不能在补齐价格上买入。",
+      "position": "每只股票单独使用一笔固定本金，只在全仓该股和全现金之间切换，不把这些单股账户合并成组合。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "1999-03-10",
+    "analysis_end": "2026-08-04",
+    "parent_experiment_id": "nasdaq100_pit_stochrsi_strategy1_top20_rotation_v1",
+    "parent_run_id": "run_20260826T173012Z_7bea626b",
+    "reused_parent_artifacts": [
+      "shared/eligible_scores.csv.gz",
+      "shared/price_panel.csv.gz",
+      "shared/instrument_master.csv",
+      "shared/manifest.json"
+    ],
+    "eligibility_threshold": 0.9,
+    "threshold_operator": "strictly greater than",
+    "score_definition": "post-trade Strategy1 equity weight in the security at completed Close",
+    "membership_definition": "parent run's point-in-time Nasdaq-100 membership observed with one XNYS-session lag",
+    "signal_frequency": "every XNYS Close",
+    "fill_time": "next XNYS adjusted Open",
+    "target_weights": [
+      0.0,
+      1.0
+    ],
+    "temporary_unavailability_policy": "change position only when the prior signal session and intended execution session have real vendor bars; otherwise freeze and reconsider on the next consecutive real signal/execution pair",
+    "terminal_price_policy": "the first terminal settlement proxy after the last real vendor bar may execute a sell only; it can never execute a buy",
+    "holding_time_definition": "percentage of analysis sessions whose Close ends with positive shares",
+    "holding_period_cagr_definition": "geometrically compress calendar CAGR by the Close-position holding-time fraction, matching the existing Strategy1 gate definition; for example 10% calendar CAGR at 50% holding time becomes 21%",
+    "holding_sharpe_definition": "annualized zero-risk-free Sharpe over the returns actually earned while exposed, including entry Open-to-Close, continuing Close-to-Close and exit prior-Close-to-Open components",
+    "max_drawdown_definition": "maximum peak-to-trough drawdown of the single-security gated account, whose cash intervals are flat",
+    "post_exit_horizons_trading_days": [
+      5,
+      10,
+      20,
+      60
+    ],
+    "post_exit_return_definition": "from the actual sell fill to the adjusted Close N XNYS sessions later when that horizon has a real vendor bar",
+    "post_exit_max_rebound_definition": "highest adjusted High in the next N XNYS sessions relative to the actual sell fill, using real vendor bars only",
+    "reliability_flags": {
+      "minimum_holding_sessions_for_primary_cross_section": 252,
+      "minimum_exit_events_for_rebound_summary": 5
+    },
+    "data_status": "candidate_pending_review"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 0,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero",
+  "benchmark": "No common portfolio benchmark is used for the requested per-security attribution; each row is the same security's Strategy1 >90% gate under 0/5bps, with calendar metrics retained beside holding-only metrics.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 and the parent run's frozen score/price cache; add a sortable 354-security attribution table, holding-quality scatter and post-exit rebound diagnostics without rerunning Strategy1 or the 16 portfolio paths."
+  },
+  "research": {
+    "stage": "exploratory_candidate_point_in_time_attribution",
+    "hypothesis": "The strict Strategy1 >90% gate may identify strong rising intervals but exit individual constituents before a rebound. Per-security holding-only CAGR, Sharpe, drawdown and post-exit forward returns can distinguish weak trend capture from premature exit without changing the strategy.",
+    "primary_metric": "At zero cost, inspect the cross-sectional distribution of holding-period CAGR, holding-return Sharpe and maximum drawdown among securities with at least 252 holding sessions; separately summarize actual exits followed by positive 5/10/20/60-session returns. Retain 5bps as a friction sensitivity and report all securities regardless of sample size.",
+    "selection_rule": "Do not select or tune a new threshold. Freeze the parent run's strict 90% eligibility rows, point-in-time membership lag, next-Open timing and missing-bar policies; publish the full per-security table and label small holding/exit samples rather than dropping them.",
+    "validation_plan": "Hash and copy the parent validated shared artifacts, test strict threshold timing, next-Open entry/exit, missing-bar freeze, terminal sell-only behavior, geometric holding CAGR and post-exit horizons. For every security/cost path reconcile the daily account equity against the independently compounded exposed-return components within 1e-6, then run report, Chrome, PDF, catalog, workspace and validate_run gates.",
+    "promotion_criteria": "This diagnostic does not promote a strategy. It may justify a separately frozen exit-rule experiment only if the premature-exit pattern is broad across securities with adequate holding and exit samples, remains directionally similar at 5bps, and survives approved data plus a predeclared forward or walk-forward test.",
+    "rejection_conditions": "Reject any claim based on current constituents, same-Close fills, threshold greater-than-or-equal semantics, recomputed or altered parent scores, hidden small samples, synthetic-bar buys, unreported terminal sells, post-exit horizons without real prices, non-finite ledgers, reconciliation error above 1e-6, or language treating pending_review candidate data as formal evidence."
+  },
+  "latest_validated_run_id": null,
+  "active_run_id": null
+}

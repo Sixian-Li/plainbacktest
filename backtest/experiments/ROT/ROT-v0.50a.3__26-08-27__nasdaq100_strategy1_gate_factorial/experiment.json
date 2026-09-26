@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_strategy1_gate_factorial_v1",
+  "created_at_utc": "2026-08-27T15:30:00+00:00",
+  "status": "exploratory_candidate_data",
+  "symbols": [
+    "NASDAQ100_STRATEGY1_GATE_FACTORIAL"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "nasdaq100_strategy1_gate_three_factor_ablation",
+    "description": "从父实验中严格筛出Strategy1-90持仓超过200个交易日的证券，再按父实验零成本持仓期间CAGR选取最高四只、最接近横截面中位数四只和最低四只。每只证券在退出现有Nasdaq-100成分身份之前的最近十个日历年内单独运行全仓或现金账户，完整交叉检验5%机械止损、双周期StochRSI都高于0.20才允许入场、以及持仓期间StochRSI100从0.80上方向下穿越便退出三项开关。母Strategy1仓位分数及全部指标使用窗口前完整历史预热；选入样本后不再施加成分资格或Top20排名门槛。本研究因按历史结果选样且行情仍为pending_review，只作机制诊断，不是样本外证据。",
+    "buy_rule": "基础入场要求上一有效交易日收盘后的母Strategy1股票仓位严格超过90%，本交易日开盘全仓买入。开启严格入场时，上一收盘的StochRSI42和StochRSI100还必须同时严格高于0.20；它只限制空仓后的新买入，不迫使已有仓位卖出。机械止损后须等母仓位严格低于10%才解除对应锁，快速退出后须等母仓位严格低于20%才解除对应锁；所有已开启的锁都解除后，未来新的90%入场信号才可买回。",
+    "sell_rule": "基础卖出是母Strategy1仓位不再严格超过90%后的下一有效交易日开盘全卖。开启机械止损时，从买入后的下一交易日起，若相对实际买入成交价下跌5%，开盘已经跳过止损位便按开盘卖出，否则日内最低价触及便按止损价卖出。开启快速退出时，仅对上一收盘已经持有的仓位，在StochRSI100由上一日不低于0.80变为当日低于0.80的穿越当日收盘全卖。",
+    "signal_time": "母Strategy1分数、严格入场条件和快速退出穿越均在拆股及股息调整后的有效交易日Close完成后确认；止损使用入场后交易日的调整Open与Low。母策略先用证券完整可用历史计算，再截取各自十年评价窗口。",
+    "execution_time": "普通90%门禁和严格入场在信号后的下一有效交易日调整Open成交；5%止损按下一交易日起的调整Open跳空价或精确止损价成交；快速下穿退出在穿越当日调整Close成交。分别报告单边0和5bps不利冲击，允许小数股。",
+    "positioning": "每只证券、每个开关组合都是相互独立的10万美元账户，只能处于100%该证券或100%现金，不融资、不做空、现金不计息；十二只证券不会合成一个可交易组合。",
+    "plain_language": {
+      "summary": "在强、中、弱三组个股上交叉检验更稳健买入和更果断卖出，判断哪些改动具有普遍作用。",
+      "buy": "母策略仓位超过90%后在下一交易日开盘全仓买入；严格版本还要求两个快慢周期都已经离开低位，止损或快速退出留下的锁也必须先解除。",
+      "sell": "母策略跌回90%以下会在下一开盘卖出；可选规则还会在持仓跌5%时止损，或在长周期指标向下穿过0.80时当天收盘退出。",
+      "execution": "普通信号收盘确认后下一开盘成交，止损看后续交易日的开盘和最低价，长周期向下穿越则在穿越当天收盘成交。",
+      "position": "每只股票和每个消融组合各用一笔固定本金，只在全仓该股和全现金之间切换，不做横截面排名。"
+    }
+  },
+  "parameters": {
+    "parent_experiment_id": "nasdaq100_strategy1_90_holding_attribution_v1",
+    "parent_run_id": "run_20260827T112925Z_a706c609",
+    "selection_cost_bps": 0,
+    "selection_minimum_holding_sessions_exclusive": 200,
+    "selection_metric": "holding_period_cagr_pct",
+    "selection_groups": {
+      "HIGH": 4,
+      "MEDIAN": 4,
+      "LOW": 4
+    },
+    "selection_tie_break": "security_id ascending after metric or absolute-median distance",
+    "selected_sample": [
+      {
+        "sample_group": "HIGH",
+        "security_id": "NDX-CAND-2682A71302CF56D3",
+        "display_ticker": "PANW",
+        "source_file": "PANW.csv",
+        "window_end": "2026-08-04"
+      },
+      {
+        "sample_group": "HIGH",
+        "security_id": "NDX-CAND-6F26F623BD63CB12",
+        "display_ticker": "HGSI",
+        "source_file": "HGSI-201208.csv",
+        "window_end": "2003-12-19"
+      },
+      {
+        "sample_group": "HIGH",
+        "security_id": "NDX-CAND-856DB388979CD47F",
+        "display_ticker": "BVSN",
+        "source_file": "BVSN-202005.csv",
+        "window_end": "2001-12-21"
+      },
+      {
+        "sample_group": "HIGH",
+        "security_id": "NDX-CAND-7CEB9EB7C37DAB06",
+        "display_ticker": "ALXN",
+        "source_file": "ALXN-202107.csv",
+        "window_end": "2021-07-20"
+      },
+      {
+        "sample_group": "MEDIAN",
+        "security_id": "NDX-CAND-6993FB92EE3B4F0F",
+        "display_ticker": "SBUX",
+        "source_file": "SBUX.csv",
+        "window_end": "2026-08-04"
+      },
+      {
+        "sample_group": "MEDIAN",
+        "security_id": "NDX-CAND-EEA053E7375B6F28",
+        "display_ticker": "CERN",
+        "source_file": "CERN-202206.csv",
+        "window_end": "2021-12-17"
+      },
+      {
+        "sample_group": "MEDIAN",
+        "security_id": "NDX-CAND-7FC2D970ED6DE772",
+        "display_ticker": "GILD",
+        "source_file": "GILD.csv",
+        "window_end": "2026-08-04"
+      },
+      {
+        "sample_group": "MEDIAN",
+        "security_id": "NDX-CAND-F3ECDFCC7340495D",
+        "display_ticker": "EA",
+        "source_file": "EA.csv",
+        "window_end": "2026-08-04"
+      },
+      {
+        "sample_group": "LOW",
+        "security_id": "NDX-CAND-6552964E16BD3B1C",
+        "display_ticker": "ATHMQ",
+        "source_file": "ATHMQ-200211.csv",
+        "window_end": "2001-09-28"
+      },
+      {
+        "sample_group": "LOW",
+        "security_id": "NDX-CAND-D00EF3EF4DD1C7F6",
+        "display_ticker": "WCOEQ",
+        "source_file": "WCOEQ-200404.csv",
+        "window_end": "2002-07-23"
+      },
+      {
+        "sample_group": "LOW",
+        "security_id": "NDX-CAND-E75DD04E94850F95",
+        "display_ticker": "GMCR",
+        "source_file": "GMCR-201603.csv",
+        "window_end": "2015-12-18"
+      },
+      {
+        "sample_group": "LOW",
+        "security_id": "NDX-CAND-6B89D2126DD4950B",
+        "display_ticker": "ADCT",
+        "source_file": "ADCT-201012.csv",
+        "window_end": "2003-12-19"
+      }
+    ],
+    "window_calendar_years": 10,
+    "window_definition": "from window_end minus ten calendar years through window_end, clipped only by the security's actual vendor history; Strategy1 state is warmed on all earlier vendor history",
+    "membership_after_selection": "not applied; membership history selects and timestamps the sample but does not shorten the requested ten-year security test",
+    "gate_threshold": 0.9,
+    "gate_operator": "strictly greater than",
+    "factor_grid": {
+      "mechanical_stop": [
+        false,
+        true
+      ],
+      "strict_entry": [
+        false,
+        true
+      ],
+      "fast_exit": [
+        false,
+        true
+      ]
+    },
+    "formal_case_count_per_security_per_cost": 8,
+    "formal_security_case_count_per_cost": 96,
+    "stop_loss_pct": 0.05,
+    "stop_first_active_session": "the first valid vendor trading session after entry",
+    "stop_gap_policy": "adjusted Open at or below stop fills at adjusted Open; otherwise adjusted Low touching stop fills at the exact stop reference",
+    "stop_reset_weight": 0.1,
+    "strict_entry_stochrsi_threshold": 0.2,
+    "fast_exit_stochrsi_period": 100,
+    "fast_exit_threshold": 0.8,
+    "fast_exit_cross": "previous completed value greater than or equal to 0.80 and current completed value strictly below 0.80",
+    "fast_exit_fill": "current adjusted Close",
+    "fast_exit_reset_weight": 0.2,
+    "lock_interaction": "stop and fast-exit locks are independent; every enabled active lock must clear before re-entry",
+    "strict_entry_is_entry_only": true,
+    "holding_period_cagr_definition": "geometric compression of calendar CAGR by Close-position exposure fraction",
+    "data_status": "candidate_pending_review"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 0,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero",
+  "benchmark": "Within each security, STOP0_STRICT0_FAST0 is the frozen Strategy1-90 gate baseline. Factor effects are paired across the same twelve securities and ten-year windows; no QQQ or cross-security portfolio benchmark is used.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse the shared v5 renderer and parent sample metrics; add compact group/factor tables and per-security paths without placing machine parameters on the report front page."
+  },
+  "research": {
+    "stage": "exploratory_selected_sample_factorial_ablation",
+    "hypothesis": "A stricter recovery-confirmed entry and faster exits may improve the Strategy1-90 gate's rotation suitability, but their effects must be broad across previously strong, typical and weak securities rather than driven by one ticker. The full factorial separates main effects and interactions.",
+    "primary_metric": "At zero cost compare paired changes in holding-period CAGR, calendar CAGR, maximum drawdown, holding-return Sharpe and exposure across all 12 securities, and separately within HIGH/MEDIAN/LOW groups; retain 5bps as friction sensitivity and show the complete 96-path table.",
+    "selection_rule": "Freeze the sample before running: among parent zero-cost securities with strictly more than 200 holding sessions, take the top four holding-period CAGR, four smallest absolute distances to the cross-sectional median, and bottom four, with security_id tie-breaks. Do not replace failed or inconvenient securities after seeing results.",
+    "validation_plan": "Verify the copied parent metric hash and exact frozen selection, recompute the unchanged Strategy1 mother score from full adjusted vendor history, test all eight factor states and exact threshold/reset/timing semantics, reconcile every account by independent order replay within 1e-6, then run strategy tests, lifecycle/report tests, real Chrome interaction, PDF print gates, workspace/catalog checks and validate_run.",
+    "promotion_criteria": "A factor is only a credible rotation candidate if its paired benefit is directionally consistent across most securities and all three groups, materially improves drawdown or holding-period CAGR without collapsing exposure, remains similar at 5bps, and is later confirmed on a separately frozen security/time sample with approved data.",
+    "rejection_conditions": "Reject claims that use only the best four securities, silently omit poor paths, treat the strict entry condition as a continuing exit condition, use below-0.80 rather than a true downcross, activate the stop on the entry day, reset locks at 10/20 inclusively, fill a gap at the unreachable stop price, alter the mother Strategy1 state, overlook sample selection bias, or present pending_review candidate data as formal evidence."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

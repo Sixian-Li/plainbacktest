@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "verified_for_shadow_bootstrap_is_not_production_approval": true,
+    "pre_candidate_history_must_not_be_spliced_automatically": true
+  },
+  "reviews": [
+    {
+      "symbol": "FERG",
+      "official_company_name": "FERGUSON ENTERPRISES INC",
+      "official_identifier": "31488V107",
+      "official_snapshot_as_of_date": "2026-08-18",
+      "official_snapshot_path": "data/processed/universes/sp500/current_constituents.csv",
+      "official_snapshot_sha256": "52b6fe2e7cae4657733a3c8408d95e96a25b50295a5be915185258e056fc1121",
+      "independent_identity_evidence": [
+        {
+          "provider": "sec",
+          "url": "https://www.sec.gov/Archives/edgar/data/102909/000010290926000334/xslSCHEDULE_13G_X01/primary_doc.xml",
+          "issuer": "Ferguson Enterprises Inc",
+          "security_title": "Common Stock",
+          "identifier": "31488V107",
+          "accessed_date": "2026-08-13"
+        }
+      ],
+      "decision": "verified_for_shadow_bootstrap_only",
+      "candidate_not_before": "2026-08-05",
+      "production_approved": false,
+      "limitations": [
+        "The candidate start is the first XNYS session after the frozen 2026-08-04 price baseline, not an inferred S&P 500 inclusion date.",
+        "Public-provider FERG history before candidate_not_before may include predecessor or domicile history and is not approved for automatic splicing."
+      ]
+    },
+    {
+      "symbol": "RDDT",
+      "official_company_name": "REDDIT INC CL A",
+      "official_identifier": "75734B100",
+      "official_snapshot_as_of_date": "2026-08-18",
+      "official_snapshot_path": "data/processed/universes/sp500/current_constituents.csv",
+      "official_snapshot_sha256": "52b6fe2e7cae4657733a3c8408d95e96a25b50295a5be915185258e056fc1121",
+      "independent_identity_evidence": [
+        {
+          "provider": "sec",
+          "url": "https://www.sec.gov/Archives/edgar/data/102909/000010290926002133/xslSCHEDULE_13G_X02/primary_doc.xml",
+          "issuer": "Reddit Inc",
+          "security_title": "Common Stock",
+          "identifier": "75734B100",
+          "accessed_date": "2026-08-19"
+        }
+      ],
+      "decision": "verified_for_shadow_bootstrap_only",
+      "candidate_not_before": "2026-08-18",
+      "production_approved": false,
+      "limitations": [
+        "The candidate start is the dated State Street snapshot session, not an inferred S&P 500 announcement timestamp.",
+        "Public-provider RDDT history before candidate_not_before is not approved for automatic splicing."
+      ]
+    },
+    {
+      "symbol": "VMRK",
+      "official_company_name": "VIVMARK RESIDENTIAL",
+      "official_identifier": "29476L107",
+      "official_snapshot_as_of_date": "2026-08-18",
+      "official_snapshot_path": "data/processed/universes/sp500/current_constituents.csv",
+      "official_snapshot_sha256": "52b6fe2e7cae4657733a3c8408d95e96a25b50295a5be915185258e056fc1121",
+      "independent_identity_evidence": [
+        {
+          "provider": "avalonbay_and_equity_residential",
+          "url": "https://investors.avalonbay.com/news-events/press-releases/detail/445/equity-residential-and-avalonbay-communities-announce-shareholder-approvals-for-merger-to-create-vivmark-residential",
+          "issuer": "Vivmark Residential",
+          "security_title": "Common Shares",
+          "identifier": "29476L107",
+          "accessed_date": "2026-08-19"
+        }
+      ],
+      "decision": "verified_for_shadow_bootstrap_only",
+      "candidate_not_before": "2026-08-18",
+      "production_approved": false,
+      "limitations": [
+        "The issuer announcement says VMRK trading was expected to begin on 2026-08-18; the dated State Street snapshot supplies the retained identifier.",
+        "AVB or EQR history must not be spliced into VMRK automatically because the merger changed the security and share count."
+      ]
+    }
+  ]
+}

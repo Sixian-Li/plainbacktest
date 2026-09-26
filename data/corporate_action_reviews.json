@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "purpose": "Explain historical adjusted-price basis changes encountered by the shadow overlap gate.",
+    "does_not_authorize_production_writes": true,
+    "unlisted_outliers_require_review": true
+  },
+  "reviews": [
+    {
+      "symbol": "APH",
+      "decision": "documented_public_corporate_action",
+      "covered_return_outlier_dates": [
+        "2026-06-23"
+      ],
+      "events": [
+        {
+          "record_date": "2026-06-23",
+          "description": "Amphenol announced a $0.25 per-share cash dividend payable July 15, 2026 to shareholders of record on June 23, 2026, explaining the dividend-adjustment boundary detected on that date.",
+          "source": "Amphenol investor relations",
+          "url": "https://investors.amphenol.com/news-and-events/news-details/2026/Amphenol-Announces-Second-Quarter-2026-Dividend/default.aspx",
+          "accessed_date": "2026-09-08"
+        },
+        {
+          "record_date": "2026-08-17",
+          "distribution_date": "2026-09-02",
+          "description": "Amphenol announced a two-for-one Class A common-stock split in the form of a stock dividend, with one additional share distributed for each share held.",
+          "source": "Amphenol investor relations",
+          "url": "https://investors.amphenol.com/news-and-events/news-details/2026/Amphenol-Announces-Two-for-One-Stock-Split-and-Third-Quarter-2026-Dividend/default.aspx",
+          "accessed_date": "2026-09-08"
+        },
+        {
+          "record_date": "2026-08-17",
+          "distribution_date": "2026-09-02",
+          "description": "Amphenol's Form 8-K independently records the approved two-for-one stock split and its record and distribution dates.",
+          "source": "U.S. Securities and Exchange Commission",
+          "url": "https://www.sec.gov/Archives/edgar/data/820313/000110465926091969/tm2622441d1_8k.htm",
+          "accessed_date": "2026-09-08"
+        }
+      ],
+      "production_approved": false
+    },
+    {
+      "symbol": "HON",
+      "decision": "documented_public_corporate_action",
+      "covered_return_outlier_dates": [
+        "2026-06-25",
+        "2026-06-29"
+      ],
+      "events": [
+        {
+          "effective_date": "2026-06-29",
+          "description": "Distribution of one HONA share for every two pre-split HON shares, a one-for-two HON reverse stock split, and the June 15-26 regular-way/ex-distribution trading window that explains provider basis changes before the effective date.",
+          "source": "Honeywell investor relations",
+          "url": "https://investor.honeywell.com/news-releases/news-release-details/honeywell-board-directors-sets-record-date-and-announces-0",
+          "accessed_date": "2026-08-13"
+        },
+        {
+          "effective_date": "2026-06-29",
+          "description": "Honeywell confirmed completion of the aerospace separation.",
+          "source": "Honeywell",
+          "url": "https://www.honeywell.com/us/en/news/press-releases/2026/06/honeywell-technologies-launches-independent-pure-play-automation-company-following-completion-honeywell-aerospace-spin-off",
+          "accessed_date": "2026-08-13"
+        },
+        {
+          "effective_date": "2026-06-29",
+          "description": "Honeywell confirmed the one-for-two reverse stock split effective June 29, 2026.",
+          "source": "Honeywell",
+          "url": "https://www.honeywell.com/us/en/news/press-releases/2026/07/honeywell-technologies-updates-2026-financial-guidance-following-reverse-stock-split",
+          "accessed_date": "2026-08-13"
+        }
+      ],
+      "production_approved": false
+    },
+    {
+      "symbol": "HST",
+      "decision": "documented_public_corporate_action",
+      "covered_return_outlier_dates": [
+        "2026-06-30"
+      ],
+      "events": [
+        {
+          "record_date": "2026-06-30",
+          "description": "Host Hotels disclosed a second-quarter cash dividend of $0.92 per share for shareholders of record on June 30, 2026.",
+          "source": "Host Hotels & Resorts 2026 Q1 Form 10-Q filed with the SEC",
+          "url": "https://www.sec.gov/Archives/edgar/data/1070750/000107075026000080/hst-20260331.htm",
+          "accessed_date": "2026-08-13"
+        }
+      ],
+      "production_approved": false
+    }
+  ]
+}

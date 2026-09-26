@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_stochrsi_90pct_and_gate_comparison_2015_2026_v1",
+  "created_at_utc": "2026-08-26T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_stochrsi_90pct_and_gate_comparison",
+    "description": "Use the three corrected TIM-v0.80a.4 mother strategies only as same-Close binary trend signals. Signal 1 is true when D0_F0_S0's completed post-trade QQQ weight is strictly greater than 90%. Signal 2 is true when D0_F1_S1's completed post-trade weight is strictly greater than 90%. Signal 4 is true when the pruned accumulation mother's completed post-trade weight is strictly greater than 90%. Recompute the three individual 90% gates as baselines and test four fixed-capital intersection accounts: 1 AND 2, 1 AND 4, 2 AND 4, and 1 AND 2 AND 4. Each intersection holds QQQ only while every named component signal is simultaneously true.",
+    "buy_rule": "Each individual baseline buys all-in QQQ when its own source mother has completed the Close with QQQ weight strictly greater than 0.90. Each intersection account buys all-in only when every named source signal is true on the same completed Close: (1 and 2), (1 and 4), (2 and 4), or (1 and 2 and 4). Equality to 0.90 is false.",
+    "sell_rule": "An individual baseline sells all QQQ when its own source signal becomes false. An intersection account sells all QQQ as soon as any named component signal is false on the completed Close. Every false or equality state holds 100% cash.",
+    "signal_time": "The three source mothers first complete all of their own current adjusted-Close transactions. Their post-trade QQQ weights are then compared strictly with 0.90. The intersection is evaluated from the three resulting same-date booleans without looking ahead.",
+    "execution_time": "Each independent gate account buys or sells at the same adjusted Close that confirms its completed source-signal state, with zero transaction cost. Source Mother 1 and Mother 2 retain their frozen theoretical fast-drop execution only inside their signal-generating ledgers; every gate order uses the ordinary adjusted Close.",
+    "positioning": "Seven independent long-only binary accounts each start with $100,000 and hold either 100% QQQ or 100% cash. They never receive external contributions, never copy mother shares or cash, and use the mothers only as binary signals.",
+    "plain_language": {
+      "summary": "检验两个或三个高仓位信号同时出现时，是否能更集中地识别QQQ上涨区间。",
+      "buy": "只有指定的两个或三个母策略都同时处于90%以上仓位时，对应账户才全仓买入QQQ。",
+      "sell": "只要组合中的任意一个母策略不再高于90%，对应账户就全部卖出并持有现金。",
+      "execution": "三条母策略先在当天收盘完成自己的交易，再读取其收盘后仓位，并让独立账户按同一个收盘价成交。",
+      "position": "每条门控账户都从10万美元开始，只在全仓QQQ和全仓现金之间切换，不追加本金。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2015-01-02",
+    "analysis_end": "2026-08-04",
+    "source_mothers": [
+      {
+        "signal_id": "S1",
+        "mother_id": "M1_D0_F0_S0",
+        "definition": "TIM-v0.80a.4 strategy 1"
+      },
+      {
+        "signal_id": "S2",
+        "mother_id": "M2_D0_F1_S1",
+        "definition": "TIM-v0.80a.4 strategy 2"
+      },
+      {
+        "signal_id": "S4",
+        "mother_id": "M4_PRUNED_ACCUMULATION",
+        "definition": "TIM-v0.80a.4 strategy 4"
+      }
+    ],
+    "source_gate_threshold": 0.9,
+    "source_gate_operator": "strictly greater than",
+    "individual_baseline_paths": [
+      "S1_90",
+      "S2_90",
+      "S4_90"
+    ],
+    "intersection_paths": [
+      {
+        "path_id": "S1_AND_S2_90",
+        "required_signals": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "path_id": "S1_AND_S4_90",
+        "required_signals": [
+          "S1",
+          "S4"
+        ]
+      },
+      {
+        "path_id": "S2_AND_S4_90",
+        "required_signals": [
+          "S2",
+          "S4"
+        ]
+      },
+      {
+        "path_id": "S1_AND_S2_AND_S4_90",
+        "required_signals": [
+          "S1",
+          "S2",
+          "S4"
+        ]
+      }
+    ],
+    "strategy_path_count": 7,
+    "gate_signal_source": "strict conjunction of completed same-Close source-mother post-trade weights greater than 0.90",
+    "gate_capital_policy": "independent fixed $100,000 initial capital; no external contributions",
+    "same_close_execution": true,
+    "holding_period_cagr": {
+      "definition": "geometric time compression of calendar CAGR over the fraction of trading sessions with shares greater than zero",
+      "formula": "(1 + calendar_cagr) ** (1 / holding_time_fraction) - 1",
+      "cash_return_assumption": 0.0,
+      "interpretation": "descriptive intensity metric, not a separately simulated return or subperiod IRR"
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000.0,
+  "financing": "No leverage, borrowing or external contributions in any of the seven gate accounts.",
+  "benchmark": "Naive QQQ Buy & Hold is the market benchmark. The three independently recomputed 90% gates are the direct baselines for the four intersection accounts.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged. Show source weights and binary states, all seven fixed-capital equity paths, and QQQ-position-value versus cash for each intersection account."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Intersecting independent high-conviction position signals may reduce false-positive exposure and drawdown while retaining a high geometric return intensity during the smaller set of jointly selected sessions.",
+    "primary_metric": "Calendar CAGR, holding-period CAGR, holding-time fraction, Sharpe, maximum drawdown and turnover for all four intersections versus their three individual 90% inputs and naive QQQ",
+    "selection_rule": "Report all four predeclared intersections and all three individual baselines. Do not select a winner from this full-sample comparison; interpret holding-period CAGR only beside calendar CAGR and holding time.",
+    "validation_plan": "Recompute all three source mothers causally; reconcile their ledgers and all seven gate accounts against compiled PyBroker; verify strict 90% equality, date alignment, every AND truth table, zero gate contributions and the holding-period CAGR identity.",
+    "promotion_criteria": "An intersection is a future rotation-signal candidate only if it improves the return/drawdown/exposure tradeoff relative to each component gate without relying on a vanishing number of isolated holding days.",
+    "rejection_conditions": "Reject a path if any required component is false while the account is long, an equality state enters QQQ, a gate receives external cash, dates or closes differ across sources, ledger reconciliation fails, or high holding-period CAGR is presented without calendar CAGR and exposure."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

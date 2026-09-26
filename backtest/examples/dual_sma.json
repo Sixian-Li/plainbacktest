@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "symbol": "QQQ",
+  "start": "2016-01-01",
+  "end": "2026-08-04",
+  "fast_window": 20,
+  "slow_window": 100,
+  "initial_cash": 100000.0,
+  "cost_bps_per_side": 5.0,
+  "natural_language": "用 QQQ 日线，收盘时 SMA20 高于 SMA100 则下一交易日开盘全仓持有，否则下一交易日开盘空仓。允许零碎股，不融资，初始资金十万美元，每次买卖按成交额计 5 bps 成本。与同一分析区间的买入持有比较，并核对独立账本。"
+}

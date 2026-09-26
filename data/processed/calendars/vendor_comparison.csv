@@ -1,0 +1,6 @@
+date,vendor_open,xnys_open,classification
+2023-06-19,True,False,vendor_marks_open_but_xnys_closed
+2023-06-20,False,True,vendor_marks_closed_but_xnys_open
+2024-06-19,True,False,vendor_marks_open_but_xnys_closed
+2025-01-26,True,False,vendor_marks_open_but_xnys_closed
+2025-06-19,True,False,vendor_marks_open_but_xnys_closed

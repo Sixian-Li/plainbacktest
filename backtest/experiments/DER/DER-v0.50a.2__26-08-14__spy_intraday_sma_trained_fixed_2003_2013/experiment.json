@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "spy_intraday_sma_trained_fixed_2003_2013_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "locked_test_validated_no_return_promotion",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "SPY"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_trained_fixed_2003_2013",
+    "description": "把仅用 SPY 1993-01-29～2002-12-31 训练选出的唯一双侧邻域代表完整冻结，在紧接其后的 2003-01-02～2013-12-31 运行一次锁定样本外测试；窗口前历史只预热指标，本实验不搜索、不扰动、不依据结果替换参数。",
+    "buy_rule": "空仓时 OR：已有卖出价后，价格达到卖出成交价上方 9.25% 则强制买回；价格向上穿越动态 SMA156；价格向上穿越 SMA12/22/32 三线平均值下方 4.4%。没有历史卖出价时，强制买回不可产生第一笔买入。",
+    "sell_rule": "持仓时 OR：价格低于成本价 19.25%；SMA12/22/32 三线平均变化率连续 7 日为负且价格跌破动态 SMA150；此前连续 8 日三线平均变化率为负且当日 SMA12、SMA22、SMA32 各自变化率全部不高于 -0.55%；价格向下穿越动态 SMA152。",
+    "signal_time": "每个交易日开始前只使用截至前一交易日 Close 的完整历史解出当日条件单阈值；2003 年前数据只用于指标预热，窗口前禁止交易。",
+    "execution_time": "若前 Close 到当日常规时段 Open 已越过阈值，按当日 Open 成交；否则常规时段调整后 OHLC 触及预先解出的理论阈值时按该阈值成交；每天最多一笔。",
+    "position_sizing": "long-only；初始 100,000 美元现金，每次在全仓 SPY 与全现金之间切换，允许小数股，不融资，现金不计息。",
+    "initial_position": "2003-01-02 起独立空仓等待第一笔普通买入，不继承训练期末仓位、成本或卖出锚；完整窗口包含等待首买的现金期。"
+  },
+  "parameters": {
+    "requested_start": "2003-01-01",
+    "analysis_start": "2003-01-02",
+    "analysis_end": "2013-12-31",
+    "evaluation_start": "analysis_start",
+    "initial_position": "flat",
+    "A_negative_days_slow": 7,
+    "B_slow_sma_window": 150,
+    "C_fast_derivative_pct": -0.55,
+    "C_fast_derivative_mode": "all_short_smas",
+    "D_negative_days_fast": 9,
+    "E_fallback_sma_window": 152,
+    "F_short_sma_center": 22,
+    "F_short_sma_spacing": 10,
+    "F_short_sma_windows": [
+      12,
+      22,
+      32
+    ],
+    "G_short_recovery_below_pct": 4.4,
+    "H_reentry_sma_window": 156,
+    "L_cost_stop_pct": 19.25,
+    "R_forced_rebuy_pct": 9.25,
+    "forced_reentry_enabled": true,
+    "max_trades_per_day": 1,
+    "training_experiment_id": "spy_intraday_sma_training_1993_2002_v1",
+    "training_run_id": "run_20260813T183932Z_ee00baab",
+    "training_selected_case_id": "CANDIDATE_05",
+    "remaining_unopened_start": "2014-01-02"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the 2003-01-02 regular-session Open, invest the same 100,000 USD in SPY and hold through the 2013-12-31 Close. Strategy and benchmark use identical evaluation dates; the strategy's initial cash waiting period remains part of performance.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged. The fixed-case performance, annual-return, signal-reason, K-line, zoom, visible-axis, rebasing and DCA controls already match this locked test."
+  },
+  "research": {
+    "stage": "locked_test",
+    "hypothesis": "The stable parameter representative selected without any post-2002 information retains useful absolute and risk-adjusted performance during the first eleven years of the untouched period.",
+    "primary_metric": "Report the single frozen case's complete-window CAGR and Sharpe against identical-window SPY Buy & Hold, with total return, maximum drawdown, exposure, annual returns and order count as supporting diagnostics.",
+    "selection_rule": "None in this experiment. Evaluate exactly one parameter vector copied from training run run_20260813T183932Z_ee00baab; do not search, rank, perturb or replace it after observing 2003–2013.",
+    "validation_plan": "The fixed case must match PyBroker and the independent pandas ledger on daily cash, shares, equity, order dates, sides, shares, fills and trade accounting within 1e-6; the first order must be ordinary, pre-2003 rows may only warm indicators, and daily orders cannot exceed one.",
+    "promotion_criteria": "Treat this as evidence about one locked post-training window only. A favorable result may support retaining the frozen strategy for a separately authorized 2014+ test or paper-trading design, but does not authorize parameter changes or live trading.",
+    "rejection_conditions": "Reject the run if any frozen parameter differs from the training representative, the test inherits training state, any pre-window row trades, the first order is seeded or forced re-entry, daily orders exceed one, Buy & Hold uses another window, data is unapproved, or PyBroker and the independent ledger diverge."
+  }
+}

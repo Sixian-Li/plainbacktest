@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_strategy1_rotation_2005_2010_factorial_v1",
+  "created_at_utc": "2026-08-28T00:00:00+00:00",
+  "status": "exploratory_candidate_data",
+  "symbols": [
+    "NASDAQ100_STRATEGY1_ROTATION_2005_2010"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "nasdaq100_strategy1_rotation_fast_exit_selection_rebalance_factorial",
+    "description": "在2005至2010年的历史时点Nasdaq-100成分中，对每只证券独立运行冻结的Strategy1，并把完成Close后的股票仓位作为分数。正式12格由快速退出开关、Top20且分数严格高于90%/全部高于90%/全部高于80%三种选股范围，以及每两日恢复等权/每两日只处理进出而让存量漂移两种资金管理完整交叉。普通名单在每两个XNYS交易日的Close确认并于下一Open成交；快速退出严格沿用父诊断，在持仓跨日时StochRSI100由不低于0.80真下穿至0.80以下的当日Close全卖，并在母Strategy1仓位严格低于20%前锁定。另报告历史时点全部成分每两日等权和同期QQQ Buy & Hold两个基准。候选历史成分与行情仍为pending_review，因此结果只作探索性证据。",
+    "buy_rule": "每个两日决策Close使用滞后一交易日已知的成分身份。TOP20_90先保留母Strategy1仓位严格高于0.90者，再按仓位降序和security_id升序取最多20只；ALL_90保留全部严格高于0.90者；ALL_80保留全部严格高于0.80者。开启快速退出时，仍处于快速退出锁的证券不能买入；锁只在该证券完成Close后的母仓位严格低于0.20时解除。普通入选决定在下一有效Open买入。",
+    "sell_rule": "每个两日决策Close重新确定名单，不再入选或已离开滞后时点成分集合的持仓在下一有效Open卖出。RESTORE_EQUAL会同时把继续入选者恢复为等权；ENTRY_EXIT_ONLY只卖出离开者并用执行Open卖出后实际可用现金平均买入新进入者，不为继续入选者主动调权。FAST开启时，只对前一Close已持有的证券，若StochRSI100由上一完成值不低于0.80变为当日完成值低于0.80，则在穿越当日Close全卖并设置锁；当天Open才新买入的证券不触发同日快速退出。",
+    "signal_time": "母Strategy1分数、StochRSI100穿越、名单和目标均只使用拆股及股息调整后的完成Close与此前信息；成分身份统一使用前一XNYS交易日已观察到的状态。",
+    "execution_time": "普通名单变化和RESTORE_EQUAL目标在决策Close确认后于下一有效调整Open先卖后买；快速退出在真下穿当日调整Close成交并优先于该Close产生的下一期名单。每条路径分别使用单边0或5bps不利冲击，允许小数股。",
+    "positioning": "全部路径从10万美元现金开始，不融资、不做空、现金不计息。RESTORE_EQUAL在每次两日决策后把100%可配置资金等分给当期入选股；ENTRY_EXIT_ONLY保留继续入选者的原股份，只把退出所得和既有现金平均投入新进入者，若没有新进入者则现金保留。没有入选证券时持有现金。",
+    "plain_language": {
+      "summary": "检验Strategy1高仓位信号在2005至2010年用于历史纳指成分轮动时，扩大候选范围、减少调权和快速退出分别有什么作用。",
+      "buy": "每两天从当时已知的纳指成分中选出分数达标的股票，按不同版本取前二十只或全部买入；快速退出留下的锁必须先解除。",
+      "sell": "股票不再入选时在下一开盘卖出；快速版本还会在长周期指标从高位向下穿过0.80时于当天收盘立即退出。",
+      "execution": "普通排名在收盘后确认并于下一开盘先卖后买，快速退出则保留上一版的穿越当天收盘成交。",
+      "position": "一种版本每两天恢复等权，另一种只处理名单进出并让旧仓自然漂移；同时与全成分等权和QQQ长期持有比较。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2005-01-03",
+    "analysis_end": "2010-12-31",
+    "parent_rotation_experiment_id": "nasdaq100_pit_stochrsi_strategy1_top20_rotation_v1",
+    "parent_rotation_run_id": "run_20260826T173012Z_7bea626b",
+    "fast_exit_source_experiment_id": "nasdaq100_strategy1_gate_factorial_v1",
+    "fast_exit_source_run_id": "run_20260827T150049Z_fdfcd5ba",
+    "signal_engine": {
+      "source_mother_id": "M1_D0_F0_S0",
+      "specification": "ScaledPoolSpec()",
+      "score": "post-trade Strategy1 equity weight in each security at completed Close",
+      "periods": [
+        42,
+        100
+      ],
+      "external_cash_flows_are_internal_to_each_virtual_signal_ledger_only": true,
+      "external_cash_flows_never_enter_the_rotation_portfolio": true
+    },
+    "universe": {
+      "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+      "review_status": "pending_review",
+      "source_package_key": "split_and_dividend",
+      "source_variant": "split_and_dividend_adjusted",
+      "membership_source": "InIndex",
+      "decision_lag_xnys_sessions": 1,
+      "pre_membership_price_history_allowed_for_indicator_and_state_warmup": true,
+      "historical_weights_used": false
+    },
+    "selection_modes": {
+      "TOP20_90": {
+        "threshold": 0.9,
+        "maximum_selected": 20
+      },
+      "ALL_90": {
+        "threshold": 0.9,
+        "maximum_selected": null
+      },
+      "ALL_80": {
+        "threshold": 0.8,
+        "maximum_selected": null
+      }
+    },
+    "threshold_operator": "strictly greater than",
+    "ranking_tie_break": "strategy1_weight descending, then security_id ascending",
+    "fast_exit": {
+      "enabled_values": [
+        false,
+        true
+      ],
+      "stochrsi_period": 100,
+      "threshold": 0.8,
+      "cross": "previous completed StochRSI100 greater than or equal to 0.80 and current completed StochRSI100 strictly below 0.80",
+      "eligible_position": "shares carried from the previous Close only",
+      "fill": "current adjusted Close",
+      "reset_weight": 0.2,
+      "reset_operator": "strictly below",
+      "mother_state_continues_while_locked": true
+    },
+    "rebalance_interval_trading_days": 2,
+    "allocation_modes": {
+      "RESTORE_EQUAL": "at every scheduled decision, resize all selected holdings to equal target weights",
+      "ENTRY_EXIT_ONLY": "at every scheduled decision, sell deselected holdings, preserve continuing shares, and divide actual available execution-Open cash equally among newly selected securities"
+    },
+    "formal_case_ids_per_cost": [
+      "FAST0_TOP20_90_REBAL",
+      "FAST0_TOP20_90_DRIFT",
+      "FAST0_ALL_90_REBAL",
+      "FAST0_ALL_90_DRIFT",
+      "FAST0_ALL_80_REBAL",
+      "FAST0_ALL_80_DRIFT",
+      "FAST1_TOP20_90_REBAL",
+      "FAST1_TOP20_90_DRIFT",
+      "FAST1_ALL_90_REBAL",
+      "FAST1_ALL_90_DRIFT",
+      "FAST1_ALL_80_REBAL",
+      "FAST1_ALL_80_DRIFT"
+    ],
+    "formal_case_count_per_cost": 12,
+    "formal_strategy_path_count": 24,
+    "baseline1_case_id": "FAST0_TOP20_90_REBAL",
+    "baseline2_case_id": "NDX100_ALL_REBAL",
+    "baseline2_definition": "every two trading days equal-weight every lagged point-in-time Nasdaq-100 member with a valid signal Close and next Open",
+    "baseline3_case_id": "QQQ_BUY_HOLD",
+    "baseline3_definition": "buy QQQ at the first executable Open and hold through the final Close",
+    "formal_path_count_including_two_extra_baselines": 28,
+    "same_session_priority": "scheduled Open changes execute first; a fast exit may act at that Close only for shares carried from the previous Close; lock reset follows the Close exit; the resulting lock participates in that Close's next scheduled selection",
+    "temporary_unavailability_policy": "a holding or requested change with no real signal Close or next execution Open is frozen until a later scheduled decision with real bars; no buy may use a synthetic carry bar",
+    "terminal_price_policy": "a final adjusted bar may be carried only to settle an existing holding at a later scheduled Open; it cannot receive a new positive target",
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; virtual Strategy1 contributions never enter the tradable portfolio; cash earns zero",
+  "benchmark": "Two explicit baselines are reported at both costs: lagged point-in-time Nasdaq-100 all-member equal weight rebalanced every two sessions, and same-window QQQ Buy & Hold. All paths share the same initial cash and analysis calendar.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse the shared v5 renderer; add experiment-specific factorial controls, equity/drawdown/exposure panels, cost and pairwise-effect tables, eligible-count diagnostics, and explicit benchmark toggles without exposing raw configuration on the front page."
+  },
+  "research": {
+    "stage": "exploratory_candidate_point_in_time_factorial",
+    "hypothesis": "The prior Top20 rotation may have lost information by capping the eligible set, overtraded by restoring equal weights, and exited weakening stocks too slowly. A complete fixed factorial over candidate breadth, rebalancing, and the retained fast exit can identify whether any improvement is broad rather than a single hand-picked variant.",
+    "primary_metric": "At 5bps compare full-window CAGR, Sharpe, Sortino, maximum drawdown, annual volatility, turnover, order count, exposure, holdings count and QQQ/baseline1 excess return across all 12 paths; use 0bps to attribute friction and pair every fast-exit state against its otherwise identical control.",
+    "selection_rule": "Run and display every predeclared 2 by 3 by 2 cell. Baseline1 is FAST0_TOP20_90_REBAL; baseline2 and QQQ are comparisons rather than selectable winners. Do not rename the highest 2005-2010 path as future-optimal, and do not change thresholds, period, lock reset, execution timing, or no-rebalance sizing after seeing results.",
+    "validation_plan": "Regression-test the exact Strategy1 score and prior fast-exit crossing/reset contract, test all 12 unique case definitions, threshold breadth, point-in-time membership lag, top20 tie-break, scheduled equal-weight restoration, entry/exit-only drift, same-day event priority and both baselines. Reconcile every portfolio between PyBroker scheduled fills and an independent cash/share/FIFO ledger within 1e-6, then run the full suite, report tests, real Chrome interaction, PDF print gates, catalog checks, workspace audit and validate_run.",
+    "promotion_criteria": "No path can be promoted while the Nasdaq-100 package is pending_review. A follow-up candidate should improve both CAGR and Sharpe versus baseline1 at 5bps, not worsen maximum drawdown materially, preserve direction at 0bps, show a coherent main effect rather than one isolated interaction, and later survive a separately frozen period with approved data.",
+    "rejection_conditions": "Reject any current-constituent lookback, same-Close ordinary ranking fill, non-strict 80/90 gate, simple below-0.80 rule instead of a true downcross, fast exit applied to same-day new shares, lock release at equality, mother-state reset by the outer portfolio, future membership or price availability in selection, silent concentration or redistribution, omitted factorial cells or poor baselines, financing, synthetic-bar buys, ledger mismatch, or presentation of pending_review candidate data as formal evidence."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

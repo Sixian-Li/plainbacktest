@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_strategy1_energy_factor_anatomy_v1",
+  "created_at_utc": "2026-08-28T00:00:00+00:00",
+  "status": "exploratory_candidate_data",
+  "symbols": [
+    "NASDAQ100_STRATEGY1_ENERGY_FACTOR"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "nasdaq100_strategy1_energy_level_direction_forward_return_anatomy",
+    "description": "在1999-03-10至2026-08-04的滞后一交易日历史Nasdaq-100成分中，对每只证券重新运行冻结且未经调参的Strategy1母状态，并把完成Close后的股票仓位比例称为能量。研究不做Top20、不构造共享资本轮动账户，也不按结果修改42/100周期或任何母策略规则；它把每个证券日按能量水平、五个交易日前后的能量方向以及高能量穿越状态分类。每个可执行观察在信号Close后的下一真实Open开始，用独立1美元事件账户观察未来5/10/20/60个XNYS交易日的证券收益、同期QQQ超额收益、最大有利涨幅和最大不利回撤。结果同时报告日等权、证券等权、逐日横截面Rank IC、五个时期和按月区块自助置信区间，用来判断能量究竟是可排序因子、只适合门禁，还是只是过去交易路径的状态记录。历史成分与个股行情仍为pending_review候选数据，所有结论只作探索。",
+    "buy_rule": "本研究没有共享资金组合。对每个当日按一XNYS交易日滞后口径已知为Nasdaq-100成分、当日有真实完成Close和有限Strategy1能量的security_id，在下一XNYS交易日仅当该证券存在真实非合成Open时建立一个互相独立、名义本金1美元的观察事件；不能成交的观察被明确排除并计数，不延期到更晚Open。",
+    "sell_rule": "每个事件分别在信号日后的第5、10、20或60个XNYS交易日Close结束观察；若证券在目标日前已经到达最后真实供应商交易日，则按最后真实Close终止并标记为终止截短。内部缺栏只允许用已知Close作期末估值并单独标记，不能伪造新的买入。事件之间不共享份额、现金或退出决定。",
+    "signal_time": "Strategy1能量、能量五日方向、历史自身252日百分位和高能量状态只使用当日完成Close及更早信息；成员身份使用滞后一XNYS交易日后可观察的历史时点状态。",
+    "execution_time": "能量在交易日Close确认，标准化事件从下一XNYS交易日真实调整Open开始，在预声明期限的调整Close或更早的最后真实Close结束；分别应用单边0或5bps不利冲击。",
+    "positioning": "每条证券日与每个期限都是独立的1美元归一化事件账户，不融资、不做空、现金不计息；重叠事件可以同时存在，因为本实验测量条件未来收益而不是声称可交易组合CAGR。",
+    "plain_language": {
+      "summary": "检查个股的Strategy1能量高低和升降，是否真的对应之后更强的上涨，而不是先做轮动再猜原因。",
+      "buy": "某只当时属于纳指成分的股票在收盘后得到能量状态，下一交易日有真实开盘价时才从该开盘开始观察。",
+      "sell": "每条观察分别在未来5、10、20或60个交易日结束，若股票更早停止真实交易就按最后真实收盘结束并注明。",
+      "execution": "所有能量在收盘后确认，未来收益从下一真实开盘计算，绝不使用同一收盘提前成交。",
+      "position": "每个股票日期独立按1美元归一化，不组成共享账户；同时与同日期的QQQ未来收益比较。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "1999-03-10",
+    "analysis_end": "2026-08-04",
+    "parent_attribution_experiment_id": "nasdaq100_strategy1_90_holding_attribution_v1",
+    "parent_attribution_run_id": "run_20260827T112925Z_a706c609",
+    "parent_rotation_factorial_experiment_id": "nasdaq100_strategy1_rotation_2005_2010_factorial_v1",
+    "parent_rotation_factorial_run_id": "run_20260827T171453Z_40f80cef",
+    "signal_engine": {
+      "source_mother_id": "M1_D0_F0_S0",
+      "specification": "ScaledPoolSpec()",
+      "periods": [
+        42,
+        100
+      ],
+      "score": "post-trade Strategy1 equity weight in the security at completed Close",
+      "parameter_optimization": "none; recompute the full 0-to-1 score surface with the frozen parent engine because the validated parent cache retained only scores strictly above 0.90",
+      "external_cash_flows_are_internal_to_each_virtual_signal_ledger_only": true,
+      "external_cash_flows_never_enter_event_returns": true
+    },
+    "universe": {
+      "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+      "review_status": "pending_review",
+      "source_package_key": "split_and_dividend",
+      "source_variant": "split_and_dividend_adjusted",
+      "membership_source": "InIndex",
+      "decision_lag_xnys_sessions": 1,
+      "pre_membership_price_history_allowed_for_indicator_warmup": true,
+      "historical_weights_used": false
+    },
+    "energy_buckets": [
+      {
+        "bucket_id": "E00_20",
+        "lower": 0.0,
+        "upper": 0.2,
+        "upper_inclusive": false
+      },
+      {
+        "bucket_id": "E20_50",
+        "lower": 0.2,
+        "upper": 0.5,
+        "upper_inclusive": false
+      },
+      {
+        "bucket_id": "E50_80",
+        "lower": 0.5,
+        "upper": 0.8,
+        "upper_inclusive": false
+      },
+      {
+        "bucket_id": "E80_90",
+        "lower": 0.8,
+        "upper": 0.9,
+        "upper_inclusive": false
+      },
+      {
+        "bucket_id": "E90_95",
+        "lower": 0.9,
+        "upper": 0.95,
+        "upper_inclusive": false
+      },
+      {
+        "bucket_id": "E95_99",
+        "lower": 0.95,
+        "upper": 0.99,
+        "upper_inclusive": false
+      },
+      {
+        "bucket_id": "E99_100",
+        "lower": 0.99,
+        "upper": 1.0,
+        "upper_inclusive": true
+      }
+    ],
+    "energy_direction": {
+      "lookback_xnys_sessions": 5,
+      "numerical_flat_tolerance": 1e-12,
+      "rising": "current score exceeds the score five XNYS sessions earlier by more than tolerance",
+      "flat": "absolute five-session score change is no greater than tolerance",
+      "falling": "current score is below the score five XNYS sessions earlier by more than tolerance"
+    },
+    "high_energy_states": {
+      "threshold": 0.9,
+      "operator": "strictly greater than",
+      "cross_above": "previous completed score no greater than 0.90 and current completed score strictly greater than 0.90",
+      "persistent": "current and the previous five completed XNYS-session scores are all strictly greater than 0.90",
+      "cross_below": "previous completed score strictly greater than 0.90 and current completed score no greater than 0.90"
+    },
+    "own_history_percentile": {
+      "window_xnys_sessions": 252,
+      "minimum_observations": 126,
+      "definition": "causal percentile rank of the current score among the same security's trailing 252 completed score observations including current Close; at least 126 observations are required"
+    },
+    "forward_horizons_xnys_sessions": [
+      5,
+      10,
+      20,
+      60
+    ],
+    "entry_definition": "signal Close at t; adjusted Open at XNYS session t+1 must be a real non-synthetic non-prelisting non-terminal bar",
+    "exit_definition": "adjusted Close at XNYS session t+h; if the security's last real vendor session occurs earlier, end at that last real Close and flag terminal truncation",
+    "path_statistics": [
+      "security total return",
+      "matched QQQ total return",
+      "security minus QQQ return",
+      "maximum favorable adjusted High excursion",
+      "maximum adverse adjusted Low excursion"
+    ],
+    "internal_missing_close_policy": "a carried adjusted Close may mark the requested horizon and is flagged synthetic; it cannot establish an event entry",
+    "era_windows": [
+      {
+        "era_id": "ERA_2000_2004",
+        "start": "1999-03-10",
+        "end": "2004-12-31"
+      },
+      {
+        "era_id": "ERA_2005_2009",
+        "start": "2005-01-03",
+        "end": "2009-12-31"
+      },
+      {
+        "era_id": "ERA_2010_2014",
+        "start": "2010-01-04",
+        "end": "2014-12-31"
+      },
+      {
+        "era_id": "ERA_2015_2019",
+        "start": "2015-01-02",
+        "end": "2019-12-31"
+      },
+      {
+        "era_id": "ERA_2020_2026",
+        "start": "2020-01-02",
+        "end": "2026-08-04"
+      }
+    ],
+    "cross_sectional_ic": {
+      "method": "daily Spearman rank correlation",
+      "minimum_securities_per_date": 10,
+      "factor_variants": [
+        "raw Strategy1 score",
+        "causal own-history score percentile"
+      ],
+      "outcome": "matched-QQQ forward return"
+    },
+    "aggregation": {
+      "primary_weighting": "each signal date receives equal weight after averaging securities within date and energy group",
+      "secondary_weightings": [
+        "pooled security-date events",
+        "each security receives equal weight"
+      ],
+      "small_samples_are_reported_not_hidden": true
+    },
+    "bootstrap": {
+      "unit": "calendar month block of daily cross-sectional aggregates",
+      "replications": 1000,
+      "confidence_level": 0.95,
+      "seed": 20260828
+    },
+    "diagnostic_spreads": [
+      "score strictly above 0.90 minus score no greater than 0.90",
+      "E99_100 minus E90_95",
+      "high-energy RISING minus high-energy FALLING"
+    ],
+    "event_notional_usd": 1.0,
+    "overlapping_events_share_capital": false,
+    "portfolio_cagr_is_not_computed": true,
+    "data_status": "candidate_pending_review"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 0,
+  "initial_cash": 1.0,
+  "financing": "not applicable to independent normalized events; no event borrows or shorts",
+  "benchmark": "Each security event is matched to QQQ from the same next-session adjusted Open to the security event's same actual ending session under the same cost scenario; a terminal-truncated security event therefore uses the same shorter interval for QQQ. Daily cross-sectional excess return is the primary outcome.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse the shared v5 renderer. Add factor-specific energy-bucket curves, state-transition comparisons, era heatmaps, daily Rank IC, bootstrap confidence intervals and sample-availability diagnostics; do not present overlapping event returns as portfolio equity or CAGR."
+  },
+  "research": {
+    "stage": "exploratory_candidate_point_in_time_factor_anatomy",
+    "hypothesis": "If the Strategy1 position score is a genuine cross-sectional energy factor rather than only a path-dependent record, higher scores should be associated with stronger future matched-QQQ returns, the relation should be broadly monotonic and positive across eras, and high energy that is rising should outperform high energy that is falling.",
+    "primary_metric": "At zero cost, for 5/10/20/60-session horizons report date-equal market-adjusted returns by the seven frozen energy buckets, daily cross-sectional raw-score and causal-own-percentile Rank IC, high-versus-not-high and E99_100-versus-E90_95 spreads, plus high-rising-versus-high-falling spreads. Require pooled, date-equal and security-equal signs, five-era stability, month-block 95% intervals, event availability, terminal truncation and 5bps sensitivity.",
+    "selection_rule": "Run the full frozen score surface and every predeclared bucket, direction, state, horizon, era and cost. Do not tune 42/100, bucket boundaries, direction lookback, 90% threshold, horizons, bootstrap seed or minimum cross-section after viewing results. Do not select securities or report only favorable buckets.",
+    "validation_plan": "Regression-test the frozen Strategy1 fast score against its reference, strict bucket boundaries, one-session-lag membership, Close-to-next-real-Open timing, terminal truncation, future path excursions, causal rolling percentile, direction/state classification, daily Rank IC and deterministic month-block bootstrap. Reconcile a vectorized event engine against an independent per-security loop within 1e-10; because observations are independent overlapping event accounts rather than a shared tradable portfolio, PyBroker portfolio CAGR is deliberately not produced. Then run full tests, report tests, real Chrome, PDF, catalog, workspace and validate_run.",
+    "promotion_criteria": "This diagnostic cannot directly promote a portfolio while data is pending_review. Raw-score ranking is supported only if 10/20/60-session mean daily Rank IC are positive and at least two horizons are positive in at least four of five eras with pooled and security-equal signs agreeing. The 90% gate is supported only if high-minus-not-high is positive at at least two of 10/20/60 sessions, its month-block 95% lower bound is above zero for at least one, and at least four eras share the sign. Direction is supported only if high-rising minus high-falling is positive at at least two of 10/20/60 sessions with at least one positive lower bound. Any supported component must later enter a separately frozen turnover-aware portfolio test with approved data.",
+    "rejection_conditions": "Reject claims based on current constituents, same-Close entry, per-security parameter fitting, omitted low-score observations, score histories that use future values, events entered on synthetic/prelisting/terminal bars, hidden terminal truncation, pooled rows presented without date/security-equal alternatives, naive independent-event standard errors, fewer than all five eras, selecting only favorable horizons, treating overlapping normalized events as a capital-feasible portfolio, reconciliation above 1e-10, or language presenting pending_review candidate data as approved evidence."
+  },
+  "latest_validated_run_id": null,
+  "active_run_id": null
+}

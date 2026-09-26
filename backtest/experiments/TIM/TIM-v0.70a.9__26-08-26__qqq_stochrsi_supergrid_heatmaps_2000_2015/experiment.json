@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_dual_stochrsi_supergrid_heatmaps_2000_2015_v1",
+  "created_at_utc": "2026-08-26T02:00:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_dual_raw_stochrsi_cross_supergrid_heatmaps_2000_2015",
+    "description": "Use only 2000–2015 to scan every valid integer pair with short StochRSI period 2 through 70, long period 50 through 150, and short strictly below long. Period zero is undefined and period one is a degenerate zero-width StochRSI window; both are excluded by the shared indicator contract. The fixed raw dual-StochRSI 0.20/0.80 CROSS rule and candidate-specific first-entry-aligned Buy & Hold comparator are unchanged.",
+    "buy_rule": "While flat, both completed prior StochRSI values are below 0.20 and both provisional same-session values cross to or above 0.20; buy at the larger joint solved trigger.",
+    "sell_rule": "While long, both completed prior StochRSI values are above 0.80 and both provisional same-session values cross to or below 0.80; sell at the smaller joint solved trigger.",
+    "signal_time": "Eligibility and exact trigger prices use completed prior data only; every scoring window ends no later than 2015-12-31.",
+    "execution_time": "Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact trigger. High and Low are ignored.",
+    "positioning": "Every window is a separate long-only 0%/100% QQQ account with 100000 dollars, fractional shares, no leverage, and no cash interest. Strategy and aligned benchmark both wait in cash until the strategy's first fill.",
+    "plain_language": {
+      "summary": "把短周期和长周期扩展到一个很大的有效整数网格，直接观察收益与稳健性参数面。",
+      "buy": "两个周期先同时处于低位，随后一起向上越过0.20时买入QQQ。",
+      "sell": "两个周期先同时处于高位，随后一起向下跌破0.80时卖出QQQ。",
+      "execution": "前一日收盘后冻结触发价；跳空越线按开盘价成交，否则只按开盘到收盘方向检查精确触发价。",
+      "position": "策略和对照都先持有现金；策略第一次实际买入时，对照用相同资金和相同含成本成交价一次买入并持有。"
+    }
+  },
+  "parameters": {
+    "research_start": "2000-01-03",
+    "horizons_years": [
+      3,
+      5,
+      7
+    ],
+    "horizon_last_start": {
+      "3": "2012-12-31",
+      "5": "2010-12-31",
+      "7": "2008-12-31"
+    },
+    "expected_windows": {
+      "3": 52,
+      "5": 44,
+      "7": 36
+    },
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "short_period_start_requested": 0,
+    "short_period_start": 2,
+    "short_period_end": 70,
+    "long_period_start": 50,
+    "long_period_end": 150,
+    "period_step": 1,
+    "require_short_strictly_less_than_long": true,
+    "combination_count": 6738,
+    "screen_cost_bps": 5,
+    "formal_costs_bps": [
+      5
+    ],
+    "chronological_blocks": [
+      [
+        2000,
+        2004
+      ],
+      [
+        2005,
+        2008
+      ],
+      [
+        2009,
+        2012
+      ]
+    ],
+    "local_radius_steps": 1,
+    "reference_pairs": [
+      [
+        17,
+        97
+      ],
+      [
+        30,
+        143
+      ],
+      [
+        42,
+        100
+      ]
+    ],
+    "gates": {
+      "minimum_worst_horizon_q25_joint_rank": 0.55,
+      "minimum_worst_time_block_median_joint_rank": 0.55,
+      "minimum_leave_one_start_year_out_q25_joint_rank": 0.5,
+      "minimum_worst_local_3x3_score": 0.45,
+      "minimum_cagr_win_rate_vs_aligned_buy_hold": 0.4,
+      "minimum_sharpe_win_rate_vs_aligned_buy_hold": 0.55,
+      "minimum_drawdown_win_rate_vs_aligned_buy_hold": 0.6
+    },
+    "heatmap_metrics": [
+      "maximin_score",
+      "gate_pass_count",
+      "median_cagr_pct",
+      "median_sharpe"
+    ]
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Candidate- and window-specific first-entry-aligned Buy & Hold QQQ: cash until the strategy's first actual buy fill, then all-in at that same cost-inclusive fill price and hold; no signal means cash throughout",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged and render four full-grid heatmaps for robustness, gate count, median CAGR, and median Sharpe."
+  },
+  "research": {
+    "stage": "supergrid_surface_exploration",
+    "hypothesis": "A much wider valid integer grid will show whether the apparent high-CAGR ridges and locally robust areas are isolated artifacts or coherent structures across the full short/long period plane.",
+    "primary_metric": "Descriptive four-surface map of maximin robustness, passed gate count, median CAGR, and median Sharpe over all valid pairs.",
+    "selection_rule": "Score all 6738 valid pairs at 5 bps on 132 quarterly left-aligned 3/5/7-year windows ending by 2015. Apply the same seven frozen gates and ranking rule, but treat any champion label as secondary to the requested full surfaces.",
+    "validation_plan": "Reconcile the selected champion or strongest near-miss plus 17/97, 30/143, and 42/100 over all 132 windows at 5 bps. Verify all four heatmaps contain exactly the valid triangular grid and mask invalid short>=long cells.",
+    "promotion_criteria": "This is an exploratory map; no parameter advances without a separately frozen out-of-sample test and an absolute excess-CAGR requirement.",
+    "rejection_conditions": "Reject any period zero cell, short>=long cell, post-2015 leakage, incomplete grid, ledger mismatch, missing heatmap, or report that hides failed gates.",
+    "leakage_guard": "No dates after 2015-12-31 are loaded into scoring windows or candidate ranking."
+  },
+  "active_run_id": null
+}

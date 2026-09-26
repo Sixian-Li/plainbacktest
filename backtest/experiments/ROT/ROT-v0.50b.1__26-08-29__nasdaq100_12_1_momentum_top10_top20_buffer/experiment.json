@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_pit_12_1_momentum_top10_top20_buffer_v1",
+  "created_at_utc": "2026-08-29T00:00:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "NASDAQ100_MOMENTUM_ROTATION"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "nasdaq100_point_in_time_12_1_momentum_rank_buffer",
+    "description": "在每个日历月最后一个XNYS交易日收盘后，只从滞后一个交易日可知的Nasdaq-100历史时点成分证券中排名。分数是上个月末相对再往前12个月末的拆股及股息调整Close总收益，因而完整跳过信号月这个最近月。实验同时运行三条组合：点时成分等权、每月强制替换为前10名，以及进入前10名后只有跌出前20名才退出的缓冲组合。成员离开指数时不等待月末，待滞后成员状态可见后发出强制卖出。数据仍是candidate_pending_review，结论只属于探索研究。",
+    "buy_rule": "月末排名时，证券必须属于滞后一个XNYS交易日可知的Nasdaq-100成分，12-1两个端点都有真实Close，且信号日有真实Close。强制Top10路径买入当月排名前10；缓冲路径买入尚未持有且进入前10的证券，并保留仍在前20的原持仓。点时等权基准持有当月全部滞后成分。新成分可以使用入选前已经公开的历史价格预热动量，但在成员资格生效并经过一日滞后前不得买入。",
+    "sell_rule": "强制Top10在每个月末卖出所有跌出前10的证券；缓冲路径只在月末卖出跌出前20、失去有效排名或已离开指数的证券。任一持仓若在月中离开指数，则在滞后一日成员状态首次显示不再属于指数的收盘后发出强制卖出，并在成交受临时停牌阻断时逐日重试。无止损、无做空。",
+    "signal_time": "排名、成员资格、目标集合和目标权重只使用月末已完成Close及此前数据；成员状态使用前一XNYS交易日观察值。月中成分退出也只在当日完成Close后确认。",
+    "execution_time": "信号后的下一XNYS交易日按拆股及股息调整Open成交；信号Close先确定股数，成交时按稳定security_id顺序先卖后买，允许小数股，单边成本作为买高卖低的价格冲击。临时缺少真实Open时不在合成价格买卖；成员退出卖单逐日重试。历史证券最终无后续报价时，只允许用最后可见调整OHLC作明确标注的终止清算代理。",
+    "positioning": "long-only、无融资。强制Top10每只目标10%，不足10只时余款留现金；Top10/Top20缓冲少于10只时每只10%，10至20只时等权，因此单股目标不超过10%；点时等权基准在当月可见成分间等权。月中退出释放的资金留现金，等到下个月末再分配。现金不计息。",
+    "initial_position": "1999-03-31信号收盘时全现金；三条组合和QQQ基准最早都在1999-04-01开盘建立仓位。",
+    "plain_language": {
+      "summary": "在历史上当时真实属于Nasdaq-100的股票里，按跳过最近一个月的过去一年涨幅选强者，并检验宽松的退出缓冲能否减少无效换手。",
+      "buy": "每个月最后一个交易日收盘后做一次排名。强制版买前10名；缓冲版只把新进入前10名的股票加进来。",
+      "sell": "强制版跌出前10就卖；缓冲版允许原持仓继续留到跌出前20才卖。股票离开当时的Nasdaq-100时会提前退出，不等到下个月。",
+      "execution": "所有判断都在收盘后完成，下一交易日开盘先卖后买；分别计算无成本和单边5个基点。",
+      "position": "最多持有20只；少于10只时每只占10%、其余现金，达到10只后等权且任何单股不超过10%。"
+    }
+  },
+  "parameters": {
+    "analysis_signal_start": "1999-03-31",
+    "first_execution_date": "1999-04-01",
+    "analysis_end": "2026-08-04",
+    "momentum": {
+      "name": "12-1 calendar-month total-return momentum",
+      "formula": "Close at prior calendar month-end / Close at the same calendar month-end 12 months earlier - 1",
+      "lookback_months": 12,
+      "skip_recent_months": 1,
+      "endpoint_policy": "both endpoints must be real bars on the exact last XNYS session of their calendar month",
+      "signal_month_return_excluded": true,
+      "pre_membership_price_history_allowed": true,
+      "price_variant": "split_and_dividend_adjusted"
+    },
+    "universe": {
+      "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+      "review_status": "pending_review",
+      "source_manifest_status": "candidate_pending_review",
+      "approved": false,
+      "build_id": "600a0e5e3273f89c51ea6cc06e9f6130ceeee0ffbd8bfcee2bb3ca7091d489f8",
+      "source_package_key": "split_and_dividend",
+      "source_archive_sha256": "f8ba17a64886d318e068dfbff734424c926a6858361504c2c87261eaea90ac89",
+      "membership_intervals_sha256": "fbef73e99b37e20f3226503bdcb10efb27868408c45a59e9a5b2580d5cccc967",
+      "security_master_sha256": "66dd94849793cdb5283a15ce5d712b234a064817da36e908860ad0db8cb68223",
+      "membership_decision_lag_xnys_sessions": 1,
+      "security_identity": "one source CSV equals one security_id; no unreviewed predecessor or share-class merge",
+      "historical_weights_used": false
+    },
+    "ranking": {
+      "descending": true,
+      "tie_break": "security_id ascending",
+      "entry_rank": 10,
+      "buffer_exit_rank": 20,
+      "missing_score_is_ineligible": true
+    },
+    "formal_cases": [
+      "PIT_EQUAL_WEIGHT",
+      "TOP10_MONTHLY_REPLACE",
+      "TOP10_EXIT20_BUFFER"
+    ],
+    "primary_case": "TOP10_EXIT20_BUFFER",
+    "rebalance_frequency": "last XNYS session of each calendar month",
+    "membership_exit_policy": "after the one-session-lagged membership state first becomes false, target zero after that completed Close and retry daily until filled",
+    "allocation": {
+      "PIT_EQUAL_WEIGHT": "equal weight across the lagged point-in-time member set at each monthly signal",
+      "TOP10_MONTHLY_REPLACE": "10% per selected security; unused slots remain cash",
+      "TOP10_EXIT20_BUFFER": "if N<10 use 10% each and keep residual cash; if 10<=N<=20 use 1/N each",
+      "maximum_single_security_weight": 0.1,
+      "off_cycle_exit_cash": "remain cash until the next monthly rebalance"
+    },
+    "signal_sizing": "target shares are calculated from completed signal Close and account equity; next Open is never used to choose or size a signal",
+    "execution_order": "sell excess first by security_id, then buy deficits by security_id with available cash",
+    "temporary_unavailability_policy": "never buy or rebalance on a synthetic carry bar; freeze that security for the event and reconsider at the next monthly rebalance, except forced membership exits retry daily",
+    "terminal_price_policy": "after a historical security's final vendor row, carry the final adjusted OHLC only for valuation and a sell-only terminal settlement proxy; never buy on it",
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09,
+    "rolling_diagnostic_years": 5,
+    "benchmark": "QQQ Buy & Hold enters on 1999-04-01 Open under the same cost scenario"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero interest",
+  "benchmark": "QQQ Buy & Hold from the same 1999-04-01 Open, plus a monthly point-in-time Nasdaq-100 equal-weight mechanism benchmark; all paths use the same 0 or 5bps one-sided price impact.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Use v5 with a compact metric comparison, normalized equity and drawdown charts, rolling five-year diagnostics, holdings-count/turnover evidence and an explicit candidate-data warning. Machine parameters stay in the folded appendix."
+  },
+  "research": {
+    "stage": "exploratory_candidate_point_in_time_rotation",
+    "hypothesis": "A simple 12-1 cross-sectional momentum rank may concentrate persistent Nasdaq-100 leadership, while an entry-10/exit-20 buffer may preserve most of that exposure with materially lower turnover and cost drag than mandatory monthly Top10 replacement.",
+    "primary_metric": "At 5bps compare TOP10_EXIT20_BUFFER with TOP10_MONTHLY_REPLACE on CAGR, Sharpe, maximum drawdown, annualized turnover, cost drag, average/max holdings and rolling five-year relative outcomes; also compare both with QQQ and PIT_EQUAL_WEIGHT. Zero cost is a friction ablation.",
+    "selection_rule": "No parameter is selected in this experiment. The 12-1 definition, monthly clock, Top10 entry, Top20 exit, weighting, membership lag, data snapshot and 0/5bps cases are frozen before the run. Call the buffer structurally useful only if it lowers annualized turnover by at least 20%, loses no more than 1.0 percentage point of CAGR and 0.05 Sharpe, and worsens maximum drawdown by no more than 3 percentage points versus forced Top10 at 5bps.",
+    "validation_plan": "Test exact calendar-month 12-1 endpoints, skipped recent month, future-data invariance, lagged membership, deterministic ties, Top10 replacement, Top10/Top20 state retention, maximum20 holdings, weight/cash rules, off-cycle exits and unavailable-bar handling. Reconcile all six formal cost-case paths between PyBroker and an independently structured FIFO multi-asset ledger for daily cash/equity, positions, orders, fills and trades within 1e-6; then run full unit tests, source hashes, catalog/audit, real Chrome interaction, PDF print contract and validate_run.",
+    "promotion_criteria": "The experiment can only nominate a mechanism for a separately frozen walk-forward or forward test. No path may be promoted to simulation or live use while the Nasdaq-100 source remains pending_review; provider, authorization, acquisition date, identity and adjustment-use review are mandatory first.",
+    "rejection_conditions": "Reject any claim of approved or out-of-sample evidence; reject current-constituent lookback, same-Close fills, use of signal-month returns, unlagged membership, next-Open availability or price used in ranking/sizing, silent identity merge, buys on synthetic or terminal bars, holdings above20, target weight above10% in the two selection cases, incomplete six-path matrix, hidden terminal settlement, non-finite account values or any ledger mismatch above1e-6."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

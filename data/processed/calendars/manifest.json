@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-07T18:24:54+00:00",
+  "calendar": "XNYS",
+  "library": "exchange_calendars",
+  "library_version": "4.13.2",
+  "range": {
+    "start": "1993-01-01",
+    "end": "2026-12-31"
+  },
+  "session_count": 8558,
+  "output": "data/processed/calendars/XNYS.csv",
+  "output_sha256": "08551fe647c2e7cdc7aa7ae00df6aa0c3446e4bdef5c8b624a5797ad8a25eac9",
+  "vendor_calendar": "data/2026-08-05美股数据_全/美股交易日历.csv",
+  "vendor_calendar_sha256": "1c07ca1895619d6a12eb9f3ad96f6cdeeeb6e991edcd9fa8d9a9cecca4f0d9c4",
+  "comparison_output": "data/processed/calendars/vendor_comparison.csv",
+  "comparison_sha256": "90427df6693d94c6ef6d022170a68e4e3bea80ade783befc9a1845462994e16d",
+  "difference_count": 5,
+  "official_references": [
+    "https://www.nyse.com/trade/hours-calendars",
+    "https://s2.q4cdn.com/154085107/files/doc_news/NYSE-Group-Announces-2024-2025-and-2026-Holiday-and-Early-Closings-Calendar-2023.pdf"
+  ],
+  "policy": "XNYS drives validation and scheduling; purchased calendar is comparison-only."
+}

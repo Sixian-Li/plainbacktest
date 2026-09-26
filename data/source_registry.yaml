@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "format_note": "This file is JSON-compatible YAML so the bootstrap data builder can read it with the Python standard library.",
+  "canonical_schema": {
+    "columns": ["date", "symbol", "open", "high", "low", "close", "volume"],
+    "date_format": "YYYY-MM-DD",
+    "timezone": "America/New_York",
+    "currency": "USD",
+    "session": "regular",
+    "sort_order": ["symbol", "date"]
+  },
+  "calendar": {
+    "path": "data/2026-08-05美股数据_全/美股交易日历.csv",
+    "date_column": "日期",
+    "trading_flag_column": "是否交易",
+    "trading_flag_value": "交易"
+  },
+  "quality_policy": {
+    "outlier_abs_close_return_pct": 30.0,
+    "ohlc_relative_tolerance": 1e-09,
+    "blocking_checks": [
+      "missing_required_value",
+      "bad_date",
+      "bad_number",
+      "wrong_symbol",
+      "duplicate_date",
+      "nonpositive_price",
+      "invalid_ohlc",
+      "unexpected_coverage"
+    ]
+  },
+  "datasets": [
+    {
+      "symbol": "QQQ",
+      "registered_status": "approved",
+      "role": "primary_backtest_input",
+      "source": {
+        "provider": "rethink",
+        "kind": "csv",
+        "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/3 大指数 ETF/QQQ - 纳斯达克 100 ETF Invesco/QQQ_1day_拆股股息调整_20260805.csv"
+      },
+      "adjustment": {
+        "kind": "split_and_dividend_adjusted",
+        "return_interpretation": "total_return_price_approximation",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "column_map": {
+        "Date": "date",
+        "Symbol": "symbol",
+        "Open": "open",
+        "High": "high",
+        "Low": "low",
+        "Close": "close",
+        "Volume": "volume"
+      },
+      "expected": {
+        "start": "1999-03-10",
+        "end": "2026-08-04"
+      },
+      "known_issues": [
+        "Adjusted prices approximate dividend reinvestment; no independent corporate-action cash ledger is available.",
+        "Vendor-adjusted volume is not raw exchange volume and must not drive liquidity or fill assumptions."
+      ],
+      "output": "data/processed/daily/QQQ.csv"
+    },
+    {
+      "symbol": "VOO",
+      "registered_status": "provisional",
+      "role": "future_trade_asset",
+      "source": {
+        "provider": "full_market",
+        "kind": "zip_member",
+        "path": "data/2026-08-05美股数据_全/日线_前复权_美股数据.zip",
+        "member": "VOO_daily_qfq.csv"
+      },
+      "adjustment": {
+        "kind": "vendor_qfq_forward_adjusted",
+        "return_interpretation": "continuous_adjusted_price",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "column_map": {
+        "日期": "date",
+        "代码": "symbol",
+        "开盘价": "open",
+        "最高价": "high",
+        "最低价": "low",
+        "收盘价": "close",
+        "成交量": "volume"
+      },
+      "expected": {
+        "start": "2010-09-09",
+        "end": "2026-08-04"
+      },
+      "known_issues": [
+        "2018-11-15 has an invalid OHLC relationship: vendor open is below vendor low.",
+        "The vendor's exact qfq formula has not been independently verified.",
+        "This dataset must not be promoted to approved until the anomalous row is verified from an independent source."
+      ],
+      "output": "data/processed/daily/VOO.csv"
+    },
+    {
+      "symbol": "SPY",
+      "registered_status": "approved",
+      "role": "long_history_proxy_and_validation",
+      "source": {
+        "provider": "rethink",
+        "kind": "csv",
+        "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/3 大指数 ETF/SPY - 标普 500 ETF SPDR/SPY_1day_拆股股息调整_20260805.csv"
+      },
+      "adjustment": {
+        "kind": "split_and_dividend_adjusted",
+        "return_interpretation": "total_return_price_approximation",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "column_map": {
+        "Date": "date",
+        "Symbol": "symbol",
+        "Open": "open",
+        "High": "high",
+        "Low": "low",
+        "Close": "close",
+        "Volume": "volume"
+      },
+      "expected": {
+        "start": "1993-01-29",
+        "end": "2026-08-04"
+      },
+      "known_issues": [
+        "SPY is a proxy and validation series, not a price segment to splice directly into VOO.",
+        "Adjusted prices approximate dividend reinvestment; no independent corporate-action cash ledger is available.",
+        "Vendor-adjusted volume is not raw exchange volume and must not drive liquidity or fill assumptions."
+      ],
+      "output": "data/processed/daily/SPY.csv"
+    },
+    {
+      "symbol": "RKLB",
+      "registered_status": "approved",
+      "role": "single_asset_backtest_input",
+      "source": {
+        "provider": "rethink",
+        "kind": "zip_member",
+        "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-拆股及股息调整_20260805.zip",
+        "member": "RKLB.csv"
+      },
+      "adjustment": {
+        "kind": "split_and_dividend_adjusted",
+        "return_interpretation": "total_return_price_approximation",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "identity": {
+        "issuer": "Rocket Lab USA, Inc.",
+        "cik": "0001819994",
+        "listing_exchange": "Nasdaq",
+        "ticker_effective_date": "2021-08-25",
+        "evidence": "https://www.sec.gov/Archives/edgar/data/1819994/000119312521262190/d175539d8k.htm"
+      },
+      "canonical_start": "2021-08-25",
+      "canonical_start_reason": "Exclude the pre-combination VACQ SPAC period; SEC evidence states RKLB trading began on 2021-08-25.",
+      "column_map": {
+        "Date": "date",
+        "Symbol": "symbol",
+        "Open": "open",
+        "High": "high",
+        "Low": "low",
+        "Close": "close",
+        "Volume": "volume"
+      },
+      "expected": {
+        "start": "2021-08-25",
+        "end": "2026-08-04"
+      },
+      "known_issues": [
+        "Rows before 2021-08-25 describe the VACQ SPAC predecessor period and are explicitly excluded from canonical RKLB history.",
+        "The primary source and the full-market vendor qfq source have identical dates, closes, and daily close returns throughout the canonical range.",
+        "Adjusted prices approximate total return; no independent corporate-action cash ledger is available.",
+        "Vendor-adjusted volume must not drive liquidity or fill assumptions."
+      ],
+      "output": "data/processed/daily/RKLB.csv"
+    }
+  ]
+}

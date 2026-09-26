@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_dual_stochrsi_cross_multistart_full_2010_2026_v1",
+  "created_at_utc": "2026-08-25T02:30:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_dual_raw_stochrsi_cross_multistart_full_2010_2026",
+    "description": "Fix dual raw StochRSI CROSS thresholds at buy 0.20 and sell 0.80 and scan short periods 14–50 against long periods 70–160 by two. Evaluate every pair on all quarterly-start five-year windows fully observable in QQQ from 2010 through 2026. Every window resets cash, shares, and position state while allowing pre-window history only for indicator warmup.",
+    "buy_rule": "While flat, both completed prior StochRSI values must be below 0.20 and both provisional same-session values must cross to or above 0.20; buy at the larger joint solved trigger.",
+    "sell_rule": "While long, both completed prior StochRSI values must be above 0.80 and both provisional same-session values must cross to or below 0.80; sell at the smaller joint solved trigger.",
+    "signal_time": "Eligibility and exact triggers are frozen before each session using completed prior data; pre-window data warms indicators but never creates inherited account state.",
+    "execution_time": "Every window starts with 100000 dollars cash and no shares. Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact trigger. High and Low are ignored.",
+    "positioning": "Each case-window is an independent long-only 0%/100% QQQ account with fractional shares, no leverage, no cash interest, and no inherited position.",
+    "initial_position": "flat with 100000 dollars at every window start",
+    "indicator_definition": "Wilder RSI(p) normalized by its rolling p-value RSI minimum and maximum; zero range maps to 0.5; no K or D smoothing.",
+    "plain_language": {
+      "summary": "把每组周期放到2010至2026所有可用的五年起点重新投资，寻找不依赖单一起点的参数区域。",
+      "buy": "每个窗口都从现金开始；两个周期先同时处于低位，再一起向上越过0.20时买入QQQ。",
+      "sell": "持仓后，两个周期先同时处于高位，再一起向下跌破0.80时卖出QQQ。",
+      "execution": "前一日收盘后冻结触发价；跳空越线按开盘价成交，否则只有开盘到收盘碰到触发价才成交。",
+      "position": "每个五年窗口独立使用10万美元在满仓QQQ和现金之间切换，并与同窗口买入持有比较。"
+    }
+  },
+  "parameters": {
+    "research_start": "2010-01-04",
+    "research_end": "2026-08-04",
+    "window_years": 5,
+    "window_frequency": "calendar_quarter_first_session",
+    "all_start_first": "2010-01-01",
+    "all_start_last": "2021-09-30",
+    "expected_all_windows": 47,
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "short_period_start": 14,
+    "short_period_end": 50,
+    "long_period_start": 70,
+    "long_period_end": 160,
+    "period_step": 2,
+    "combination_count": 874,
+    "anchor_short_period": 42,
+    "anchor_long_period": 100,
+    "full_sample_max_cagr_short_period": 36,
+    "full_sample_max_cagr_long_period": 152,
+    "full_sample_max_sharpe_short_period": 32,
+    "full_sample_max_sharpe_long_period": 152,
+    "screen_cost_bps": 5,
+    "formal_costs_bps": [
+      0,
+      5
+    ]
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ independently restarted at the first Open of every five-year window",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse interactive_research_v5 unchanged with a Close market panel, representative equity window, full-sample robustness heatmap, and five-year metric distributions."
+  },
+  "research": {
+    "stage": "full_sample_multistart_exploration",
+    "hypothesis": "Using every observable five-year quarterly restart from 2010 through 2026 will identify a broader and less start-dependent period region than a single full-history endpoint.",
+    "primary_metric": "Within every window take the lower of the candidate's CAGR and Sharpe percentile ranks, then aggregate each period pair by the 25th percentile of that joint score across all 47 windows.",
+    "selection_rule": "Screen all 874 pairs at five bps on all 47 windows. High performance means robust score at least 95% of the positive maximum. Use eight-neighbor connectivity; a qualifying component requires at least nine cases and cannot touch any period-grid boundary. Choose within the largest qualifying component by robust score, then proximity to its centroid and case ID. If none qualifies, report no robust champion.",
+    "validation_plan": "This experiment intentionally uses all 2010–2026 data for descriptive multistart selection and has no holdout. Reconcile PyBroker and the independent ledger at zero and five bps for the anchor, prior full-history winners, mechanical robust-score maximum, and any qualifying champion.",
+    "promotion_criteria": "Do not promote directly because all available dates participate in selection. A future experiment must freeze any candidate before a new date or cross-asset test.",
+    "rejection_conditions": "Name no champion if the high-score set lacks an interior nine-case component, is cost fragile, or fails any ledger/report/engineering gate."
+  },
+  "active_run_id": null
+}

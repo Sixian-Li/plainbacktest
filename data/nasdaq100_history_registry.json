@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+  "description": "Reproducible audit and pending-review candidate contract for the purchased Nasdaq-100 historical constituent packages. No source prices are copied and no output is approved automatically.",
+  "review_status": "pending_review",
+  "production_writes_enabled": false,
+  "source_root": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股",
+  "provider": "unknown",
+  "license_or_authorization": "unknown",
+  "acquired_date": "unknown",
+  "filename_snapshot_token": "20260805",
+  "snapshot_token_interpretation": "pending_review; the filename token is not treated as proven acquisition or market as-of metadata",
+  "packages": {
+    "split_only": {
+      "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-仅拆股调整_20260805.zip",
+      "sha256": "3fc215759bcf3da8656b0fab6909cfe015c2182618007559a5c3d7ff02943968",
+      "size_bytes": 70905836,
+      "archive_members": 480,
+      "uncompressed_bytes": 224299808,
+      "declared_adjustment_from_filename": "split_adjusted",
+      "adjustment_status": "pending_review"
+    },
+    "split_and_dividend": {
+      "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-拆股及股息调整_20260805.zip",
+      "sha256": "f8ba17a64886d318e068dfbff734424c926a6858361504c2c87261eaea90ac89",
+      "size_bytes": 84579391,
+      "archive_members": 480,
+      "uncompressed_bytes": 242889069,
+      "declared_adjustment_from_filename": "split_and_dividend_adjusted",
+      "adjustment_status": "pending_review"
+    }
+  },
+  "extracted_evidence": {
+    "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-拆股及股息调整_20260805",
+    "file_count": 480,
+    "size_bytes": 242889069,
+    "directory_sha256": "83557b0f88fe7be490bf204c06888ee6040b1a2e2dfc879ef9a5c5467d498fbc",
+    "directory_hash_contract": "SHA256 over sorted UTF-8 records: relative_path NUL size_bytes NUL file_sha256 newline"
+  },
+  "source_schema": [
+    "Date",
+    "CompanyName",
+    "Symbol",
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "Volume",
+    "Unadjusted Close",
+    "InIndex"
+  ],
+  "membership_contract": {
+    "source_field": "InIndex",
+    "allowed_values": [0, 1],
+    "interval_representation": "Maximal runs of observed InIndex=1 rows, preserving gaps in price observations as reported quality warnings.",
+    "point_in_time_use": "Use the membership state known before the decision timestamp; absent independent announcement-time evidence, lag observed effective membership by one XNYS session.",
+    "left_censoring": "The first observed 1 does not prove the true admission date.",
+    "right_censoring": "A final observed 1 is only valid through the source coverage end.",
+    "daily_representation": "The checked-in membership_intervals.csv plus data/processed/calendars/XNYS.csv unambiguously generates each daily member set.",
+    "historical_weights_available": false
+  },
+  "identity_contract": {
+    "primary_record": "Each source CSV member is a separate candidate security record.",
+    "security_id": "Deterministic SHA256-derived ID from the exact source filename; IDs do not imply corporate continuity.",
+    "dated_suffix": "A trailing -YYYYMM is preserved in source_symbol and source_file and removed only for display_ticker. It is not treated as an index-exit date.",
+    "rename_policy": "Do not create AABA/YHOO, META/FB, BKNG/PCLN or other predecessor links without external primary evidence and explicit review.",
+    "share_class_policy": "Keep separate files and share classes separate, including GOOG and GOOGL. Same company name is not a merge key."
+  },
+  "quality_policy": {
+    "ohlc_relative_tolerance": 1e-09,
+    "outlier_abs_close_return_pct": 50.0,
+    "max_issue_examples": 10,
+    "blocking_checks": [
+      "archive_integrity_failure",
+      "archive_member_set_mismatch",
+      "extracted_content_mismatch",
+      "package_row_key_mismatch",
+      "package_in_index_mismatch",
+      "package_unadjusted_close_mismatch",
+      "unexpected_schema",
+      "empty_file",
+      "bad_encoding",
+      "bad_row",
+      "bad_date",
+      "duplicate_date",
+      "source_order_violation",
+      "unstable_symbol",
+      "filename_symbol_mismatch",
+      "unstable_company_name",
+      "bad_number",
+      "nonpositive_price",
+      "invalid_ohlc",
+      "negative_volume",
+      "nonpositive_unadjusted_close",
+      "bad_in_index",
+      "never_in_index",
+      "source_mutated_during_build"
+    ],
+    "warning_checks": [
+      "missing_in_index_session",
+      "zero_volume",
+      "outlier_close_return",
+      "member_outlier_close_return",
+      "reentered_index",
+      "filename_suffix_not_last_in_index_month",
+      "daily_member_count_below_100",
+      "daily_member_count_above_100",
+      "left_censored_history"
+    ]
+  },
+  "official_cross_checks": [
+    {
+      "effective_date": "2020-12-21",
+      "previous_session": "2020-12-18",
+      "expected_additions": ["AEP", "MRVL", "MTCH", "OKTA", "PTON", "TEAM"],
+      "expected_deletions": ["BMRN", "CTXS", "EXPE", "LBTYA", "LBTYK", "TTWO", "ULTA"],
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-index-9"
+    },
+    {
+      "effective_date": "2021-12-20",
+      "previous_session": "2021-12-17",
+      "expected_additions": ["ABNB", "DDOG", "FTNT", "LCID", "PANW", "ZS"],
+      "expected_deletions": ["CDW", "CERN", "CHKP", "FOX", "FOXA", "INCY", "TCOM"],
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-indexr"
+    },
+    {
+      "effective_date": "2024-12-23",
+      "previous_session": "2024-12-20",
+      "expected_additions": ["AXON", "MSTR", "PLTR"],
+      "expected_deletions": ["ILMN", "MRNA", "SMCI"],
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-indexr-1"
+    },
+    {
+      "effective_date": "2025-12-22",
+      "previous_session": "2025-12-19",
+      "expected_additions": ["ALNY", "FER", "INSM", "MPWR", "STX", "WDC"],
+      "expected_deletions": ["BIIB", "CDW", "GFS", "LULU", "ON", "TTD"],
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/annual-changes-nasdaq-100-indexr-2"
+    },
+    {
+      "effective_date": "2026-01-20",
+      "previous_session": "2026-01-16",
+      "expected_additions": ["WMT"],
+      "expected_deletions": ["AZN"],
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/walmart-inc-join-nasdaq-100-indexr-beginning-january-20th-2026"
+    },
+    {
+      "effective_date": "2026-06-22",
+      "previous_session": "2026-06-18",
+      "expected_additions": ["ALAB", "CRWV", "NBIS", "RKLB", "TER"],
+      "expected_deletions": ["CHTR", "CTSH", "INSM", "VRSK", "ZS"],
+      "url": "https://ir.nasdaq.com/node/110541"
+    },
+    {
+      "effective_date": "2026-07-07",
+      "previous_session": "2026-07-06",
+      "expected_additions": ["SPCX"],
+      "expected_deletions": [],
+      "url": "https://ir.nasdaq.com/news-releases/news-release-details/space-exploration-technologies-corporation-join-nasdaq-100"
+    }
+  ],
+  "official_primary_sources": [
+    {
+      "topic": "index_methodology",
+      "url": "https://indexes.nasdaqomx.com/docs/methodology_NDX.pdf",
+      "reviewed_points": [
+        "multiple eligible share classes may each be included",
+        "Fast Entry and some quarterly additions may temporarily raise the security count above 100",
+        "spin-off securities may temporarily raise the security count above 100"
+      ]
+    },
+    {
+      "topic": "official_component_count_snapshot",
+      "url": "https://indexes.nasdaqomx.com/Index/overview/NDX",
+      "observed_as_of": "2026-07-23",
+      "observed_component_count": 103
+    },
+    {
+      "topic": "HONA_spin_off_trading_date",
+      "url": "https://www.nasdaq.com/press-release/honeywell-aerospace-completes-spin-honeywell-technologies-and-begins-trading-nasdaq",
+      "observed_regular_trading_start": "2026-06-29",
+      "index_membership_inference_only": true
+    }
+  ],
+  "outputs": {
+    "directory": "data/processed/universes/nasdaq100/pending_review",
+    "security_master": "data/processed/universes/nasdaq100/pending_review/security_master.csv",
+    "membership_intervals": "data/processed/universes/nasdaq100/pending_review/membership_intervals.csv",
+    "membership_daily_counts": "data/processed/universes/nasdaq100/pending_review/membership_daily_counts.csv",
+    "membership_changes": "data/processed/universes/nasdaq100/pending_review/membership_changes.csv",
+    "source_manifest": "data/processed/universes/nasdaq100/pending_review/source_manifest.json",
+    "quality_report_json": "data/processed/universes/nasdaq100/pending_review/quality_report.json",
+    "quality_report_markdown": "data/processed/universes/nasdaq100/pending_review/quality_report.md"
+  },
+  "promotion_policy": {
+    "auto_promote_to_approved": false,
+    "requires_manual_provider_review": true,
+    "requires_manual_license_review": true,
+    "requires_manual_acquisition_metadata_review": true,
+    "requires_explicit_user_authorization": true
+  }
+}

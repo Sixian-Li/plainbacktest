@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-07T18:24:54+00:00",
+  "symbol": "SPY",
+  "decision": "Use Rethink split-and-dividend-adjusted data for daily trend research.",
+  "confidence": "high_for_daily_trend_research_not_exchange_grade",
+  "rethink": {
+    "rows": 8435,
+    "start": "1993-01-29",
+    "end": "2026-08-04",
+    "invalid_ohlc_split_adjusted": [],
+    "invalid_ohlc_total_adjusted": []
+  },
+  "full_market": {
+    "rows": 6433,
+    "start": "2001-01-02",
+    "end": "2026-08-04",
+    "invalid_ohlc_raw": [
+      {
+        "date": "2015-03-30",
+        "open": 205.74,
+        "high": 208.61,
+        "low": 206.96,
+        "close": 208.25
+      }
+    ],
+    "invalid_ohlc_qfq": [
+      {
+        "date": "2015-03-30",
+        "open": 166.367,
+        "high": 168.688,
+        "low": 167.354,
+        "close": 168.397
+      }
+    ]
+  },
+  "split_vs_raw": {
+    "common_dates": 6433,
+    "rethink_only_dates": 2002,
+    "full_only_dates": 0,
+    "full_missing_2015_04_09": true,
+    "rethink_has_2015_04_09": true,
+    "latest_close_rethink": 771.33,
+    "latest_close_full": 771.33,
+    "max_abs_level_difference_pct": 0.4809619238477003,
+    "max_abs_daily_return_difference_pct": 0.4871425939233953,
+    "daily_return_difference_count_over_1bp": 307,
+    "daily_return_difference_count_over_10bp": 30,
+    "daily_return_difference_count_over_100bp": 0,
+    "largest_daily_return_differences": [
+      {
+        "date": "2016-06-28",
+        "abs_difference_pct": 0.4871425939233953,
+        "rethink_return_pct": 1.8034569138276613,
+        "full_return_pct": 1.316314319904266
+      },
+      {
+        "date": "2016-06-27",
+        "abs_difference_pct": 0.41916531377428345,
+        "rethink_return_pct": -1.7378033771476398,
+        "full_return_pct": -1.3186380633733563
+      },
+      {
+        "date": "2002-10-03",
+        "abs_difference_pct": 0.30856422674421236,
+        "rethink_return_pct": -1.010222489476853,
+        "full_return_pct": -1.3187867162210654
+      },
+      {
+        "date": "2002-10-02",
+        "abs_difference_pct": 0.30331311245915815,
+        "rethink_return_pct": -2.9981334577694696,
+        "full_return_pct": -2.6948203453103114
+      },
+      {
+        "date": "2002-05-31",
+        "abs_difference_pct": 0.2803738317757043,
+        "rethink_return_pct": 0.20560747663551648,
+        "full_return_pct": -0.07476635514018781
+      },
+      {
+        "date": "2002-06-03",
+        "abs_difference_pct": 0.2731254596578192,
+        "rethink_return_pct": -2.6580861779518683,
+        "full_return_pct": -2.384960718294049
+      },
+      {
+        "date": "2003-04-29",
+        "abs_difference_pct": 0.2614663906743697,
+        "rethink_return_pct": 0.0,
+        "full_return_pct": 0.2614663906743697
+      },
+      {
+        "date": "2003-04-30",
+        "abs_difference_pct": 0.26112545872953863,
+        "rethink_return_pct": 0.13073319533716266,
+        "full_return_pct": -0.13039226339237597
+      },
+      {
+        "date": "2026-07-08",
+        "abs_difference_pct": 0.2070884768338166,
+        "rethink_return_pct": -0.3089433068970693,
+        "full_return_pct": -0.10185483006325269
+      },
+      {
+        "date": "2026-07-07",
+        "abs_difference_pct": 0.2063145564902613,
+        "rethink_return_pct": -0.4751890107549728,
+        "full_return_pct": -0.6815035672452341
+      }
+    ]
+  },
+  "total_adjusted_vs_qfq": {
+    "common_dates": 6433,
+    "rethink_only_dates": 2002,
+    "full_only_dates": 0,
+    "full_missing_2015_04_09": true,
+    "rethink_has_2015_04_09": true,
+    "latest_close_rethink": 771.33,
+    "latest_close_full": 771.33,
+    "max_abs_level_difference_pct": 3.427355776408625,
+    "max_abs_daily_return_difference_pct": 0.6340239213375232,
+    "daily_return_difference_count_over_1bp": 301,
+    "daily_return_difference_count_over_10bp": 29,
+    "daily_return_difference_count_over_100bp": 0,
+    "largest_daily_return_differences": [
+      {
+        "date": "2003-06-20",
+        "abs_difference_pct": 0.6340239213375232,
+        "rethink_return_pct": -0.22049424032358766,
+        "full_return_pct": 0.4135296810139355
+      },
+      {
+        "date": "2016-12-16",
+        "abs_difference_pct": 0.5915725043978415,
+        "rethink_return_pct": -0.1956122357067991,
+        "full_return_pct": 0.3959602686910424
+      },
+      {
+        "date": "2016-06-17",
+        "abs_difference_pct": 0.5213636534923904,
+        "rethink_return_pct": -0.37221432495341267,
+        "full_return_pct": 0.14914932853897778
+      },
+      {
+        "date": "2016-03-18",
+        "abs_difference_pct": 0.5201832011600294,
+        "rethink_return_pct": 0.39277907892609765,
+        "full_return_pct": 0.912962280086127
+      },
+      {
+        "date": "2016-09-16",
+        "abs_difference_pct": 0.5055810004628847,
+        "rethink_return_pct": -0.38652481147917195,
+        "full_return_pct": 0.11905618898371273
+      },
+      {
+        "date": "2016-06-28",
+        "abs_difference_pct": 0.48687154310183,
+        "rethink_return_pct": 1.8034509331362525,
+        "full_return_pct": 1.3165793900344225
+      },
+      {
+        "date": "2017-03-17",
+        "abs_difference_pct": 0.4362282315431565,
+        "rethink_return_pct": -0.17556194307898343,
+        "full_return_pct": 0.26066628846417306
+      },
+      {
+        "date": "2016-06-27",
+        "abs_difference_pct": 0.4192226465286719,
+        "rethink_return_pct": -1.7377982563992145,
+        "full_return_pct": -1.3185756098705426
+      },
+      {
+        "date": "2002-10-03",
+        "abs_difference_pct": 0.30933149917524716,
+        "rethink_return_pct": -1.0102269929761487,
+        "full_return_pct": -1.3195584921513959
+      },
+      {
+        "date": "2002-10-02",
+        "abs_difference_pct": 0.30376732195611655,
+        "rethink_return_pct": -2.9981333097664375,
+        "full_return_pct": -2.694365987810321
+      }
+    ]
+  },
+  "limitations": [
+    "Neither purchased source is an exchange-grade official feed.",
+    "Full-market SPY also omits 2015-04-09 and contains an invalid OHLC row.",
+    "Dividend-adjustment conventions differ; adjusted price levels must not be spliced.",
+    "Rethink adjusted volume is not raw exchange volume and is excluded from liquidity assumptions."
+  ]
+}

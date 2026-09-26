@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_single_stochrsi_robust_2005_2020_v1",
+  "created_at_utc": "2026-08-25T07:30:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_single_raw_stochrsi_cross_robust_2005_2020",
+    "description": "Use one raw StochRSI only. Scan every integer period from 14 through 200 with fixed 0.20 upward-cross entry and 0.80 downward-cross exit, selecting on 2005–2020 through the same cross-horizon, chronological, leave-year-out, benchmark, and local-neighborhood robustness framework.",
+    "buy_rule": "While flat, the completed prior StochRSI is below 0.20 and its provisional same-session value crosses to or above 0.20; buy at the solved trigger.",
+    "sell_rule": "While long, the completed prior StochRSI is above 0.80 and its provisional same-session value crosses to or below 0.80; sell at the solved trigger.",
+    "signal_time": "Eligibility and the exact trigger use only completed prior data. Selection windows end no later than 2020-12-31.",
+    "execution_time": "Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact trigger. High and Low are ignored.",
+    "positioning": "Every training window is an independent long-only 0%/100% QQQ account with 100000 dollars, fractional shares, no leverage, and no cash interest.",
+    "plain_language": {
+      "summary": "只看一条Stochastic RSI，在2005至2020寻找换起点、换期限和轻微改周期后仍稳定的单周期。",
+      "buy": "这条Stochastic RSI先处于低位，随后向上越过0.20时买入QQQ。",
+      "sell": "持仓后，这条Stochastic RSI先处于高位，随后向下跌破0.80时卖出QQQ。",
+      "execution": "前一日收盘后冻结触发价；跳空越线按开盘价成交，否则盘中只按开盘到收盘方向检查触发价。",
+      "position": "每个训练窗口都从10万美元现金独立开始，在满仓QQQ与现金之间切换，并与同期持有比较。"
+    }
+  },
+  "parameters": {
+    "research_start": "2005-01-03",
+    "selection_end": "2020-12-31",
+    "horizons_years": [
+      3,
+      5,
+      7
+    ],
+    "horizon_last_start": {
+      "3": "2017-12-31",
+      "5": "2015-12-31",
+      "7": "2013-12-31"
+    },
+    "expected_windows": {
+      "3": 52,
+      "5": 44,
+      "7": 36
+    },
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "period_start": 14,
+    "period_end": 200,
+    "period_step": 1,
+    "combination_count": 187,
+    "screen_cost_bps": 5,
+    "formal_costs_bps": [
+      0,
+      5,
+      10
+    ],
+    "chronological_blocks": [
+      [
+        2005,
+        2009
+      ],
+      [
+        2010,
+        2013
+      ],
+      [
+        2014,
+        2017
+      ]
+    ],
+    "local_radius_steps": 1,
+    "reference_periods": [
+      42,
+      100
+    ],
+    "gates": {
+      "minimum_worst_horizon_q25_joint_rank": 0.55,
+      "minimum_worst_time_block_median_joint_rank": 0.55,
+      "minimum_leave_one_start_year_out_q25_joint_rank": 0.5,
+      "minimum_worst_local_3point_score": 0.45,
+      "minimum_cagr_win_rate_vs_buy_hold": 0.4,
+      "minimum_sharpe_win_rate_vs_buy_hold": 0.55,
+      "minimum_drawdown_win_rate_vs_buy_hold": 0.6
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5,
+    10
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ independently restarted in every training window",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged with one-dimensional robustness curve and training-window distributions."
+  },
+  "research": {
+    "stage": "single_period_robust_training_exploration",
+    "hypothesis": "A single StochRSI period can form a stable one-dimensional neighborhood across 2005–2020 without requiring dual-period confirmation.",
+    "primary_metric": "Maximize the minimum of worst-horizon lower-quartile joint CAGR/Sharpe rank, worst chronological-block median rank, leave-one-start-year-out lower-quartile rank, and the worst score among period-1, period, and period+1.",
+    "selection_rule": "Screen periods 14–200 at 5 bps using only 132 windows ending by 2020. Exclude periods 14 and 200, apply all seven frozen gates, then choose the passing period with highest maximin score, benchmark win rates, and lower period as final tie-break. If none passes, report no robust champion rather than substituting a mechanical maximum; choose the diagnostic near-miss first by number of gates passed, then maximin, benchmark win rates, and lower period.",
+    "validation_plan": "Reconcile the robust champion if any, strongest near-miss, and reference periods 42 and 100 at 0/5/10 bps across all 132 training windows. Do not inspect 2021+ performance in this experiment.",
+    "promotion_criteria": "A period is a descriptive 2005–2020 robust champion only if all seven gates and all engineering checks pass; future-date validation remains a separate experiment.",
+    "rejection_conditions": "Name no robust champion if no interior period passes every horizon, time, leave-year-out, local, benchmark, cost, ledger, and engineering gate."
+  },
+  "active_run_id": null
+}

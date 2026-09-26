@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_timing_bear9_rebalance_robustness_v1",
+  "created_at_utc": "2026-08-25T00:00:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "QQQ_BEAR9_REBALANCE"
+  ],
+  "strategy": {
+    "name": "qqq_sma_timing_with_fixed_bear9_and_rebalance_robustness",
+    "description": "比较六个QQQ长期均线择时器：SMA160、180、200、220、240均使用完成Close相对均线上下3%的连续滞回状态；第六个使用SMA190与SMA310的分层仓位状态机。分层状态在SMA310不低于SMA190时持有0% QQQ；只有SMA190高于SMA310时才按完成Close所在区间持有0%、30%、70%或100% QQQ。每个对称择时器都比较非QQQ仓位留现金与改持固定Bear9；分层择时器比较全部留现金、只在QQQ为0%时持Bear9、以及用Bear9填满所有非QQQ仓位。Bear9固定为AZO/SO/ED/ORLY/MO/WRB/DLTR/DG/WMT，权重10/12/13/10/13/12/8/9/13，不使用任何个股SMA。Bear9内部除不再平衡外，还按1、2、3、4、5、6、8、10、15、20、25或30个共同交易日恢复目标权重。所有状态使用完成Close，下一共同Open先卖后买；允许小数股、无融资、现金不计息。",
+    "buy_rule": "对称择时器在连续滞回状态进入多头时把QQQ目标设为100%，进入空头时设为0%；首次共同评价日直接继承此前仅由已完成历史形成的滞回状态。分层择时器先要求SMA190>SMA310：Close>=SMA190时QQQ目标100%，SMA190>Close>=两均线算术均值时70%，均值>Close>SMA310时30%，Close<=SMA310时0%；若SMA310>=SMA190则QQQ目标0%。Bear9路径在其允许的非QQQ袖套首次出现时，按固定目标权重买入当时已有真实价格的成员；DG上市前的9%保留现金。",
+    "sell_rule": "对称择时器持有QQQ时，完成Close严格低于对应SMA的97%即把QQQ目标降为0%；重新真实上穿SMA的103%才恢复100%。分层择时器只要完成Close或两条均线的次序进入更低仓位档，就按0%/30%/70%/100%目标降低QQQ；非QQQ袖套按现金、只在QQQ为0%时持Bear9、或Bear9填满全部剩余仓位三种冻结模式处理。QQQ目标恢复时同比例卖出Bear9。",
+    "signal_time": "所有均线、价格区间、QQQ目标仓位和周期性再平衡资格都在当日常规时段完成Close后计算，只使用该日及更早的拆股和股息调整数据。",
+    "execution_time": "完成Close确认后的目标在下一共同交易日调整Open执行；同一开盘先按字母顺序卖出超额份额，再按字母顺序使用可用现金买入不足份额并施加单边成本。",
+    "positioning": "long-only、不融资、允许小数股、现金不计息。QQQ目标由择时器确定；Bear9只占冻结模式允许的非QQQ袖套。每次QQQ目标档位变化都会把账户恢复到当时目标，周期性再平衡从最近一次目标调整后重新计数并恢复QQQ/Bear9完整目标；不再平衡版本只在档位、可交易成员集合变化时调整。",
+    "initial_position": "所有路径在QQQ的SMA310首次形成日以10万美元现金开始；该日收盘只产生首个目标，最早在下一共同Open成交。此前历史只用于均线预热和对称滞回状态，不继承任何账户持仓。",
+    "plain_language": {
+      "summary": "用六种QQQ长期趋势开关检验固定九只防守股票能否稳定改善空仓期，以及频繁恢复权重究竟有没有帮助。",
+      "buy": "QQQ趋势允许时按对应档位持有QQQ；没有配置给QQQ的资金，按实验版本留现金或买入固定九只防守股票。",
+      "sell": "QQQ趋势转弱时降低或清空QQQ；趋势恢复时卖出相应的防守股票并把资金转回QQQ。",
+      "execution": "每天收盘后确认均线和目标仓位，下一共同交易日开盘先卖后买；定期再平衡也遵守同样的隔日成交顺序。",
+      "position": "九只防守股票使用一套固定非等权比例且没有自身均线；报告比较不再平衡与十二种交易日再平衡频率。"
+    }
+  },
+  "parameters": {
+    "master_symbol": "QQQ",
+    "analysis_start": "2000-05-30",
+    "analysis_end": "2026-08-04",
+    "common_warmup_window": 310,
+    "symmetric_timing": {
+      "sma_windows": [
+        160,
+        180,
+        200,
+        220,
+        240
+      ],
+      "entry_buffer_pct": 3.0,
+      "exit_buffer_pct": 3.0,
+      "state_before_common_start_is_retained": true,
+      "first_common_bar_is_signal_only": true
+    },
+    "layered_timing": {
+      "fast_sma_window": 190,
+      "slow_sma_window": 310,
+      "falling_trend_rule": "SMA310 >= SMA190 gives 0% QQQ",
+      "full_rule": "SMA190 > SMA310 and Close >= SMA190 gives 100% QQQ",
+      "upper_band_rule": "SMA190 > Close >= mean(SMA190,SMA310) gives 70% QQQ",
+      "lower_band_rule": "mean(SMA190,SMA310) > Close > SMA310 gives 30% QQQ",
+      "below_rule": "Close <= SMA310 gives 0% QQQ",
+      "buffer_pct": null
+    },
+    "timing_ids": [
+      "SMA160",
+      "SMA180",
+      "SMA200",
+      "SMA220",
+      "SMA240",
+      "LAYERED_190_310"
+    ],
+    "bear9_weights": {
+      "AZO": 0.1,
+      "SO": 0.12,
+      "ED": 0.13,
+      "ORLY": 0.1,
+      "MO": 0.13,
+      "WRB": 0.12,
+      "DLTR": 0.08,
+      "DG": 0.09,
+      "WMT": 0.13
+    },
+    "bear9_individual_sma_enabled": false,
+    "bear_modes": {
+      "CASH": "all non-QQQ allocation remains cash",
+      "BEAR_ZERO_ONLY": "Bear9 is 100% only when QQQ target is 0%; intermediate layered residual stays cash",
+      "BEAR_RESIDUAL": "Bear9 fills all allocation not assigned to QQQ"
+    },
+    "symmetric_bear_modes": [
+      "CASH",
+      "BEAR_RESIDUAL"
+    ],
+    "layered_bear_modes": [
+      "CASH",
+      "BEAR_ZERO_ONLY",
+      "BEAR_RESIDUAL"
+    ],
+    "rebalance_intervals_trading_days": [
+      null,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "rebalance_clock": "count common trading sessions from the most recent target execution signal; any QQQ allocation-state or tradable-member change resets the clock",
+    "rebalance_scope": "restore the complete current QQQ and Bear9 target weights; never alter the timing engine's QQQ target",
+    "prelisting_policy": "a positive Bear9 member weight with no historical price remains cash and is not redistributed; if the member becomes tradable while the Bear9 sleeve is active, add it at the next Open and reset the rebalance clock",
+    "formal_case_count_per_cost": 97,
+    "formal_path_count": 194,
+    "cost_bps_per_side": [
+      0.0,
+      5.0
+    ],
+    "signal_time": "completed adjusted close",
+    "fill_time": "next QQQ common-session adjusted open",
+    "rotation_order": "sell excess target shares first by symbol, then buy deficits by symbol with available cash",
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09,
+    "post_dotcom_scope": "continuous inherited account state rebased on the first common session strictly after the first subjective 2000-2002 bear interval end",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "bear_intervals_are_attribution_only": true
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "关闭；所有路径long-only，不融资，现金不计息。",
+  "benchmark": "同一共同日历和SMA310预热起点后，下一共同Open一次性满仓QQQ并持有到样本末；每个择时器的非QQQ资金留现金路径同时作为对应政策基线。",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "沿用TIM-v0.40c.4已验收的v5中文策略流程、净值交互和可下载机器表；新增择时器×再平衡频率稳健性曲线、热力图和310/190分层仓位说明，不修改共享模板。"
+  },
+  "research": {
+    "stage": "exploratory_full_history_policy_robustness",
+    "hypothesis": "若Bear9确实是可用的QQQ弱势期替代袖套，那么相对各自现金基线的改善不应只出现在SMA200或某一个再平衡频率，而应在多个长期均线窗口、完整历史与剔除2000后的连续区间中保持同向；再平衡若有价值也应形成宽频率带而不是孤立单点。",
+    "primary_metric": "单边5bps下，Bear9相对同一择时器现金路径的总收益、CAGR、Sharpe和最大回撤差；同时统计完整历史与2000-2002后连续继承状态区间中，跨六个择时器和十三种再平衡政策的正向比例、中位改善、最差改善及换手成本。",
+    "selection_rule": "不根据本实验选择新的SMA窗口、Bear9成员或权重，也不把最高收益再平衡频率命名为最优。按预先给定顺序展示全部频率，并把连续至少四档、完整历史与剔除2000后同向的区域称为描述性宽带；孤立峰只记录为不稳健。310/190的BEAR_ZERO_ONLY是结构消融，BEAR_RESIDUAL是与五个对称择时器统一比较的主路径。",
+    "validation_plan": "97条正式路径分别由PyBroker执行，并用独立的多资产、卖出优先、下一Open参考账本逐日核对现金、持仓、净值、订单与FIFO聚合交易，容差1e-6。单测覆盖五个SMA滞回状态、310/190四档及均线倒挂、三种Bear模式、DG上市前现金袖套、1日至30日再平衡时钟、未来价格不可回写、0/5bps成本和完整case计数。完成全量测试、真实Chrome交互、PDF打印门禁、目录生成、工作区审计及validate_run。",
+    "promotion_criteria": "本实验仍使用事后挑选的Bear9，不能直接晋级模拟盘。描述性稳健门槛为BEAR_RESIDUAL在至少5/6个择时器中均有过半数再平衡政策同时改善完整历史与剔除2000后的总收益，全部78个组合的中位Sharpe差为正，且最大回撤中位数不恶化超过3个百分点；任何再平衡结论还必须形成至少四个相邻频率的同向宽带。满足后仍需另建严格时间顺序或前向实验。",
+    "rejection_conditions": "若改善主要由2000-2002贡献、只集中于单一SMA或孤立再平衡频率、5bps后方向反转、频繁再平衡靠未计成本获利、DG上市前权重被偷偷分给未来成员、310/190档位与冻结不等式不一致、完成Close用于同一Open、主观熊市区间参与信号、数据在run中漂移或PyBroker与独立账本任一差异超过1e-6，则拒绝对应稳健性解释或正式验证。"
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

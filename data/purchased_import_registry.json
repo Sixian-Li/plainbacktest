@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "copied_sources_are_immutable": true,
+    "auto_merge_into_approved_data": false,
+    "default_status": "pending_review"
+  },
+  "batches": []
+}

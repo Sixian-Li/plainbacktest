@@ -1,0 +1,1 @@
+"""Interactive report contracts."""

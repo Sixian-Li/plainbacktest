@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_sma_regime_peak_drawdown_train_oos_v1",
+  "created_at_utc": "2026-08-13T13:30:00+00:00",
+  "status": "exploratory_oos_test",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "sma_regime_conditions_1_3_with_peak_close_drawdown_overlay",
+    "description": "在上一轮去掉条件 2 的基础策略上，只保留 Close>SMA200 与 SMA200>SMA250>SMA300 两个持仓条件。初始空仓；两个基础条件均成立才目标持有，任一不成立则目标空仓。另叠加一个可关闭的持仓内峰值回撤卖出：从每次实际买入成交价开始，用其后每个已完成 Close 更新峰值，若当前 Close 相对该峰值的跌幅严格大于阈值，则产生卖出信号。固定 8% 作为预声明消融基准，并在训练期扫描 5%～15% 后冻结所选值到测试期。",
+    "buy_rule": "空仓且完成 Close 后 Close>SMA200 与 SMA200>SMA250>SMA300 同时为真时产生买入信号。止损卖出后不设置冷却期；若基础条件仍为真，卖出成交当日完成 Close 后可再次发出买入信号，最早下一交易日 Open 买回。",
+    "sell_rule": "持仓且完成 Close 后任一基础条件为假，或启用止损且 (持仓峰值-当前 Close)/持仓峰值×100 严格大于阈值时，产生卖出信号。基础条件失败优先登记为卖出原因；峰值初值为实际买入成交价，每个新持仓独立重置。",
+    "signal_time": "每个交易日常规时段完成 Close 后。基础 SMA 含当日 Close；持仓峰值只使用实际入场价及截至当日的已完成 Close，不使用当日 High 或未来数据。",
+    "execution_time": "所有信号均在下一交易日常规时段 Open 执行；按明确 Open 成交，不允许同日 Close、盘中假设成交或 PyBroker 默认 middle price。",
+    "position_sizing": "long-only，初始 100,000 美元现金；买入时使用全部可用现金，卖出时清空全部持仓；允许小数股，不融资，现金不计息。",
+    "initial_position": "每个窗口独立从现金开始；测试期不继承训练期仓位、现金或峰值状态。训练期前使用更早历史仅预热 SMA，不发生交易。"
+  },
+  "parameters": {
+    "sma_windows": [
+      30,
+      200,
+      250,
+      300
+    ],
+    "price_sma_window": 200,
+    "ordering_windows": [
+      200,
+      250,
+      300
+    ],
+    "rising_sessions": 3,
+    "rising_sessions_parameter_status": "retained only for shared indicator preparation compatibility; it does not affect readiness, signals, or trading in this experiment",
+    "disabled_prior_condition": "all_smas_rising_3d",
+    "base_conditions": [
+      "price_above_sma200",
+      "sma200_above_sma250_above_sma300"
+    ],
+    "fixed_ablation_stop_pct": 8,
+    "stop_grid_pct": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "stop_trigger_operator": ">",
+    "stop_peak_source": "maximum of the actual entry fill and completed closes observed during the current position",
+    "requested_train_start": "1999-03-10",
+    "train_end": "2004-12-31",
+    "test_start": "2005-01-01",
+    "test_end": "2026-08-04",
+    "windows_are_independent": true
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "For each independent train or test window, invest the same 100,000 USD in QQQ at the Open following that window's first completed Close and hold through the window end Close without artificial final liquidation.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged for market and performance controls. Add experiment-specific Plotly threshold-response charts through the existing report assembly without changing the reusable template."
+  },
+  "research": {
+    "stage": "out_of_sample_test",
+    "hypothesis": "A peak-to-completed-Close drawdown exit selected only on 1999–2004 data can reduce maximum drawdown of the two-condition base strategy on the untouched 2005–2026 period; fixed 8% provides a predeclared ablation reference.",
+    "primary_metric": "Maximum drawdown is the sole threshold-selection objective in training and the sole test success criterion. Total return, CAGR, Sharpe, exposure and order count are reported only as consequences.",
+    "selection_rule": "On the 1999-start through 2004-12-31 training window, choose the 5%–15% integer threshold with the least negative maximum drawdown. Break an exact tie by higher total return, then lower order count, then the threshold closest to the predeclared 8%, then the lower threshold. Freeze that value before reading test metrics. Because condition 2 is disabled, readiness requires only the four configured SMA levels to exist and does not retain its additional three-difference warmup.",
+    "validation_plan": "Run the base strategy without overlay, fixed 8%, and all 11 grid thresholds on training. Freeze one selected threshold by the declared rule, then independently run base, fixed 8%, and selected threshold on 2005-01-01 through 2026-08-04. Every formal case must match PyBroker and an independent ledger in daily cash/shares/equity, orders and closed trades; train and test dates must not overlap.",
+    "promotion_criteria": "The frozen selected threshold helps only if its test-period maximum drawdown is strictly less severe than the no-overlay base strategy. Even if it helps, one split is insufficient for paper trading; later rolling or multiple non-overlapping validations and transaction costs are required.",
+    "rejection_conditions": "Reject if test metrics influence selection, windows overlap, test inherits train account or peak state, an exactly equal threshold drawdown triggers, stop uses High/Low or future data, execution occurs before next Open, base conditions differ from conditions 1 and 3, or either ledger diverges."
+  }
+}

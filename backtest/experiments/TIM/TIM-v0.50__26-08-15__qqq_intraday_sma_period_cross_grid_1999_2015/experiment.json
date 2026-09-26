@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_period_cross_grid_1999_2015_v1",
+  "created_at_utc": "2026-08-15T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_dynamic_independent_sma_period_cross_with_rebuy_and_stop",
+    "description": "QQQ 初始空仓。买入与卖出分别使用可独立选择的长期 SMA 周期；每个交易日开盘前只用截至前一收盘的完成历史，解出当日价格等于相应 provisional SMA 的精确触发价。普通买入必须从前一日位于买入 SMA 下方或相等开始向上穿越，普通卖出必须从前一日位于卖出 SMA 上方或相等开始向下穿越。卖出后保留基于实际计成本卖出价的强制买回线，买入后可选基于实际计成本买入价的止损线。",
+    "buy_rule": "空仓时，若前一完成 Close <= 前一完成 buy-SMA，则放置向上普通买单，动态价为 P=sum(previous buy_window-1 closes)/(buy_window-1)。若已有卖出，同时放置上次计成本卖出成交价×(1+forced_rebuy_pct/100) 的强制买回线；两条向上触发线取较低者优先。forced_rebuy_pct 必须为 3%、5%、8% 或 10%。",
+    "sell_rule": "持仓时，若前一完成 Close >= 前一完成 sell-SMA，则放置向下普通卖单，动态价为 P=sum(previous sell_window-1 closes)/(sell_window-1)。若 stop_loss_pct 开启，同时放置上次计成本买入成交价×(1-stop_loss_pct/100) 的止损线；两条向下触发线取较高者优先。关闭止损仅作为机制对照。",
+    "signal_time": "每个常规交易日开盘前，只使用截至前一交易日 Close 的完成历史、前一完成 SMA 状态和既有实际账户成交价，冻结当日资格与触发价；当日 Close 不参与当日订单。",
+    "execution_time": "若常规时段 Open 已越过预挂触发线则按 Open 成交；否则调整后日线 OHLC 触及时按精确理论线成交；随后施加单边 5 bps 不利成本。每日最多一笔，不允许买入后同日止损或卖出后同日买回。",
+    "positioning": "long-only；2000-12-18 以 100,000 美元现金空仓开始；每次买入投入全部现金、每次卖出清空全部份额；允许小数股，不融资，现金不计息。",
+    "price_basis": "approved split-and-dividend-adjusted QQQ OHLC; an internally consistent total-return approximation, not an exact raw-price corporate-action account replay"
+  },
+  "parameters": {
+    "requested_data_start": "1999-03-10",
+    "analysis_start": "2000-12-18",
+    "analysis_end": "2015-12-31",
+    "warmup_policy": "Use QQQ history from 1999-03-10. The common analysis start is the first session with both a completed prior SMA450 and 449 completed closes available for the provisional SMA450 equation; all cases start flat on that same date.",
+    "buy_sma_window_range": {
+      "start": 80,
+      "stop": 450,
+      "step": 10,
+      "count": 38
+    },
+    "sell_sma_window_range": {
+      "start": 80,
+      "stop": 450,
+      "step": 10,
+      "count": 38
+    },
+    "forced_rebuy_pct": [
+      3.0,
+      5.0,
+      8.0,
+      10.0
+    ],
+    "stop_loss_pct": [
+      null,
+      3.0,
+      5.0,
+      8.0,
+      10.0
+    ],
+    "legacy_symbol_mapping": "forced_rebuy_pct is prior c; stop_loss_pct is prior d",
+    "combination_count": 28880,
+    "cost_bps_per_side": 5.0,
+    "max_trades_per_session": 1,
+    "fixed_subperiods": [
+      {
+        "period_id": "P1_2000_2005",
+        "start": "2000-12-18",
+        "end": "2005-12-30"
+      },
+      {
+        "period_id": "P2_2006_2010",
+        "start": "2006-01-03",
+        "end": "2010-12-31"
+      },
+      {
+        "period_id": "P3_2011_2015",
+        "start": "2011-01-03",
+        "end": "2015-12-31"
+      }
+    ],
+    "subperiod_state_policy": "Run one continuous strategy path. At each fixed subperiod boundary, inherit position and trigger anchors, rebase equity at the first bar, and compute subperiod CAGR/Sharpe without restarting or peeking.",
+    "identifiability_gate": {
+      "minimum_ordinary_buy_count": 3,
+      "minimum_ordinary_sell_count": 3,
+      "stop_loss_activity_count": 10,
+      "purpose": "Exclude one-entry hold artifacts from period selection and label enabled stop losses with too few primary events as descriptive insurance only."
+    },
+    "surface_selection": {
+      "grouping": "Analyze each of the 20 forced-rebuy/stop-loss modes as a complete 38x38 buy-window by sell-window surface.",
+      "primary_metric": "minimum CAGR across the three fixed inherited-state subperiods",
+      "top_quantile": 0.9,
+      "connectivity": "four-neighbor adjacency at one 10-session step",
+      "minimum_component_cells": 9,
+      "minimum_buy_window_span": 20,
+      "minimum_sell_window_span": 20,
+      "boundary_policy": "A component touching 80 or 450 is reported but cannot nominate a stable period region.",
+      "representative_rule": "Within the largest eligible top-decile component, require a complete 3x3 neighborhood and maximize local median primary metric minus 0.5 times local standard deviation; break ties by full-history Sharpe, full-history CAGR, distance to component centroid, then lower turnover.",
+      "supplementary_champions": [
+        "full-history CAGR",
+        "full-history Sharpe",
+        "least-negative maximum drawdown"
+      ]
+    },
+    "paired_correction_analysis": "For every buy/sell period pair and forced-rebuy value, compare each enabled stop loss with the stop-loss-disabled control; report metric deltas and primary stop-loss event counts. Compare forced-rebuy values only on the same period pair and stop-loss mode.",
+    "multiple_testing": {
+      "pbo_block_count": 12,
+      "pbo_metric": "Annualized daily Sharpe from the selected six-block training half and its six-block complement; the 12 chronological blocks are fixed before screening.",
+      "pbo_maximum": 0.2,
+      "dsr_minimum_probability": 0.95,
+      "trial_count_policy": "Report correlation-adjusted effective trials and the conservative full 28,880-case count. DSR is applied only to predeclared surface representatives after their identities are frozen from the surface rule."
+    },
+    "formal_reconciliation": {
+      "anchors": "SMA200/SMA200 for all 20 correction modes",
+      "surface_representatives": "Reconcile the deterministic 3x3-local surface representative for every correction mode when defined. A representative from a boundary-touching or otherwise structurally failed component remains a diagnostic row and is not a stable nomination.",
+      "objective_champions": "deduplicated full-history CAGR, Sharpe and maximum-drawdown champions",
+      "requirement": "Every formal candidate must match PyBroker and the independent Python ledger in dates, sides, shares, fills, cash and equity within 1e-6. The two compiled full-grid ledgers must match every case metric and signal count."
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Invest the same 100,000 USD at the 2000-12-18 regular-session Open with 5 bps adverse entry cost and hold QQQ through 2015-12-31.",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "reuse_review": "Reuse v4 unchanged. Build experiment-specific correction-mode comparisons, buy/sell-period heatmaps, plateau diagnostics, subperiod robustness, PBO/DSR and formal-candidate charts in the analyzer."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Replacing fixed SMA200 percentage buffers with independently selectable buy and sell SMA periods may reveal a broad, interpretable period plateau across the dot-com aftermath, pre/post-GFC years and 2011-2015 trend, while forced rebuy and stop-loss settings should be judged by paired event-aware comparisons rather than isolated winners.",
+    "primary_metric": "Minimum inherited-state CAGR across the three frozen subperiods, subject to ordinary buy/sell identifiability and two-dimensional plateau structure.",
+    "selection_rule": "Use parameters.surface_selection exactly. Full-history CAGR/Sharpe/max-drawdown champions are supplementary and cannot override the subperiod, event-count, boundary, PBO or DSR gates. Do not declare one future-optimal parameter from this scan.",
+    "validation_plan": "Save all 28,880 case metrics, fixed-subperiod results, signal counts, paired stop-loss deltas, surface diagnostics, PBO splits and DSR inputs. Cross-check every case through two independently structured compiled ledgers; reconcile all predeclared formal candidates with PyBroker and a Python reference ledger; require hashes, full tests, catalog rebuild, workspace audit and real Chrome report interaction.",
+    "promotion_criteria": "No direct promotion from this 2000-2015 exploratory scan. A period region may be nominated for a future locked 2016+ experiment only if it forms a non-boundary plateau meeting all structural and identifiability gates, has positive primary metric, PBO <=20%, effective-trials DSR >=95%, and does not depend on an underidentified stop-loss event count.",
+    "rejection_conditions": "Do not nominate a unique buy/sell-period or correction mode if no qualifying two-dimensional plateau exists, the best component touches a search boundary, ordinary crossings are underidentified, stop-loss claims rely on fewer than 10 primary events, correction-mode conclusions conflict across subperiods, PBO exceeds 20%, DSR is below 95%, or any timing, accounting, count, hash, test, audit, catalog, strategy-card or browser gate fails."
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "experiment_id": "bear24_sma_window_plateau_v1",
+  "created_at_utc": "2026-08-21T00:00:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "BEAR24_SMA_WINDOW_GRID"
+  ],
+  "excluded_symbols": {
+    "Q": "用户此前明确要求完全排除；本实验只使用既有核心12、近核心8和零售4，共24个标的。"
+  },
+  "strategy": {
+    "name": "bear24_sma_window_plateau",
+    "description": "只在既有12段事后峰值至谷底熊市窗口内，对24个单标的100%独立账户和核心12、近核心8、零售4三个固定等权袖套分组，比较A全程持有与28条完整SMA择时路径。SMA窗口从30到300、步长10；每条SMA路径使用同一条均线的上下3%滞回，允许卖出后重新买入。所有窗口共用SMA300预热样本，ATR硬止损、峰值回撤止损、10%成交锁和星标权重均关闭。",
+    "buy_rule": "每段熊市start完成Close后，A在标的具有有效OHLC且共同SMA300预热完成时产生买入信号。对任一SMA_N路径，若同一时点Close>SMA_N×1.03则产生初始买入信号；否则在Close<=SMA_N×1.03时进入已武装空仓状态。熊市途中只有在已武装且完成Close严格上穿SMA_N×1.03时，才产生重新买入信号。",
+    "sell_rule": "A只在每段熊市end完成Close后清仓。任一SMA_N路径持仓时，完成Close<SMA_N×0.97产生卖出信号；卖出后重新进入空仓武装状态，并可在同一熊市后续再次上穿上轨时买入。所有路径在end无条件产生清仓信号。没有ATR止损、峰值回撤止损或其他价格硬止损。",
+    "signal_time": "熊市start/end来自事后人工区间，是外生oracle事件，不宣称当时可知。SMA_N只使用当日常规时段已完成Close及更早历史；共同可比样本要求该标的在熊市start已经完成SMA300预热。",
+    "execution_time": "熊市初始买入、SMA买卖、重新买入和熊市结束清仓，均在信号后的下一共同交易日拆股及股息调整Open成交；单边成本通过买高、卖低调整每笔成交价。",
+    "positioning": "long-only、允许小数股、不融资、现金不计息。24个单标的分别使用独立100%账户。三个分组在每段熊市start把当时组合净值等分给该段已完成共同SMA300预热的成员；每只成员拥有独立固定资金袖套，未入场或SMA卖出后的资金留在自身袖套，不重新分配给其他成员；下一段熊市开始再重新等权。",
+    "initial_position": "每段熊市start完成Close之前均为空仓；符合规则的初始仓位在下一共同Open建立。",
+    "plain_language": {
+      "summary": "比较一直持有与不同长期均线择时，看看每个标的是否存在一段稳定、而不是单点碰巧好的均线窗口。",
+      "buy": "熊市开始时，持有版直接买入；均线版只有价格站到所选均线上方的缓冲带之后才买入，卖出后也可以按同样条件再次买回。",
+      "sell": "持有版只在熊市结束卖出；均线版跌到所选均线下方的缓冲带时卖出，熊市结束时也会清仓。",
+      "execution": "每天收盘后确认信号，并在下一共同交易日开盘成交；熊市区间本身来自事后人工标注。",
+      "position": "单标的使用完整独立账户；分组把资金等分为固定袖套，某只股票卖出后资金留现金，不会加到其他股票上。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2000-03-24",
+    "analysis_end": "2026-03-31",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "core12": [
+      "AZO",
+      "TLT",
+      "COR",
+      "EXE",
+      "DVA",
+      "SJM",
+      "SO",
+      "ED",
+      "GLD",
+      "CHD",
+      "HRL",
+      "GILD"
+    ],
+    "near_core8": [
+      "HSY",
+      "ORLY",
+      "MO",
+      "WRB",
+      "EQT",
+      "LMT",
+      "GIS",
+      "WEC"
+    ],
+    "retail4": [
+      "DLTR",
+      "DG",
+      "WMT",
+      "TSCO"
+    ],
+    "groups": {
+      "GROUP_CORE12": [
+        "AZO",
+        "TLT",
+        "COR",
+        "EXE",
+        "DVA",
+        "SJM",
+        "SO",
+        "ED",
+        "GLD",
+        "CHD",
+        "HRL",
+        "GILD"
+      ],
+      "GROUP_NEAR8": [
+        "HSY",
+        "ORLY",
+        "MO",
+        "WRB",
+        "EQT",
+        "LMT",
+        "GIS",
+        "WEC"
+      ],
+      "GROUP_RETAIL4": [
+        "DLTR",
+        "DG",
+        "WMT",
+        "TSCO"
+      ]
+    },
+    "targets": [
+      "AZO",
+      "TLT",
+      "COR",
+      "EXE",
+      "DVA",
+      "SJM",
+      "SO",
+      "ED",
+      "GLD",
+      "CHD",
+      "HRL",
+      "GILD",
+      "HSY",
+      "ORLY",
+      "MO",
+      "WRB",
+      "EQT",
+      "LMT",
+      "GIS",
+      "WEC",
+      "DLTR",
+      "DG",
+      "WMT",
+      "TSCO",
+      "GROUP_CORE12",
+      "GROUP_NEAR8",
+      "GROUP_RETAIL4"
+    ],
+    "baseline_strategy_id": "hold",
+    "sma_windows": [
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120,
+      130,
+      140,
+      150,
+      160,
+      170,
+      180,
+      190,
+      200,
+      210,
+      220,
+      230,
+      240,
+      250,
+      260,
+      270,
+      280,
+      290,
+      300
+    ],
+    "sma_window_start": 30,
+    "sma_window_end": 300,
+    "sma_window_step": 10,
+    "common_warmup_window": 300,
+    "formal_case_count_per_cost": 783,
+    "sma_buffer_pct": 3.0,
+    "sma_entry": "initial Close strictly above SMA_N plus 3%, or later armed strict cross above the same upper rail",
+    "sma_exit": "held completed Close strictly below SMA_N minus 3%",
+    "sma_reentry": "after an SMA exit the path is armed flat and may buy at the next completed Close strictly above SMA_N plus 3%",
+    "state_change_lock_band_pct": null,
+    "hard_stop": null,
+    "star_weighting": false,
+    "group_weighting": "equal independent capital sleeves among members with valid OHLC and common SMA300 warmup at each bear start",
+    "inactive_sleeve_policy": "cash retained in the same member sleeve; never redistributed within the bear interval",
+    "group_rebalance_policy": "re-equalize eligible member sleeves only at the start of each bear interval",
+    "common_calendar_policy": "以SPY日历为基础；标的上市前缺席不影响日历，任何标的上市后缺少Open/High/Low/Close的日期从全部case共同剔除，禁止填造价格；熊市start/end及其下一共同交易日必须保留。",
+    "interval_liquidation": "end completed Close signal, next common adjusted Open",
+    "aggregate_return_policy": "12段逐段收益分别计算；总小熊、总大熊、总熊和剔除2000-2002总熊按对应逐段账户收益几何复合；未持有区间收益为0。",
+    "excluded_bear_for_post_2000_scope": {
+      "ordinal": 1,
+      "label": "2000-2002"
+    },
+    "report_scopes": [
+      "12_individual_intervals",
+      "minor_compound",
+      "major_compound",
+      "all_compound",
+      "all_excluding_2000_2002_compound"
+    ],
+    "default_report_scope": "all_ex_2000_2002",
+    "descriptive_plateau_rule": "within 5 percentage points of the target-and-scope maximum, contiguous in 10-day steps, at least three windows; longest run wins, then higher mean return, then smaller starting window",
+    "fractional_shares": true,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; cash between and within bear intervals earns zero interest",
+  "benchmark": "每个目标的A持有收益是所有SMA30至SMA300曲线的水平虚线基准；单边5bps为正式结果，0bps只检查成本方向。",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "复用v5共享渲染器与自包含Plotly交互；实验专属内容只负责27张SMA窗口收益折线、Hold水平虚线、观察范围下拉和描述性高原提示，不修改共享模板。"
+  },
+  "research": {
+    "stage": "retrospective_event_conditioned_exploratory_parameter_stability_scan",
+    "hypothesis": "固定SMA200可能掩盖标的之间不同的趋势速度；若完整SMA择时确有可重复的防守价值，单标的和分组的收益曲线应在相邻长期均线窗口上形成宽高原，而不是只在一个窗口出现孤立尖峰，且剔除2000-2002后仍应可见。",
+    "primary_metric": "单边5bps下保存27个目标×29种策略的完整结果。每个目标强制报告12段逐段、总小熊、总大熊、总熊和剔除2000-2002总熊；每个观察范围以SMA30至SMA300收益实线和A持有水平虚线展示，并保存相对Hold差值、最大回撤、持仓率、SMA退出次数、重新买入次数和换手。",
+    "selection_rule": "A与28个SMA窗口、3%缓冲、名单、熊市边界和成本在运行前冻结，保存783个case乘0/5bps的全部1566条路径，不按结果删窗口或标的。本实验不选择可交易冠军。只作描述性高原标记：在同一目标和观察范围内，收益距该曲线最高值不超过5个百分点、按10日步长连续且至少含3个窗口；优先最长区间，再取均值更高者，再取起点更小者。孤立最优点不得称为稳定。",
+    "validation_plan": "每个单标的路径先由独立因果状态机生成明确的下一Open成交，再把相同成交交给PyBroker独立组合账本，逐日核对现金、股数、净值、订单日期/方向/股数/成交价和闭合交易，容差1e-6。三个分组由已双算的独立成员袖套按每段起点等权聚合，并分别从PyBroker成员路径和参考成员路径重建后再次逐日核对。单测覆盖30至300步长10的完整case数、共同SMA300预热、3%滞回、卖出后再买入、Hold虚线、高原算法、首段剔除和未来数据不可回写。保存全部机器产物与来源哈希，运行全量测试、目录生成、工作区审计、真实Chrome交互、PDF打印门禁和validate_run。",
+    "promotion_criteria": "本实验因24个候选、12段熊市边界和全样本窗口扫描均含事后选择，永不直接晋级模拟盘。只有多个经济上相近的标的在剔除2000-2002后都出现宽高原，且0bps与5bps方向一致，才值得另建使用实时可知熊市状态、前瞻名单和锁定窗口的样本外实验。",
+    "rejection_conditions": "若所谓优势只来自2000-2002、只存在单窗口尖峰、相邻窗口剧烈反转、0bps与5bps方向反转、不同窗口因预热样本不同而不可比、组内退出资金被错误分给其他标的、使用未来Close决定当日成交、validated父run被修改、任一目标权重超过100%、或PyBroker与独立账本任一差异超过1e-6，则拒绝对应参数稳定性或机制解释。"
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

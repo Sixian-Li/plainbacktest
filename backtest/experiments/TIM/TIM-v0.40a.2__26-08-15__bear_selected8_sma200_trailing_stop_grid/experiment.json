@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "experiment_id": "bear_selected8_sma200_trailing_stop_grid_v1",
+  "created_at_utc": "2026-08-15T00:00:00+00:00",
+  "status": "specification_frozen",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "BEAR_SELECTED8_STOP_GRID"
+  ],
+  "strategy": {
+    "name": "bear_selected8_sma200_trailing_stop_grid",
+    "description": "只在既有12段事后峰值至谷底熊市窗口内，分别回测LMT、EQT、ORLY、AZO、TLT、COR、SO、HRL八个单标的100%仓位路径，以及八标的当前有效成员等权组合。全部路径保留SMA200上下3%滞回，比较关闭峰值回撤强制退出与3%至20%、步长1%的18个阈值。峰值退出后允许再次买入，但必须先在本次空仓期观察到Close位于SMA200×1.03之下或等于上轨，随后再严格上穿上轨。熊市之间全现金，星标和双坑位完全移除。",
+    "buy_rule": "每段start完成Close后，SMA200已形成且Close>SMA200×1.03时产生初始进入信号。熊市途中及峰值/SMA退出后，空仓标的必须先观察到Close<=SMA200×1.03完成重新武装，之后某日完成Close严格上穿SMA200×1.03才产生买入信号；信号下一共同交易日Open执行。",
+    "sell_rule": "持仓时，完成Close<SMA200×0.97产生普通退出；启用峰值回撤阈值时，完成Close严格低于本次真实状态进入后运行峰值×(1-阈值)产生强制退出，阈值从3%至20%、步长1%，等于阈值不触发。峰值退出优先于SMA退出但同日只产生一笔卖单。每段end完成Close后无条件清仓；所有卖出下一共同交易日Open执行。",
+    "signal_time": "只使用当日常规时段已完成Close、当日及更早的SMA200、此前真实状态进入成交价和此前完成Close形成的运行峰值。12段熊市start/end为外生事后oracle，不宣称当时可知。",
+    "execution_time": "所有Close确认目标在下一共同交易日按拆股及股息调整Open成交；同日先卖后买，代码字母序执行，单边成本通过买高卖低的成交价冲击计入。",
+    "positioning": "long-only、允许小数股、不融资、总目标权重不超过100%。单标的路径在有效时持有100%，无有效标的时全现金。八标的组合在当前有效标的之间等权；退出释放的资金按幸存持仓当时市值比例分配，新进入标的获得最终活跃标的数的1/n预算，原持仓按当时市值比例腾仓。被动缩放不重置运行峰值。",
+    "trailing_peak": "每次标的由空仓真实进入并成交后，以成本后Open成交价初始化运行峰值；随后每个持仓日用已完成Close更新max。组合被动再平衡不重置峰值；状态退出后清空，下一次真实进入重新初始化。",
+    "initial_position": "每段熊市start的Close之前均为空仓；start信号下一共同Open才建立初始仓位。"
+  },
+  "parameters": {
+    "analysis_start": "2000-03-24",
+    "analysis_end": "2026-03-31",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "universe": [
+      "LMT",
+      "EQT",
+      "ORLY",
+      "AZO",
+      "TLT",
+      "COR",
+      "SO",
+      "HRL"
+    ],
+    "targets": [
+      "LMT",
+      "EQT",
+      "ORLY",
+      "AZO",
+      "TLT",
+      "COR",
+      "SO",
+      "HRL",
+      "PORTFOLIO_8"
+    ],
+    "portfolio_target": "PORTFOLIO_8",
+    "portfolio_weighting": "equal_weight_among_currently_active_symbols",
+    "trailing_stop_drawdown_pct": [
+      null,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0,
+      19.0,
+      20.0
+    ],
+    "threshold_step_pct": 1.0,
+    "formal_case_count_per_cost": 171,
+    "sma_window": 200,
+    "entry_buffer_pct": 3.0,
+    "exit_buffer_pct": 3.0,
+    "entry_semantics": "start使用严格水平条件；途中和峰值/SMA退出后要求先观察上轨之下或等于上轨，再严格上穿上轨",
+    "state_change_lock_band_pct": null,
+    "trailing_peak_price": "max(actual state-entry cost-adjusted Open fill, subsequent completed adjusted Close values)",
+    "trailing_stop_comparison": "strictly below peak times one minus threshold; equality does not trigger",
+    "forced_exit_priority": "trailing stop before SMA exit; record one sell target",
+    "same_day_transition_order": "remove exits then add all entries simultaneously",
+    "common_calendar_policy": "以SPY日历为基础；八个标的上市前缺席不影响日历，任何标的上市后缺少Open/Close的日期从全部case共同剔除，禁止填造价格或在非共同日成交；熊市start/end必须保留。",
+    "interval_liquidation": "end_close_signal_next_common_open",
+    "aggregate_return_policy": "总小熊、总大熊、总熊及剔除2000-2002总熊均按对应逐段账户收益几何复合；某段因SMA择时全程无持仓时该段收益严格记为0。",
+    "report_scopes": [
+      "12_individual_intervals",
+      "minor_compound",
+      "major_compound",
+      "all_compound",
+      "all_excluding_2000_2002_compound"
+    ],
+    "fractional_shares": true,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; cash between and within bear intervals earns zero interest",
+  "benchmark": "每个单标的及PORTFOLIO_8各自的stop_off路径是3%至20%阈值的配对基准；0 bps只作成本敏感性，单边5 bps为主结果。",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "reuse_review": "复用v4的标题后完整冻结策略卡、自包含Plotly和性能控件；本实验专属增加9张16行×19列收益表/热力图、剔除2000-2002诊断、阈值响应和相邻高原判断。"
+  },
+  "research": {
+    "stage": "retrospective_event_conditioned_exploratory_parameter_grid",
+    "hypothesis": "八个收窄候选中至少部分标的及其等权组合存在不依赖2000-2002单一熊市、并在相邻峰值回撤阈值上连续出现的收益改善区间；SMA200±3%与允许重新上穿买回可避免把一次强卖永久等同于整段熊市空仓。",
+    "primary_metric": "单边5bps下，每个单标的和PORTFOLIO_8的16行×19列收益矩阵：12段逐段收益、总小熊、总大熊、总熊、剔除2000-2002后的总熊；同时报告相对stop_off差、最大回撤、最差单段、持仓率、强卖次数、换手和0bps成本敏感性。",
+    "selection_rule": "保存9个目标×19个止损状态×2种成本的全部342条路径。分别标记全12段总熊最高点与剔除2000-2002最高点；只有至少3个连续相邻数值阈值在总熊和剔除2000-2002总熊上都严格优于各自stop_off基准，才称为描述性稳定高原。若无高原则不提名阈值；若有，仅报告完整区间，不把历史单点赢家称为未来最优。",
+    "validation_plan": "对342条连续事件账户路径使用PyBroker与独立参考账本核对逐日现金、净值、逐标的股数、订单日期/方向/股数/成交价。单测覆盖9×19 case构造、3%至20%完整整数网格、单标的100%仓位、组合等权与再分配、无交易区间收益0、3%起点水平、途中重新武装上穿、运行峰值、严格阈值、强卖后可再次买入、未来数据不可回写、次日Open和无10%锁。保存逐段/聚合表、全部订单交易、压缩逐日账户与持仓、来源/产物哈希，并运行完整测试、目录生成、工作区审计、validate_run和真实Chrome门禁。",
+    "promotion_criteria": "本实验因熊市边界和八标的名单均使用事后信息，永不直接晋级模拟盘。只有PORTFOLIO_8在5bps下存在至少3点连续稳定高原，且该高原同时改善总熊和剔除2000-2002总熊、在大小熊中不完全反向、并未增加最差单段或最大回撤，才值得另建实时可知熊市状态与前瞻名单的锁定实验。",
+    "rejection_conditions": "若收益改善只来自2000-2002，3%至20%响应只有孤立单点，所有阈值在剔除2000-2002后均不如stop_off，目标权重超过100%，无交易区间不是0，同日Close成交，强卖后未重新武装即买回，未来价格改变既有信号，validated父run被修改，或PyBroker与独立账本任一差异超过1e-6，则拒绝对应阈值解释、实现或后续晋级。"
+  },
+  "active_run_id": null
+}

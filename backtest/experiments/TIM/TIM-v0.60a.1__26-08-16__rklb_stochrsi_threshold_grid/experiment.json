@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "experiment_id": "rklb_stochrsi_threshold_grid_v1",
+  "created_at_utc": "2026-08-16T15:30:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "RKLB"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "rklb_raw_stochrsi_threshold_timing",
+    "description": "Compute unsmoothed Stochastic RSI from adjusted RKLB daily closes. The same period is used for Wilder RSI and for the rolling RSI minimum/maximum range. Starting flat, buy when the completed close has StochRSI at or below the configured buy threshold and sell when long and StochRSI is at or above the configured sell threshold; fill each signal at the next regular-session open.",
+    "buy_rule": "flat and raw StochRSI <= buy_threshold (inclusive level condition)",
+    "sell_rule": "long and raw StochRSI >= sell_threshold (inclusive level condition)",
+    "signal_time": "regular-session close after the daily bar is complete",
+    "execution_time": "next regular-session open",
+    "positioning": "long-only, all cash or all invested, fractional shares, no pyramiding",
+    "initial_position": "flat",
+    "indicator_definition": "Wilder RSI(period), then (RSI - rolling_min(RSI, period)) / (rolling_max(RSI, period) - rolling_min(RSI, period)); zero range maps to 0.5; no K/D smoothing",
+    "comparison_window": "all cases start on the first date where period 130 has a complete StochRSI warmup"
+  },
+  "parameters": {
+    "period": [
+      10,
+      13,
+      16,
+      19,
+      22,
+      25,
+      28,
+      31,
+      34,
+      37,
+      40,
+      43,
+      46,
+      49,
+      52,
+      55,
+      58,
+      61,
+      64,
+      67,
+      70,
+      73,
+      76,
+      79,
+      82,
+      85,
+      88,
+      91,
+      94,
+      97,
+      100,
+      103,
+      106,
+      109,
+      112,
+      115,
+      118,
+      121,
+      124,
+      127,
+      130
+    ],
+    "buy_threshold": [
+      0.0,
+      0.2
+    ],
+    "sell_threshold": [
+      0.8,
+      1.0
+    ],
+    "combination_count": 164,
+    "rsi_method": "Wilder",
+    "stochrsi_smoothing": "none"
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "buy and hold RKLB from the first executable open after the common period-130 warmup, with 5 bps entry cost",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "reuse_review": "reused without template changes; v4 already provides the mandatory strategy card, market controls, performance controls, and self-contained report",
+    "scenario_layer": "browser-only rebasing and DCA controls do not mutate formal metrics"
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "At least one of the four predeclared Stochastic RSI threshold pairs may produce a useful RKLB timing profile across a broad period range after costs, but any full-sample optimum may be unstable.",
+    "primary_metric": "CAGR and Sharpe for every case, interpreted with maximum drawdown, exposure, and order count",
+    "selection_rule": "Report all 164 cases; within each threshold pair identify the maximum-CAGR period and maximum-Sharpe period, while clearly labeling every selection as full-sample exploratory.",
+    "validation_plan": "If a broad and economically coherent period region appears, freeze a representative rule before a separate chronological holdout or walk-forward experiment.",
+    "promotion_criteria": "Independent-ledger reconciliation and engineering gates pass; a follow-up predeclared out-of-sample experiment retains useful risk-adjusted performance after costs without retuning on its test segment.",
+    "rejection_conditions": "Reject direct promotion if performance is isolated, boundary-dependent, driven by very few trades, materially below buy-and-hold without compensating risk improvement, or fails later out-of-sample testing."
+  },
+  "active_run_id": null
+}

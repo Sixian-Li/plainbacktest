@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_stochrsi_scaled_accumulation_virtual_pools_2015_2026_v1",
+  "created_at_utc": "2026-08-25T00:00:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_stochrsi_scaled_accumulation_virtual_pools",
+    "description": "A zero-cost, long-only QQQ state machine using raw unsmoothed Stochastic RSI periods 42 and 100. Every completed Close can cause a same-Close fill. Extreme-low buy rule B2 supersedes ordinary-low buy rule B1. B1 spends max(5% of pre-buy cash, one quarter of the cycle's first B1 amount a after a exists). B2 spends 20%, 30%, 40%, then 30% of pre-buy cash; its fourth amount defines buy_b and later B2 buys spend max(30% of cash, 60% of buy_b). Any minimum shortfall is an external contribution, mirrored into modified Buy & Hold. Every actual sale resets a, buy_b, and the B2 count. Sell mechanism A arms when StochRSI100 first closes above 0.80, clears pool_B without selling, disables mechanism B, and earmarks 1% of total QQQ shares per above-0.80 Close into pool_A. While armed and StochRSI100 is in [0.50,0.80], each Close sells 20% of remaining pool_A. An armed strict downcross below 0.50 sells all pool_A plus 65% of other shares. A strict fast-drop override, prior StochRSI100 >0.60 and current <0.30, instead fills that same sale at the theoretical price solving provisional StochRSI100=0.30, without an OHLC-touch gate, then permits a normal same-Close buy. When A is not armed, mechanism B adds 10% of shares outside pool_B per Close while QQQ weight exceeds 75% and StochRSI42 >0.80; a strict downcross below 0.70 sells min(pool_B, 55% of total shares) and clears pool_B regardless of the cap.",
+    "buy_rule": "At every completed Close, B2 is true when (StochRSI42 < 0.05 and StochRSI100 < 0.01) or (StochRSI42 < 0.01 and StochRSI100 < 0.05). If true, execute B2 only: its post-sale-cycle signal number spends 20%, 30%, 40%, then 30% of pre-buy cash; the fourth actual security notional defines buy_b, and signals five onward spend max(30% of cash, 60% of buy_b), adding exactly enough external cash if required. Otherwise B1 is true when both values are <0.20 and spends max(5% of pre-buy cash, 25% of a after a exists); the first actual B1 notional after a reset defines a, and an exact shortfall is externally contributed. Ordinary Close-sale days cannot buy; the fast-drop intraday override may sell first and then evaluate B2/B1 at the final Close as a new cycle.",
+    "sell_rule": "Mechanism A has priority. A Close with StochRSI100 >0.80 arms A, clears pool_B without a sale, disables B, and adds min(1% of total pre-trade shares, shares outside pool_A) to pool_A. While armed, each Close in inclusive [0.50,0.80] sells 20% of remaining pool_A. A strict armed downcross with prior StochRSI100 >0.50 and current <0.50 sells all pool_A plus 65% of shares outside pool_A, clears pool_A, and disarms A. If prior StochRSI100 >0.60 and current <0.30, the same quantity instead fills at the solved provisional StochRSI100=0.30 price and may be followed by a Close buy. Only while A is not armed, if pre-trade QQQ weight >75% and StochRSI42 >0.80, add 10% of shares outside pool_B to pool_B; a strict downcross with prior StochRSI42 >0.70 and current <0.70 sells min(pool_B, 55% of total pre-trade shares) and clears pool_B even when capped. Any positive sale resets a, buy_b, and B2 count.",
+    "signal_time": "Raw StochRSI42/100 state and ordinary crossings are confirmed using the completed current adjusted Close. The fast-drop theoretical 0.30 price uses indicator state completed through the prior Close plus the frozen same-day provisional-price equation.",
+    "execution_time": "Ordinary buys and sells fill at the same adjusted Close that confirms the signal, an idealized market-on-close assumption. The strict fast-drop override fills before the Close at the theoretical provisional-StochRSI100=0.30 price and deliberately ignores whether adjusted OHLC touched that price; a qualifying buy can then fill at the final Close.",
+    "positioning": "Long-only fractional QQQ shares and cash; initial cash $100,000 and no initial QQQ. External cash is permitted only to meet the frozen B1/B2 minimum notionals. Modified Buy & Hold receives every identical dated contribution and immediately purchases QQQ at that Close. Virtual pools only earmark existing shares and never create holdings. No leverage, shorting, cash interest, or transaction cost.",
+    "plain_language": {
+      "summary": "在QQQ极弱时分档补仓，在指标转热后用两个虚拟池逐步减仓并优先处理长周期快速转弱。",
+      "buy": "两个周期都很低时每天买一点，极端低位改用更大的分档金额；最低买入额不够时才追加本金。",
+      "sell": "长周期进入高位后优先累积并释放主卖出池；主池未启动时，仓位过满才由短周期池辅助减仓。",
+      "execution": "通常在当天收盘确认并按同一收盘价成交；长周期从高位快速跌破时按指标0.30对应的理论价格先卖，再允许收盘买回。",
+      "position": "账户只持有QQQ和现金，外部追加本金会同步投入modified Buy & Hold，并用现金流调整后的收益率公平比较。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2015-01-02",
+    "analysis_end": "2026-08-04",
+    "stochrsi_periods": [
+      42,
+      100
+    ],
+    "buy_b1_threshold": 0.2,
+    "buy_b1_cash_fraction": 0.05,
+    "buy_b1_minimum_fraction_of_a": 0.25,
+    "buy_b2_threshold_pairs": [
+      [
+        0.05,
+        0.01
+      ],
+      [
+        0.01,
+        0.05
+      ]
+    ],
+    "buy_b2_cash_fraction_sequence": [
+      0.2,
+      0.3,
+      0.4,
+      0.3
+    ],
+    "buy_b2_later_minimum_fraction_of_buy_b": 0.6,
+    "sell_a_arm_threshold": 0.8,
+    "sell_a_daily_pool_fraction_of_total_shares": 0.01,
+    "sell_a_decay_zone": [
+      0.5,
+      0.8
+    ],
+    "sell_a_daily_pool_sale_fraction": 0.2,
+    "sell_a_downcross_threshold": 0.5,
+    "sell_a_remaining_sale_fraction": 0.65,
+    "fast_drop_prior_strict_threshold": 0.6,
+    "fast_drop_current_strict_threshold": 0.3,
+    "fast_drop_theoretical_fill_stochrsi": 0.3,
+    "sell_b_crowded_weight_threshold": 0.75,
+    "sell_b_arm_threshold": 0.8,
+    "sell_b_daily_pool_fraction": 0.1,
+    "sell_b_downcross_threshold": 0.7,
+    "sell_b_total_position_sale_cap": 0.55,
+    "same_close_execution": true,
+    "fast_drop_ignores_ohlc_touch": true,
+    "ordinary_sale_blocks_same_close_buy": true,
+    "fast_drop_allows_same_close_buy": true,
+    "strict_boundary_equality_audit": [
+      0.6,
+      0.3
+    ],
+    "performance_return_method_with_flows": "daily time weighted returns; XIRR also reported"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000.0,
+  "financing": "No leverage or borrowing. Explicit external contributions are allowed only for frozen minimum-buy shortfalls and are fully mirrored to modified Buy & Hold.",
+  "benchmark": "Naive Buy & Hold invests initial cash at the first analysis Close and receives no later flows. Modified Buy & Hold invests initial cash at the first analysis Close, receives every strategy external contribution on the identical date, and immediately buys QQQ at that Close. The main equity chart compares the strategy only with modified Buy & Hold; naive Buy & Hold remains in the metric table.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged; add experiment-specific Close/StochRSI/pool-state and raw-current-value versus modified Buy & Hold figures."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Repeated low-StochRSI accumulation with contribution floors and priority virtual-pool exits may improve cash-flow-adjusted risk and terminal wealth relative to a contribution-matched QQQ holder over 2015-2026.",
+    "primary_metric": "Cash-flow-adjusted CAGR and Sharpe versus modified Buy & Hold, interpreted with XIRR, maximum drawdown of the unitized return index, total contributions, terminal wealth, sale attribution, and exact-boundary/fast-drop event counts",
+    "selection_rule": "One fully frozen anchor case only; no parameter search and no post-result substitution.",
+    "validation_plan": "Reconcile exact orders, external contributions, daily cash/shares/equity, virtual pools, and modified benchmark with an independent reference ledger and PyBroker compiled portfolio replay. Treat the entire 2015-2026 interval as exploratory.",
+    "promotion_criteria": "All ledgers and artifacts reconcile, the strategy improves at least one cash-flow-adjusted return/risk dimension without relying primarily on the OHLC-unchecked fast-drop fill, and contribution magnitude remains economically interpretable.",
+    "rejection_conditions": "Reject or redesign if reconciliation fails, virtual pools exceed shares, external contributions dominate reported wealth, the fast-drop override dominates performance, exact equality changes branching, or cash-flow-adjusted results do not support the stated comparison."
+  },
+  "active_run_id": null
+}

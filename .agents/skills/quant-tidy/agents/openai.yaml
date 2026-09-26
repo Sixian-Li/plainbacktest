@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quant Tidy"
+  short_description: "Audit and reorganize the Quant workspace safely"
+  default_prompt: "Use $quant-tidy to audit or reorganize this Quant workspace, including canonical experiment/test paths and repository-local worktrees."

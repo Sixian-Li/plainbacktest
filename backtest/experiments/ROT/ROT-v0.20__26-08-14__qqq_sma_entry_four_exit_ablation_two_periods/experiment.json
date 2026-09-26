@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_sma_entry_four_exit_ablation_two_periods_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "exploratory_two_period_full_factorial_ablation",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "stateful_sma_entry_and_four_exit_full_factorial_ablation",
+    "description": "每次独立窗口初始空仓，每次卖出信号都会清空并重置买入资格。买入资格有两条 OR 路径：A，完成 Close 在同一交易日从下方向上穿越 SMA25、SMA30、SMA35 及三者平均线，随后且在任何启用的卖出信号出现前，完成 Close 位于 SMA200 上方；B，完成 Close 从下方向上穿越 SMA200，随后且在任何启用的卖出信号出现前，完成 Close 同时位于 SMA25、SMA30、SMA35 及三者平均线上方。资格形成后持续有效，直至成交或任一启用卖出信号重置；随后盘中 price 同时高于动态 SMA30×98% 和动态 SMA200×98% 时全仓买入。四个完成 Close 卖出开关为：SMA200 连续三个交易日严格下降、短 SMA 平均单日严格下跌超过 0.15%、Close<SMA200、Close<SMA30；对四开关执行全部 2^4=16 组合。",
+    "buy_rule": "路径 A：同一完成 Close 必须同时满足前 Close<=前 SMA25/30/35/短均线平均且今 Close>今四条线，记录短线共同上穿；此后在卖出信号重置前任一完成 Close>SMA200 即形成资格。路径 B：完成 Close 从前 Close<=前 SMA200 到今 Close>今 SMA200，记录 SMA200 上穿；此后在卖出信号重置前任一完成 Close 同时高于 SMA25、SMA30、SMA35 和短均线平均即形成资格。两路径 OR；同日可同时完成先后条件。资格形成后的下一及后续交易日，盘前用此前 29/199 个完成 Close 解出包含当日候选价的 0.98×SMA30 和 0.98×SMA200 动态边界；Open 已严格高于两边界则按 Open 买入，否则 High 从下方触及两边界较高者时按该阈值买入。",
+    "sell_rule": "持仓时，对每个 case 启用的规则取 OR：R1，SMA200(t)<SMA200(t-1)、SMA200(t-1)<SMA200(t-2)、SMA200(t-2)<SMA200(t-3)；R2，短均线平均 avg(SMA25,SMA30,SMA35) 的单日变化率严格小于 -0.15%；R3，Close<SMA200；R4，Close<SMA30。完成 Close 确认后下一交易日 Open 全部卖出。空仓时出现任一启用卖出信号也会清空尚未成交的买入资格和部分路径状态。多条同日成立只执行一笔卖单并保存全部原因。",
+    "signal_time": "上穿、均线上方状态、三日下降、短均线平均变化和 Close 破位均由完成日线 Close 判定。买入资格形成后，当日收盘之后才能使用；下一交易日的动态 SMA30/SMA200 买入边界只使用此前完成 Close，在开盘前可解。",
+    "execution_time": "资格形成后的最早下一交易日，以预放日内买单执行：Open 已高于两条动态 98% 边界时按 Open，否则当日 High 触及较高边界时按精确阈值；若未触及则资格延续。卖出信号一律在下一交易日 Open 执行。",
+    "position_sizing": "long-only；每个 case-window 独立从 100,000 美元现金开始；买入使用全部现金，卖出清空；允许小数股，不融资，现金不计息。",
+    "initial_position": "每个窗口首日空仓；窗口前数据只预热指标，不继承仓位、现金或买入资格状态。"
+  },
+  "parameters": {
+    "short_sma_windows": [
+      25,
+      30,
+      35
+    ],
+    "short_sma_average": "simple arithmetic mean of SMA25, SMA30 and SMA35",
+    "entry_short_cross_operator": "the same completed Close crosses from <= to > each of SMA25, SMA30, SMA35 and their average",
+    "entry_sma200_cross_operator": "completed Close crosses from <= SMA200 to > SMA200",
+    "entry_post_qualification_price_filters": [
+      "price > dynamic SMA30 * 0.98",
+      "price > dynamic SMA200 * 0.98"
+    ],
+    "sell_rules": {
+      "r1": "SMA200 strictly decreases for three consecutive completed-session differences",
+      "r2": "one-day percentage change of mean(SMA25,SMA30,SMA35) < -0.15%",
+      "r3": "completed Close < SMA200",
+      "r4": "completed Close < SMA30"
+    },
+    "combination_count": 16,
+    "windows": {
+      "2010_2015": {
+        "requested_start": "2010-01-01",
+        "end": "2015-12-31"
+      },
+      "2020_2026": {
+        "requested_start": "2020-01-01",
+        "end": "2026-08-04"
+      }
+    },
+    "windows_are_independent": true
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "For each independent window, invest the same 100,000 USD in QQQ at the Open following the first completed window Close and hold through the window end Close without artificial liquidation.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged for the interactive report; add an experiment-specific 4x4 ablation matrix and print-only combined PDF source without changing the shared template."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "At least one stable subset of the four exit rules reduces maximum drawdown versus the no-exit-rule case in both independent windows without an extreme loss of return.",
+    "primary_metric": "Maximum drawdown is primary. Total return, CAGR, Sharpe, exposure, orders and per-rule signal/fill counts describe costs and mechanics.",
+    "selection_rule": "Report all 16 predeclared exit masks in both independent windows. Rank descriptively by maximum drawdown within each window and report cross-window average rank; do not promote an in-sample winner.",
+    "validation_plan": "Reconcile all 32 case-window paths between the state-machine reference ledger and PyBroker in dates, sides, fills, cash, shares, equity and closed trades. Add golden tests for simultaneous four-short-line crossing, both ordered entry paths, qualification reset, dynamic dual-boundary buy fills, strict three-day SMA200 decline, strict -0.15% rule and all 16 masks.",
+    "promotion_criteria": "A follow-up candidate must reduce maximum drawdown versus the no-exit-rule case in both windows, avoid catastrophic return loss, remain credible after explicit trading costs, and pass a later frozen sample test.",
+    "rejection_conditions": "Reject if fewer than 16 masks are saved, windows inherit state, short-line crossings are treated as mere levels, qualification survives an enabled sell signal, dynamic buy thresholds use future Close, equality incorrectly satisfies a strict rule, any signal fills before knowable, or either ledger diverges."
+  }
+}

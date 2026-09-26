@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_flat_trio_substitution_v1",
+  "created_at_utc": "2026-08-25T00:00:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "QQQ_FLAT_SUBSTITUTION"
+  ],
+  "excluded_symbols": {
+    "discarded_candidates": "本轮按用户复核只保留AZO、TLT、MO三个替代品；SO、ED、GIS及此前其他候选不进入组合或汇总。",
+    "no_combined_trio_portfolio": "三只替代品分别建立独立账户路径，不在同一账户内等权或轮动，以便直接回答每只标的在QQQ空仓期的贡献。"
+  },
+  "strategy": {
+    "name": "qqq_sma200_flat_trio_asset_specific_substitution",
+    "description": "以QQQ的SMA200上下3%滞回择时作为账户总开关。QQQ空仓时分别建立三条互斥替代路径：AZO使用SMA237、TLT使用SMA160、MO使用SMA110，替代品也采用上下3%滞回；替代品状态连续计算，QQQ空仓且替代品处于可持有状态时全仓持有该替代品，否则持有现金。QQQ重新进入可持有状态时优先恢复QQQ。所有信号使用完成Close并在下一QQQ共同交易日调整Open卖出在先、买入在后；无止损、成交锁、熊市oracle或样本末强制清仓。",
+    "buy_rule": "QQQ从不高于SMA200上轨变为严格高于上轨时，账户下一Open全仓买入QQQ。QQQ处于空仓状态时，若对应替代品的连续滞回状态为可持有，下一Open全仓买入AZO、TLT或MO；替代品首次形成自身SMA时，若已严格高于上轨可直接建立可持有状态，之后卖出后必须再次真实上穿上轨才重新进入。",
+    "sell_rule": "持有QQQ且其完成Close严格低于SMA200下轨时，下一Open卖出QQQ；若替代品当时可持有则同一Open接替，否则转现金。持有替代品时，其完成Close严格低于自身SMA下轨就下一Open卖出并转现金。QQQ一旦重新上穿自己的上轨，下一Open无条件先卖出替代品再恢复QQQ。",
+    "signal_time": "QQQ与替代品均只用各自当日常规时段已完成的拆股及股息调整Close和更早数据计算SMA、上下轨与持有状态。主观熊市区间仅用于事后标记，不参与信号。",
+    "execution_time": "信号在完成Close后确认，下一QQQ共同交易日的调整Open成交。同一Open发生资产切换时先把旧资产全部卖出，再用扣除单边成本后的全部现金买入新资产；允许小数股。",
+    "positioning": "long-only、不融资、现金不计息。每条路径任一时刻只可能100%持有QQQ、100%持有一个指定替代品或100%现金。AZO、TLT、MO三条路径各使用独立10万美元账户。",
+    "initial_position": "在QQQ的SMA200第一次完整形成时账户从空仓开始；该日只建立QQQ前一状态，不能立即买入QQQ。若替代品自身SMA已形成且处于上轨之上，初始QQQ等待期可以从下一Open持有替代品。",
+    "plain_language": {
+      "summary": "QQQ该空仓时，不只放现金，而是分别尝试用已通过各自长期均线的AZO、TLT或MO接替。",
+      "buy": "QQQ处于自己的多头状态就持有QQQ；QQQ空仓时，只在替代品通过自己的长期均线门槛时持有它，否则留现金。",
+      "sell": "QQQ跌破自己的下轨就退出；替代品跌破自己的下轨也退出，而QQQ重新转强时会优先换回QQQ。",
+      "execution": "每天收盘后确认状态，下一共同交易日开盘先卖旧仓、再用全部可用资金买新仓。",
+      "position": "三条路径分别只持有QQQ、一个指定替代品或现金，不把AZO、TLT、MO混在同一个账户里。"
+    }
+  },
+  "parameters": {
+    "master_symbol": "QQQ",
+    "master_sma_window": 200,
+    "substitute_windows": {
+      "AZO": 237,
+      "TLT": 160,
+      "MO": 110
+    },
+    "entry_buffer_pct": 3.0,
+    "exit_buffer_pct": 3.0,
+    "master_first_valid_sma_bar_can_enter": false,
+    "substitute_first_valid_sma_level_eligible": true,
+    "substitute_state_updates_while_qqq_long": true,
+    "master_priority_on_reentry": true,
+    "entry_semantics_after_initialization": "true close crossing from <= upper rail to > upper rail",
+    "exit_semantics": "held completed close strictly below lower rail",
+    "analysis_start": "first_valid_qqq_sma200_close",
+    "analysis_end": "2026-08-04",
+    "signal_time": "completed adjusted close",
+    "fill_time": "next QQQ common-session adjusted open",
+    "rotation_order": "sell old asset first, then buy new asset with all available cash",
+    "formal_cases": [
+      "QQQ_CASH",
+      "QQQ_AZO237",
+      "QQQ_TLT160",
+      "QQQ_MO110"
+    ],
+    "primary_flat_spell_scope": "post_QQQ_sell_fill_to_next_QQQ_buy_fill",
+    "initial_wait_reported_separately": true,
+    "open_final_spell_reported_separately": true,
+    "dotcom_exclusion_rule": "exclude any master flat spell overlapping the first subjective 2000-2002 bear interval",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "bear_intervals_are_attribution_only": true,
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09,
+    "formal_case_count_per_cost": 4,
+    "formal_path_count": 8
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "关闭；QQQ与替代品之间不融资，所有空仓现金不计利息。",
+  "benchmark": "同一QQQ SMA200预热起点后，下一QQQ交易日调整Open一次性满仓QQQ并持有到样本末；另把QQQ择时空仓持有现金的QQQ_CASH路径作为直接政策基线。两者均按0和5bps计算。",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "沿用上一实验已验收的v5中文策略流程、净值勾选、区间对齐和定投控件；新增QQQ总开关空仓高亮、四条账户路径对比、三只替代品逐空仓期贡献及含/不含2000熊市汇总，不修改共享模板。"
+  },
+  "research": {
+    "stage": "exploratory_post_selected_overlay_attribution",
+    "hypothesis": "若AZO/SMA237、TLT/SMA160或MO/SMA110能有效利用QQQ机械择时产生的空仓，替代路径在单边5bps后应优于QQQ_CASH，同时不应只靠2000-2002一次空仓贡献，且最大回撤不应相对现金基线失控。",
+    "primary_metric": "单边5bps下分别比较QQQ_CASH、QQQ_AZO237、QQQ_TLT160、QQQ_MO110与同起点QQQ Hold的总收益、CAGR、Sharpe、最大回撤和资产暴露；逐个QQQ卖出产生的空仓期报告替代品择时回报、无替代现金基线、无自身择时的替代品持有诊断，以及剔除2000-2002重叠空仓后的复合结果。",
+    "selection_rule": "QQQ窗口固定200，替代品窗口固定为前一细网格诊断选定的AZO237、TLT160、MO110；所有上下轨固定3%，不再扫描窗口、缓冲或止损。四条正式账户路径与0/5bps全部保存，QQQ初始等待、QQQ卖出后的闭合空仓和样本末开放空仓分开标记。",
+    "validation_plan": "每条路径由PyBroker执行，并用独立的卖出优先、下一Open小数股账本从状态决策重新计算，逐日核对现金、股数、净值以及订单日期、方向、标的、数量和成交价，容差1e-6。单测覆盖QQQ首次SMA日不买、替代品首次水平资格、QQQ优先级、替代品连续状态、同Open轮换、卖出后再买、未来数据不可回写、QQQ空仓端点及2000剔除只改汇总不改信号。完成全量测试、目录生成、工作区审计、真实Chrome、PDF门禁和validate_run。",
+    "promotion_criteria": "本实验使用在同一历史熊市样本上筛出的资产与窗口，不能直接晋级模拟盘。只有至少一条替代路径在剔除2000-2002后仍于多个非重叠QQQ空仓期稳定优于QQQ_CASH、成本后改善具经济意义、最大回撤受控，并在另建时间顺序样本外或实时前向实验中复现，才考虑进入候选政策。",
+    "rejection_conditions": "若优势只由2000-2002单一时期贡献、QQQ持仓期误持替代品、替代状态停更、未来Close用于同一Open成交、QQQ重新买入时未优先换回、替代品未通过自身均线仍被持有、主观熊市边界驱动信号、0与5bps方向相反、数据在run中漂移或PyBroker与独立账本任一差异超过1e-6，则拒绝对应替代政策解释或正式验证。"
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

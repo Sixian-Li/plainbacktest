@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-16T14:36:45+00:00",
+  "builder": "backtest/scripts/build_canonical_data.py",
+  "registry": "data/source_registry.yaml",
+  "registry_sha256": "2af690bd2590e037150f23a7d408d172e599a49279137145315e8775651e3cc1",
+  "build_id": "dacf68c4e40d893a66692115d1d9d1b4382dde70bc29f8713067fbc0369a2b61",
+  "canonical_schema": {
+    "columns": [
+      "date",
+      "symbol",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume"
+    ],
+    "date_format": "YYYY-MM-DD",
+    "timezone": "America/New_York",
+    "currency": "USD",
+    "session": "regular",
+    "sort_order": [
+      "symbol",
+      "date"
+    ]
+  },
+  "calendar_analysis": {
+    "calendar_status": "suspect",
+    "calendar_suspect_dates": [
+      {
+        "date": "2023-06-19",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Monday"
+      },
+      {
+        "date": "2024-06-19",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Wednesday"
+      },
+      {
+        "date": "2025-01-26",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Sunday"
+      },
+      {
+        "date": "2025-06-19",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Thursday"
+      },
+      {
+        "date": "2023-06-20",
+        "calendar_flag": "closed",
+        "evidence": "data_present_for_all_covered_datasets",
+        "symbols_with_data": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Tuesday"
+      }
+    ],
+    "dataset_specific_missing_dates": [
+      {
+        "date": "2015-04-09",
+        "missing_symbols": [
+          "VOO"
+        ],
+        "peer_symbols_with_data": [
+          "QQQ",
+          "SPY"
+        ],
+        "weekday": "Thursday"
+      }
+    ]
+  },
+  "datasets": [
+    {
+      "symbol": "QQQ",
+      "role": "primary_backtest_input",
+      "registered_status": "approved",
+      "quality_status": "passed",
+      "effective_status": "approved",
+      "source": {
+        "provider": "rethink",
+        "kind": "csv",
+        "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/3 大指数 ETF/QQQ - 纳斯达克 100 ETF Invesco/QQQ_1day_拆股股息调整_20260805.csv"
+      },
+      "source_content_sha256": "dc666bc93d92b4cf264b3218b37e85888e561f352be6819187a20bfe6fbd1954",
+      "adjustment": {
+        "kind": "split_and_dividend_adjusted",
+        "return_interpretation": "total_return_price_approximation",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "output": "data/processed/daily/QQQ.csv",
+      "canonical_sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df",
+      "rows": 6893,
+      "start": "1999-03-10",
+      "end": "2026-08-04",
+      "blocking_counts": {},
+      "exclusions": {}
+    },
+    {
+      "symbol": "VOO",
+      "role": "future_trade_asset",
+      "registered_status": "provisional",
+      "quality_status": "failed",
+      "effective_status": "quality_failed",
+      "source": {
+        "provider": "full_market",
+        "kind": "zip_member",
+        "path": "data/2026-08-05美股数据_全/日线_前复权_美股数据.zip",
+        "member": "VOO_daily_qfq.csv"
+      },
+      "source_content_sha256": "17ed74b6c991c5c8fe83fac35561cd084c12a26fb73dc2f5e0edcc00c9b74dd0",
+      "adjustment": {
+        "kind": "vendor_qfq_forward_adjusted",
+        "return_interpretation": "continuous_adjusted_price",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "output": "data/processed/daily/VOO.csv",
+      "canonical_sha256": "a770043b768eebf03da4bf990f572cb9f5e1c903ae4d488f59f2e49229ebc97b",
+      "rows": 3998,
+      "start": "2010-09-09",
+      "end": "2026-08-04",
+      "blocking_counts": {
+        "invalid_ohlc": 1
+      },
+      "exclusions": {}
+    },
+    {
+      "symbol": "SPY",
+      "role": "long_history_proxy_and_validation",
+      "registered_status": "approved",
+      "quality_status": "passed",
+      "effective_status": "approved",
+      "source": {
+        "provider": "rethink",
+        "kind": "csv",
+        "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/3 大指数 ETF/SPY - 标普 500 ETF SPDR/SPY_1day_拆股股息调整_20260805.csv"
+      },
+      "source_content_sha256": "30ff8d65233fd23b23e67f823c1634ce27b109b931b2bd9bb63dbc7c1615349e",
+      "adjustment": {
+        "kind": "split_and_dividend_adjusted",
+        "return_interpretation": "total_return_price_approximation",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "output": "data/processed/daily/SPY.csv",
+      "canonical_sha256": "6b07e1636b1ecc276f17d6d474bb9ec864f7efe829d955c1f83d9f84088f4313",
+      "rows": 8435,
+      "start": "1993-01-29",
+      "end": "2026-08-04",
+      "blocking_counts": {},
+      "exclusions": {}
+    },
+    {
+      "symbol": "RKLB",
+      "role": "single_asset_backtest_input",
+      "registered_status": "approved",
+      "quality_status": "passed",
+      "effective_status": "approved",
+      "source": {
+        "provider": "rethink",
+        "kind": "zip_member",
+        "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-拆股及股息调整_20260805.zip",
+        "member": "RKLB.csv"
+      },
+      "source_content_sha256": "32c988c84e216c465b81ebe9678008160660fa585d351e2c526fb5da17276024",
+      "adjustment": {
+        "kind": "split_and_dividend_adjusted",
+        "return_interpretation": "total_return_price_approximation",
+        "exact_cash_dividend_ledger": false,
+        "volume_is_vendor_adjusted": true
+      },
+      "output": "data/processed/daily/RKLB.csv",
+      "canonical_sha256": "a31c53d823c401a6af156ebc23191bbee0ece850e7e1637b86f56c6c82972d47",
+      "rows": 1240,
+      "start": "2021-08-25",
+      "end": "2026-08-04",
+      "blocking_counts": {},
+      "exclusions": {
+        "before_canonical_start": {
+          "rows": 187,
+          "source_start": "2020-11-24",
+          "source_end": "2021-08-24",
+          "canonical_start": "2021-08-25",
+          "reason": "Exclude the pre-combination VACQ SPAC period; SEC evidence states RKLB trading began on 2021-08-25."
+        }
+      }
+    }
+  ]
+}

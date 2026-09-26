@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "experiment_id": "spy_intraday_sma_training_1993_2002_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "training_candidate_validated",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "SPY"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_broad_stable_training_search",
+    "description": "只用 SPY 上市日至 2002 年末训练此前冻结的日内动态 SMA 规则族。保持四类 OR 卖出、三类 OR 买入、初始空仓和盘前解阈值语义不变；在 A–H/L/R 的宽范围细离散网格上固定种子全域抽样并前沿精搜，排除缺少任一侧相邻点的边界中心，再按每个候选相邻一步扰动后的最差 CAGR 与最差 Sharpe 选择双侧稳健代表。2003 年起数据完全不参与本实验。",
+    "buy_rule": "空仓时 OR：已有卖出价后，价格达到卖出成交价上方 R% 则强制买回；价格向上穿越动态 H 日 SMA；价格向上穿越以 F 为中心、固定间距的三条短 SMA 平均值下方 G%。没有历史卖出价时强制买回不可产生第一笔买入。",
+    "sell_rule": "持仓时 OR：价格低于成本价 L%；三短 SMA 平均变化率连续 A 日为负且价格跌破动态 B 日 SMA；此前连续 D-1 日三线平均变化率为负且当日三条短 SMA 各自变化率全部不高于 C%；价格向下穿越动态 E 日 SMA。",
+    "signal_time": "每个交易日开始前仅用截至前一交易日 Close 的完整可用历史解出当日条件单；SPY 上市后指标尚未预热完成时，相应规则不产生订单。",
+    "execution_time": "若前 Close 到当日常规时段 Open 已越过阈值，按当日 Open 成交；否则当日常规时段调整后 OHLC 触及预先解出的理论阈值时按该阈值成交；每天最多一笔。",
+    "position_sizing": "long-only；初始 100,000 美元现金，每次在全仓 SPY 与全现金之间切换，允许小数股，不融资，现金不计息。",
+    "initial_position": "1993-01-29 起空仓等待第一笔普通买入；全部训练 case 和 Buy & Hold 都从同一训练窗口起点计绩，包含指标预热与等待首买的现金期。"
+  },
+  "parameters": {
+    "requested_train_start": "1993-01-01",
+    "analysis_start": "1993-01-29",
+    "analysis_end": "2002-12-31",
+    "held_out_start": "2003-01-02",
+    "held_out_end_requested": "2023-12-31",
+    "held_out_access": "forbidden_in_this_experiment",
+    "evaluation_start": "analysis_start",
+    "initial_position": "flat",
+    "C_fast_derivative_mode": "all_short_smas",
+    "max_trades_per_day": 1,
+    "search_method": "seeded_broad_discrete_sampling_frontier_mutation_then_complete_two_sided_worst_neighbor_maximin",
+    "random_seed": 20260814,
+    "global_sample_count": 100000,
+    "refined_sample_count": 100000,
+    "frontier_parent_count_per_objective": 100,
+    "stability_parent_count_per_objective": 80,
+    "formal_candidate_count_per_objective": 3,
+    "search_space_definition": {
+      "A_negative_days_slow": {
+        "start": 2,
+        "stop": 15,
+        "step": 1
+      },
+      "B_slow_sma_window": {
+        "start": 60,
+        "stop": 260,
+        "step": 2
+      },
+      "C_fast_derivative_pct": {
+        "start": -0.6,
+        "stop": -0.025,
+        "step": 0.025
+      },
+      "D_negative_days_fast": {
+        "start": 2,
+        "stop": 10,
+        "step": 1
+      },
+      "E_fallback_sma_window": {
+        "start": 80,
+        "stop": 400,
+        "step": 2
+      },
+      "F_short_sma_center": {
+        "start": 20,
+        "stop": 140,
+        "step": 2
+      },
+      "F_short_sma_spacing": {
+        "values": [
+          5,
+          10,
+          15
+        ]
+      },
+      "G_short_recovery_below_pct": {
+        "start": 0,
+        "stop": 5,
+        "step": 0.1
+      },
+      "H_reentry_sma_window": {
+        "start": 80,
+        "stop": 400,
+        "step": 2
+      },
+      "L_cost_stop_pct": {
+        "start": 1,
+        "stop": 25,
+        "step": 0.25
+      },
+      "R_forced_rebuy_pct": {
+        "start": 0,
+        "stop": 10,
+        "step": 0.25
+      }
+    },
+    "anchors": [
+      {
+        "A_negative_days_slow": 3,
+        "B_slow_sma_window": 176,
+        "C_fast_derivative_pct": -0.25,
+        "D_negative_days_fast": 4,
+        "E_fallback_sma_window": 302,
+        "F_short_sma_center": 80,
+        "F_short_sma_spacing": 10,
+        "G_short_recovery_below_pct": 0.9,
+        "H_reentry_sma_window": 264,
+        "L_cost_stop_pct": 10,
+        "R_forced_rebuy_pct": 0
+      }
+    ],
+    "stability_selection": {
+      "candidate_pool": "union of top 80 by CAGR, Sharpe, delta-CAGR, delta-Sharpe and maximin CAGR/Sharpe percentile",
+      "neighborhood": "center plus every available lower and upper one-grid-step perturbation in each of 11 dimensions",
+      "eligibility": "all 11 dimensions must have both lower and upper one-grid-step neighbors and all 23 center/neighbor cases must be finite",
+      "primary_score": "maximum of the minimum percentile of the worst one-step-neighbor CAGR and worst one-step-neighbor Sharpe",
+      "tie_breakers": [
+        "sum of the two worst-neighbor percentiles",
+        "worst-neighbor CAGR",
+        "worst-neighbor Sharpe",
+        "center CAGR"
+      ],
+      "boundary_policy": "exclude every center missing a lower or upper neighbor in any dimension"
+    },
+    "oat_diagnostic": {
+      "baseline": "selected stable representative",
+      "sweeps": "all 11 complete declared parameter grids, changing one dimension at a time",
+      "plateau_cagr_tolerance_pct_points": 0.5,
+      "plateau_sharpe_tolerance": 0.03
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the 1993-01-29 regular-session Open, invest the same 100,000 USD in SPY and hold through the 2002-12-31 Close. Every training case uses the identical evaluation dates; no 2003-or-later row may influence search or selection.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged. Add experiment-specific search-cloud, neighborhood-stability and eleven full-range OAT figures while preserving the accepted performance, K-line, zoom, visible-axis and selection interactions."
+  },
+  "research": {
+    "stage": "training_parameter_selection",
+    "hypothesis": "Within a broad finely discretized SPY training space, a locally stable parameter region may improve both return and risk-adjusted return without relying on a single discontinuous sample maximum.",
+    "primary_metric": "Among candidates with complete finite two-sided one-step neighborhoods, select the candidate maximizing the minimum percentile of worst-neighbor CAGR and worst-neighbor Sharpe. Report center CAGR/Sharpe, Buy & Hold, maximum drawdown, turnover, boundary status and all eleven full-range OAT curves.",
+    "selection_rule": "Fixed-seed sample 100,000 broad-grid cases, mutate 100,000 additional unique cases around the CAGR, Sharpe, delta-CAGR and delta-Sharpe frontiers, form a diverse high-score parent pool, score each center plus all lower/upper one-step perturbations, exclude incomplete or boundary neighborhoods, select the deterministic worst-neighbor CAGR/Sharpe maximin representative, then run all eleven complete OAT curves around that selected center. Do not replace it after viewing 2003+ data.",
+    "validation_plan": "Every reported center, mechanical objective winner and OAT winner must reproduce compiled screening metrics and match PyBroker plus the independent pandas ledger on daily cash, shares, equity, order dates, sides, shares, fills and trade accounting within 1e-6; the first order must be ordinary and daily orders cannot exceed one.",
+    "promotion_criteria": "Only freeze one training-selected candidate if it has finite metrics, ordinary first entry, a meaningful two-sided or explicitly one-sided local neighborhood, and complete engineering validation. Promotion to a useful strategy requires the separately authorized untouched 2003–2023 evaluation to be run exactly once without retuning.",
+    "rejection_conditions": "Reject the selection if any 2003+ data enters training, sampling is not reproducible, the chosen row is absent from saved cases, neighborhood mapping is incomplete, every favorable point is boundary-only or spike-like, the first order is seeded/forced, daily orders exceed one, or compiled, PyBroker and independent ledgers disagree."
+  }
+}

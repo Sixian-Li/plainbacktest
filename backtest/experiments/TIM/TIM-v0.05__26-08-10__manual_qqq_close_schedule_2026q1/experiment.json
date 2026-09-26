@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "manual_qqq_close_schedule_2026q1_v1",
+  "created_at_utc": "2026-08-10T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "manual_scheduled_all_in_out",
+    "description": "从 2026-01-16 收盘时已经持有的 100 股 QQQ 出发，严格按照用户给出的日期，在每个所列交易日的复权收盘价全仓卖出或把全部现金买回；日期序列本身不由行情生成。",
+    "buy_rule": "在 parameters.trade_schedule 中 side=buy 的日期，以当日常规时段复权 Close 把全部可用现金买入 QQQ，允许小数股。",
+    "sell_rule": "在 parameters.trade_schedule 中 side=sell 的日期，以当日常规时段复权 Close 卖出全部 QQQ；最后一次卖出后保持现金。",
+    "signal_time": "外部给定并视为在各成交日前已知的固定日期日程；不读取当日 Close 生成交易信号。",
+    "execution_time": "清单所列交易日的常规时段复权 Close；PyBroker 在前一交易日提交对应的预定指令。",
+    "position_sizing": "全仓买入或全部卖出；买入允许小数股；不融资、不做空。",
+    "initial_position": "2026-01-16 收盘后已持有 100 股 QQQ，现金为零；引擎种子买入仅用于建立这一既有状态，不计成本。"
+  },
+  "parameters": {
+    "initial_date": "2026-01-16",
+    "end_date": "2026-04-13",
+    "initial_shares": 100,
+    "trade_schedule": [
+      {
+        "date": "2026-01-20",
+        "side": "sell"
+      },
+      {
+        "date": "2026-01-21",
+        "side": "buy"
+      },
+      {
+        "date": "2026-02-03",
+        "side": "sell"
+      },
+      {
+        "date": "2026-02-06",
+        "side": "buy"
+      },
+      {
+        "date": "2026-02-10",
+        "side": "sell"
+      },
+      {
+        "date": "2026-02-18",
+        "side": "buy"
+      },
+      {
+        "date": "2026-02-19",
+        "side": "sell"
+      },
+      {
+        "date": "2026-02-20",
+        "side": "buy"
+      },
+      {
+        "date": "2026-02-23",
+        "side": "sell"
+      },
+      {
+        "date": "2026-02-24",
+        "side": "buy"
+      },
+      {
+        "date": "2026-02-26",
+        "side": "sell"
+      },
+      {
+        "date": "2026-03-04",
+        "side": "buy"
+      },
+      {
+        "date": "2026-03-05",
+        "side": "sell"
+      },
+      {
+        "date": "2026-03-09",
+        "side": "buy"
+      },
+      {
+        "date": "2026-03-12",
+        "side": "sell"
+      },
+      {
+        "date": "2026-03-16",
+        "side": "buy"
+      },
+      {
+        "date": "2026-03-18",
+        "side": "sell"
+      },
+      {
+        "date": "2026-03-31",
+        "side": "buy"
+      },
+      {
+        "date": "2026-04-13",
+        "side": "sell"
+      }
+    ]
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 61979.63,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Hold the same initial 100 QQQ shares through 2026-04-13 and mark them to adjusted Close; do not impose an artificial terminal sale.",
+  "reporting": {
+    "template_id": "interactive_research_v2",
+    "template_path": "backtest/report_templates/interactive_research_v2",
+    "reuse_review": "Reuse the accepted interactive template for zoom, visible-window Y axis, selectable curves, left-edge rebasing and DCA; this experiment adds no new template semantics."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "The supplied date path can be accounted for exactly and compared with holding the same 100 QQQ shares under explicit transaction-cost assumptions.",
+    "primary_metric": "Total return over the stated interval, with final equity and excess percentage points versus QQQ buy-and-hold.",
+    "selection_rule": "None; there is one frozen date path and no parameter or date selection inside this experiment.",
+    "validation_plan": "Engineering validation only: PyBroker and an independent cash/share ledger must match every daily state, order and closed trade.",
+    "promotion_criteria": "None. A hindsight-selected manual date list cannot be promoted; a causal signal rule must be defined as a separate experiment before walk-forward or paper-trading validation.",
+    "rejection_conditions": "Reject any predictive interpretation, any unavailable scheduled date, any non-alternating position transition, or any ledger difference above tolerance."
+  }
+}

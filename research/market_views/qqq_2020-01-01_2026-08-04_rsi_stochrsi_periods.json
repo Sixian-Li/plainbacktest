@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "view_id": "close_rsi_stochrsi_periods_v1",
+  "symbol": "QQQ",
+  "requested_start": "2020-01-01",
+  "requested_end": "2026-08-04",
+  "actual_start": "2020-01-02",
+  "actual_end": "2026-08-04",
+  "trading_sessions": 1655,
+  "price_field": "close",
+  "price_adjustment": "split_and_dividend_adjusted canonical Close",
+  "periods": [
+    14,
+    28,
+    42,
+    56,
+    70,
+    100,
+    140
+  ],
+  "rsi_method": "Wilder RSI divided by 100 for display",
+  "stochrsi_formula": "(RSI - rolling_min(RSI, period)) / (rolling_max(RSI, period) - rolling_min(RSI, period)); zero range maps to 0.5",
+  "same_period_for_rsi_and_stochastic_range": true,
+  "k_smoothing": null,
+  "d_smoothing": null,
+  "prewarm_before_requested_start": true,
+  "default_visible_periods": [
+    14
+  ],
+  "source": "data/processed/daily/QQQ.csv",
+  "source_sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df",
+  "output": "research/market_views/qqq_2020-01-01_2026-08-04_rsi_stochrsi_periods.html",
+  "output_sha256": "dbfcaed8bb3a3d16702d1d7c5e0f83faa1653ac6720ff487b694ab2ba981d9bb"
+}

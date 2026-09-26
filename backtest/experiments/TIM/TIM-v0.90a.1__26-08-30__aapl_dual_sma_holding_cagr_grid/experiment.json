@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "aapl_dual_sma_holding_cagr_grid_v1",
+  "created_at_utc": "2026-08-30T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "AAPL"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "aapl_close_confirmed_dual_sma_holding_cagr_grid",
+    "description": "In each independently restarted window, calculate simple moving averages from adjusted AAPL closes using pre-window history. At every completed regular-session close, target a full long position when the fast SMA is strictly above the slow SMA and target cash when it is at or below the slow SMA. Fill any required state change at the next regular-session open. The primary report annualizes the net account growth over sessions whose post-open account state holds AAPL.",
+    "buy_rule": "flat and completed fast_sma > completed slow_sma",
+    "sell_rule": "long and completed fast_sma <= completed slow_sma",
+    "signal_time": "after the regular-session close, using only that completed close and earlier AAPL history",
+    "execution_time": "next regular-session open with an explicit adverse cost; a last-window-close signal has no later fill",
+    "positioning": "long-only, all cash or all invested in AAPL, fractional shares, no leverage, no cash interest; each window restarts from 100000 dollars",
+    "plain_language": {
+      "summary": "在两个互不重叠的五年窗口中，比较AAPL快慢均线策略只按实际持仓日折算的年化收益网格。",
+      "buy": "当天收盘后，如果快线严格高于慢线且账户空仓，策略准备满仓买入AAPL。",
+      "sell": "当天收盘后，如果快线等于或低于慢线且账户持仓，策略准备全部卖出AAPL。",
+      "execution": "信号只在收盘数据完整后确认，买卖统一在下一交易日开盘成交，并计入单边5个基点成本。",
+      "position": "每个窗口都从10万美元现金独立开始，只在满仓AAPL与现金之间切换；报告同时展示持仓CAGR、持仓日和持仓率。"
+    }
+  },
+  "parameters": {
+    "window_convention": "[calendar-year start inclusive, end-label-year start exclusive); each account uses the first and last available AAPL sessions inside that interval",
+    "windows": [
+      {
+        "window_id": "W2013_2018",
+        "label": "2013–2018",
+        "start_inclusive": "2013-01-01",
+        "end_exclusive": "2018-01-01"
+      },
+      {
+        "window_id": "W2018_2023",
+        "label": "2018–2023",
+        "start_inclusive": "2018-01-01",
+        "end_exclusive": "2023-01-01"
+      }
+    ],
+    "window_count": 2,
+    "fast_window_start": 1,
+    "fast_window_end": 50,
+    "fast_window_step": 1,
+    "slow_window_start": 15,
+    "slow_window_end": 250,
+    "slow_window_step": 1,
+    "role_constraint": "fast_window < slow_window",
+    "rectangular_cells_per_window": 11800,
+    "invalid_role_cells_per_window": 666,
+    "valid_pair_count": 11134,
+    "combination_count": 22268,
+    "formal_cost_bps": 5,
+    "primary_surface_metric": "holding_period_cagr_pct",
+    "holding_period_cagr": {
+      "formula": "(final_equity / initial_cash) ** (252 / holding_sessions) - 1",
+      "annualization_sessions": 252,
+      "holding_session_definition": "a regular-session row whose post-open account state has positive AAPL shares; an entry-open session is included and an exit-open session is excluded",
+      "interpretation": "descriptive geometric time compression under zero cash return; not a separate backtest, trade-level compounded CAGR, or IRR"
+    },
+    "derived_zero_cost_sensitivity": "Reuse the identical reconciled order schedule and remove adverse fill costs; do not treat it as a second formal engine block."
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "AAPL Buy & Hold independently restarted in each window; signal on the first window close and buy at the following regular-session open with the same 5 bps cost; its holding CAGR uses the same post-open holding-session definition",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged. Its accepted strategy-first narrative, market overlays, performance controls, printing rules, and self-contained Plotly layout cover the holding-CAGR and exposure surfaces."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Annualizing net account growth only over sessions with AAPL exposure may reveal whether apparently strong calendar-window returns come from efficient trend capture or simply from staying invested longer; a persistent structure should retain broad neighboring high-holding-CAGR regions across both non-overlapping windows without relying on vanishing exposure.",
+    "primary_metric": "5 bps holding-period CAGR, defined as net final account growth annualized over post-open sessions with positive AAPL shares, always interpreted with holding sessions, exposure percentage, calendar CAGR, total return, Sharpe, maximum drawdown, AAPL Buy & Hold, and cross-window surface stability.",
+    "selection_rule": "Do not name a deployable champion. For each window report the deterministic holding-CAGR maximum and a descriptive complete-3x3-neighborhood representative maximizing neighborhood median minus half its standard deviation; lower fast then lower slow breaks exact ties. Display exposure beside the primary surface and do not filter low-exposure cells after seeing results.",
+    "validation_plan": "Run and reconcile all 22268 valid pair-window cases against an independent daily ledger at 5 bps; independently recompute holding sessions from both PyBroker and reference shares, verify the holding-CAGR formula, compare both full parameter surfaces, and retain any later candidate for a separately frozen experiment with unseen dates.",
+    "promotion_criteria": "Engineering and ledger gates pass; holding-CAGR regions remain broad across both windows at non-trivial exposure; calendar return and risk remain competitive after costs; and a future locked period remains useful relative to AAPL Buy & Hold.",
+    "rejection_conditions": "Reject deployment claims if holding-CAGR maxima depend on very low exposure, boundaries, isolated points, weak cross-window rank or top-decile overlap, poor calendar returns, material costs, or any accounting/report gate failure."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

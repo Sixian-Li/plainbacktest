@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "view_id": "spy_qqq_bear_market_annotator_v1",
+  "exported_at": "2026-08-13T15:35:25.046Z",
+  "source": {
+    "price_field": "split-and-dividend-adjusted Close",
+    "common_start": "1999-03-10",
+    "common_end": "2026-08-04",
+    "trading_sessions": 6893,
+    "QQQ": {
+      "path": "../data/processed/daily/QQQ.csv",
+      "sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df"
+    },
+    "SPY": {
+      "path": "../data/processed/daily/SPY.csv",
+      "sha256": "6b07e1636b1ecc276f17d6d474bb9ec864f7efe829d955c1f83d9f84088f4313"
+    }
+  },
+  "intervals": [
+    {
+      "ordinal": 1,
+      "id": "bear-msro9inm-addcb1",
+      "label": "熊市 1",
+      "start": "2000-03-21",
+      "end": "2002-11-27",
+      "note": "",
+      "trading_sessions": 676,
+      "QQQ": {
+        "total_return": -0.7496860839802633,
+        "max_drawdown": -0.8298197182614617
+      },
+      "SPY": {
+        "total_return": -0.34782768290640553,
+        "max_drawdown": -0.4751429461918568
+      }
+    },
+    {
+      "ordinal": 2,
+      "id": "bear-msro9oip-tkx3zp",
+      "label": "熊市 2",
+      "start": "2007-06-27",
+      "end": "2009-03-20",
+      "note": "",
+      "trading_sessions": 437,
+      "QQQ": {
+        "total_return": -0.38199241789635796,
+        "max_drawdown": -0.5340325433420552
+      },
+      "SPY": {
+        "total_return": -0.46863859167377353,
+        "max_drawdown": -0.5518912082016887
+      }
+    },
+    {
+      "ordinal": 3,
+      "id": "bear-msroetfo-rfd0ni",
+      "label": "熊市 3",
+      "start": "2010-04-28",
+      "end": "2010-09-02",
+      "note": "",
+      "trading_sessions": 90,
+      "QQQ": {
+        "total_return": -0.07969966406013729,
+        "max_drawdown": -0.15121579836680665
+      },
+      "SPY": {
+        "total_return": -0.07864713751126329,
+        "max_drawdown": -0.15036838694668397
+      }
+    },
+    {
+      "ordinal": 4,
+      "id": "bear-msrof4q0-7ohlcf",
+      "label": "熊市 4",
+      "start": "2011-07-14",
+      "end": "2011-10-06",
+      "note": "",
+      "trading_sessions": 60,
+      "QQQ": {
+        "total_return": -0.04482491124459731,
+        "max_drawdown": -0.16099287888723424
+      },
+      "SPY": {
+        "total_return": -0.10568523828496101,
+        "max_drawdown": -0.1789367895101116
+      }
+    },
+    {
+      "ordinal": 5,
+      "id": "bear-msrofjtu-72xk6y",
+      "label": "熊市 5",
+      "start": "2012-09-18",
+      "end": "2012-11-21",
+      "note": "",
+      "trading_sessions": 45,
+      "QQQ": {
+        "total_return": -0.08762877783787593,
+        "max_drawdown": -0.11637929540988379
+      },
+      "SPY": {
+        "total_return": -0.04382192823315323,
+        "max_drawdown": -0.07181937394621296
+      }
+    },
+    {
+      "ordinal": 6,
+      "id": "bear-msrohq5p-h6eln3",
+      "label": "熊市 6",
+      "start": "2015-07-27",
+      "end": "2015-09-25",
+      "note": "",
+      "trading_sessions": 44,
+      "QQQ": {
+        "total_return": -0.06361953120952557,
+        "max_drawdown": -0.12614699711147903
+      },
+      "SPY": {
+        "total_return": -0.06256089132987497,
+        "max_drawdown": -0.11170665794302126
+      }
+    },
+    {
+      "ordinal": 7,
+      "id": "bear-msrohsst-l1l3x6",
+      "label": "熊市 7",
+      "start": "2015-12-17",
+      "end": "2016-02-24",
+      "note": "",
+      "trading_sessions": 46,
+      "QQQ": {
+        "total_return": -0.08419234891257632,
+        "max_drawdown": -0.1573053849781525
+      },
+      "SPY": {
+        "total_return": -0.05130633820495667,
+        "max_drawdown": -0.11832202236974843
+      }
+    },
+    {
+      "ordinal": 8,
+      "id": "bear-msroi1yh-xf2flq",
+      "label": "熊市 8",
+      "start": "2018-09-24",
+      "end": "2018-12-31",
+      "note": "",
+      "trading_sessions": 68,
+      "QQQ": {
+        "total_return": -0.15873112297458625,
+        "max_drawdown": -0.22699587270164112
+      },
+      "SPY": {
+        "total_return": -0.136210956442109,
+        "max_drawdown": -0.1920308022770787
+      }
+    },
+    {
+      "ordinal": 9,
+      "id": "bear-msroi8rr-ixky4i",
+      "label": "熊市 9",
+      "start": "2020-02-10",
+      "end": "2020-03-31",
+      "note": "",
+      "trading_sessions": 36,
+      "QQQ": {
+        "total_return": -0.17745657580034002,
+        "max_drawdown": -0.28559369741546836
+      },
+      "SPY": {
+        "total_return": -0.22533414190418433,
+        "max_drawdown": -0.33717380792910223
+      }
+    },
+    {
+      "ordinal": 10,
+      "id": "bear-msroim6z-9otbiw",
+      "label": "熊市 10",
+      "start": "2021-12-02",
+      "end": "2023-01-09",
+      "note": "",
+      "trading_sessions": 277,
+      "QQQ": {
+        "total_return": -0.3001403267600167,
+        "max_drawdown": -0.3511878732724564
+      },
+      "SPY": {
+        "total_return": -0.13524118036224697,
+        "max_drawdown": -0.24496336225207693
+      }
+    },
+    {
+      "ordinal": 11,
+      "id": "bear-msroj3aj-8peqmb",
+      "label": "熊市 11",
+      "start": "2024-12-26",
+      "end": "2025-04-30",
+      "note": "",
+      "trading_sessions": 85,
+      "QQQ": {
+        "total_return": -0.10087087292395691,
+        "max_drawdown": -0.22768359229336155
+      },
+      "SPY": {
+        "total_return": -0.07505297531133981,
+        "max_drawdown": -0.1875530874920368
+      }
+    },
+    {
+      "ordinal": 12,
+      "id": "bear-msrojgwr-686udc",
+      "label": "熊市 12",
+      "start": "2026-01-22",
+      "end": "2026-04-17",
+      "note": "",
+      "trading_sessions": 60,
+      "QQQ": {
+        "total_return": 0.04656852320572891,
+        "max_drawdown": -0.11723603873248645
+      },
+      "SPY": {
+        "total_return": 0.033527091656777364,
+        "max_drawdown": -0.08884978267856858
+      }
+    }
+  ]
+}

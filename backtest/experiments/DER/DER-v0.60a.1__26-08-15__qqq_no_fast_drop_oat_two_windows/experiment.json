@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_no_fast_drop_oat_two_windows_v1",
+  "created_at_utc": "2026-08-15T00:00:00+00:00",
+  "status": "exploratory_robustness",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_no_fast_drop_oat_two_windows",
+    "description": "冻结 DER-v0.60 在 1999–2015 训练期选出的无 C/D 九参数高原代表，不改变任何策略语义；分别在原训练评价窗口和去掉 2005 年以前行情的子窗口执行单参数扰动，以诊断冻结点是一维高原还是时期驱动的尖峰。",
+    "buy_rule": "初始空仓。普通买入为 OR：价格向上穿越动态 H 日 SMA；或价格向上穿越动态三短 SMA（F-spacing、F、F+spacing）平均值下方 G%。已有卖出成交价后，再加入达到卖出价上方 R% 的强制买回。多个买入阈值同时存在时，采用当天最先可能触及的最低向上阈值。",
+    "sell_rule": "持仓时 OR：价格跌至成本价下方 L%；三短 SMA 平均变化连续 A 个交易日为负且价格向下穿越动态 B 日 SMA；价格向下穿越动态 E 日 SMA。C/D 快速导数卖出明确关闭。多个卖出阈值同时存在时，采用当天最先可能触及的最高向下阈值。",
+    "signal_time": "每个交易日开始前只使用截至前一交易日 Close 的完整历史，解出当日动态条件单阈值；两个窗口均可使用评价起点之前的 QQQ 历史做指标预热，但不能在评价起点前成交。",
+    "execution_time": "若前一 Close 到当日常规时段 Open 已越过阈值，按当日 Open 成交；否则当日调整后 OHLC 触及盘前解出的理论阈值时按该阈值成交。每天最多一笔，不使用 PyBroker middle price。",
+    "position_sizing": "long-only；每个窗口独立从 100,000 美元现金与空仓开始，每次在全仓 QQQ 与全现金之间切换，允许小数股，不融资，现金不计息。",
+    "initial_position": "每个窗口从空仓等待第一笔普通买入；强制买回不能产生第一笔买入。绩效从共同评价首日开始，包含等待首买的现金期。"
+  },
+  "parameters": {
+    "initial_position": "flat",
+    "evaluation_start": "analysis_start",
+    "max_trades_per_day": 1,
+    "search_method": "one_parameter_at_a_time_around_frozen_DER_v0.60_baseline",
+    "unique_case_count": 164,
+    "sweep_point_count": 172,
+    "report_primary_window_id": "W2005_2015",
+    "windows": [
+      {
+        "window_id": "W1999_2015",
+        "label": "1999–2015（评价 2000-07-27 起）",
+        "input_history_start": "1999-03-10",
+        "analysis_start": "2000-07-27",
+        "analysis_end": "2015-12-31",
+        "warmup": "1999-03-10 至 2000-07-26 只预热；评价边界与 DER-v0.60 训练期完全一致。"
+      },
+      {
+        "window_id": "W2005_2015",
+        "label": "2005–2015",
+        "input_history_start": "1999-03-10",
+        "analysis_start": "2005-01-03",
+        "analysis_end": "2015-12-31",
+        "warmup": "2005 年以前只用于均线预热，禁止交易；窗口从 2005-01-03 独立空仓重置。"
+      }
+    ],
+    "legacy_disabled_rule_placeholders": {
+      "C_fast_derivative_pct": -0.1,
+      "D_negative_days_fast": 3,
+      "note": "只为兼容通用账本结构；fast_drop_enabled=false，C/D 不产生信号也不参与扰动。"
+    },
+    "baseline": {
+      "A_negative_days_slow": 8,
+      "B_slow_sma_window": 178,
+      "C_fast_derivative_pct": -0.1,
+      "D_negative_days_fast": 3,
+      "E_fallback_sma_window": 187,
+      "F_short_sma_center": 151,
+      "F_short_sma_spacing": 10,
+      "G_short_recovery_below_pct": 0.3,
+      "H_reentry_sma_window": 238,
+      "L_cost_stop_pct": 24.25,
+      "R_forced_rebuy_pct": 23.5,
+      "forced_reentry_enabled": true,
+      "fast_drop_enabled": false
+    },
+    "sweeps": [
+      {
+        "sweep_id": "A",
+        "parameter": "A_negative_days_slow",
+        "label": "A · 慢趋势连续负变化日",
+        "start": 2,
+        "stop": 10,
+        "step": 1
+      },
+      {
+        "sweep_id": "B",
+        "parameter": "B_slow_sma_window",
+        "label": "B · 慢趋势卖出 SMA",
+        "start": 158,
+        "stop": 198,
+        "step": 2
+      },
+      {
+        "sweep_id": "E",
+        "parameter": "E_fallback_sma_window",
+        "label": "E · 兜底卖出 SMA",
+        "start": 167,
+        "stop": 207,
+        "step": 2
+      },
+      {
+        "sweep_id": "F_CENTER",
+        "parameter": "F_short_sma_center",
+        "label": "F · 三短 SMA 中心（间隔固定 10）",
+        "start": 131,
+        "stop": 171,
+        "step": 2
+      },
+      {
+        "sweep_id": "F_SPACING",
+        "parameter": "F_short_sma_spacing",
+        "label": "F · 三短 SMA 间隔（中心固定 151）",
+        "start": 5,
+        "stop": 20,
+        "step": 1
+      },
+      {
+        "sweep_id": "G",
+        "parameter": "G_short_recovery_below_pct",
+        "label": "G · 短均线恢复买入偏移 (%)",
+        "start": 0,
+        "stop": 1.0,
+        "step": 0.05
+      },
+      {
+        "sweep_id": "H",
+        "parameter": "H_reentry_sma_window",
+        "label": "H · 趋势恢复买入 SMA",
+        "start": 218,
+        "stop": 258,
+        "step": 2
+      },
+      {
+        "sweep_id": "L",
+        "parameter": "L_cost_stop_pct",
+        "label": "L · 成本止损 (%)",
+        "start": 19.25,
+        "stop": 29.25,
+        "step": 0.5
+      },
+      {
+        "sweep_id": "R",
+        "parameter": "R_forced_rebuy_pct",
+        "label": "R · 卖价上方强制买回 (%)",
+        "start": 18.5,
+        "stop": 28.5,
+        "step": 0.5
+      }
+    ],
+    "plateau_diagnostic": {
+      "reference_mode": "curve_maximum",
+      "cagr_tolerance_pct_points": 0.75,
+      "sharpe_tolerance": 0.05,
+      "component": "connected_interval_containing_frozen_baseline",
+      "baseline_outside_rule": "report_no_baseline_connected_plateau"
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "每个评价窗口独立在首个交易日常规时段 Open 用同样的 100,000 美元全仓买入 QQQ 并持有；策略从同日现金与空仓开始，因此包含等待首个普通买入信号的现金期。",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "report_title": "QQQ 无 C/D 基线：1999–2015 与 2005–2015 单参数高原诊断",
+    "report_subtitle": "冻结 DER-v0.60 参数；九个有效维度逐一扰动，比较 CAGR、Sharpe、高原区间和时期形状。",
+    "reuse_review": "复用 v4 交互报告与通用 OAT 曲线；新增规则优先的合并 PDF、曲线最高点联合高原、跨窗口交集和高原端点正式账本复核。",
+    "include_market_figure": true,
+    "combined_pdf": true,
+    "no_per_trade_table": true
+  },
+  "research": {
+    "stage": "exploratory_robustness",
+    "hypothesis": "若 DER-v0.60 的冻结参数不是由 1999–2004 特定行情制造的畸形峰，那么它在原训练评价窗口与 2005–2015 子窗口中，应在多数有效维度上都位于相对各自 CAGR/Sharpe 最高点的连续联合近最高带内，并且两个窗口的基线相连区间应有非空交集。",
+    "primary_metric": "对每个参数和每个窗口分别定义联合近最高带：CAGR 不低于该曲线最高值 0.75 个百分点以上，且 Sharpe 不低于该曲线最高值 0.05 以上；只报告包含冻结基线的连续分量。",
+    "selection_rule": "本实验不选参数、不优化也不替换 DER-v0.60 基线。曲线 CAGR/Sharpe 最高点与基线相连高原端点只用于 PyBroker/独立账本正式复核和诊断展示。",
+    "validation_plan": "先用编译筛选账本运行 164 个唯一 case × 2 个窗口，再对每窗基线、各曲线 CAGR/Sharpe 最高点及联合高原端点用 PyBroker 与独立 pandas 账本逐日核对；明确断言 fast_drop_enabled=false 且没有 SELL_FAST_DROP。",
+    "promotion_criteria": "本轮没有自动晋级。只有当冻结基线在两个窗口的大多数维度都位于双侧或宽单侧联合近最高带、跨窗交集非空且曲线方向没有明显反转时，才支持把 DER-v0.60 继续作为后续成本与规则消融研究基线。",
+    "rejection_conditions": "若任一窗口没有普通首买、C/D 产生信号、每天超过一笔、筛选与正式账本不一致、数据未批准、基线在多个关键维度落在联合近最高带之外、跨窗高原大量无交集、极值普遍触及范围边界或报告/PDF/哈希/目录门禁失败，则否决相应稳健性主张；仍保留全部诊断结果。"
+  },
+  "active_run_id": null
+}

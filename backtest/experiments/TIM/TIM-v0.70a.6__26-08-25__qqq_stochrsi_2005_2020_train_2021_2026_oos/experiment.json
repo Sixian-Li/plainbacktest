@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_dual_stochrsi_robust_train_2005_2020_oos_2021_2026_v1",
+  "created_at_utc": "2026-08-25T06:00:00+00:00",
+  "status": "holdout_validation",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_dual_raw_stochrsi_cross_robust_train_oos",
+    "description": "Select the 14–50 by 70–160 period pair using only 2005–2020 and the frozen multidimensional robustness method, then evaluate the frozen pair once on the untouched continuous 2021–2026 account.",
+    "buy_rule": "While flat, both completed prior StochRSI values are below 0.20 and both provisional same-session values cross to or above 0.20; buy at the larger joint solved trigger.",
+    "sell_rule": "While long, both completed prior StochRSI values are above 0.80 and both provisional same-session values cross to or below 0.80; sell at the smaller joint solved trigger.",
+    "signal_time": "Eligibility and exact triggers use only completed prior data. No observation dated 2021 or later may enter selection.",
+    "execution_time": "Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact trigger. High and Low are ignored.",
+    "positioning": "Every training window and the locked holdout are separate long-only 0%/100% QQQ accounts with 100000 dollars, fractional shares, no leverage, and no cash interest.",
+    "plain_language": {
+      "summary": "只用2005至2020寻找换期限、换起点和轻微改参数后仍稳定的周期，再把它原样放进2021至2026检验。",
+      "buy": "两个周期先同时处于低位，再一起向上越过0.20时买入QQQ。",
+      "sell": "两个周期先同时处于高位，再一起向下跌破0.80时卖出QQQ。",
+      "execution": "前一日收盘后冻结触发价；跳空越线按开盘价成交，否则盘中只按开盘到收盘方向检查触发价。",
+      "position": "训练窗口和验证账户都从10万美元现金独立开始，在满仓QQQ与现金之间切换，并与同期持有比较。"
+    }
+  },
+  "parameters": {
+    "research_start": "2005-01-03",
+    "selection_end": "2020-12-31",
+    "horizons_years": [
+      3,
+      5,
+      7
+    ],
+    "horizon_last_start": {
+      "3": "2017-12-31",
+      "5": "2015-12-31",
+      "7": "2013-12-31"
+    },
+    "expected_windows": {
+      "3": 52,
+      "5": 44,
+      "7": 36
+    },
+    "holdout_start": "2021-01-04",
+    "holdout_end": "2026-08-04",
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "short_period_start": 14,
+    "short_period_end": 50,
+    "long_period_start": 70,
+    "long_period_end": 160,
+    "period_step": 2,
+    "combination_count": 874,
+    "screen_cost_bps": 5,
+    "formal_costs_bps": [
+      0,
+      5,
+      10
+    ],
+    "chronological_blocks": [
+      [
+        2005,
+        2009
+      ],
+      [
+        2010,
+        2013
+      ],
+      [
+        2014,
+        2017
+      ]
+    ],
+    "local_radius_steps": 1,
+    "gates": {
+      "minimum_worst_horizon_q25_joint_rank": 0.55,
+      "minimum_worst_time_block_median_joint_rank": 0.55,
+      "minimum_leave_one_start_year_out_q25_joint_rank": 0.5,
+      "minimum_worst_local_3x3_score": 0.45,
+      "minimum_cagr_win_rate_vs_buy_hold": 0.4,
+      "minimum_sharpe_win_rate_vs_buy_hold": 0.55,
+      "minimum_drawdown_win_rate_vs_buy_hold": 0.6
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5,
+    10
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ independently restarted in every training window and at the 2021 holdout first Open",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged for frozen training diagnostics and untouched holdout results."
+  },
+  "research": {
+    "stage": "locked_out_of_sample_validation",
+    "hypothesis": "The multidimensional robustness method applied only to 2005–2020 can identify a period pair whose risk-adjusted behavior persists in untouched 2021–2026 data.",
+    "primary_metric": "Training selection uses exactly the frozen maximin and seven-gate rule from the parent experiment; the primary holdout result is CAGR at 5 bps on the single continuous 2021-01-04 through 2026-08-04 account.",
+    "selection_rule": "Use only 132 training windows ending by 2020-12-31. Exclude boundaries, apply all seven gates, and choose the passing center with highest maximin score. If none passes, freeze the strongest near-miss and label it as such before opening the holdout.",
+    "validation_plan": "After writing the 5 bps training selection artifact, run only the frozen selected pair and 42/100 anchor on the untouched 2021–2026 account at 0/5/10 bps, with Buy & Hold and dual-ledger reconciliation.",
+    "promotion_criteria": "A candidate may advance only if it was selected without 2021+ data and its 5 bps holdout CAGR is positive with no ledger or engineering failure; relative performance versus Buy & Hold must be reported rather than required post hoc.",
+    "rejection_conditions": "Reject promotion for any 2021+ selection leakage, cost fragility, nonpositive holdout CAGR, ledger mismatch, or validation failure."
+  },
+  "active_run_id": null
+}

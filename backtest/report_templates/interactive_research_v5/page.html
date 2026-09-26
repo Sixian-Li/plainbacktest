@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="quant-report-template" content="{{TEMPLATE_ID}}">
+<title>{{TITLE}}</title>
+<style>
+{{STYLES}}
+</style>
+</head>
+<body><main>
+<h1>{{HEADING}}</h1>
+<p>{{SUBTITLE}}</p>
+{{STRATEGY}}
+<nav class="nav">{{NAVIGATION}}</nav>
+<div class="warning"><strong>不是样本外验证。</strong> 本报告用于检查回测管线和历史研究结果；不能把回看后选出的参数、日期或路径直接解释为未来有效。</div>
+<div class="card" id="summary">{{SUMMARY}}</div>
+<div class="card notes"><h2>读图说明</h2><ul>{{NOTES}}</ul></div>
+{{SECTIONS}}
+<script>
+{{INTERACTIONS}}
+</script>
+</main></body></html>

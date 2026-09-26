@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_dual_stochrsi_cross_multihorizon_robustness_v1",
+  "created_at_utc": "2026-08-25T04:30:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_dual_raw_stochrsi_cross_multihorizon_robustness",
+    "description": "Fix CROSS thresholds at 0.20/0.80 and scan 874 short/long period pairs over every fully observable quarterly restart using 3-, 5-, and 7-year accounts. Select only through cross-horizon downside ranks, chronological regimes, leave-one-start-year-out stability, benchmark comparisons, and a complete local 3x3 neighborhood.",
+    "buy_rule": "While flat, both completed prior StochRSI values are below 0.20 and both provisional same-session values cross to or above 0.20; buy at the larger joint solved trigger.",
+    "sell_rule": "While long, both completed prior StochRSI values are above 0.80 and both provisional same-session values cross to or below 0.80; sell at the smaller joint solved trigger.",
+    "signal_time": "Eligibility and exact triggers use only completed prior data; pre-window history only warms indicators.",
+    "execution_time": "Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact trigger. High and Low are ignored.",
+    "positioning": "Every horizon-window is an independent long-only 0%/100% QQQ account starting with 100000 dollars cash, fractional shares, no leverage, and no cash interest.",
+    "plain_language": {
+      "summary": "把同一组周期放进长短不同、开始时间不同的独立账户，寻找换时期和轻微改参数后仍可靠的选择。",
+      "buy": "两个周期先同时处于低位，再一起向上越过0.20时买入QQQ。",
+      "sell": "两个周期先同时处于高位，再一起向下跌破0.80时卖出QQQ。",
+      "execution": "前一日收盘后冻结触发价；跳空越线按开盘价成交，否则盘中只按开盘到收盘的方向检查触发价。",
+      "position": "每个窗口都以10万美元现金独立开始，在满仓QQQ和现金之间切换，并与同期买入持有比较。"
+    }
+  },
+  "parameters": {
+    "research_start": "2010-01-04",
+    "research_end": "2026-08-04",
+    "horizons_years": [
+      3,
+      5,
+      7
+    ],
+    "horizon_last_start": {
+      "3": "2023-09-30",
+      "5": "2021-09-30",
+      "7": "2019-09-30"
+    },
+    "expected_windows": {
+      "3": 55,
+      "5": 47,
+      "7": 39
+    },
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "short_period_start": 14,
+    "short_period_end": 50,
+    "long_period_start": 70,
+    "long_period_end": 160,
+    "period_step": 2,
+    "combination_count": 874,
+    "screen_cost_bps": 5,
+    "formal_costs_bps": [
+      0,
+      5,
+      10
+    ],
+    "chronological_blocks": [
+      [
+        2010,
+        2013
+      ],
+      [
+        2014,
+        2017
+      ],
+      [
+        2018,
+        2023
+      ]
+    ],
+    "local_radius_steps": 1,
+    "gates": {
+      "minimum_worst_horizon_q25_joint_rank": 0.55,
+      "minimum_worst_time_block_median_joint_rank": 0.55,
+      "minimum_leave_one_start_year_out_q25_joint_rank": 0.5,
+      "minimum_worst_local_3x3_score": 0.45,
+      "minimum_cagr_win_rate_vs_buy_hold": 0.4,
+      "minimum_sharpe_win_rate_vs_buy_hold": 0.55,
+      "minimum_drawdown_win_rate_vs_buy_hold": 0.6
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5,
+    10
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ independently restarted at each horizon-window first Open",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged for robustness diagnostics and formal finalist comparisons."
+  },
+  "research": {
+    "stage": "full_sample_multihorizon_robustness_exploration",
+    "hypothesis": "A genuinely robust period pair should remain strong across 3/5/7-year restarts, early/middle/late start blocks, deletion of any one start year, nearby parameters, and comparisons with independently restarted Buy & Hold.",
+    "primary_metric": "Maximize the minimum of worst-horizon lower-quartile joint CAGR/Sharpe percentile rank, worst chronological-block median joint rank, leave-one-start-year-out lower-quartile joint rank, and the worst corresponding score in the complete 3x3 parameter neighborhood.",
+    "selection_rule": "Exclude grid boundaries. Apply every frozen absolute gate, then rank passing centers by the maximin score, benchmark win rates, and case ID. If none passes, report no robust champion. Mechanical point maxima are not eligible evidence by themselves.",
+    "validation_plan": "Screen all 874 pairs over all 141 horizon-windows at 5 bps. Reconcile the robust finalist, 42/100 anchor, and strongest near-miss through PyBroker and the independent ledger at 0/5/10 bps on every horizon-window.",
+    "promotion_criteria": "No direct promotion because all 2010–2026 observations participate. A named robust champion remains a descriptive candidate requiring frozen future or cross-asset validation.",
+    "rejection_conditions": "Reject a champion if any horizon, time-block, leave-year-out, local-neighborhood, benchmark, cost, ledger, or engineering gate fails."
+  },
+  "active_run_id": null
+}

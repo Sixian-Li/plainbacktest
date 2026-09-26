@@ -1,0 +1,3 @@
+as_of_date,ticker,name,identifier,weight_pct,classification,reason
+2026-08-18,-,US DOLLAR,999USDZ92,0.100187,cash,"US dollar cash is a fund holding, not an equity constituent."
+2026-08-18,2602335D,CONTRA HOLOGIC INCORPO,436CVR021,3e-06,corporate_action_right,"The CONTRA HOLOGIC position is a corporate-action right, not a listed equity ticker."

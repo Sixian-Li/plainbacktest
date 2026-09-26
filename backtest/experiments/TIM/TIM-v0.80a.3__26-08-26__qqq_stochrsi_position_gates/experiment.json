@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_stochrsi_position_gate_comparison_2015_2026_v1",
+  "created_at_utc": "2026-08-26T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_stochrsi_position_gate_comparison",
+    "description": "Compare three frozen QQQ mother strategies and nine all-in-or-cash timing accounts derived from each mother's completed post-trade QQQ weight. Mother M1 is D0_F0_S0 from TIM-v0.80a.2. Mother M2 is D0_F1_S1, which adds the sparse StochRSI42 recovery and StochRSI100 recovery buys to the original accumulation and pool-sale state machine. Mother M4 is a separate four-state target-weight process: StochRSI42 turns its short state on at a strict upcross above 0.20 and off at a strict downcross below 0.10; StochRSI100 does the same for its long state; the daily target QQQ weights for neither/short-only/long-only/both states are 0%/40%/60%/100%. For each mother, three independent fixed-capital accounts hold 100% QQQ only when the mother's same-Close post-trade QQQ weight is strictly greater than 70%, 80%, or 90%, otherwise 100% cash.",
+    "buy_rule": "M1 and M2 preserve their frozen B2-over-B1 accumulation rules and M2 additionally preserves its two low-position recovery buys. M4 rebalances to 40% when only the StochRSI42 state is on, 60% when only the StochRSI100 state is on, and 100% when both are on. Each derived gate buys all-in QQQ when its source mother's completed post-trade QQQ weight becomes strictly greater than its own 70%, 80%, or 90% threshold.",
+    "sell_rule": "M1 and M2 preserve the frozen Pool A and Pool B sell mechanisms, including the theoretical StochRSI100=0.30 fast-drop special case. M4 rebalances down to 60%, 40%, or 0% as its two component states turn off below 0.10. Each derived gate sells all QQQ whenever its source mother's completed post-trade weight is not strictly greater than the gate threshold; equality is cash.",
+    "signal_time": "All StochRSI crossings and mother post-trade QQQ weights use completed current adjusted-Close data. M4 state history is causally warmed on approved observations before 2015-01-02. A gate reads the deterministic completed post-trade weight produced by its mother on the same Close.",
+    "execution_time": "All ordinary mother rebalances and all gate entries/exits execute at the same adjusted Close that confirms the signal, with zero transaction cost. M1/M2 retain the frozen fast-drop theoretical-price exception. Gate orders always use the ordinary adjusted Close and never inherit that theoretical fill price.",
+    "positioning": "Long-only fractional QQQ and cash. Every account starts with $100,000. M1 and M2 may add external cash only under their frozen minimum-buy rules, and each is compared with its own contribution-matched Buy & Hold. M4 and all nine gate accounts never accept external cash. Gate accounts do not copy mother cash flows or mother position size; they only copy the binary weight signal.",
+    "plain_language": {
+      "summary": "比较三种QQQ仓位管理方法，并检验它们的持仓比例能否直接变成全仓或空仓的择时信号。",
+      "buy": "三条母策略按各自规则增加QQQ；九条独立择时账户只在对应母策略的QQQ仓位严格高于70%、80%或90%时全仓买入。",
+      "sell": "母策略按各自规则减仓；择时账户一旦不再严格高于门槛，就把QQQ全部卖出并持有现金。",
+      "execution": "当天收盘确认信号并按当天收盘成交，门槛相等时视为空仓。",
+      "position": "每个账户从10万美元开始；九条择时账户和四状态母策略不追加本金，两个复杂母策略的追加本金只进入各自的同步注资基准。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2015-01-02",
+    "analysis_end": "2026-08-04",
+    "mother_strategies": [
+      {
+        "mother_id": "M1_D0_F0_S0",
+        "definition": "TIM-v0.80a.2 D0_F0_S0"
+      },
+      {
+        "mother_id": "M2_D0_F1_S1",
+        "definition": "TIM-v0.80a.2 D0_F1_S1"
+      },
+      {
+        "mother_id": "M4_FOUR_STATE",
+        "definition": "StochRSI42/100 hysteresis target weights"
+      }
+    ],
+    "four_state": {
+      "short_period": 42,
+      "long_period": 100,
+      "on_threshold": 0.2,
+      "off_threshold": 0.1,
+      "target_weights": {
+        "both_off": 0.0,
+        "short_only": 0.4,
+        "long_only": 0.6,
+        "both_on": 1.0
+      },
+      "rebalance_frequency": "every completed Close"
+    },
+    "position_gate_thresholds": [
+      0.7,
+      0.8,
+      0.9
+    ],
+    "position_gate_operator": "strictly greater than",
+    "gate_signal_source": "mother post-trade QQQ market value divided by mother equity on the same Close",
+    "gate_capital_policy": "independent fixed $100,000 initial capital; no external contributions",
+    "strategy_path_count": 12,
+    "final_comparison_paths": "nine position gates plus naive QQQ Buy & Hold",
+    "same_close_execution": true,
+    "performance_return_method_with_flows": "daily time-weighted returns; XIRR also reported"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000.0,
+  "financing": "No leverage or borrowing. Only M1/M2 frozen minimum-buy shortfalls can add external cash; M4 and all gates cannot.",
+  "benchmark": "M1 and M2 each have a contribution-matched QQQ Buy & Hold plus naive QQQ Buy & Hold. M4 and all nine fixed-capital gates compare directly with naive QQQ Buy & Hold.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged. Add mother-group equity and capital panels plus one directly comparable ten-line gate-versus-QQQ chart."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "A complex continuous position process may be more useful as a trend-membership signal than as a standalone single-asset capital-allocation strategy, and fixed 70/80/90 gates reveal how much information survives binary conversion.",
+    "primary_metric": "For the nine fixed-capital gates: CAGR, Sharpe, maximum drawdown and average exposure versus naive QQQ. For M1/M2: cash-flow-adjusted CAGR, Sharpe, drawdown and XIRR versus contribution-matched Buy & Hold.",
+    "selection_rule": "Report all 12 predeclared strategy paths without selecting a winner. The nine gate paths are the only common-capital final comparison; identical paths remain visible and are diagnosed rather than deduplicated.",
+    "validation_plan": "Reconcile every mother and gate order, daily cash, shares, equity and FIFO trade against compiled PyBroker replay; verify strict gate equality, no gate contributions, causal state warmup, four-state targets and the expected equivalence of M4's 70/80/90 gates.",
+    "promotion_criteria": "A gate is a rotation-signal candidate only if its return/drawdown tradeoff is useful versus naive QQQ and its behavior is not dependent on external contributions or threshold equality accidents.",
+    "rejection_conditions": "Reject any path if reconciliation fails, a gate receives external cash, a gate uses a pre-trade rather than post-trade mother weight, equality enters QQQ, or four-state weights do not match the frozen target map."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

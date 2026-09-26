@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "experiment_id": "bear24_atr_hard_stop_policy_ablation_v1",
+  "created_at_utc": "2026-08-21T00:00:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "BEAR24_ATR_ABLATION"
+  ],
+  "excluded_symbols": {
+    "Q": "用户此前明确要求完全排除；本实验只使用既有核心12、近核心8和零售4，共24个标的。"
+  },
+  "strategy": {
+    "name": "bear24_atr_hard_stop_policy_ablation",
+    "description": "只在既有12段事后峰值至谷底熊市窗口内，分别对24个单标的100%仓位路径，以及核心12、近核心8、零售4三个固定等权分组，比较四种冻结政策：A不使用SMA或止损并持有到熊市结束；B使用SMA200上下3%完整择时；C不使用普通SMA退出，按每次真实入场时的Wilder ATR20设置12%至20%的固定硬止损，止损后在后续完成Close重新高于原止损线时买回；D与C使用相同硬止损，但止损后必须先在SMA200上方3%水平之下或等于该水平完成重新武装，再严格上穿才买回。10%成交锁和星标权重均关闭。",
+    "buy_rule": "每段熊市start完成Close后，若标的在该日具备有效OHLC、SMA200和Wilder ATR20，则A/C/D产生初始买入信号；B仅在Close>SMA200×1.03时产生初始买入信号，否则当Close<=SMA200×1.03时进入已武装空仓状态。B在熊市途中只有已武装且完成Close严格上穿SMA200×1.03时买入。C因硬止损空仓后忽略止损当日，从下一交易日起首个完成Close严格高于该次原固定止损线时买入。D因硬止损空仓后忽略止损当日，先在后续完成Close<=SMA200×1.03时武装，再在更晚完成Close严格上穿该水平时买入。所有Close信号下一共同交易日Open执行；每次真实买入重新计算并冻结新的ATR止损线。",
+    "sell_rule": "A只在每段熊市end完成Close后清仓。B持仓时完成Close<SMA200×0.97产生普通卖出，并在end清仓。C/D持仓时不使用普通SMA卖出；每次真实入场以该次计成本买入价和买入信号日已完成的Wilder ATR20计算止损距离clip(3×ATR20/入场价,12%,20%)，固定止损线为入场价×(1-距离)，持仓期间不随峰值移动。若某日Open<=止损线则按Open卖出，否则Low<=止损线<Open时按止损线卖出；end仍无条件清仓。硬止损等于触线即触发。",
+    "signal_time": "熊市start/end来自事后人工区间，是外生oracle事件，不宣称当时可知。SMA与重新买入只使用当日常规时段已完成Close和更早历史；ATR止损线只使用买入信号日已经完成的ATR20与下一日真实Open成交价。固定止损在入场成交后成为已知挂单水平，之后只用当日Open/Low判断是否触发，不使用当日High或Close抬高止损。",
+    "execution_time": "Close确认的初始买入、SMA买卖、止损后重新买入和熊市结束清仓均在下一共同交易日的拆股及股息调整Open成交。固定硬止损可在持仓当日成交：若Open已跌破则按Open，否则Low触线则按固定止损线；入场当日先按Open买入，随后硬止损立即生效，若当日Low触线可同日卖出。单边成本通过买高、卖低调整每笔成交价。",
+    "positioning": "long-only、允许小数股、不融资、现金不计息。24个单标的分别用独立100%账户。三个分组在每段熊市start把当时组合净值等分给该段已具备共同指标预热的成员；每只成员拥有独立固定资金袖套，未入场或止损后的资金留在自身袖套，绝不重新分配给其他成员；同一熊市重新买入只使用自己的袖套，下一段熊市开始再重新等权。",
+    "initial_position": "每段熊市start完成Close之前均为空仓；符合规则的初始仓位在下一共同Open建立。",
+    "plain_language": {
+      "summary": "比较一直持有、完整SMA200择时、ATR硬止损后快速买回，以及ATR硬止损后等待SMA确认四种熊市防守办法。",
+      "buy": "每段熊市开始时，基准版和两种ATR版买入具备足够历史的标的；完整SMA版要先站上200日均线上方3%。止损后，一版等价格重新站回原止损线，另一版等待重新上穿200日均线上方3%。",
+      "sell": "基准版只在熊市结束卖出；完整SMA版跌到200日均线下方3%卖出；两种ATR版按入场时波动率设置固定灾难止损，并在熊市结束时清仓。",
+      "execution": "收盘确认的信号都在下一交易日开盘成交；硬止损作为持仓中的挂单，跳空时按开盘价、盘中触线时按止损线成交。",
+      "position": "单标的使用完整独立账户；分组把资金等分为固定袖套，某只股票退出后资金留现金，不会加到其他股票上。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2000-03-24",
+    "analysis_end": "2026-03-31",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "core12": [
+      "AZO",
+      "TLT",
+      "COR",
+      "EXE",
+      "DVA",
+      "SJM",
+      "SO",
+      "ED",
+      "GLD",
+      "CHD",
+      "HRL",
+      "GILD"
+    ],
+    "near_core8": [
+      "HSY",
+      "ORLY",
+      "MO",
+      "WRB",
+      "EQT",
+      "LMT",
+      "GIS",
+      "WEC"
+    ],
+    "retail4": [
+      "DLTR",
+      "DG",
+      "WMT",
+      "TSCO"
+    ],
+    "groups": {
+      "GROUP_CORE12": [
+        "AZO",
+        "TLT",
+        "COR",
+        "EXE",
+        "DVA",
+        "SJM",
+        "SO",
+        "ED",
+        "GLD",
+        "CHD",
+        "HRL",
+        "GILD"
+      ],
+      "GROUP_NEAR8": [
+        "HSY",
+        "ORLY",
+        "MO",
+        "WRB",
+        "EQT",
+        "LMT",
+        "GIS",
+        "WEC"
+      ],
+      "GROUP_RETAIL4": [
+        "DLTR",
+        "DG",
+        "WMT",
+        "TSCO"
+      ]
+    },
+    "targets": [
+      "AZO",
+      "TLT",
+      "COR",
+      "EXE",
+      "DVA",
+      "SJM",
+      "SO",
+      "ED",
+      "GLD",
+      "CHD",
+      "HRL",
+      "GILD",
+      "HSY",
+      "ORLY",
+      "MO",
+      "WRB",
+      "EQT",
+      "LMT",
+      "GIS",
+      "WEC",
+      "DLTR",
+      "DG",
+      "WMT",
+      "TSCO",
+      "GROUP_CORE12",
+      "GROUP_NEAR8",
+      "GROUP_RETAIL4"
+    ],
+    "policies": [
+      "A_hold",
+      "B_sma200_full",
+      "C_atr_stop_price_reentry",
+      "D_atr_stop_sma_reentry"
+    ],
+    "formal_case_count_per_cost": 108,
+    "sma_window": 200,
+    "sma_buffer_pct": 3.0,
+    "atr_window": 20,
+    "atr_method": "Wilder RMA initialized by the simple mean of the first 20 true ranges",
+    "atr_multiplier": 3.0,
+    "atr_stop_min_pct": 12.0,
+    "atr_stop_max_pct": 20.0,
+    "atr_for_entry": "the last completed ATR20 on the buy signal date; the next-Open effective entry fill fixes the stop distance and line",
+    "hard_stop_type": "fixed_from_effective_entry_fill_not_trailing",
+    "hard_stop_fill": "Open when Open is at or below the fixed line; otherwise the fixed line when Low touches it; symmetric adverse cost adjustment is then applied",
+    "hard_stop_activation": "immediately after the entry Open fill, including the entry session",
+    "simple_reentry": "ignore the stop session; from the next session, first completed Close strictly above the original fixed stop line signals next-Open buy",
+    "sma_reentry": "ignore the stop session; later Close at or below SMA200 plus 3% arms, and a still later strict Close cross above that level signals next-Open buy",
+    "state_change_lock_band_pct": null,
+    "star_weighting": false,
+    "group_weighting": "equal independent capital sleeves among members with valid OHLC, SMA200 and ATR20 at each bear start",
+    "inactive_sleeve_policy": "cash retained in the same member sleeve; never redistributed within the bear interval",
+    "group_rebalance_policy": "re-equalize eligible member sleeves only at the start of each bear interval",
+    "common_calendar_policy": "以SPY日历为基础；标的上市前缺席不影响日历，任何标的上市后缺少Open/High/Low/Close的日期从全部case共同剔除，禁止填造价格；熊市start/end及其下一共同交易日必须保留。",
+    "interval_liquidation": "end completed Close signal, next common adjusted Open",
+    "aggregate_return_policy": "12段逐段收益分别计算；总小熊、总大熊、总熊和剔除2000-2002总熊按对应逐段账户收益几何复合；未持有区间收益为0。",
+    "excluded_bear_for_post_2000_scope": {
+      "ordinal": 1,
+      "label": "2000-2002"
+    },
+    "report_scopes": [
+      "12_individual_intervals",
+      "minor_compound",
+      "major_compound",
+      "all_compound",
+      "all_excluding_2000_2002_compound"
+    ],
+    "fractional_shares": true,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; cash between and within bear intervals earns zero interest",
+  "benchmark": "每个目标的A_hold是B和C的机制基准；D只与相同ATR硬止损的C配对比较。单边5bps为主结果，0bps只检查成本是否反转。",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "复用v5共享渲染器与自包含Plotly交互；实验专属内容只负责24张单标的和3张分组的16行×4列收益表、政策对照、回撤、止损与重新买入诊断，不修改共享模板。"
+  },
+  "research": {
+    "stage": "retrospective_event_conditioned_exploratory_policy_ablation",
+    "hypothesis": "对既有24个事后熊市韧性候选而言，按真实入场波动冻结的12%至20%ATR硬止损，可以比无止损持有降低尾部回撤；把SMA200限制为止损后的重新买入门槛，可能比SMA200负责日常卖出保留更多熊市逆势收益，而且结果不应只由2000-2002首段贡献。",
+    "primary_metric": "单边5bps下保存27个目标×4种政策的完整结果。每个目标强制报告12段逐段、总小熊、总大熊、总熊、剔除2000-2002总熊、连续账户最大回撤、最差单段、持仓率、硬止损次数、SMA退出次数、重新买入次数和换手；B-A隔离完整SMA，C-A隔离ATR硬止损，D-C隔离SMA重新买入。",
+    "selection_rule": "四种政策和所有参数均在运行前冻结，不扫描ATR倍数、上下限、SMA缓冲或股票名单。保存108个case乘0/5bps的全部216条路径，不按结果删标的。只有5bps下最大回撤改善至少5个百分点、最差单段不恶化、剔除2000-2002总熊相对配对基准不落后超过5个百分点且0bps方向不反转，才把B-A或C-A标记为目标层面的描述性有效。D-C采用Pareto规则：最大回撤不恶化超过2个百分点且剔除2000后收益提高至少5个百分点，或剔除2000后收益不恶化超过5个百分点且最大回撤改善至少2个百分点。分组层只有至少三个分组中的两个同向通过时才称为跨分组有效。",
+    "validation_plan": "先用独立因果状态机生成每个单标的的明确Open或日内固定止损成交，再把相同明确成交交给PyBroker独立组合账本，逐日核对现金、股数、净值、订单日期/方向/股数/成交价和闭合交易，容差1e-6。三个分组由已双算的独立成员袖套按每段起点等权聚合，并分别从PyBroker成员路径和参考成员路径重建后再次逐日核对。单测覆盖Wilder ATR初始化、12%/20%截断、跳空/触线/等于触发、入场日止损、B的3%滞回、C简单买回、D先武装再上穿、止损资金不再分配、每段重新等权、首段剔除、未来数据不可回写和108 case完整性。保存全部机器产物、来源哈希，运行全量测试、目录生成、工作区审计、真实Chrome交互、PDF打印门禁和validate_run。",
+    "promotion_criteria": "本实验因24个候选和12段熊市边界均含事后选择，永不直接晋级模拟盘。只有C或D在三个分组至少两个满足冻结有效规则，剔除2000-2002后仍保持方向，且结果不是少数单标的贡献集中，才值得另建使用实时可知熊市状态和前瞻名单的锁定实验。",
+    "rejection_conditions": "若ATR改善只来自2000-2002、三个分组中至少两个在剔除首段后反向、完整SMA继续显著牺牲收益而未降低回撤、硬止损没有改善最差单段或最大回撤、组内退出资金被错误分给其他标的、同一历史结果被用于改ATR或SMA参数、使用未来ATR或Close决定当日止损、validated父run被修改、任一目标权重超过100%、或PyBroker与独立账本任一差异超过1e-6，则拒绝对应机制解释、实现或后续晋级。"
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

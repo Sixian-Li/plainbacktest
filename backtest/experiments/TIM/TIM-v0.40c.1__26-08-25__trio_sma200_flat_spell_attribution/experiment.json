@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "experiment_id": "trio_sma200_flat_spell_attribution_v1",
+  "created_at_utc": "2026-08-25T00:00:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "MO",
+    "AZO",
+    "TLT"
+  ],
+  "excluded_symbols": {
+    "discarded_parent_targets": "本轮按用户复核只保留MO、AZO、TLT；SO、ED、GIS及父实验其他标的不进入计算或汇总。"
+  },
+  "strategy": {
+    "name": "trio_sma200_three_percent_hysteresis",
+    "description": "对MO、AZO、TLT分别在各自完整批准历史上运行独立的SMA200上下3%全仓择时。SMA200首次形成时只建立前一状态并保持空仓；空仓时，只有前一完成Close不高于前一SMA200×1.03、当日完成Close严格高于当日SMA200×1.03，才产生买入信号。持仓时，当日完成Close严格低于当日SMA200×0.97产生卖出信号。卖出后可无限次按同一上穿规则重新买入。所有信号下一标的交易日拆股及股息调整Open成交；没有熊市oracle、止损、成交锁、星标、组合资金再分配或参数扫描。",
+    "buy_rule": "SMA200已完整预热，当前为空仓，前一交易日完成Close<=前一SMA200×1.03，且当日完成Close>当日SMA200×1.03时产生买入信号；第一个SMA200有效日永不买入。卖出后的重新买入使用完全相同的真实向上穿越条件。",
+    "sell_rule": "当前持仓且当日完成Close<当日SMA200×0.97时产生卖出信号。由于买入发生在上轨之上且每日连续观察，该条件记录持仓后的首次下轨下穿；不使用ATR、峰值回撤、固定百分比或其他强制止损。样本末日不为报告方便强制清仓。",
+    "signal_time": "SMA200、上下轨和买卖状态只使用当日常规时段已完成Close及更早数据；主观大小熊区间只在成交完成后的事件归因中标记重叠，不参与任何信号。",
+    "execution_time": "买卖信号均在当日Close完成后确认，并在下一标的有效交易日的拆股及股息调整Open成交；单边成本通过买高、卖低调整成交价。卖出成交Open至下一买入成交Open定义为一段空仓期。",
+    "positioning": "long-only、允许小数股、不融资。每只标的使用独立100%账户；买入时使用全部可用现金，卖出时清空全部持仓，空仓现金不计息。三只标的不合并成组合。",
+    "initial_position": "每只标的在SMA200首次形成前后均从空仓开始，只有第一次真实上穿SMA200上轨的信号在下一Open建立首仓。",
+    "plain_language": {
+      "summary": "只保留MO、AZO和TLT，检查简单SMA200择时卖出后的空仓究竟避开了下跌，还是错过了上涨。",
+      "buy": "价格收盘真正从SMA200上方3%的门槛下方穿到门槛上方时，用全部现金买入；卖出后以后还可以按同一规则再买。",
+      "sell": "持仓时，只要收盘跌到SMA200下方3%的门槛以下，就全部卖出。",
+      "execution": "每天收盘后确认信号，订单在下一交易日开盘成交；报告从卖出开盘一直观察到下一次买入开盘。",
+      "position": "三只标的各用一个独立满仓或空仓账户，空仓资金保留现金且不计利息。"
+    }
+  },
+  "parameters": {
+    "targets": [
+      "MO",
+      "AZO",
+      "TLT"
+    ],
+    "analysis_start": "symbol_specific_first_valid_sma200",
+    "analysis_end": "2026-08-04",
+    "sma_window": 200,
+    "entry_buffer_pct": 3.0,
+    "exit_buffer_pct": 3.0,
+    "first_valid_sma_bar_can_enter": false,
+    "entry_semantics": "true close crossing from <= upper rail to > upper rail",
+    "exit_semantics": "held completed close strictly below lower rail",
+    "reentry": "unlimited, using the same true upper-rail crossing",
+    "signal_time": "completed adjusted close",
+    "fill_time": "next symbol-session adjusted open",
+    "flat_spell_start": "sell fill adjusted open, inclusive",
+    "flat_spell_end": "next buy fill adjusted open, exclusive of the reentry session after its open",
+    "open_final_spell_mark_to_market": "last approved adjusted close",
+    "flat_spell_path_extremes": "adjusted low/high from sell-fill session through the session before reentry; open final spell through the final session",
+    "forward_sessions_after_sell": [
+      5,
+      10,
+      20,
+      60
+    ],
+    "forward_return_definition": "return from raw sell-fill Open to adjusted Close after N cash sessions counting the sell-fill session as session one; require a complete N-session horizon",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "bear_intervals_are_attribution_only": true,
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09,
+    "formal_case_count_per_cost": 3,
+    "formal_path_count": 6
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "关闭；首次买入前和每段空仓期间的现金均不计利息。",
+  "benchmark": "每只标的在其第一个有效SMA200完成Close后发出买入信号、下一标的交易日调整Open满仓并持有到样本末日；分别按0和5bps计算。空仓期机会成本使用不含交易成本的原始调整Open/Close回报。",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "复用父实验已验收的v5策略流程、净值勾选、区间对齐和定投控件；新增三张价格/SMA/空仓高亮图、空仓事件表和固定前瞻分布，但不修改共享模板。"
+  },
+  "research": {
+    "stage": "exploratory_full_history_fixed_policy_event_attribution",
+    "hypothesis": "若SMA200上下3%对MO、AZO、TLT确有机械风控价值，卖出成交至重新买入成交之间的标的回报应更常为负，且下探幅度应显著大于错过的上涨；这种方向不应只由2000-2002或少数单次事件贡献。",
+    "primary_metric": "单边5bps下分别报告三只标的完整策略与同起点Hold的总收益、CAGR、Sharpe、最大回撤和持仓率；空仓期以原始卖出Open至下一原始买入Open的标的回报为主指标，并同时保存期间最低Low、最高High、持续交易日、5/10/20/60日完整前瞻回报以及主观大小熊重叠。",
+    "selection_rule": "策略窗口固定SMA200、上下缓冲固定3%，不扫描参数、不筛除任何有效买卖或空仓事件。MO、AZO、TLT及0/5bps共六条完整路径全部保存。闭合空仓期和样本末尚未闭合的最后一段分开汇总；前瞻窗口不足时保留可用天数并把该固定窗口指标记为缺失，禁止用较短窗口冒充完整窗口。",
+    "validation_plan": "每条路径分别由PyBroker和quantkit.reference因果账本执行，逐日核对现金、股数、净值及订单日期、方向、数量和成交价，容差1e-6。单测覆盖首次SMA有效日不买、真实上穿、下轨卖出、卖出后再买、空仓期端点、开放末段、固定前瞻完整性、熊市仅归因不改信号及未来价格不可回写。保存价格/订单/交易/逐日状态/全部空仓事件/来源哈希，运行全量测试、目录生成、工作区审计、真实Chrome、PDF门禁和validate_run。",
+    "promotion_criteria": "这是用户在全历史复核后从六只标的再次收窄到三只的固定规则归因，仍含选择后观察，不可直接晋级模拟盘。只有三只中至少两只在多个非重叠时期显示多数空仓期避免损失、最大回撤有实质改善、成本后收益没有不可接受损失，才值得另建参数完全锁定、时间顺序样本外或实时前向实验。",
+    "rejection_conditions": "若结论依赖删除错过上涨的空仓期、把首次预热后的水平条件误作上穿、使用未来Close在同一Open成交、用主观熊市边界驱动信号、前瞻不足仍报完整收益、策略只由单一2000-2002事件改善、0与5bps方向冲突、源数据在run内变化、或PyBroker与独立账本任一差异超过1e-6，则拒绝对应风控解释或正式验证。"
+  },
+  "latest_validated_run_id": null,
+  "active_run_id": null
+}

@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_three_factor_downside_risk_training_2000_2015_v1",
+  "created_at_utc": "2026-08-21T08:00:00+00:00",
+  "status": "specification_frozen",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "traded_symbol": "QQQ",
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_three_factor_trend_downside_risk_vote",
+    "description": "QQQ只在0%和100%仓位之间切换。长期趋势因子要求完成Close高于SMA180且SMA180最近3个交易日的平均每日百分比斜率严格高于0.04%；短期趋势因子要求SMA20最近10个完成值的OLS每日对数斜率乘R²严格高于0；风险因子比较短期与长期波动率，风险比率严格高于报警阈值时进入危险状态，之后只有严格低于报警阈值减0.4才恢复安全。主候选使用只保留下跌收益的下行波动率与风险否决结构；普通总波动率、严格3/3和普通2/3只作消融。所有信号仅使用完成Close，不使用固定百分比止损。",
+    "buy_rule": "空仓时，长期趋势、短期趋势和风险安全三个因子必须全部成立，并连续2个完成交易日成立，才产生买入信号。风险否决主候选持仓后要求风险继续安全且长短趋势至少一个成立；严格3/3消融要求三个因子持续全部成立；普通2/3消融要求任意两个因子成立。风险比率为短窗口波动率除以长窗口波动率；下行版本以sqrt(mean(min(log_return,0)^2))计算，普通版本以sqrt(mean(log_return^2))计算。",
+    "sell_rule": "风险否决主候选在风险状态变为危险，或长期与短期趋势同时失效时产生卖出信号；严格3/3消融在任一因子失效时卖出；普通2/3消融在不足两个因子成立时卖出。风险状态一旦危险，只有风险比率严格低于恢复阈值才解除；解除风险状态本身不会直接买入，仍须三个因子连续2日全部成立。基线P24不使用风险因子，任一长短趋势条件失效即卖出。",
+    "signal_time": "长期SMA、长期斜率、短期趋势质量、每日对数收益和波动率比值只使用当日常规时段完成Close及更早数据；当日Close完成后才确认状态变化。",
+    "execution_time": "所有买卖信号最早在下一QQQ交易日的拆股及股息调整Open成交；每边成本作为买高卖低的成交价冲击，禁止同日Close成交和PyBroker默认middle price。",
+    "positioning": "long-only；初始100,000美元；QQQ仓位只能为0%或100%，每次买入使用全部现金、每次卖出清空全部份额；允许小数股，不融资、不做空，现金不计息。",
+    "initial_position": "2000-03-17前为空仓；更早数据只用于指标和风险状态预热，不继承仓位、现金或趋势确认计数。",
+    "reentry": "卖出后先等待风险状态恢复安全，再要求长期趋势、短期趋势和风险安全连续2日全部成立，下一Open满仓买回。",
+    "plain_language": {
+      "summary": "用长趋势、短趋势和下行风险三个信号决定QQQ是否值得满仓，重点观察风险否决能否让净值更平稳。",
+      "buy": "长期方向向上、短期走势健康且近期下跌没有突然变剧烈，这三个条件连续两天都成立时买入。",
+      "sell": "近期下跌风险一旦明显升高就卖出；风险仍安全时，只有长短趋势同时转弱才卖出，并与更严格或普通多数票版本比较。",
+      "execution": "每天收盘后确认全部信号，产生的买卖决定在下一交易日开盘执行。",
+      "position": "持有时QQQ满仓，不满足条件时全部现金；不融资、不做空，现金不计息。"
+    }
+  },
+  "parameters": {
+    "warmup_start": "1999-03-10",
+    "training_window": {
+      "start": "2000-03-17",
+      "end": "2015-12-31"
+    },
+    "robustness_subwindows": [
+      {
+        "window_id": "W1_2000_2003",
+        "start": "2000-03-17",
+        "end": "2003-12-31"
+      },
+      {
+        "window_id": "W2_2004_2007",
+        "start": "2004-01-01",
+        "end": "2007-12-31"
+      },
+      {
+        "window_id": "W3_2008_2011",
+        "start": "2008-01-01",
+        "end": "2011-12-31"
+      },
+      {
+        "window_id": "W4_2012_2015",
+        "start": "2012-01-01",
+        "end": "2015-12-31"
+      }
+    ],
+    "frozen_trend_parameters": {
+      "long_sma_window": 180,
+      "long_slope_lookback": 3,
+      "long_slope_threshold_daily_pct": 0.04,
+      "short_sma_window": 20,
+      "short_regression_window": 10,
+      "short_quality_threshold_daily_pct": 0.0,
+      "entry_confirmation_sessions": 2,
+      "relative_strength_lookback": 120
+    },
+    "decision_structures": [
+      "STRICT_3_OF_3",
+      "MAJORITY_2_OF_3",
+      "RISK_VETO"
+    ],
+    "risk_kinds": [
+      "TOTAL_VOLATILITY",
+      "DOWNSIDE_VOLATILITY"
+    ],
+    "principal_candidate": {
+      "decision_structure": "RISK_VETO",
+      "risk_kind": "DOWNSIDE_VOLATILITY"
+    },
+    "risk_grid": {
+      "short_window": [
+        10,
+        20,
+        30
+      ],
+      "long_window": [
+        90,
+        120,
+        180
+      ],
+      "danger_ratio": [
+        1.3,
+        1.5,
+        1.7
+      ],
+      "recovery_gap": 0.4,
+      "combination_count_per_structure_and_kind": 27,
+      "total_risk_cases_per_cost": 162
+    },
+    "center_risk_parameters": {
+      "short_window": 20,
+      "long_window": 120,
+      "danger_ratio": 1.5,
+      "recovery_ratio": 1.1
+    },
+    "selection": {
+      "minimum_cagr_pct": 0.0,
+      "minimum_closed_trades": 6,
+      "minimum_full_period_exposure_pct": 10.0,
+      "require_positive_exposure_in_every_subwindow": true,
+      "plateau_drawdown_tolerance_pct_points": 1.0,
+      "minimum_connected_component_cases": 3,
+      "minimum_representative_plateau_neighbors": 2,
+      "prefer_non_boundary_candidate": true,
+      "primary": "在5bps的RISK_VETO+DOWNSIDE_VOLATILITY 27组中最大化四个独立重置子窗口的最差最大回撤",
+      "secondary": [
+        "最大的三维Manhattan连通1个百分点平台",
+        "平台内非边界候选",
+        "更低完整期Ulcer Index",
+        "更高最差63日收益",
+        "更短最大水下持续时间",
+        "更高亏损月份规避率",
+        "到平台坐标中位数更近"
+      ]
+    },
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero interest",
+  "benchmark": "QQQ buy and hold from 2000-03-17, with the same initial cash and per-side cost assumption",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "复用v5的人类语言策略流程、折叠技术附录、自包含Plotly、可见区间缩放、净值选择和打印隐藏规则；新增图表只属于本实验的三因子风险投票消融。"
+  },
+  "research": {
+    "stage": "exploratory_in_sample_factor_ablation",
+    "hypothesis": "长期与短期趋势都来自均线，面对快速下跌可能同步滞后；加入尺度无关的短期/长期下行波动率扩张，并赋予风险因子否决权，可能在保持QQQ 0%/100%仓位的同时进一步降低2000–2015各市场阶段回撤。",
+    "primary_metric": "四个预声明子窗口中最差最大回撤；其次为三维风险参数平台连通性、完整期Ulcer Index、最差63日收益、水下持续时间、亏损月份比例和CAGR。",
+    "selection_rule": "趋势参数固定为父实验扩边代表，不再联合优化。完整运行3种决策结构×2种风险定义×27组风险参数；只有RISK_VETO+DOWNSIDE_VOLATILITY的27组参与正式选参，其余均为消融。候选须5bps CAGR不低于0、至少6笔闭合交易、完整期持仓率至少10%且四个子窗口均有持仓；先按四窗最差最大回撤取最优值1个百分点带，再按三维单轴相邻索引选择最大连通分量，优先非边界点，并依次按Ulcer、最差63日收益、水下时间、亏损月份规避率和平台中心距离选代表。",
+    "validation_plan": "参考状态机保存全部163个case及风险状态；冻结代表、无风险P24、中心风险候选、普通总波动率、严格3/3和普通2/3在0/5bps下由PyBroker与独立账本核对逐日现金、份额、净值、订单日期、方向、份额与成交价。单测覆盖下行波动率定义、风险滞回、三种投票状态机、无未来数据、连续入场确认、风险单日退出、次日Open和全仓成交。2016年以后不得读取。",
+    "promotion_criteria": "只有5bps下行风险否决代表不触及风险网格边界、所在1pp连通分量至少3个case且至少有2个直接邻居、相对无风险P24的四窗最差回撤改善至少2个百分点、完整期最大回撤和Ulcer均不恶化、CAGR保持正值、0bps不反转风险方向且全部工程门禁通过，才值得新建独立2016–2026锁定测试。",
+    "rejection_conditions": "若代表触及边界或依赖孤立点，风险参数响应不连通，四窗最差回撤改善不足2个百分点，完整期最大回撤或Ulcer恶化，5bps后CAGR不为正，持仓率低于10%，风险因子被普通2/3趋势票抵消才产生改善，使用2016年后数据、未完成Close、同日Close成交、非0%/100%仓位，或PyBroker与独立账本差异超过1e-8，则拒绝晋级；负结果仍保存为validated研究证据。"
+  }
+}

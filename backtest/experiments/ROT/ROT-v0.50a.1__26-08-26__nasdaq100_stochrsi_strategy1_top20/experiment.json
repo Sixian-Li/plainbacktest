@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_pit_stochrsi_strategy1_top20_rotation_v1",
+  "created_at_utc": "2026-08-26T15:45:00+00:00",
+  "status": "exploratory_candidate_data",
+  "symbols": [
+    "NASDAQ100_PIT_STRATEGY1_ROTATION"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "nasdaq100_point_in_time_strategy1_90_top20_rotation",
+    "description": "对每一只历史时点Nasdaq-100成分证券独立运行已验证的策略1（D0_F0_S0），把当日收盘后策略1模拟账户中的股票市值占比作为分数。只有分数严格高于90%的证券才有资格参与排名；在每个预定调仓收盘从当时已知成分中取分数最高的20只，下一交易日开盘按目标权重完整再平衡。比较1、2、3、5个交易日调仓，以及不足10只时将未满十个10%槽位交给固定Bear9或始终把全部资金等权分配给所有合格股。每条政策同时以单边0和5bps执行，因此共有16条正式路径。历史成分和个股行情来自pending_review候选包，结果只能作探索性证据。",
+    "buy_rule": "每只证券先用自己的完整既有价格历史独立更新策略1；若该证券属于决策日前一交易日已经观察到的Nasdaq-100成分、指标已预热、当日有有效收盘价，而且策略1收盘后股票仓位严格大于90%，它才进入候选。调仓日按该仓位分数从高到低排名，同分按稳定security_id排序，最多选择20只。",
+    "sell_rule": "每个调仓收盘都会重新计算完整目标。分数不再严格高于90%、跌出前20名、或按滞后一交易日的成分状态已经离开指数的证券，在下一交易日开盘降到零；仍入选的证券也恢复到该路径的等权目标。非调仓日不主动改变目标。",
+    "signal_time": "成员资格、策略1仓位分数、排名和目标权重只使用当日已完成的拆股及股息调整Close以及此前信息。为避免把生效日才观察到的InIndex变化倒灌进决策，成员状态统一使用前一XNYS交易日的观察值。",
+    "execution_time": "调仓收盘确认目标，下一XNYS交易日的拆股及股息调整Open先卖出超额份额，再按稳定security_id顺序买入不足份额；允许小数股。成交价分别加入单边0或5bps不利冲击。",
+    "positioning": "最多持有20只合格成分股。FULL_EQUAL路径无论合格数量多少都把100%资金在合格股之间等权分配，零只时持现金。BEAR9_FLOOR10路径在合格股少于10只时每只目标10%，剩余资金按固定Bear9权重配置；达到10只后只持合格股并等权。Bear9尚未上市的权重保留现金，不融资、不做空，现金不计息。",
+    "plain_language": {
+      "summary": "把策略1当作每只历史Nasdaq-100股票的上涨强度评分，定期持有分数最高且超过90%的最多20只。",
+      "buy": "到调仓日时，只考虑当时已经属于指数、策略1仓位超过90%的股票，并买入其中排名最靠前的最多20只。",
+      "sell": "股票不再超过90%、跌出前20名或离开当时指数时，在下一次调仓把它卖掉；其余持仓也恢复到新的等权比例。",
+      "execution": "每天收盘后确认分数和排名，预定调仓日的决定在下一交易日开盘先卖后买；分别查看无成本和单边5bps。",
+      "position": "主仓最多20只股票；一种路径始终把资金平均分给现有合格股，另一种在不足10只时把空出的十等分槽位交给固定九只防守股票。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "1999-03-10",
+    "analysis_end": "2026-08-04",
+    "signal_engine": {
+      "source_experiment_id": "qqq_stochrsi_true124_position_gate_comparison_2015_2026_v1",
+      "source_mother_id": "M1_D0_F0_S0",
+      "specification": "ScaledPoolSpec()",
+      "score": "post-trade strategy1 equity weight in the security at completed Close",
+      "periods": [
+        42,
+        100
+      ],
+      "eligibility_threshold": 0.9,
+      "threshold_operator": "strictly greater than",
+      "pre_membership_price_history_allowed_for_indicator_and_state_warmup": true,
+      "external_cash_flows_are_internal_to_each_virtual_signal_ledger_only": true,
+      "external_cash_flows_never_enter_the_rotation_portfolio": true
+    },
+    "universe": {
+      "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+      "review_status": "pending_review",
+      "source_package_key": "split_and_dividend",
+      "source_variant": "split_and_dividend_adjusted",
+      "membership_source": "InIndex",
+      "decision_lag_xnys_sessions": 1,
+      "security_identity": "one source CSV equals one candidate security_id; no unreviewed predecessor merge",
+      "historical_weights_used": false
+    },
+    "terminal_price_policy": "when a selected historical security has no vendor row after its final observation, carry its final adjusted OHLC only as a terminal cash-settlement proxy until the next scheduled rebalance; it cannot receive a new target without a real score row, and only sell orders may use this proxy",
+    "temporary_unavailability_policy": "if a security has no real vendor bar on either the rebalance signal session or the intended next-Open execution session, freeze that security's shares for this rebalance and reconsider it only at the next scheduled rebalance with real signal and execution bars",
+    "ranking": {
+      "maximum_selected": 20,
+      "primary_sort": "strategy1 post-trade security weight descending",
+      "tie_break": "security_id ascending",
+      "eligible_only": true
+    },
+    "allocation_modes": {
+      "FULL_EQUAL": "if N>0 each selected security receives 1/N; if N=0 remain cash",
+      "BEAR9_FLOOR10": "if N>=10 each selected security receives 1/N; if 0<=N<10 each receives 10%, and Bear9 receives 1-N/10"
+    },
+    "bear9_weights": {
+      "AZO": 0.1,
+      "SO": 0.12,
+      "ED": 0.13,
+      "ORLY": 0.1,
+      "MO": 0.13,
+      "WRB": 0.12,
+      "DLTR": 0.08,
+      "DG": 0.09,
+      "WMT": 0.13
+    },
+    "bear9_source_definition": "codex/qqq-bear9-rebalance-robustness@337d8cf",
+    "bear9_individual_timing_enabled": false,
+    "bear9_prelisting_policy": "unavailable positive target weight remains cash and is not redistributed",
+    "rebalance_intervals_trading_days": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "rebalance_clock": "start at the first analysis Close; every Nth XNYS session is a signal day",
+    "rebalance_scope": "restore every selected security and active Bear9 member to the complete current target",
+    "formal_case_ids_per_cost": [
+      "RB01_FULL_EQUAL",
+      "RB02_FULL_EQUAL",
+      "RB03_FULL_EQUAL",
+      "RB05_FULL_EQUAL",
+      "RB01_BEAR9_FLOOR10",
+      "RB02_BEAR9_FLOOR10",
+      "RB03_BEAR9_FLOOR10",
+      "RB05_BEAR9_FLOOR10"
+    ],
+    "formal_case_count_per_cost": 8,
+    "formal_path_count": 16,
+    "signal_time": "completed adjusted Close",
+    "fill_time": "next XNYS adjusted Open",
+    "rotation_order": "sell excess first by stable instrument_id, then buy deficits by stable instrument_id with available cash",
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09,
+    "benchmark": "QQQ Buy & Hold enters on the same first executable Open and uses the same cost scenario"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; signal-ledger contributions do not enter the tradable portfolio; cash earns zero",
+  "benchmark": "QQQ Buy & Hold from the same initial decision date and next-Open execution, under the same 0 or 5bps one-sided price impact.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 with a 16-path metric table, QQQ-relative equity and drawdown views, eligible-count/exposure diagnostics, and current top-ranked constituents. Keep candidate-data warnings visible in natural language and machine details folded."
+  },
+  "research": {
+    "stage": "exploratory_candidate_point_in_time_rotation",
+    "hypothesis": "Strategy1's greater-than-90% virtual position may be a cross-asset trend-intensity score. Ranking only point-in-time Nasdaq-100 members and repeatedly equal-weighting the strongest names may concentrate rising segments, while the Bear9 floor may reduce idle cash when fewer than ten securities qualify.",
+    "primary_metric": "At 5bps compare CAGR, Sharpe, maximum drawdown, turnover, average invested fraction, eligible-count distribution and QQQ-relative return across all four rebalance intervals and both allocation modes; retain 0bps as a friction ablation.",
+    "selection_rule": "Report all 16 predeclared paths and do not rename the highest full-history path as an optimized winner. The 1/2/3/5-day grid, strict 90% gate, top20 cap, ten-slot Bear9 floor, Bear9 assets/weights, point-in-time membership lag and 0/5bps costs are frozen before execution.",
+    "validation_plan": "Unit-test the specialized strategy1 score engine against the source experiment's exact reference ledger; verify strict threshold, lagged membership, deterministic top20 ranking, both under-ten allocation policies, rebalance calendars, no signal-ledger cash leakage, prelisting cash and no future data. Reconcile every formal path between PyBroker and an independent next-Open multi-asset ledger for daily cash/equity, positions, orders, fills and FIFO trades within 1e-6, then run report tests, Chrome interaction, PDF gate, catalog checks, workspace audit and validate_run.",
+    "promotion_criteria": "No path can be promoted while the Nasdaq-100 package remains pending_review or the Bear9 list remains post-hoc. A descriptive candidate should improve 5bps Sharpe and maximum drawdown versus QQQ without reducing CAGR below QQQ, retain direction at 0bps, and show a broad neighboring rebalance-frequency response rather than a single isolated winner. Promotion additionally requires provider/license/acquisition/identity/adjustment review and a separately frozen forward or walk-forward experiment.",
+    "rejection_conditions": "Reject formal or out-of-sample language while the data is pending_review; reject any current-constituent lookback, same-Close portfolio fill, non-strict 90% entry, membership change used without the one-session lag, future availability used in ranking, redistribution of unavailable Bear9 weights, signal-ledger contribution entering portfolio capital, silent security-identity merge, unreported terminal-settlement proxy or unavailable-order deferral, any buy on a synthetic carry bar, incomplete 16-path matrix, cost direction reversal hidden from the report, non-finite ledger value, or ledger mismatch above 1e-6."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

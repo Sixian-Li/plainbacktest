@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_single_stochrsi_rolling_drift_2005_2020_v1",
+  "created_at_utc": "2026-08-29T15:53:30+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_single_raw_stochrsi_cross_rolling_drift_2005_2020",
+    "description": "Use one raw StochRSI only. For periods 14 through 210 in steps of 7, enter on the 0.20 upward recovery cross and exit on the 0.80 downward reversal cross. Evaluate the unchanged strategy in eleven overlapping five-calendar-year windows whose start year advances by one from 2005 through 2015.",
+    "buy_rule": "While flat, the completed prior StochRSI is below 0.20 and its provisional same-session value crosses to or above 0.20; buy at the solved trigger.",
+    "sell_rule": "While long, the completed prior StochRSI is above 0.80 and its provisional same-session value crosses to or below 0.80; sell at the solved trigger.",
+    "signal_time": "Eligibility and the exact trigger use only completed prior data. Each rolling account is restarted independently at its declared first session.",
+    "execution_time": "Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact trigger. High and Low are ignored.",
+    "positioning": "Every period-window case is an independent long-only 0%/100% QQQ account with 100000 dollars, fractional shares, no leverage, and no cash interest.",
+    "plain_language": {
+      "summary": "固定同一套QQQ低位恢复买入、高位转弱卖出规则，观察最佳Stochastic RSI周期是否随五年窗口逐年有序移动。",
+      "buy": "这条Stochastic RSI先处于低位，随后向上越过0.20时满仓买入QQQ。",
+      "sell": "持仓后，这条Stochastic RSI先处于高位，随后向下跌破0.80时全部卖出。",
+      "execution": "前一日收盘后冻结触发价；次日若跳空越线按开盘成交，否则只沿开盘到收盘方向检查精确触发价。",
+      "position": "每个五年窗口都从10万美元现金独立开始，在满仓QQQ与现金之间切换，空仓资金不计利息。"
+    }
+  },
+  "parameters": {
+    "window_convention": "[start-year first QQQ session, end-label-year first QQQ session); labels show the exclusive end year",
+    "window_interval_years": 5,
+    "window_start_year": 2005,
+    "window_last_start_year": 2015,
+    "window_count": 11,
+    "period_start": 14,
+    "period_end": 210,
+    "period_step": 7,
+    "period_count": 29,
+    "combination_count": 319,
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "screen_cost_bps": 5
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ independently restarted in every rolling window",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged; use its market-series checkbox controls for the eleven rolling-window response curves."
+  },
+  "research": {
+    "stage": "rolling_window_parameter_drift_diagnostic",
+    "hypothesis": "If the economically preferred single StochRSI horizon changes gradually with market regime, the mechanical best period and the high-performing region should move in an ordered way as the five-year window advances one year at a time.",
+    "primary_metric": "Describe the start-year sequence of the mechanical best period separately for CAGR and Sharpe, including rank correlation, linear slope, direction changes, and the full response curves.",
+    "selection_rule": "Do not name a deployable champion. Within each window report the mechanical maximum CAGR period and maximum Sharpe period from the frozen 29-point grid, with lower period as the deterministic tie-break.",
+    "validation_plan": "Reconcile all 319 period-window cases against the independent ledger at 5 bps and compare each window with an independently restarted QQQ Buy & Hold account.",
+    "promotion_criteria": "Diagnostic only. Ordered drift requires a visually coherent response surface plus consistent best-period direction; overlapping-window smoothness alone is insufficient for promotion.",
+    "rejection_conditions": "Reject ordered drift if best periods jump in both directions, correlations are weak or metric-dependent, or apparent continuity comes only from the 80% overlap between adjacent windows."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

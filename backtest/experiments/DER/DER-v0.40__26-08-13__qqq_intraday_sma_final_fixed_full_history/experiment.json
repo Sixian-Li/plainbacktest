@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_final_fixed_full_history_v1",
+  "created_at_utc": "2026-08-13T00:00:00+00:00",
+  "status": "frozen_historical_assessment",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_final_fixed_full_history",
+    "description": "冻结用户在全局搜索、分窗检验和逐参数敏感性分析后选定的最终参数，不再优化。策略从 QQQ 批准历史起点以现金开始，等待普通买入；随后以成本止损、慢速短均线转弱、三短均线快速下跌或长期均线下穿中的任一条件卖出，并以同价强制买回、长期均线上穿或短均线恢复中的任一条件买入。",
+    "buy_rule": "空仓时 OR：已有卖出价后，价格重新达到该卖出成交价（R=0%）则强制买回；价格向上穿越动态 SMA270；价格向上穿越 SMA70/80/90 三线平均值下方 1%。没有历史卖出价时，强制买回规则不可产生第一笔买入。",
+    "sell_rule": "持仓时 OR：价格低于成本价 10%；SMA70/80/90 三线平均变化率连续 3 日为负且价格跌破动态 SMA175；此前连续 3 日三线平均变化率为负且当日 SMA70、SMA80、SMA90 各自变化率全部不高于 -0.25%；价格向下穿越动态 SMA305。",
+    "signal_time": "每个交易日开始前只使用截至前一交易日 Close 的完整历史，解出当日条件单阈值；指标预热不足时对应规则不生成订单。",
+    "execution_time": "若前 Close 到当日常规时段 Open 已越过阈值，按当日 Open 成交；否则常规时段调整后 OHLC 触及预先解出的理论阈值时按该阈值成交；每天最多一笔。",
+    "position_sizing": "long-only；初始 100,000 美元现金，每次在全仓 QQQ 与全现金之间切换，允许小数股，不融资，现金不计息。",
+    "initial_position": "1999-03-10 起空仓等待第一笔普通买入；策略绩效从完整评价窗口起点计算，包含指标预热和等待首买的现金期。"
+  },
+  "parameters": {
+    "requested_start": "1999-03-10",
+    "analysis_start": "1999-03-10",
+    "analysis_end": "2026-08-04",
+    "evaluation_start": "analysis_start",
+    "initial_position": "flat",
+    "A_negative_days_slow": 3,
+    "B_slow_sma_window": 175,
+    "C_fast_derivative_pct": -0.25,
+    "C_fast_derivative_mode": "all_short_smas",
+    "D_negative_days_fast": 4,
+    "E_fallback_sma_window": 305,
+    "F_short_sma_center": 80,
+    "F_short_sma_spacing": 10,
+    "F_short_sma_windows": [
+      70,
+      80,
+      90
+    ],
+    "G_short_recovery_below_pct": 1.0,
+    "H_reentry_sma_window": 270,
+    "L_cost_stop_pct": 10.0,
+    "R_forced_rebuy_pct": 0.0,
+    "forced_reentry_enabled": true,
+    "max_trades_per_day": 1
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the first regular-session Open of the common 1999-03-10 through 2026-08-04 evaluation window, invest the same 100,000 USD in QQQ and hold. Strategy and benchmark use identical evaluation dates; the strategy's initial cash waiting period remains part of its performance.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged. The accepted zoom, visible-range Y axes, optional SMA overlays, equity selection, rebasing and DCA controls apply; keep experiment-specific annual returns and signal summaries outside the template."
+  },
+  "research": {
+    "stage": "frozen_historical_assessment",
+    "hypothesis": "The user-selected compromise parameters provide a coherent final historical description after prior optimization and sensitivity work, with improved risk-adjusted behavior versus QQQ Buy & Hold even if raw CAGR may differ.",
+    "primary_metric": "Report complete-window total return, CAGR, Sharpe, Sortino, annual volatility, maximum drawdown, drawdown duration, exposure, turnover, annual returns and order counts against the identical-window QQQ Buy & Hold; do not optimize or rank parameters.",
+    "selection_rule": "None in this experiment. The complete parameter vector was supplied and frozen by the user before this run; exactly one strategy case is evaluated.",
+    "validation_plan": "The single fixed case must match PyBroker and the independent pandas ledger on daily cash, shares, equity, order dates, sides, shares, fills and trade accounting; the first order must be an ordinary buy, forced re-entry cannot create it, and daily trades cannot exceed one.",
+    "promotion_criteria": "No automatic promotion. This run closes the historical research branch and creates the frozen specification that may later be evaluated with explicit costs and prospective paper trading if the user authorizes those steps.",
+    "rejection_conditions": "Reject if parameters differ from the frozen vector, pre-window or warmup rows trade, the first order is seeded or forced re-entry, daily orders exceed one, Buy & Hold uses another evaluation window, or PyBroker and the independent ledger diverge."
+  }
+}

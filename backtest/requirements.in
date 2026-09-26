@@ -1,0 +1,8 @@
+# Direct runtime dependencies. Exact transitive versions are captured in
+# requirements.lock after the isolated environment is installed and tested.
+lib-pybroker==1.2.12
+exchange-calendars==4.13.2
+plotly==6.3.0
+PyYAML==6.0.3
+openpyxl==3.1.5
+streamlit==1.62.0

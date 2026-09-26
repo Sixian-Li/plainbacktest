@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_stochrsi_sparse_entry_factorial_2015_2026_v1",
+  "created_at_utc": "2026-08-25T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_stochrsi_sparse_entry_factorial",
+    "description": "Eight zero-cost long-only QQQ cases form the full 2x2x2 factorial of three buy switches on top of the frozen TIM-v0.80 sell state machine. Switch D replaces immediate B1/B2 fills with the same virtual tranche accounting and releases the accumulated notional on a strict raw StochRSI100 upcross from <=0.20 to >0.20. Switch F arms after a strict StochRSI42 downcross below 0.20 and, on the next strict recovery upcross above 0.20, buys 40% of remaining cash only when pre-trade QQQ weight is below 15% and StochRSI100 is above 0.20. Switch S buys 50% of remaining cash when pre-trade QQQ weight is below 15% and StochRSI100 strictly upcrosses 0.20. On a shared Close, a deferred-queue release executes first; S then supersedes F and sizes from the remaining cash. Sparse buys do not change a, buy_b, the B2 counter, or a pending queue. Any actual sale resets the F arm along with the existing buy-cycle state.",
+    "buy_rule": "For every combination D/F/S in {off,on}^3: D off preserves immediate B2-over-B1 buys; D on queues the identical virtual B1/B2 dollar tranches and releases them on prior StochRSI100 <=0.20 and current >0.20. F on records a strict StochRSI42 downcross prior>=0.20/current<0.20; its next strict upcross prior<=0.20/current>0.20 buys 40% of remaining cash if pre-trade QQQ weight<15% and current StochRSI100>0.20, then clears the arm whether or not the weight/filter allowed a buy. S on buys 50% of remaining cash if pre-trade QQQ weight<15% on a strict StochRSI100 upcross prior<=0.20/current>0.20. Priority on the same Close is deferred release, then S; F is suppressed when S triggers. All conditions use strict crossings and completed Close data.",
+    "sell_rule": "All eight cases preserve TIM-v0.80's Pool A and Pool B sell mechanisms, including Pool A priority, daily decay in the 0.50-0.80 zone, armed downcross below 0.50, crowded-position Pool B accumulation and downcross below 0.70, and the strict theoretical-price fast-drop special case. Ordinary sale days block same-Close buys; the existing fast-drop special case may permit a buy after selling.",
+    "signal_time": "Raw StochRSI42/100 levels, sparse-weight tests, arm state, and strict crossings are confirmed using the completed current adjusted Close. Pre-trade QQQ weight is measured before every same-Close order as QQQ market value divided by total account equity.",
+    "execution_time": "Ordinary buys and sells fill at the same adjusted Close that confirms the signal. When multiple buys share a Close, the deferred queue fills first and the 50% StochRSI100 recovery buy sizes from the remaining cash; the 40% StochRSI42 recovery buy is suppressed. The unchanged fast-drop sale uses its theoretical StochRSI100=0.30 price without an OHLC-touch gate.",
+    "positioning": "Long-only fractional QQQ and cash from $100,000 initial capital. The original B1/B2 minimum shortfalls remain explicit external contributions and are mirrored into each case's own modified Buy & Hold. Sparse 40%/50% buys use remaining cash only and never introduce external capital. Pending deferred tranches remain reserved and any actual sale cancels them.",
+    "plain_language": {
+      "summary": "用八个组合检验低位金额延迟买入和两种低仓位恢复买入能否改善QQQ的持仓路径。",
+      "buy": "原有低位补仓可以立即执行或累计到长周期指标上穿0.2再执行；仓位很低时，还可分别启用短周期恢复买入和长周期恢复买入。",
+      "sell": "八个版本都沿用原策略的两个虚拟池减仓规则，不改变卖出逻辑。",
+      "execution": "当天收盘确认并成交；同日先执行累计金额，随后长周期50%买入优先于短周期40%买入。",
+      "position": "账户只持有QQQ和现金，新增恢复买入只使用剩余现金，原规则所需追加本金仍同步投入对应的Modified Buy & Hold。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2015-01-02",
+    "analysis_end": "2026-08-04",
+    "stochrsi_periods": [
+      42,
+      100
+    ],
+    "factorial_switches": {
+      "D": "queue B1/B2 and release on strict StochRSI100 upcross above 0.20",
+      "F": "when pre-trade weight<15%, buy 40% cash on armed StochRSI42 recovery above 0.20 while StochRSI100>0.20",
+      "S": "when pre-trade weight<15%, buy 50% cash on strict StochRSI100 upcross above 0.20"
+    },
+    "factorial_cases": [
+      {
+        "case_id": "D0_F0_S0",
+        "D": false,
+        "F": false,
+        "S": false
+      },
+      {
+        "case_id": "D0_F0_S1",
+        "D": false,
+        "F": false,
+        "S": true
+      },
+      {
+        "case_id": "D0_F1_S0",
+        "D": false,
+        "F": true,
+        "S": false
+      },
+      {
+        "case_id": "D0_F1_S1",
+        "D": false,
+        "F": true,
+        "S": true
+      },
+      {
+        "case_id": "D1_F0_S0",
+        "D": true,
+        "F": false,
+        "S": false
+      },
+      {
+        "case_id": "D1_F0_S1",
+        "D": true,
+        "F": false,
+        "S": true
+      },
+      {
+        "case_id": "D1_F1_S0",
+        "D": true,
+        "F": true,
+        "S": false
+      },
+      {
+        "case_id": "D1_F1_S1",
+        "D": true,
+        "F": true,
+        "S": true
+      }
+    ],
+    "same_close_buy_priority": [
+      "deferred_queue_release",
+      "sparse_100_50pct",
+      "sparse_42_40pct"
+    ],
+    "ordinary_sale_blocks_same_close_buy": true,
+    "fast_drop_allows_same_close_buy": true,
+    "same_close_execution": true,
+    "performance_return_method_with_flows": "daily time weighted returns; XIRR also reported"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000.0,
+  "financing": "No leverage or borrowing. Only frozen B1/B2 minimum shortfalls can add external cash; sparse recovery buys cannot.",
+  "benchmark": "Each of the eight cases is compared with its own contribution-matched QQQ Buy & Hold. Naive Buy & Hold invests only the initial $100,000 at the first analysis Close.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged and reuse the accepted StochRSI market, virtual-pool, QQQ-position-value, cash, factorial-performance, and drawdown figure patterns."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Low-position recovery entries may repair the return drag of deferred B1/B2 accumulation, and the 2x2x2 factorial can identify whether their effects are additive or interaction-dependent.",
+    "primary_metric": "CAGR gap and maximum-drawdown improvement versus each case's contribution-matched Buy & Hold, interpreted with Sharpe, XIRR, external contributions, turnover, average QQQ weight, order attribution, and factorial main/interaction effects",
+    "selection_rule": "Evaluate all eight predeclared cases. Report all cells and exact factorial contrasts; prefer a Pareto set and do not select a winner unless Sharpe is at least matched Buy & Hold, drawdown improves by at least 8 percentage points, and CAGR gap is no worse than -2 percentage points.",
+    "validation_plan": "Reconcile every case's orders, contributions, daily state and FIFO trades against compiled PyBroker replay; verify strict crossings, F arming, pre-trade weight, same-day priority and zero leftover pending notional; treat the entire interval as exploratory.",
+    "promotion_criteria": "A fixed combination passes all engineering gates and materially improves the return/drawdown/capital-demand tradeoff without depending on the OHLC-unchecked fast-drop fill.",
+    "rejection_conditions": "Reject a case or rule if reconciliation fails, a sparse buy occurs without its strict crossing and weight filter, same-day priority double-spends cash, pending notional is lost, or the apparent benefit is dominated by external contributions or an idealized untriggered event."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

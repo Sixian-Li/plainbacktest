@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma200_threshold_grid_2010_2014_v1",
+  "created_at_utc": "2026-08-13T14:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {
+    "SPY": "User explicitly limited this historical rerun to QQQ."
+  },
+  "strategy": {
+    "name": "intraday_dynamic_sma200_asymmetric_threshold_with_optional_corrections",
+    "description": "SMA200 uses completed history through the prior close to solve the exact next-session price at which the provisional current SMA200 reaches each a/b buffer. Start flat. When flat and the prior completed close is at or below the completed buy boundary, place the ordinary upward trigger; when long, keep the ordinary downward trigger active. Optionally also place a correction buy c% above the last effective sell fill or a correction sell d% below the last effective buy fill, with c=d in this experiment. The first eligible trigger in the current position direction executes and the position becomes fully invested or fully flat.",
+    "buy_rule": "Flat ordinary entry: prior_close <= prior_sma200*(1+b/100), then buy if current regular-session price reaches P where P=(1+b/100)*(sum of prior 199 closes + P)/200. If correction mode is enabled and a prior sell exists, also buy at last effective sell fill*(1+c/100); execute the lower upward trigger first.",
+    "sell_rule": "While long, sell if current regular-session price reaches downward P where P=(1-a/100)*(sum of prior 199 closes + P)/200. If correction mode is enabled, also sell at last effective buy fill*(1-d/100); execute the higher downward trigger first.",
+    "signal_time": "All trigger eligibility and prices are known before each regular session using only completed closes through the preceding session plus prior effective account fills.",
+    "execution_time": "If the regular-session Open has already crossed a predeclared trigger, fill at Open; otherwise fill at the exact theoretical trigger when the adjusted regular-session OHLC touches it. Apply the configured adverse cost to the raw fill. At most one fill per session.",
+    "positioning": "long-only; start with 100,000 USD cash; every buy invests all cash and every sell liquidates all shares; fractional shares; no financing; cash earns zero",
+    "sma_window": 200
+  },
+  "parameters": {
+    "analysis_start": "2010-01-04",
+    "analysis_end": "2014-12-31",
+    "requested_interval": "2010-01-01 inclusive to 2015-01-01 exclusive; normalized to available QQQ sessions",
+    "a_pct_range": {
+      "start": -20.0,
+      "stop": 20.0,
+      "step": 0.25
+    },
+    "b_pct_range": {
+      "start": -20.0,
+      "stop": 20.0,
+      "step": 0.25
+    },
+    "correction_scenarios_pct": [
+      null,
+      5.0,
+      10.0
+    ],
+    "correction_constraint": "c=d within each enabled scenario",
+    "max_trades_per_session": 1,
+    "combination_count_per_mode": 25921,
+    "combination_count_per_cost": 77763,
+    "total_case_count_all_costs": 155526
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Invest the same 100,000 USD in QQQ at the 2010-01-04 regular-session Open, including the configured one-sided entry cost, and hold through the 2014-12-31 Close.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse the accepted v3 navigation, visible-window axes, performance controls, rebase and DCA interactions. Reuse the same three-panel CAGR heatmaps and dynamic SMA200/correction overlays as the 2021-2025 experiment."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "The unchanged dynamic SMA200 a/b and optional correction design may exhibit different stable regions during the post-financial-crisis bull market than during 2000-2004 and 2021-2025.",
+    "primary_metric": "5 bps CAGR interpreted jointly with Sharpe, maximum drawdown, order count, exposure, surface connectedness, neighborhood stability and the common-start QQQ Buy & Hold benchmark; retain 0 bps for cost sensitivity.",
+    "selection_rule": "For each correction scenario independently, exhaustively evaluate the full 161x161 a/b grid. Report the mechanical global CAGR maximum, but select the stable representative only from the largest four-neighbor component of top-decile CAGR cells by maximizing the 3x3 neighborhood median minus half its standard deviation; do not promote a boundary-truncated or isolated maximum.",
+    "validation_plan": "Use prior QQQ history only for SMA200 warmup. Formally verify the global maximum, stable representative and a=b=0 anchor for every correction scenario and cost block with PyBroker and the independent daily ledger.",
+    "promotion_criteria": "No promotion from this rerun. Compare its stable regions and behavior with the unchanged 2000-2004 and 2021-2025 experiments only as historical sensitivity evidence.",
+    "rejection_conditions": "Reject or redesign if trigger prices use current-bar data before execution, daily OHLC requires an unresolvable second same-day fill, screening and formal metrics differ, PyBroker and the independent ledger diverge, or results rely on no-trade artifacts or isolated/boundary-truncated winners."
+  }
+}

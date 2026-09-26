@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "spy_intraday_sma_recentered_fixed_2000_2020_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "frozen_cross_asset_historical_assessment",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "SPY"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_recentered_fixed_2000_2020",
+    "description": "把 QQQ 全历史局部高原复测后由用户确认的联合参数完整冻结，不在 SPY 上重新选参；使用 2000 年前 SPY 历史预热指标，2000-01-03 起空仓等待第一笔普通买入，在 2020-12-31 收盘停止评价。",
+    "buy_rule": "空仓时 OR：已有卖出价后，价格重新达到该卖出成交价（R=0%）则强制买回；价格向上穿越动态 SMA264；价格向上穿越 SMA70/80/90 三线平均值下方 0.95%。没有历史卖出价时，强制买回不可产生第一笔买入。",
+    "sell_rule": "持仓时 OR：价格低于成本价 10%；SMA70/80/90 三线平均变化率连续 3 日为负且价格跌破动态 SMA176；此前连续 4 日三线平均变化率为负且当日 SMA70、SMA80、SMA90 各自变化率全部不高于 -0.25%；价格向下穿越动态 SMA301。",
+    "signal_time": "每个交易日开始前只使用截至前一交易日 Close 的完整历史，解出当日条件单阈值；2000 年前数据只用于指标预热，窗口前禁止交易。",
+    "execution_time": "若前 Close 到当日常规时段 Open 已越过阈值，按当日 Open 成交；否则常规时段调整后 OHLC 触及预先解出的理论阈值时按该阈值成交；每天最多一笔。",
+    "position_sizing": "long-only；初始 100,000 美元现金，每次在全仓 SPY 与全现金之间切换，允许小数股，不融资，现金不计息。",
+    "initial_position": "2000-01-03 起空仓等待第一笔普通买入；策略绩效从完整评价窗口起点计算，包含等待首买的现金期。"
+  },
+  "parameters": {
+    "requested_start": "2000-01-01",
+    "analysis_start": "2000-01-03",
+    "analysis_end": "2020-12-31",
+    "evaluation_start": "analysis_start",
+    "initial_position": "flat",
+    "A_negative_days_slow": 3,
+    "B_slow_sma_window": 176,
+    "C_fast_derivative_pct": -0.25,
+    "C_fast_derivative_mode": "all_short_smas",
+    "D_negative_days_fast": 4,
+    "E_fallback_sma_window": 301,
+    "F_short_sma_center": 80,
+    "F_short_sma_spacing": 10,
+    "F_short_sma_windows": [
+      70,
+      80,
+      90
+    ],
+    "G_short_recovery_below_pct": 0.95,
+    "H_reentry_sma_window": 264,
+    "L_cost_stop_pct": 10.0,
+    "R_forced_rebuy_pct": 0.0,
+    "forced_reentry_enabled": true,
+    "max_trades_per_day": 1
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the 2000-01-03 regular-session Open, invest the same 100,000 USD in SPY and hold through the 2020-12-31 Close. Strategy and benchmark use identical evaluation dates; the strategy's initial cash waiting period remains part of performance.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged. The accepted zoom, visible-range Y axes, optional SMA overlays, equity selection, rebasing and DCA controls apply; keep experiment-specific annual returns and signal summaries outside the template."
+  },
+  "research": {
+    "stage": "frozen_cross_asset_historical_assessment",
+    "hypothesis": "The exact QQQ-selected parameter vector may retain coherent return and risk behavior on SPY during 2000–2020 without any SPY-specific optimization.",
+    "primary_metric": "Report complete-window total return, CAGR, Sharpe, Sortino, annual volatility, maximum drawdown, drawdown duration, exposure and order counts against identical-window SPY Buy & Hold; do not optimize or rank parameters.",
+    "selection_rule": "None. The complete parameter vector was frozen by the user before this SPY run and exactly one zero-cost case is evaluated.",
+    "validation_plan": "The fixed SPY case must match PyBroker and the independent pandas ledger on daily cash, shares, equity, order dates, sides, shares, fills and trade accounting; the first order must be an ordinary buy, pre-2000 rows may only warm indicators, and daily trades cannot exceed one.",
+    "promotion_criteria": "No automatic promotion. SPY is economically related to QQQ and this is a retrospective zero-cost test, so even favorable results only provide cross-asset historical context.",
+    "rejection_conditions": "Reject if any frozen parameter changes, any pre-window row trades, the first order is seeded or forced re-entry, daily orders exceed one, Buy & Hold uses another window, data is unapproved, or PyBroker and the independent ledger diverge."
+  }
+}

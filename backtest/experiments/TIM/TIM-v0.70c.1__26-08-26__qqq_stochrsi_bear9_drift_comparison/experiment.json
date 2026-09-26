@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_stochrsi_bear9_drift_comparison_v1",
+  "created_at_utc": "2026-08-26T06:30:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "QQQ_STOCHRSI_BEAR9"
+  ],
+  "strategy": {
+    "name": "qqq_dual_stochrsi_close_cross_with_bear9_drift_sleeve",
+    "description": "Compare QQQ Buy & Hold with two frozen dual raw-StochRSI close-cross timing pairs, 12/61 and 62/111. Each timing path starts in cash and buys QQQ only after both completed StochRSI values cross upward through 0.20 on the same close; it exits after both cross downward through 0.80 on the same close. Two companion paths use the identical timing state but hold the fixed Bear9 basket whenever QQQ is not held, including before the first QQQ entry. Bear9 is AZO/SO/ED/ORLY/MO/WRB/DLTR/DG/WMT at 10/12/13/10/13/12/8/9/13 percent. While Bear9 is active, if any tradable member's completed-close total-account weight differs from its frozen target by strictly more than three percentage points, the entire available basket is restored to target weights at the next common Open. DG's unavailable prelisting sleeve remains cash.",
+    "buy_rule": "While the timing state is flat, both prior completed raw StochRSI values must be strictly below 0.20 and both current completed values must be at or above 0.20; that close changes the next-Open target to 100% QQQ. The Bear9 companion holds the frozen available-member targets whenever the QQQ target is zero.",
+    "sell_rule": "While the timing state is long, both prior completed raw StochRSI values must be strictly above 0.80 and both current completed values must be at or below 0.80; that close changes the next-Open target from QQQ to cash or Bear9. During a Bear9 spell, any available member whose absolute total-account weight drift is strictly greater than 0.03 triggers a full next-Open restoration of all current targets.",
+    "signal_time": "All StochRSI crossings, tradable-member changes, portfolio weights, and three-percentage-point drift checks use the completed adjusted Close and information available by that Close only.",
+    "execution_time": "Every target change executes at the next common adjusted Open with sells before buys and one-sided price-impact costs. No same-session trigger fill is used in this experiment.",
+    "positioning": "Long-only, 100000 dollars initial cash, fractional shares, no leverage, and no cash interest. Base timing paths wait in cash before their first QQQ entry and during later flat spells. Bear9 companion paths invest the flat sleeve from the first eligible signal day; unavailable DG weight remains cash until listing.",
+    "plain_language": {
+      "summary": "比较两组Stochastic RSI择时，并检验把QQQ空仓资金放进固定九只防守股票后净值会怎样。",
+      "buy": "两个周期都从低位向上越过0.20后，下一交易日开盘把资金切换到QQQ；增强版在此前持有九只防守股票。",
+      "sell": "两个周期都从高位向下跌破0.80后，下一交易日开盘卖出QQQ；增强版把资金切换到固定Bear9。",
+      "execution": "所有信号都等收盘确认，下一共同交易日开盘先卖后买；Bear9偏离目标超过三个百分点也在下一开盘恢复目标。",
+      "position": "账户只在QQQ、Bear9或现金之间切换，不融资；基础择时空仓留现金，增强择时空仓持有Bear9。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2000-05-30",
+    "analysis_end": "2026-08-04",
+    "timing_pairs": {
+      "STOCH_12_61": [
+        12,
+        61
+      ],
+      "STOCH_62_111": [
+        62,
+        111
+      ]
+    },
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "cross_semantics": "both prior values strictly beyond the old side and both current completed-close values at or beyond the new side",
+    "bear9_weights": {
+      "AZO": 0.1,
+      "SO": 0.12,
+      "ED": 0.13,
+      "ORLY": 0.1,
+      "MO": 0.13,
+      "WRB": 0.12,
+      "DLTR": 0.08,
+      "DG": 0.09,
+      "WMT": 0.13
+    },
+    "bear9_drift_threshold_absolute_weight": 0.03,
+    "bear9_drift_comparison": "strictly greater than threshold; absolute total-account member-weight deviation",
+    "bear9_rebalance_scope": "restore all currently tradable Bear9 members to frozen total-account targets; unavailable positive weights remain cash",
+    "initial_flat_policy": {
+      "base_timing": "cash",
+      "bear9_companion": "Bear9 from the first signal day, executing on the next Open"
+    },
+    "formal_case_ids": [
+      "STOCH_12_61_CASH",
+      "STOCH_62_111_CASH",
+      "STOCH_12_61_BEAR9_DRIFT3",
+      "STOCH_62_111_BEAR9_DRIFT3"
+    ],
+    "benchmark_case_id": "QQQ_BUY_HOLD",
+    "cost_bps_per_side": 5.0,
+    "signal_time": "completed adjusted Close",
+    "fill_time": "next common adjusted Open",
+    "rotation_order": "sell excess shares first in symbol order, then buy deficits in symbol order using available cash",
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; all paths are long-only and uninvested cash earns zero",
+  "benchmark": "QQQ Buy & Hold on the identical common calendar: the first analysis Close is the signal, the next common Open is the one-time 100% QQQ purchase, and the position is held through 2026-08-04 with 5 bps entry cost.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged for the requested five-line equity and drawdown comparison, plus metrics and Bear9 drift diagnostics."
+  },
+  "research": {
+    "stage": "exploratory_full_history_policy_comparison",
+    "hypothesis": "A fixed Bear9 sleeve used only during two frozen StochRSI flat states may raise terminal wealth and Sharpe, but the comparison must expose whether it also worsens drawdown and turnover.",
+    "primary_metric": "At 5 bps compare final equity, CAGR, Sharpe, maximum drawdown, turnover, and exposure for the five requested paths; report each Bear9 companion's deltas against its exact cash-flat timing parent.",
+    "selection_rule": "No parameter or winner is selected. The two StochRSI pairs, Bear9 members and weights, three-percentage-point absolute drift threshold, common dates, and next-Open execution are frozen before execution; all five paths are retained.",
+    "validation_plan": "Reconcile all four timing paths between PyBroker and an independent multi-asset next-Open ledger for daily cash, equity, per-symbol shares, orders, fills, and FIFO trades within 1e-6. Unit tests cover simultaneous dual close crossing, initial flat behavior, strict drift threshold, full-target restoration, DG prelisting cash, next-Open execution, and five-case identity. Run the full suite, v5 Chrome interaction, PDF print gate, catalog checks, workspace audit, and validate_run.",
+    "promotion_criteria": "This full-history comparison cannot promote Bear9 because its members and weights were chosen after historical review. A descriptive improvement requires each Bear9 companion to improve CAGR and Sharpe over its cash parent without worsening maximum drawdown by more than three percentage points.",
+    "rejection_conditions": "Reject any interpretation that calls this out-of-sample, any use of intraday exact-trigger fills, same-close execution, absolute drift at or below three percentage points triggering a rebalance, redistribution of DG's prelisting weight, missing path, unreported drawdown or turnover damage, data after 2026-08-04, or any ledger mismatch above 1e-6."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

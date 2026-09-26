@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_single_stochrsi_annual_dynamic_oos_2011_2021_v1",
+  "created_at_utc": "2026-08-30T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_single_stochrsi_annual_cagr_winner_walk_forward_2011_2021",
+    "description": "Trade QQQ from 2011 through 2021 with one raw StochRSI. At the start of each calendar year, replace the indicator period with the frozen maximum-CAGR period from the corresponding parent rolling window, beginning with the parent label 2005–2010 for application year 2011. Carry the existing QQQ or cash position through the parameter change; do not force a trade at year boundaries.",
+    "buy_rule": "While flat, use the application year's frozen period. The completed prior StochRSI for that same period must be below 0.20 and its provisional current-session value must cross to or above 0.20; buy at the solved trigger.",
+    "sell_rule": "While long, use the application year's frozen period. The completed prior StochRSI for that same period must be above 0.80 and its provisional current-session value must cross to or below 0.80; sell at the solved trigger.",
+    "signal_time": "The annual period schedule is frozen before the run from the validated parent evidence. On every session, eligibility and trigger calculations use completed prior data for the period assigned to the current application year; no application-year return is used to select that period.",
+    "execution_time": "Gaps beyond the trigger fill at Open; otherwise only the directed Open-to-Close path may fill at the exact solved trigger. High and Low are ignored. A January period change itself never creates or forces an order.",
+    "positioning": "The dynamic strategy and fixed-period 14 and 140 baselines each start flat with 100000 dollars on 2011-01-03, then alternate only between 100% QQQ and 100% cash. Fractional shares are allowed, leverage is disabled, and cash earns no interest.",
+    "plain_language": {
+      "summary": "把每个历史滚动窗口中CAGR最高的Stochastic RSI周期留到更晚的一年使用，观察年度换参能否比固定周期和长期持有更好。",
+      "buy": "账户空仓时，用当年已经提前冻结的周期观察Stochastic RSI；它从0.20下方向上恢复越过0.20时满仓买入QQQ。",
+      "sell": "账户持有QQQ时，仍用当年的冻结周期；它从0.80上方向下跌破0.80时全部卖出。",
+      "execution": "每年年初只更换指标周期，不强制交易；每天都先用该周期的前一日数据冻结触发价，再按次日开盘跳空或开盘到收盘路径成交。",
+      "position": "动态策略、固定14和固定140都从10万美元现金开始，首次买入信号出现后才持有，在满仓QQQ与现金之间切换。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2011-01-03",
+    "analysis_end": "2021-12-31",
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "dynamic_schedule": [
+      {
+        "application_year": 2011,
+        "source_window": "W2005_2010",
+        "source_label": "2005–2010",
+        "source_end": "2009-12-31",
+        "period": 14
+      },
+      {
+        "application_year": 2012,
+        "source_window": "W2006_2011",
+        "source_label": "2006–2011",
+        "source_end": "2010-12-31",
+        "period": 14
+      },
+      {
+        "application_year": 2013,
+        "source_window": "W2007_2012",
+        "source_label": "2007–2012",
+        "source_end": "2011-12-30",
+        "period": 28
+      },
+      {
+        "application_year": 2014,
+        "source_window": "W2008_2013",
+        "source_label": "2008–2013",
+        "source_end": "2012-12-31",
+        "period": 14
+      },
+      {
+        "application_year": 2015,
+        "source_window": "W2009_2014",
+        "source_label": "2009–2014",
+        "source_end": "2013-12-31",
+        "period": 28
+      },
+      {
+        "application_year": 2016,
+        "source_window": "W2010_2015",
+        "source_label": "2010–2015",
+        "source_end": "2014-12-31",
+        "period": 140
+      },
+      {
+        "application_year": 2017,
+        "source_window": "W2011_2016",
+        "source_label": "2011–2016",
+        "source_end": "2015-12-31",
+        "period": 42
+      },
+      {
+        "application_year": 2018,
+        "source_window": "W2012_2017",
+        "source_label": "2012–2017",
+        "source_end": "2016-12-30",
+        "period": 14
+      },
+      {
+        "application_year": 2019,
+        "source_window": "W2013_2018",
+        "source_label": "2013–2018",
+        "source_end": "2017-12-29",
+        "period": 14
+      },
+      {
+        "application_year": 2020,
+        "source_window": "W2014_2019",
+        "source_label": "2014–2019",
+        "source_end": "2018-12-31",
+        "period": 14
+      },
+      {
+        "application_year": 2021,
+        "source_window": "W2015_2020",
+        "source_label": "2015–2020",
+        "source_end": "2019-12-31",
+        "period": 14
+      }
+    ],
+    "schedule_selection_metric": "maximum CAGR within the parent 14–210 step-7 grid, with lower period as the frozen tie-break",
+    "year_boundary_policy": "carry cash/shares unchanged; calculate both prior and current StochRSI state with the new application's period; no forced order",
+    "baseline_periods": [
+      14,
+      140
+    ],
+    "case_ids": [
+      "DYNAMIC_CAGR",
+      "FIXED_014",
+      "FIXED_140"
+    ],
+    "formal_case_count": 3,
+    "cost_bps": 5,
+    "parent_experiment_id": "qqq_single_stochrsi_rolling_drift_2005_2020_v1",
+    "parent_run_id": "run_20260829T160927Z_f1d1fec3",
+    "parent_selection_artifact": "analysis/best_by_window.csv",
+    "parent_selection_artifact_sha256": "569d477de31ca5c4197a3dbee3ee196f7a4421982e50b57e8159ea7ef63948f4"
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "QQQ Buy & Hold purchased at the first 2011 session Open with the same 5 bps one-sided purchase cost",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 unchanged with the standard performance controls, an annual return comparison, and a frozen period-schedule chart."
+  },
+  "research": {
+    "stage": "exploratory_walk_forward_parameter_schedule_test",
+    "hypothesis": "A one-year-lagged annual schedule of mechanically best five-year-window CAGR periods may adapt to changing market regimes better than fixed periods 14 or 140 without using application-year returns.",
+    "primary_metric": "Compare 2011–2021 full-account CAGR first, then Sharpe, maximum drawdown, exposure, and calendar-year return consistency against QQQ Buy & Hold and fixed-period 14 and 140 baselines.",
+    "selection_rule": "The dynamic schedule is copied exactly from the validated parent best_by_window.csv before this run. No period is reselected from 2011–2021 outcomes. Fixed 14 and 140 are descriptive baselines requested in advance.",
+    "validation_plan": "Run the dynamic schedule, fixed 14, and fixed 140 as continuous 2011–2021 accounts at 5 bps; reconcile every strategy with the independent ledger and retain the complete annual period provenance.",
+    "promotion_criteria": "This historical walk-forward diagnostic may support further study only if the dynamic schedule improves full-period CAGR over Buy & Hold and both fixed baselines without materially worsening Sharpe or drawdown; it cannot by itself promote the strategy because the annual-selection idea was proposed after reviewing the parent study.",
+    "rejection_conditions": "Reject the dynamic adaptation hypothesis if it fails to beat Buy & Hold CAGR, fails to improve on fixed 14, or achieves any gain mainly through one isolated application year or the period-140 outlier."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

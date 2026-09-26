@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "dataset_id": "sp500_current_member_daily_update_v1",
+  "description": "Operational contract for status checks, isolated shadow updates, source cross-checks, and purchased-data intake.",
+  "production_writes_enabled": false,
+  "schedule": {
+    "target_local_time": "06:15",
+    "timezone": "Asia/Shanghai",
+    "catch_up_after_sleep_or_power_off": true,
+    "installed": false
+  },
+  "capabilities": {
+    "sp500_point_in_time_baseline": "ready",
+    "sp500_current_member_shadow_update": "ready",
+    "provider_archive_replay": "ready",
+    "purchased_data_intake": "ready",
+    "approved_price_promotion": "not_implemented",
+    "automatic_scheduler": "not_installed",
+    "benchmark_etf_shadow_update": "not_implemented",
+    "nasdaq100_point_in_time_universe": "candidate_pending_review",
+    "sp500_point_in_time_candidate_reaudit": "candidate_pending_review",
+    "hedge_asset_universe": "not_defined"
+  },
+  "tracked_assets": {
+    "source_registry": "data/source_registry.yaml",
+    "symbols": ["QQQ", "SPY", "VOO", "RKLB"],
+    "required_for_current_research": ["QQQ", "SPY"],
+    "shadow_update_enabled": false
+  },
+  "universe": {
+    "current_constituents": "data/processed/universes/sp500/current_constituents.csv",
+    "expected_equities": 503,
+    "approved_price_directory": "data/processed/daily/equities"
+  },
+  "security_identity_reviews": "data/security_identity_reviews.json",
+  "corporate_action_reviews": "data/corporate_action_reviews.json",
+  "shadow_update": {
+    "primary_provider": "twelve_data",
+    "primary_adjustment": "all",
+    "overlap_calendar_days": 45,
+    "minimum_overlap_sessions": 10,
+    "minimum_stable_tail_sessions": 10,
+    "bootstrap_start": "2020-01-01",
+    "overlap_close_return_abs_diff_tolerance": 0.001,
+    "cross_source_close_return_abs_diff_tolerance": 0.001,
+    "cross_check_calendar_days": 60,
+    "tiingo_daily_batch_size": 30,
+    "tiingo_monthly_unique_budget": 480,
+    "tiingo_mandatory_symbols": ["FERG", "BRK.B", "BF.B"],
+    "eastmoney_role": "opportunistic_validation_only_until_transport_stability_passes",
+    "candidate_output": "data/processed/updates/sp500_shadow",
+    "raw_archive_output": "data/raw/public/market_data_updates"
+  },
+  "purchased_import": {
+    "destination_root": "data/raw/purchased",
+    "registry": "data/purchased_import_registry.json",
+    "default_status": "pending_review",
+    "auto_merge_into_approved_data": false
+  },
+  "nasdaq100_candidate": {
+    "registry": "data/nasdaq100_history_registry.json",
+    "output_directory": "data/processed/universes/nasdaq100/pending_review",
+    "manifest": "data/processed/universes/nasdaq100/pending_review/source_manifest.json",
+    "production_price_output": null,
+    "status": "candidate_pending_review",
+    "auto_promote_to_approved": false
+  },
+  "sp500_candidate": {
+    "registry": "data/sp500_candidate_registry.json",
+    "output_directory": "data/processed/universes/sp500/pending_review",
+    "manifest": "data/processed/universes/sp500/pending_review/source_manifest.json",
+    "production_price_output": null,
+    "status": "candidate_pending_review",
+    "auto_promote_to_approved": false,
+    "existing_approved_baseline_unchanged": true
+  },
+  "promotion_policy": {
+    "minimum_consecutive_successful_us_sessions": 3,
+    "recommended_consecutive_successful_us_sessions": 5,
+    "requires_explicit_implementation_and_user_authorization": true
+  },
+  "shadow_validation_campaign": {
+    "target_consecutive_completed_sessions": 5,
+    "required_tiingo_cross_checks_per_session": 30,
+    "allow_verified_shadow_bootstrap_candidate": true
+  }
+}

@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "view_id": "bear_resilience_24_full_history_sma_bear_intervals_v1",
+  "generated_at_utc": "2026-08-14T16:30:54.639810Z",
+  "view_type": "non_trading_market_view",
+  "builder": {
+    "path": "research/scripts/build_bear_resilience_history_view.py",
+    "sha256": "d36b53bd74aca618dc952e6e1064f3e33eeadcd61c09dafd2896382b1b015081"
+  },
+  "requested_window": {
+    "start": "1999-01-01",
+    "end": "2026-08-04"
+  },
+  "price_policy": "split-and-dividend-adjusted Close; pre-window history is used only to warm SMAs",
+  "sma_windows": [
+    30,
+    150,
+    200,
+    250,
+    300
+  ],
+  "groups": [
+    {
+      "group_id": "core12",
+      "label": "核心层 12",
+      "description": "此前事件筛选得到的 12 个核心候选（已排除 Q）。",
+      "symbols": [
+        "AZO",
+        "TLT",
+        "COR",
+        "EXE",
+        "DVA",
+        "SJM",
+        "SO",
+        "ED",
+        "GLD",
+        "CHD",
+        "HRL",
+        "GILD"
+      ]
+    },
+    {
+      "group_id": "near8",
+      "label": "近核心层 8",
+      "description": "业务属性或历史表现接近核心层、但未通过原筛选的 8 个候选。",
+      "symbols": [
+        "HSY",
+        "ORLY",
+        "MO",
+        "WRB",
+        "EQT",
+        "LMT",
+        "GIS",
+        "WEC"
+      ]
+    },
+    {
+      "group_id": "retail4",
+      "label": "零售补充 4",
+      "description": "单独补充观察的四个零售标的。",
+      "symbols": [
+        "DLTR",
+        "DG",
+        "WMT",
+        "TSCO"
+      ]
+    }
+  ],
+  "counts": {
+    "assets": 24,
+    "core": 12,
+    "near_core": 8,
+    "retail": 4,
+    "bear_intervals": 12,
+    "major_bear_intervals": 6,
+    "minor_bear_intervals": 6
+  },
+  "coverage": [
+    {
+      "symbol": "AZO",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "TLT",
+      "group": "core12",
+      "actual_start": "2002-07-26",
+      "actual_end": "2026-08-04",
+      "sessions": 6044,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "COR",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "EXE",
+      "group": "core12",
+      "actual_start": "2021-02-10",
+      "actual_end": "2026-08-04",
+      "sessions": 1376,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "DVA",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "SJM",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "SO",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "ED",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "GLD",
+      "group": "core12",
+      "actual_start": "2004-11-18",
+      "actual_end": "2026-08-04",
+      "sessions": 5460,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "CHD",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "HRL",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "GILD",
+      "group": "core12",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6935,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "HSY",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "ORLY",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "MO",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "WRB",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "EQT",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "LMT",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "GIS",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "WEC",
+      "group": "near8",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "DLTR",
+      "group": "retail4",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "DG",
+      "group": "retail4",
+      "actual_start": "2009-11-13",
+      "actual_end": "2026-08-04",
+      "sessions": 4204,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "WMT",
+      "group": "retail4",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6938,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    },
+    {
+      "symbol": "TSCO",
+      "group": "retail4",
+      "actual_start": "1999-01-04",
+      "actual_end": "2026-08-04",
+      "sessions": 6937,
+      "available_smas": [
+        30,
+        150,
+        200,
+        250,
+        300
+      ]
+    }
+  ],
+  "sources": {
+    "bear_intervals": {
+      "path": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+      "sha256": "70cf21d0fab4fa9abc7b9c17fa1185abd6d949262a1f59f33951191992bb7f4a",
+      "dataset_id": "subjective_spy_qqq_bear_markets_peak_to_trough_v2",
+      "boundary_policy": {
+        "name": "worst-peak-to-trough",
+        "rule": "within each user-drawn candidate window, choose the symbol with the deeper maximum drawdown and trim to that drawdown's peak-through-trough dates",
+        "never_expands_beyond_candidate_window": true,
+        "post_trough_rebound_excluded": true
+      }
+    },
+    "prices": {
+      "AZO": {
+        "path": "data/processed/daily/equities/AZO.csv",
+        "sha256": "0f0c01fb849b80e6ed04b7b5ccdb34a199914097403ed35b22a77ebb784e6961"
+      },
+      "COR": {
+        "path": "data/processed/daily/equities/COR.csv",
+        "sha256": "b2c60209cf8bd1b5ef1c07fa5a938e953d96728bbe4c059c35e33a5166345c81"
+      },
+      "EXE": {
+        "path": "data/processed/daily/equities/EXE.csv",
+        "sha256": "24434e5c73bf2769babf18cdc315b200257a7682edf690a6efadb3d35b2d12b7"
+      },
+      "DVA": {
+        "path": "data/processed/daily/equities/DVA.csv",
+        "sha256": "e3c97ad261618ad3fdbe81a6be85ecb248a9b04dee6fb8756b55775e6c53e951"
+      },
+      "SJM": {
+        "path": "data/processed/daily/equities/SJM.csv",
+        "sha256": "70851a1adb4f68feafeda19a3ca4c9b0481c32a655df9c6905e578985eb7d786"
+      },
+      "SO": {
+        "path": "data/processed/daily/equities/SO.csv",
+        "sha256": "bb8f377c77c22958e3eb1cfa92c215b506b840047e9f2776e39a537c1992ce91"
+      },
+      "ED": {
+        "path": "data/processed/daily/equities/ED.csv",
+        "sha256": "63ffec3c549609fbfbe25db4b62dd12eeaf879066c826f105bed5fea4a8debd2"
+      },
+      "CHD": {
+        "path": "data/processed/daily/equities/CHD.csv",
+        "sha256": "6a50c211b32663c8517762ced04f194beca76c27e288bc9934477a8a57c70350"
+      },
+      "HRL": {
+        "path": "data/processed/daily/equities/HRL.csv",
+        "sha256": "87c05fef0e396687f52307b39a5a7d792e7e85ee023f96605c87e630c093fdb8"
+      },
+      "GILD": {
+        "path": "data/processed/daily/equities/GILD.csv",
+        "sha256": "f48124f2bfe33c0fb078c63e1e791f30d48fed0660ac5b6a168c033a257e3cda"
+      },
+      "HSY": {
+        "path": "data/processed/daily/equities/HSY.csv",
+        "sha256": "5da52617229bda68e28cb8dbfb9416df8e7f8d075a84ae232bba12d4336189c5"
+      },
+      "ORLY": {
+        "path": "data/processed/daily/equities/ORLY.csv",
+        "sha256": "3e408e0718776a46eba9a4af53e16736d7b0d8311b189448286286e6589a4d87"
+      },
+      "MO": {
+        "path": "data/processed/daily/equities/MO.csv",
+        "sha256": "6c13a3f6b3b8a2f14593dbcf74586273ed8d91662e8a1378aeaf5cac9414912f"
+      },
+      "WRB": {
+        "path": "data/processed/daily/equities/WRB.csv",
+        "sha256": "5aedf1ca5c2630b588057da0e432ee6298ba09adadb920741b0c2ade9c88c513"
+      },
+      "EQT": {
+        "path": "data/processed/daily/equities/EQT.csv",
+        "sha256": "8315e7e4053655e3d68f90e3c7061f11102c88d71e74d14a6fbc85fb8298e81d"
+      },
+      "LMT": {
+        "path": "data/processed/daily/equities/LMT.csv",
+        "sha256": "07f1da6b96b7dd4efd6fb91c813db354fe169f3cbc5d1883f3876065ede3539f"
+      },
+      "GIS": {
+        "path": "data/processed/daily/equities/GIS.csv",
+        "sha256": "b3aa2365d25257ea91caaf649bf12f2b9d1c4c64f2dfd5b6a34b5727f66ab6d9"
+      },
+      "WEC": {
+        "path": "data/processed/daily/equities/WEC.csv",
+        "sha256": "ec1fca10ebcfe91f431ea1bb96e4be20860c776eb61d36cd0d8783b2b8bf201b"
+      },
+      "DLTR": {
+        "path": "data/processed/daily/equities/DLTR.csv",
+        "sha256": "cf5f7667bcb7ff97e802b622a0f1e9e715738b7ed1fa18cf897932e78a0c251b"
+      },
+      "DG": {
+        "path": "data/processed/daily/equities/DG.csv",
+        "sha256": "55cdf651bc5894e48000375dd5caed8d4cecece9bc0694ead83ae6358eaf1fff"
+      },
+      "WMT": {
+        "path": "data/processed/daily/equities/WMT.csv",
+        "sha256": "f4230285f96bd9c763c2c4dbfa04fc3d5aa5e7e527655285f45e019b5116d00f"
+      },
+      "TSCO": {
+        "path": "data/processed/daily/equities/TSCO.csv",
+        "sha256": "db0658c7639b6647afcd1933efb9bf874b045c4d42c5b64666f759688e0b0165"
+      },
+      "TLT": {
+        "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/国债系列 ETF/TLT - 美国 20 年以上国债 ETF iShares/TLT_1day_拆股股息调整_20260805.csv",
+        "sha256": "ac5c3e9018c7e162cf3a657f0519b883a0b36cb79aecc9ff6d3f6400dc2bd863"
+      },
+      "GLD": {
+        "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/核心商品 ETF/GLD - 黄金 ETF SPDR/GLD_1day_拆股股息调整_20260805.csv",
+        "sha256": "1c491b264c04816fc2e442928b96acb535eff5cf4a922df27fc3fa7be999ef52"
+      }
+    }
+  },
+  "limitations": [
+    "The 24 assets were selected after reviewing the same historical bear intervals, so the view is retrospective and subject to selection and survivorship bias.",
+    "Bear intervals are ex-post user annotations refined to QQQ/SPY peak-to-trough windows and were not knowable at their starts.",
+    "Adjusted Close approximates dividend reinvestment and is not an exact cash corporate-action ledger.",
+    "Assets listed after 1999 retain their true first available date; no prices are fabricated or backfilled."
+  ],
+  "outputs": {
+    "interactive_html": "research/market_views/bear_resilience_24_full_history_sma_bear_intervals.html",
+    "interactive_html_sha256": "c615c92a3529a4f33f39a246446743388cfa4ed99e7c23adc92a942d25257b50"
+  }
+}

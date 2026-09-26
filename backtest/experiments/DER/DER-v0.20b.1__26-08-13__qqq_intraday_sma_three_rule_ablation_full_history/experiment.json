@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_three_rule_ablation_full_history_v1",
+  "created_at_utc": "2026-08-13T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_three_rule_ablation_flat_start",
+    "description": "在完整 QQQ 批准历史上同时删除卖出价上方强制买回、成本线强止损、短均线连续转弱且跌破 SMA130 三条规则。初始空仓，等待 SMA200 上穿或短均线恢复首次触发后全仓买入；持仓时只保留三条短均线同时快速下跌或 SMA200 下穿卖出；空仓时只保留 SMA200 上穿或短均线恢复买入。",
+    "buy_rule": "初始及以后空仓时 OR：动态 SMA200 上穿；价格上穿动态 SMA25/30/35 平均值下方 1%。明确禁用卖出价 +R% 强制买回。",
+    "sell_rule": "持仓时 OR：此前连续 2 日短均线平均变化率为负且当日动态 SMA25、SMA30、SMA35 各自变化率全部不高于 -0.20%；动态 SMA200 下穿。明确禁用成本线 -1.5% 强止损和短均线连续转弱且跌破 SMA130。",
+    "signal_time": "每个交易日开始前，仅用截至前一交易日 Close 的历史计算该日条件单及动态阈值公式；盘中是否触发由该日常规时段调整后 OHLC 判定。指标尚未完成预热时不生成对应条件单。",
+    "execution_time": "若前 Close 到当日 Open 已越过阈值，按当日 Open；否则常规时段 OHLC 触及阈值时按精确理论阈值；零滑点、零费用；每天最多一笔成交。",
+    "position_sizing": "long-only，初始 100,000 美元现金；触发后全仓持有或全现金，允许小数股，不融资，现金不计息。",
+    "initial_position": "1999-03-10 起空仓等待；第一笔正常买入成交前不计入策略与 Buy & Hold 的正式比较区间。"
+  },
+  "parameters": {
+    "requested_start": "1999-03-10",
+    "analysis_start": "1999-03-10",
+    "analysis_end": "2026-08-04",
+    "initial_position": "flat",
+    "A_negative_days_slow": 7,
+    "B_slow_sma_window": 130,
+    "C_fast_derivative_pct": -0.2,
+    "C_fast_derivative_mode": "all_short_smas",
+    "D_negative_days_fast": 3,
+    "E_fallback_sma_window": 200,
+    "F_short_sma_center": 30,
+    "F_short_sma_spacing": 5,
+    "F_short_sma_windows": [
+      25,
+      30,
+      35
+    ],
+    "G_short_recovery_below_pct": 1.0,
+    "H_reentry_sma_window": 200,
+    "L_cost_stop_pct": 1.5,
+    "R_forced_rebuy_pct": 0.0,
+    "max_trades_per_day": 1,
+    "disabled_signals": [
+      "BUY_FORCED_REENTRY",
+      "SELL_COST_STOP",
+      "SELL_SLOW_TREND"
+    ],
+    "inactive_parameter_note": "A、B、L、R 仍保留在规格对象中以复用同一已测试引擎，但对应三条规则已关闭，因此不会影响成交。"
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the strategy's first actual buy fill, invest the same 100,000 USD in QQQ at that identical fill price; compare both paths only from that date through 2026-08-04 Close.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged because the accepted K-line, optional SMA70-450, derivative autoscaling, trade-reason markers, equity controls, rebase and DCA interactions remain appropriate."
+  },
+  "context_comparison": {
+    "experiment_id": "qqq_intraday_sma_reentry_grid_full_history_v1",
+    "run_id": "run_20260813T094202Z_b4c25eca",
+    "relative_path": "backtest/experiments/DER/DER-v0.20a.3__26-08-13__qqq_intraday_sma_reentry_grid_full_history/runs/run_20260813T094202Z_b4c25eca/QQQ/cost_0bps",
+    "cases": [
+      "R02",
+      "R05"
+    ]
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Simultaneously removing the forced re-entry, cost stop and slow-trend sell may reduce whipsaw, but interactions can differ materially from the previous one-rule-at-a-time ablations.",
+    "primary_metric": "Report total return, CAGR, Sharpe, maximum drawdown, exposure and order count against the identical-entry QQQ benchmark, with prior validated all-rule R=2% and R=5% cases shown only as context.",
+    "selection_rule": "There is no parameter selection in this run. The three-rule removal is predeclared from the user's instruction, and R is inactive rather than optimized.",
+    "validation_plan": "The combined-rule strategy must match PyBroker and the independent ledger exactly, begin with an ordinary SMA buy signal after valid warmup, never emit any disabled signal, use the identical first fill for Buy & Hold, and trade at most once per day.",
+    "promotion_criteria": "None. This full-history combination ablation only evaluates behavior and creates a hypothesis for later walk-forward validation.",
+    "rejection_conditions": "Reject if any disabled signal trades, if R changes behavior, if trading begins before a valid ordinary buy, if the benchmark entry differs, if more than one trade occurs per day, or if the two ledgers diverge."
+  }
+}

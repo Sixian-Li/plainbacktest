@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "dataset_id": "sp500_history_v1",
+  "description": "Point-in-time S&P 500 constituent and adjusted daily-price baseline built without modifying purchased sources.",
+  "canonical_price_schema": {
+    "columns": ["date", "symbol", "open", "high", "low", "close", "volume"],
+    "date_format": "YYYY-MM-DD",
+    "timezone": "America/New_York",
+    "currency": "USD",
+    "session": "regular",
+    "sort_order": ["symbol", "date"]
+  },
+  "price_source": {
+    "provider": "rethink",
+    "kind": "zip_members",
+    "path": "data/2026-08-05多个数据包_rethink/标普 500 成分股/标普 500 成分股-拆股及股息调整_20260804.zip",
+    "sha256": "e1a9635755580470ff2dbf062dc56f15c0bfbe1fc222700608592dec88593299",
+    "snapshot_date": "2026-08-04",
+    "columns": ["Date", "CompanyName", "Symbol", "Open", "High", "Low", "Close", "Volume", "Unadjusted Close", "InIndex"],
+    "adjustment": {
+      "kind": "split_and_dividend_adjusted",
+      "return_interpretation": "total_return_price_approximation",
+      "exact_cash_dividend_ledger": false,
+      "volume_is_vendor_adjusted": true,
+      "unadjusted_close_is_audit_only": true
+    }
+  },
+  "current_holdings_source": {
+    "provider": "state_street",
+    "fund": "SPY",
+    "kind": "xlsx",
+    "official_url": "https://www.ssga.com/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
+    "path": "data/raw/public/ssga/spy/holdings_2026-08-18.xlsx",
+    "sha256": "067cafc3ab09e0cc23fd34ec873417135802c2b99999b8b2cd6cd9d9a8b1229c",
+    "as_of_date": "2026-08-18",
+    "downloaded_at_utc": "2026-08-19T11:50:37Z",
+    "excluded_holdings": [
+      {
+        "ticker": "-",
+        "classification": "cash",
+        "reason": "US dollar cash is a fund holding, not an equity constituent."
+      },
+      {
+        "ticker": "2602335D",
+        "classification": "corporate_action_right",
+        "reason": "The CONTRA HOLOGIC position is a corporate-action right, not a listed equity ticker."
+      }
+    ]
+  },
+  "membership_contract": {
+    "source_field": "InIndex",
+    "source_values": [0, 1],
+    "interval_representation": "每个来源 member 可用行上 InIndex=1 的最大连续段。",
+    "left_censored": "第一条可用价格已在指数内，实际入选日期未知。",
+    "right_censored": "最后一条可用价格仍在指数内，不代表当前成员身份。",
+    "adjacent_transition": "0 和 1 出现在相邻的 XNYS session，成员边界可精确到首个 1 或最后一个 1 的交易日。",
+    "interval_censored_transition": "0 和 1 的观察行之间缺少 session，变化只能定位在 previous_observed_date 与 observed_start，或 observed_end 与 next_observed_date 之间。",
+    "point_in_time_use": "Lag observed membership by one trading session unless announcement-time data independently proves earlier availability.",
+    "current_membership_authority": "The dated State Street SPY holdings snapshot, not the last row of a historical price file."
+  },
+  "identity_contract": {
+    "historical_key": "Each ZIP member is a distinct instrument record; preserve its filename stem and never splice versioned tickers automatically.",
+    "official_link": "Link an official holding to a vendor instrument only by exact ticker in adjacent dated snapshots; retain the official identifier and the link method.",
+    "punctuation": "Preserve official dots in canonical symbols (for example BRK.B and BF.B); public-source aliases belong to the later updater."
+  },
+  "quality_policy": {
+    "ohlc_relative_tolerance": 1e-09,
+    "outlier_abs_close_return_pct": 30.0,
+    "adjustment_factor_change_tolerance": 1e-06,
+    "max_issue_examples": 5,
+    "blocking_checks": [
+      "bad_archive_member",
+      "unexpected_schema",
+      "missing_required_value",
+      "bad_date",
+      "bad_number",
+      "wrong_symbol",
+      "duplicate_date",
+      "source_order_violation",
+      "non_session_date",
+      "nonpositive_price",
+      "invalid_ohlc",
+      "negative_volume",
+      "nonpositive_unadjusted_close",
+      "bad_in_index",
+      "multiple_company_names",
+      "never_in_index"
+    ],
+    "warning_checks": [
+      "missing_session",
+      "missing_in_index_session",
+      "zero_volume",
+      "outlier_close_return",
+      "adjacent_in_index_outlier_close_return",
+      "adjustment_factor_change"
+    ]
+  },
+  "expected": {
+    "archive_members": 1299,
+    "archive_price_rows": 7377574,
+    "ever_in_index_members": 1299,
+    "vendor_snapshot_active_equities": 503,
+    "official_snapshot_raw_holdings": 505,
+    "official_snapshot_equities": 503,
+    "matched_active_equities": 500,
+    "official_snapshot_only": ["FERG", "RDDT", "VMRK"],
+    "vendor_snapshot_only": ["AVB", "EA", "EQR"],
+    "coverage_not_before": "1990-01-02"
+  },
+  "frozen_existing_outputs": [
+    {
+      "path": "data/processed/daily/QQQ.csv",
+      "sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df"
+    },
+    {
+      "path": "data/processed/daily/SPY.csv",
+      "sha256": "6b07e1636b1ecc276f17d6d474bb9ec864f7efe829d955c1f83d9f84088f4313"
+    }
+  ],
+  "outputs": {
+    "price_directory": "data/processed/daily/equities",
+    "universe_directory": "data/processed/universes/sp500",
+    "security_master": "data/processed/universes/sp500/security_master.csv",
+    "membership_intervals": "data/processed/universes/sp500/membership_intervals.csv",
+    "current_constituents": "data/processed/universes/sp500/current_constituents.csv",
+    "snapshot_reconciliation": "data/processed/universes/sp500/snapshot_reconciliation.csv",
+    "snapshot_exclusions": "data/processed/universes/sp500/snapshot_exclusions.csv",
+    "manifest": "data/processed/universes/sp500/manifest.json",
+    "quality_report_json": "data/processed/universes/sp500/quality_report.json",
+    "quality_report_markdown": "data/processed/universes/sp500/quality_report.md"
+  },
+  "known_limitations": [
+    "历史覆盖最早只到 1990-01-02，不是自 1957 年起的完整 S&P 500 历史。",
+    "InIndex 是供应商记录的成员状态，没有公告时间或删除原因。",
+    "数据不含历史时点权重，不能精确重建指数收益。",
+    "复权 OHLC 只近似股息再投资，没有独立的现金分红和拆股事件账本。",
+    "供应商复权成交量不是交易所原始成交量，不得用于流动性或成交假设。",
+    "最新官方持仓若缺少历史包价格，必须继续标为不可用，直到用单独来源记录补齐。"
+  ]
+}

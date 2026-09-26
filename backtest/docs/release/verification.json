@@ -1,0 +1,90 @@
+{
+  "verified_on": "2026-09-26",
+  "environment": {
+    "os": "Darwin",
+    "os_version": "14.4",
+    "architecture": "arm64",
+    "python": "3.13.9"
+  },
+  "backtest_tests": {
+    "run": 504,
+    "passed": 498,
+    "skipped": 6,
+    "failed": 0,
+    "skipped_tests": [
+      "test_rklb_excludes_spac_predecessor_and_matches_secondary_source (tests.data.test_canonical_data.CanonicalDataIntegrationTest.test_rklb_excludes_spac_predecessor_and_matches_secondary_source)",
+      "test_source_content_hashes_match_exact_csv_or_zip_member (tests.data.test_canonical_data.CanonicalDataIntegrationTest.test_source_content_hashes_match_exact_csv_or_zip_member)",
+      "test_unchanged_rebuild_is_byte_reproducible (tests.data.test_canonical_data.CanonicalDataIntegrationTest.test_unchanged_rebuild_is_byte_reproducible)",
+      "test_frozen_sources_and_existing_etfs_are_unchanged (tests.data.test_sp500_history.Sp500HistoryBaselineTest.test_frozen_sources_and_existing_etfs_are_unchanged)",
+      "test_full_rebuild_is_byte_reproducible (tests.data.test_sp500_history.Sp500HistoryBaselineTest.test_full_rebuild_is_byte_reproducible)",
+      "test_original_archive_members_match_price_outputs (tests.data.test_sp500_history.Sp500HistoryBaselineTest.test_original_archive_members_match_price_outputs)"
+    ]
+  },
+  "research_tests": {
+    "run": 40,
+    "passed": 40,
+    "failed": 0
+  },
+  "skills_validated": [
+    "quant-backtest",
+    "data-update",
+    "quant-tidy"
+  ],
+  "data_snapshot": {
+    "files": 1344,
+    "bytes": 628156999,
+    "hash_check": "passed"
+  },
+  "example_checks": [
+    {
+      "case": "spy",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "validation": {
+        "status": "passed",
+        "scope": "example independent-ledger reconciliation; not a formal validate_run or strategy promotion",
+        "daily_rows": 2661,
+        "orders": 11,
+        "tolerance": 1e-06,
+        "differences": {
+          "max_abs_cash_difference": 8.731149137020111e-11,
+          "max_abs_shares_difference": 1.1368683772161603e-13,
+          "max_abs_equity_difference": 1.1641532182693481e-10,
+          "max_abs_order_shares_difference": 1.1368683772161603e-13,
+          "max_abs_order_fill_price_difference": 0.0
+        }
+      }
+    },
+    {
+      "case": "unapproved_voo",
+      "returncode": 1,
+      "expected_returncode": 1,
+      "message": "Example failed: No approved distributed daily data for VOO; VOO is intentionally excluded."
+    },
+    {
+      "case": "reversed_dates",
+      "returncode": 1,
+      "expected_returncode": 1,
+      "message": "Example failed: start must not be after end"
+    },
+    {
+      "case": "invalid_windows",
+      "returncode": 1,
+      "expected_returncode": 1,
+      "message": "Example failed: fast_window must be strictly shorter than slow_window"
+    },
+    {
+      "case": "qqq_repeat_same_saved_inputs_ledgers_metrics",
+      "passed": true
+    }
+  ],
+  "repeatability": "QQQ saved input, daily ledgers, orders and metrics match byte-for-byte across two executions",
+  "browser_smoke": "passed; v5 equity/drawdown rebasing, DCA, visibility and visible-window price/derivative axes",
+  "catalog": {
+    "programs": 3,
+    "experiments": 83,
+    "check": "passed"
+  },
+  "workspace_audit": "passed",
+  "distribution": "local candidate; no remote publication or CI verification"
+}

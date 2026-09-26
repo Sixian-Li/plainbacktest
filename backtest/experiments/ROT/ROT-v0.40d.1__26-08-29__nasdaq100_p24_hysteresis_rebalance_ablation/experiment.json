@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_p24_hysteresis_rebalance_ablation_2005_2012_v1",
+  "created_at_utc": "2026-08-29T13:31:37+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "NASDAQ100_P24_HYSTERESIS_REBALANCE_2005_2012"
+  ],
+  "excluded_symbols": {},
+  "cost_scenarios_bps_per_side": [
+    0,
+    10
+  ],
+  "primary_cost_bps_per_side": 10,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero interest",
+  "benchmark": "QQQ Buy & Hold over 2005-01-03 through 2012-12-31 at the same initial cash and per-side cost; the four factorial P24 portfolios are the primary comparison.",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "parameters": {
+    "analysis_start": "2005-01-03",
+    "analysis_end": "2012-12-31",
+    "parent_experiment_id": "nasdaq100_p24_three_state_portfolios_2005_2012_v1",
+    "parent_run_id": "run_20260828T180707Z_6bcf13f0",
+    "fixed_parameters": {
+      "long_sma_window": 180,
+      "long_slope_lookback": 10,
+      "short_sma_window": 20,
+      "short_regression_window": 10,
+      "entry_confirmation_sessions": 2
+    },
+    "original_thresholds": {
+      "long_slope_threshold_daily_pct": 0.02,
+      "short_quality_threshold_daily_pct": 0.0
+    },
+    "strict_thresholds": {
+      "long_slope_threshold_daily_pct": 0.04,
+      "short_quality_threshold_daily_pct": 0.05
+    },
+    "factor_axes": {
+      "holding_policy": {
+        "STRICT_LEVEL": "空仓和持仓都要求当日严格P24目标状态为真；严格状态失效即取消目标持仓。",
+        "STRICT_ENTRY_ORIGINAL_EXIT": "空仓只允许严格P24进入；进入后只要原P24仍为真就继续目标持有；原P24失效或离开滞后成员集合才取消目标持仓，之后再次入场仍要求严格P24。"
+      },
+      "rebalance_policy": {
+        "DAILY_EQUAL": "每个完成Close都为下一Open按当日信号账户净值和信号Close恢复全部目标股票等权。",
+        "SELECTION_CHANGE_EQUAL": "仍逐日确认同一目标名单并在下一Open成交，但只有目标股票集合改变或前次真实行情不可用导致目标未完成时，才把全部目标股票恢复等权；名单不变时允许权重自然漂移。"
+      }
+    },
+    "case_definitions": {
+      "STRICT_LEVEL_DAILY_EQUAL": {
+        "holding_policy": "STRICT_LEVEL",
+        "rebalance_policy": "DAILY_EQUAL"
+      },
+      "STRICT_LEVEL_CHANGE_EQUAL": {
+        "holding_policy": "STRICT_LEVEL",
+        "rebalance_policy": "SELECTION_CHANGE_EQUAL"
+      },
+      "STRICT_ENTRY_ORIGINAL_EXIT_DAILY_EQUAL": {
+        "holding_policy": "STRICT_ENTRY_ORIGINAL_EXIT",
+        "rebalance_policy": "DAILY_EQUAL"
+      },
+      "STRICT_ENTRY_ORIGINAL_EXIT_CHANGE_EQUAL": {
+        "holding_policy": "STRICT_ENTRY_ORIGINAL_EXIT",
+        "rebalance_policy": "SELECTION_CHANGE_EQUAL"
+      }
+    },
+    "formal_case_ids_per_cost": [
+      "STRICT_LEVEL_DAILY_EQUAL",
+      "STRICT_LEVEL_CHANGE_EQUAL",
+      "STRICT_ENTRY_ORIGINAL_EXIT_DAILY_EQUAL",
+      "STRICT_ENTRY_ORIGINAL_EXIT_CHANGE_EQUAL"
+    ],
+    "formal_case_count_per_cost": 4,
+    "formal_strategy_path_count": 8,
+    "universe": {
+      "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+      "review_status": "pending_review",
+      "source_package_key": "split_and_dividend",
+      "source_variant": "split_and_dividend_adjusted",
+      "membership_source": "InIndex",
+      "decision_lag_xnys_sessions": 1,
+      "pre_membership_price_history_allowed_for_indicator_warmup": true,
+      "historical_weights_used": false,
+      "user_authorized_exploratory_use_on": "2026-08-29"
+    },
+    "selection": {
+      "ranking_used": false,
+      "maximum_selected": null,
+      "hold_every_qualifying_security": true,
+      "signal_frequency_trading_days": 1,
+      "unchanged_selection_rebalance_disabled_only_in_change_cases": true
+    },
+    "initial_state": "all four portfolios start in cash; indicator history may prewarm but confirmation and hysteresis state reset at analysis_start",
+    "temporary_unavailability_policy": "a requested change with no real signal Close or next execution Open is retried on later daily decisions with real bars; no buy uses a synthetic carry bar",
+    "terminal_price_policy": "after the final vendor bar an existing holding may be settled once at the carried final adjusted price on a later scheduled Open; no new positive target may use a terminal proxy",
+    "holding_diagnostics": {
+      "holding_sessions": "sessions with at least one positive position after that Open's execution",
+      "holding_cagr_pct": "full account terminal growth annualized over holding_sessions/252; includes costs but compresses cash-only sessions and is diagnostic rather than a selection metric",
+      "holdings_count": "number of positive security positions after daily Open execution"
+    },
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "strategy": {
+    "name": "nasdaq100_point_in_time_p24_hysteresis_rebalance_factorial",
+    "description": "在2005至2012年的滞后一交易日历史Nasdaq-100成员中，完全冻结父实验的原P24与严格P24参数，做两项二元结构消融。持有轴比较严格P24每日状态与严格P24买入、原P24退出的滞回状态机；再平衡轴比较每日恢复等权与仅在目标名单变化或前次未完成时恢复等权。四条路径都逐日检查全部历史合格股，不排名、不限数量，完成Close确认后最早下一Open成交，并分别测试0与10bps。候选历史成分和行情仍为pending_review，所以结果只作探索性证据。",
+    "buy_rule": "每天完成Close后，在滞后一交易日已知的Nasdaq-100历史成员中检查每只股票。两条STRICT_LEVEL路径只要严格P24目标状态为真就列入下一Open目标名单；两条STRICT_ENTRY_ORIGINAL_EXIT路径中，空仓股票也必须严格P24为真才进入目标名单。严格P24继续沿用三个条件连续2个完成交易日成立；没有排名、Top-N或主观筛选。",
+    "sell_rule": "STRICT_LEVEL路径在严格P24目标状态失效或股票离开滞后成员集合时取消目标持仓。STRICT_ENTRY_ORIGINAL_EXIT路径买入后允许从严格状态退回普通原P24并继续持有，只有原P24目标状态失效或离开滞后成员集合才取消目标持仓；退出后只有重新达到严格P24才可再入。没有固定百分比止损或盘中退出。",
+    "signal_time": "SMA、长期平均涨幅、短期趋势质量、连续日确认和滞回状态都只使用拆股及股息调整后的当日完成Close及更早价格；成员身份统一延迟一个XNYS交易日，分析窗口开始时不继承此前确认计数、滞回状态或仓位。",
+    "execution_time": "每个Close确认下一交易日Open的目标名单。DAILY_EQUAL路径每个Open先卖后买并恢复等权；SELECTION_CHANGE_EQUAL路径只在名单变化或上次目标因真实行情不可用而未完成时执行同样的先卖后买等权调整，名单不变时不为价格漂移交易。每边分别测试0或10bps不利成交价冲击。",
+    "positioning": "四条组合各自从10万美元现金开始，long-only，持有所有目标股票且不排名；允许小数股，不融资、不做空，现金不计息，无目标股票时全部现金。",
+    "plain_language": {
+      "summary": "比较严格P24是否适合只负责买入、普通P24负责延迟卖出，以及减少无必要等权调整能否改善纳指成分组合。",
+      "buy": "每天检查当时已知的全部纳指成分，只有连续满足严格P24的股票才能成为新持仓，所有合格股票都会买入。",
+      "sell": "一半组合在严格条件失效时卖出；另一半允许持仓暂时退回普通P24，直到连普通P24也失效才卖出。",
+      "execution": "收盘后确认名单、下一开盘先卖后买；一半每天恢复等权，另一半只在名单改变或上次交易未完成时恢复等权。",
+      "position": "四个独立账户各用10万美元，不排名、不限制合格股票数量，不融资、不做空，没有合格股票时持有现金。"
+    }
+  },
+  "research": {
+    "stage": "exploratory_candidate_point_in_time_factorial",
+    "hypothesis": "The strict P24 state may be more useful as a high-quality entry gate than as a symmetric exit gate, while suppressing equal-weight restoration on unchanged selections may reduce friction without changing stock eligibility or signal timing. The two mechanisms may interact because hysteresis changes how often the selected set changes.",
+    "primary_metric": "At 10bps compare the complete 2x2 interaction on calendar CAGR, maximum drawdown, Sharpe, annual volatility, turnover, order count, exposure, holding sessions, holding CAGR and holdings count. Use 0bps only to separate gross path quality from friction; compare all paths with QQQ Buy & Hold.",
+    "selection_rule": "Run and display all four predeclared cases. Do not retune P24 thresholds, choose a winner for future use, add market-risk gates, ranking, caps or delayed signal clocks after seeing 2005-2012. Attribute holding-policy and rebalance-policy main effects and their interaction at 10bps; holding CAGR remains diagnostic rather than a replacement for calendar CAGR.",
+    "validation_plan": "Unit-test strict-entry/original-exit state transitions, reentry only from strict, exact next-Open timing, all-qualifier selection, no orders for unchanged-list drift in SELECTION_CHANGE_EQUAL, daily retry after unavailable prices and preservation of the parent strict-daily case. Reconcile all eight formal paths between the immutable order plan and PyBroker within 1e-6, then run full tests, source hashes, v5 report tests, real Chrome interaction, PDF print gates, catalog checks, workspace audit and validate_run.",
+    "promotion_criteria": "No path can be promoted while the Nasdaq-100 package is pending_review. A mechanism may only be nominated for a separately frozen approved-data out-of-sample experiment if it improves 10bps drawdown-adjusted performance coherently, reduces turnover without hidden entry delay, retains nontrivial breadth and does not depend on a single 2005-2012 episode.",
+    "rejection_conditions": "Reject any current-constituent lookback, unlagged membership, inherited pre-window state, same-Close execution, ranking or hidden cap, omission of qualifiers, delayed entry disguised as rebalancing, synthetic-bar buys, financing, failure of strict subset or hysteresis transition tests, incomplete 2x2 matrix, ledger mismatch above1e-6, use of 2005-2012 to retune P24, or presentation of candidate data as approved evidence."
+  },
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse the shared v5 renderer with the human strategy flow first; display the four equity/drawdown paths, QQQ benchmark, turnover/cost effects, holdings and a two-factor interaction table. Keep exact P24 formulas, state-machine details and data caveats in the folded appendix."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_dual_stochrsi_cross_period_grid_full_history_v1",
+  "created_at_utc": "2026-08-25T00:00:00+00:00",
+  "status": "exploratory",
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_dual_raw_stochrsi_cross_period_grid",
+    "description": "Keep the parent dual-StochRSI CROSS thresholds fixed at buy 0.20 and sell 0.80 while independently scanning one short and one long raw unsmoothed Stochastic RSI period. While flat, both completed prior values must be strictly below 0.20 and both provisional values must cross to or above 0.20. While long, both completed prior values must be strictly above 0.80 and both provisional values must cross to or below 0.80. Trigger prices use only completed data through the prior close; opening gaps fill at Open and other fills require the directed Open-to-Close segment to reach the exact joint boundary. High and Low are ignored for touch inference.",
+    "buy_rule": "For every short period in {14,16,...,50} and long period in {70,72,...,160}, buy while flat only when both completed prior StochRSI values are < 0.20 and both provisional same-session values cross to >= 0.20. The joint upward trigger is the larger of the two period-specific solved prices.",
+    "sell_rule": "For every period pair, sell while long only when both completed prior StochRSI values are > 0.80 and both provisional same-session values cross to <= 0.80. The joint downward trigger is the smaller of the two period-specific solved prices.",
+    "signal_time": "Crossing eligibility and both period-specific trigger equations are frozen before each regular session using adjusted daily data completed through the prior close.",
+    "execution_time": "On the same regular session, fill at Open if it has already gapped through the frozen joint boundary; otherwise fill at the exact boundary only when the directed Open-to-Close segment reaches it. High and Low are not used to infer a touch.",
+    "positioning": "Long-only; 0% or 100% QQQ; fractional shares; no leverage, shorting, pyramiding, or cash interest; at most one order per session.",
+    "initial_position": "flat for every period pair; Buy & Hold enters at the first analysis-session Open",
+    "indicator_definition": "For each candidate period p, Wilder RSI(p) is normalized by the rolling p-value minimum and maximum of that same RSI series; a zero range maps to 0.5; no K or D smoothing.",
+    "plain_language": {
+      "summary": "固定双周期StochRSI的买卖线，观察短周期和长周期取多长时能否形成稳定的QQQ择时区域。",
+      "buy": "空仓时，两个候选周期前一天都低于0.20，并在当天一起向上越过0.20才买入。",
+      "sell": "持仓时，两个候选周期前一天都高于0.80，并在当天一起向下跌破0.80才卖出。",
+      "execution": "每天开盘前用前一日及更早数据算好触发价；跳空越过就按开盘价成交，否则只有开盘到收盘的价格路径碰到触发价才成交。",
+      "position": "每组周期都独立在满仓QQQ和现金之间切换，并与同起点买入持有、SMA200正负3%择时及报告中的等额定投情景比较。"
+    }
+  },
+  "parameters": {
+    "analysis_start": "2000-01-03",
+    "analysis_end": "2026-08-04",
+    "buy_threshold": 0.2,
+    "sell_threshold": 0.8,
+    "short_period_start": 14,
+    "short_period_end": 50,
+    "long_period_start": 70,
+    "long_period_end": 160,
+    "period_step": 2,
+    "grid_semantics": "full_cartesian_product",
+    "combination_count_per_cost": 874,
+    "parent_anchor_short_period": 42,
+    "parent_anchor_long_period": 100,
+    "sma_baseline_window": 200,
+    "sma_baseline_buy_buffer_pct": 3.0,
+    "sma_baseline_sell_buffer_pct": 3.0,
+    "intraday_path": "directed_open_to_close_only",
+    "gap_policy": "fill_at_open_when_open_is_already_beyond_trigger"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; uninvested cash earns zero",
+  "benchmark": "Buy & Hold QQQ from the first analysis-session Open, plus the parent all-in/all-out dynamic SMA200 -3%/+3% timing baseline under the same directed Open-to-Close trigger model and 0/5 bps costs",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse the corrected v5 template unchanged. Add experiment-specific CAGR and Sharpe period heatmaps while retaining the shared human-language flow, Close-only market panel, selectable equity series, visible-range scaling, collapsed technical appendix, and print rules.",
+    "scenario_layer": "The equal-installment DCA control is browser-only, uses the visible-range Buy & Hold starting equity as total budget, invests at evenly spaced sessions, leaves undeployed cash non-interest-bearing, and does not mutate formal ledgers."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "The fixed 42/100 periods may belong to a broad short/long-period region rather than a sample-specific pair when the 0.20/0.80 CROSS rule is evaluated over QQQ history from 2000 onward.",
+    "primary_metric": "Five-bps CAGR and Sharpe jointly, interpreted with maximum drawdown, exposure, order count, zero-cost sensitivity, boundary contact, and local surface continuity",
+    "selection_rule": "Run and retain all 874 Cartesian period pairs at both costs. Report the parent 42/100 anchor and separate mechanical CAGR/Sharpe maxima. Define the high-performance set as cases reaching at least 95% of both positive five-bps maxima; find eight-neighbor components on the two-step grid. Name a descriptive stable representative only from a component with at least nine cases that does not touch any period boundary, choosing the case that maximizes its minimum normalized CAGR/Sharpe and then is closest to the component centroid. If no component qualifies, report no stable representative.",
+    "validation_plan": "Treat 2000-2026 as a full-sample period robustness scan, not a holdout. A later experiment must freeze one pair or plateau rule before opening a distinct time window or cross-asset test.",
+    "promotion_criteria": "Both ledgers reconcile for every case, all engineering/report gates pass, the parent anchor remains economically useful after five-bps costs, and any descriptive candidate lies in a qualifying interior connected component rather than an isolated or boundary peak.",
+    "rejection_conditions": "Do not promote directly from this scan. Reject a stable-candidate claim if the qualifying set is absent, boundary-touching, smaller than nine connected cases, driven by very few completed trades, cost-fragile, or if any case, artifact, report, or ledger gate fails."
+  },
+  "active_run_id": null
+}

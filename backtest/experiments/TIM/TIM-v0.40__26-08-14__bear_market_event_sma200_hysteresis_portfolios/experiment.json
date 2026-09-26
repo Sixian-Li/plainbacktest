@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "experiment_id": "bear_market_event_sma200_hysteresis_portfolios_v1",
+  "created_at_utc": "2026-08-14T00:00:00+00:00",
+  "status": "specification_frozen",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "BEAR_EVENT_PORTFOLIOS"
+  ],
+  "excluded_symbols": {
+    "Q": "用户明确要求完全排除；核心层由原13只缩为12只，不进入任何股票池、信号或结果。"
+  },
+  "strategy": {
+    "name": "bear_market_event_sma200_hysteresis_portfolios",
+    "description": "只在12段事后标注并收紧为峰值至谷底的熊市窗口内持仓，比较三个固定候选池的无筛选路径与统一SMA200筛选路径。无筛选在每段熊市起点把当日已有价格的标的等权买入并持有到熊市结束；SMA路径在起点只纳入Close>SMA200的标的，途中使用SMA200上下2%滞回、最近一次状态切换成交价上下10%解锁和路径依赖的比例再分配。所有熊市之间保持现金。",
+    "buy_rule": "无筛选case只在每段熊市start完成Close后，对该日已有价格的池内标的生成等权目标。SMA筛选case在start完成Close后，只对SMA200已形成且Close>SMA200的标的生成等权目标；熊市途中，空仓标的仅在未受10%锁定且Close>SMA200×1.02时转为持仓。若同时有k只新标的进入、最终活跃数为n，每只新标的获得1/n目标权重，原持仓按其信号Close市值比例缩放到剩余(n-k)/n。",
+    "sell_rule": "无筛选case在熊市途中不主动再平衡，只在end完成Close后全部清仓。SMA筛选case中，持仓标的仅在未受10%锁定且Close<SMA200×0.98时退出；退出标的权重按其余持仓在信号Close的市值比例重新分配。每段end完成Close后无条件清仓；若没有活跃标的则持有现金。",
+    "signal_time": "所有进入、退出和目标股数只使用当日常规时段已完成Close、当日及更早的SMA200、当时持仓市值与此前真实成交锚。熊市start/end来自事后人工区间，是外生oracle事件，不宣称当时可知。",
+    "execution_time": "所有Close确认目标在下一共同交易日按拆股及股息调整Open成交；同日先卖后买，买单按代码字母序，在现金不足时只成交可负担股数。单边成本作为买高卖低的成交价冲击。",
+    "position_sizing": "long-only；初始100,000美元；允许小数股；目标总权重最高100%。初始进入等权，途中退出后幸存标的保持当时市值相对比例，新进入标的各获最终活跃数的1/n，原持仓按比例腾出权重。其他标的进出造成的被动增减仓不更新该标的10%状态切换锚。",
+    "trade_lock": "标的因自身SMA状态由空仓转持仓或由持仓转空仓并实际成交后，以该次成本后Open成交价为锚；后续Close仍处于锚价[0.90,1.10]区间内时禁止该标的再次改变持有状态。首次Close落到区间外时解除锁定并在同一Close按当前SMA滞回水平重新判断。每段熊市结束后全部状态与成交锚重置。",
+    "initial_position": "每段熊市start的Close之前均为空仓；start信号下一Open才建立该段的初始组合。"
+  },
+  "parameters": {
+    "analysis_start": "2000-03-24",
+    "analysis_end": "2026-03-31",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "core12": [
+      "AZO",
+      "TLT",
+      "COR",
+      "EXE",
+      "DVA",
+      "SJM",
+      "SO",
+      "ED",
+      "GLD",
+      "CHD",
+      "HRL",
+      "GILD"
+    ],
+    "near_core8": [
+      "HSY",
+      "ORLY",
+      "MO",
+      "WRB",
+      "EQT",
+      "LMT",
+      "GIS",
+      "WEC"
+    ],
+    "retail4": [
+      "DLTR",
+      "DG",
+      "WMT",
+      "TSCO"
+    ],
+    "universes": {
+      "core12_near8": [
+        "AZO",
+        "TLT",
+        "COR",
+        "EXE",
+        "DVA",
+        "SJM",
+        "SO",
+        "ED",
+        "GLD",
+        "CHD",
+        "HRL",
+        "GILD",
+        "HSY",
+        "ORLY",
+        "MO",
+        "WRB",
+        "EQT",
+        "LMT",
+        "GIS",
+        "WEC"
+      ],
+      "core12_retail4": [
+        "AZO",
+        "TLT",
+        "COR",
+        "EXE",
+        "DVA",
+        "SJM",
+        "SO",
+        "ED",
+        "GLD",
+        "CHD",
+        "HRL",
+        "GILD",
+        "DLTR",
+        "DG",
+        "WMT",
+        "TSCO"
+      ],
+      "core12_near8_retail4": [
+        "AZO",
+        "TLT",
+        "COR",
+        "EXE",
+        "DVA",
+        "SJM",
+        "SO",
+        "ED",
+        "GLD",
+        "CHD",
+        "HRL",
+        "GILD",
+        "HSY",
+        "ORLY",
+        "MO",
+        "WRB",
+        "EQT",
+        "LMT",
+        "GIS",
+        "WEC",
+        "DLTR",
+        "DG",
+        "WMT",
+        "TSCO"
+      ]
+    },
+    "filter_modes": [
+      "no_filter",
+      "sma200_hysteresis"
+    ],
+    "formal_cases": [
+      "core12_near8__no_filter",
+      "core12_near8__sma200_hysteresis",
+      "core12_retail4__no_filter",
+      "core12_retail4__sma200_hysteresis",
+      "core12_near8_retail4__no_filter",
+      "core12_near8_retail4__sma200_hysteresis"
+    ],
+    "sma_window": 200,
+    "initial_entry_buffer_pct": 0.0,
+    "mid_bear_entry_buffer_pct": 2.0,
+    "mid_bear_exit_buffer_pct": 2.0,
+    "state_change_lock_band_pct": 10.0,
+    "lock_anchor_updates": "own_state_change_fills_only",
+    "same_day_transition_order": "remove_exits_then_add_all_entries_simultaneously",
+    "no_filter_rebalancing": "equal_weight_at_bear_start_then_hold_until_end",
+    "common_calendar_policy": "以SPY日历为基础；标的上市前缺席不影响日历，任何池内标的上市后缺少Open/Close的日期从全部case共同剔除，禁止填造价格或在非共同日成交；熊市start/end必须保留。",
+    "interval_liquidation": "end_close_signal_next_common_open",
+    "fractional_shares": true,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; cash between bear intervals earns zero interest",
+  "benchmark": "每个股票池自己的no_filter路径是对应SMA200筛选路径的唯一机制基准；不跨股票池改选赢家。",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "复用v3的自包含Plotly、可见区间缩放、净值选择与性能控件；实验专属图展示6条事件净值、逐段熊市收益、大小熊市复合收益和换仓事件。"
+  },
+  "research": {
+    "stage": "retrospective_event_conditioned_exploratory_backtest",
+    "hypothesis": "在事后已知的熊市峰谷窗口内，统一SMA200上下2%滞回和状态成交价10%锁定可以相对同池无筛选等权持有改善熊市复合收益，而且该方向能在12+8、12+4和12+8+4三个候选池中重复。",
+    "primary_metric": "单边5bps下，各股票池sma200_hysteresis相对no_filter的全部熊市复合收益差；强制同时报告6段大熊市复合、6段小熊市复合、12段逐段收益、最差单段、订单数、换手和现金占比。",
+    "selection_rule": "参数和股票池均由用户事前冻结；保存三个股票池乘两个筛选模式的全部6个case，不按历史结果改选股票池、阈值、锁定带或赢家。",
+    "validation_plan": "对0/5bps的6条连续事件账户路径，使用PyBroker共享现金账户与独立FIFO多标的账本核对逐日现金、净值、逐标的股数、订单顺序、股数、成交价和按标的/退出日汇总的FIFO交易；只有名义金额不超过1e-9美元的浮点订单或FIFO碎片可在经济序列中忽略，账户、实际订单和经济交易差异门槛仍为1e-6。单测覆盖起点等权、2%滞回、10%解锁、同时进出、比例再分配、无筛选不再平衡、次日Open和未来数据不可回写。保存来源与产物哈希并执行完整测试、工作区审计和真实Chrome交互门禁。",
+    "promotion_criteria": "本实验因使用事后已知熊市边界永不直接晋级模拟盘。只有5bps下SMA路径在三个股票池的全部熊市复合收益全部优于各自无筛选路径，且大熊/小熊共6个配对中至少4个改善、成本不反转结论，才值得建立一个使用可实时市场状态触发的新实验。",
+    "rejection_conditions": "若5bps下SMA路径在至少两个股票池的全部熊市复合收益不如无筛选，或0bps优势被5bps反转，或任一目标权重超过100%、使用同日Close成交、状态锁被被动再平衡错误重置、未来数据改变既有信号、或PyBroker与独立账本任一核对差超过1e-6，则拒绝机制或实现。"
+  }
+}

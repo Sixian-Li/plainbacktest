@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_reentry_grid_full_history_v1",
+  "created_at_utc": "2026-08-13T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_or_flat_start_reentry_grid",
+    "description": "在本地已批准 QQQ 日线的完整覆盖区间 1999-03-10 至 2026-08-04 复测同一策略。初始持有现金；数据起点后的 SMA 预热期不产生信号，等待第一个普通买入信号后全仓持有 QQQ。持仓时由成本止损、短均线慢性转弱、SMA25/30/35 当日变化率同时快速转弱或 SMA200 下穿中的任一规则全仓卖出；空仓时由卖出价上方强制买回、SMA200 上穿或短均线恢复中的任一规则全仓买回。扫描 R=0% 至 10%。",
+    "buy_rule": "初始空仓且没有上次卖价，因此仅允许完成相应 SMA 预热后的动态 SMA200 上穿或短均线恢复产生第一笔买入；以后空仓时再额外允许价格达到上次实际卖出价的 1+R。",
+    "sell_rule": "持仓时 OR：成本价 -1.5%；短均线平均变化率此前连续 6 日为负且当日仍为负并跌破动态 SMA130；此前连续 2 日短均线平均变化率为负且当日动态 SMA25、SMA30、SMA35 各自变化率全部不高于 -0.20%；动态 SMA200 下穿。",
+    "signal_time": "每个交易日开始前，仅用截至前一交易日 Close 的历史计算该日条件单及动态阈值公式；盘中是否触发由该日常规时段调整后 OHLC 判定。指标尚未完成预热时不生成对应条件单。",
+    "execution_time": "若前 Close 到当日 Open 已越过阈值，按当日 Open；否则常规时段 OHLC 触及阈值时按精确理论阈值；零滑点、零费用；每天最多一笔成交。",
+    "position_sizing": "long-only，初始 100,000 美元现金；触发后全仓持有或全现金，允许小数股，不融资，现金不计息。",
+    "initial_position": "1999-03-10 起空仓等待；第一笔正常买入成交前不计入策略与 Buy & Hold 的正式比较区间。"
+  },
+  "parameters": {
+    "requested_start": "1999-03-10",
+    "analysis_start": "1999-03-10",
+    "analysis_end": "2026-08-04",
+    "initial_position": "flat",
+    "A_negative_days_slow": 7,
+    "B_slow_sma_window": 130,
+    "C_fast_derivative_pct": -0.2,
+    "C_fast_derivative_mode": "all_short_smas",
+    "D_negative_days_fast": 3,
+    "E_fallback_sma_window": 200,
+    "F_short_sma_center": 30,
+    "F_short_sma_spacing": 5,
+    "F_short_sma_windows": [
+      25,
+      30,
+      35
+    ],
+    "G_short_recovery_below_pct": 1.0,
+    "H_reentry_sma_window": 200,
+    "L_cost_stop_pct": 1.5,
+    "R_forced_rebuy_pct_grid": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "display_R_forced_rebuy_pct": 5,
+    "max_trades_per_day": 1,
+    "single_rule_ablation": {
+      "enabled": true,
+      "scope": "For every R=0% through 10%, compare all rules against disabling each of the seven buy/sell signals one at a time.",
+      "metric_start": "Use the all-rules common first-entry date for every ablation; later entry caused by removing a buy rule remains cash and is included in performance.",
+      "disabled_signals": [
+        "SELL_COST_STOP",
+        "SELL_SLOW_TREND",
+        "SELL_FAST_DROP",
+        "SELL_SMA200_CROSS",
+        "BUY_FORCED_REENTRY",
+        "BUY_SMA200_CROSS",
+        "BUY_SHORT_RECOVERY"
+      ]
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the strategy's first actual buy fill, invest the same 100,000 USD in QQQ at that identical fill price; compare both paths only from that date through 2026-08-04 Close.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Reuse v3 unchanged because this is the same strategy and report interaction contract with only the analysis interval expanded to all approved QQQ history."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "The complete available QQQ history can reveal whether the R response and any drawdown improvement persist across multiple market regimes.",
+    "primary_metric": "Report all R=0% through 10% results for total return, CAGR, Sharpe, maximum drawdown, exposure and trade count against the common-entry QQQ benchmark; additionally report the same metrics after removing each rule one at a time for every R.",
+    "selection_rule": "No parameter or rule removal is selected or promoted. R=5% is predeclared only as the trade-marker display case; sample extrema and ablation improvements are descriptive and the full response must be assessed for stability.",
+    "validation_plan": "Every base and single-rule-ablation case must match PyBroker and the independent ledger. Base R cases must share the same first ordinary buy fill; every ablation is scored from that common date, remains flat when a removed buy rule delays entry, respects incomplete indicator warmup, and uses the exact approved QQQ data endpoints.",
+    "promotion_criteria": "None. A full-history in-sample scan may inform later walk-forward design but cannot promote a parameter by itself.",
+    "rejection_conditions": "Reject if the run invents pre-1999 warmup, trades before a valid ordinary buy, changes any non-date strategy parameter outside the declared single-rule ablation, changes the common metric start to favor a removed rule, uses a different benchmark entry, trades more than once per day, or diverges from the independent ledger."
+  }
+}

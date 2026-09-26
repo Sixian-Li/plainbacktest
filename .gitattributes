@@ -1,0 +1,5 @@
+# Frozen datasets and copied license texts must survive checkout byte-for-byte.
+# Keep original line endings and source formatting for their recorded hashes.
+data/** -text -whitespace
+research/market_views/*.csv -text -whitespace
+backtest/docs/licenses/* -text -whitespace

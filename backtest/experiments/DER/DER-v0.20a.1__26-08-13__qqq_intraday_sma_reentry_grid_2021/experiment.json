@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_intraday_sma_reentry_grid_2021_v1",
+  "created_at_utc": "2026-08-13T00:00:00+00:00",
+  "status": "exploratory",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "intraday_sma_or_flat_start_reentry_grid",
+    "description": "2021-01-04 起先持有现金，等待第一个普通买入信号后全仓持有 QQQ；持仓时由成本止损、短均线慢性转弱、SMA25/30/35 当日变化率同时快速转弱或 SMA200 下穿中的任一规则全仓卖出；空仓时由卖出价上方强制买回、SMA200 上穿或短均线恢复中的任一规则全仓买回。本实验只扫描强制买回幅度 R=0% 至 10%。",
+    "buy_rule": "初始空仓且没有上次卖价，因此仅允许动态 SMA200 上穿或短均线恢复产生第一笔买入；以后空仓时再额外允许价格达到上次实际卖出价的 1+R。",
+    "sell_rule": "持仓时 OR：成本价 -1.5%；短均线平均变化率此前连续 6 日为负且当日仍为负并跌破动态 SMA130；此前连续 2 日短均线平均变化率为负且当日动态 SMA25、SMA30、SMA35 各自变化率全部不高于 -0.20%；动态 SMA200 下穿。",
+    "signal_time": "每个交易日开始前，仅用截至前一交易日 Close 的历史计算该日条件单及动态阈值公式；盘中是否触发由该日常规时段调整后 OHLC 判定。",
+    "execution_time": "若前 Close 到当日 Open 已越过阈值，按当日 Open；否则常规时段 OHLC 触及阈值时按精确理论阈值；零滑点、零费用；每天最多一笔成交。",
+    "position_sizing": "long-only，初始 100,000 美元现金；触发后全仓持有或全现金，允许小数股，不融资，现金不计息。",
+    "initial_position": "2021-01-04 起空仓等待；第一笔正常买入成交前不计入策略与 Buy & Hold 的正式比较区间。"
+  },
+  "parameters": {
+    "analysis_start": "2021-01-04",
+    "analysis_end": "2026-08-04",
+    "initial_position": "flat",
+    "A_negative_days_slow": 7,
+    "B_slow_sma_window": 130,
+    "C_fast_derivative_pct": -0.2,
+    "C_fast_derivative_mode": "all_short_smas",
+    "D_negative_days_fast": 3,
+    "E_fallback_sma_window": 200,
+    "F_short_sma_center": 30,
+    "F_short_sma_spacing": 5,
+    "F_short_sma_windows": [
+      25,
+      30,
+      35
+    ],
+    "G_short_recovery_below_pct": 1.0,
+    "H_reentry_sma_window": 200,
+    "L_cost_stop_pct": 1.5,
+    "R_forced_rebuy_pct_grid": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "display_R_forced_rebuy_pct": 5,
+    "max_trades_per_day": 1
+  },
+  "cost_scenarios_bps_per_side": [
+    0
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "At the strategy's first actual buy fill, invest the same 100,000 USD in QQQ at that identical fill price; compare both paths only from that date through 2026-08-04 Close.",
+  "reporting": {
+    "template_id": "interactive_research_v3",
+    "template_path": "backtest/report_templates/interactive_research_v3",
+    "reuse_review": "Promote the accepted v2 report to v3. The visible-window Y-axis logic is extended so the lower derivative panel independently follows the visible dates and selected derivative traces, while old validated v2 runs remain reproducible."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "Starting flat and requiring all three short-SMA derivatives to reach -0.20% may reduce unintended early exposure and noisy fast-drop exits; the one-dimensional forced-rebuy grid reveals whether R has a broad, smooth useful region.",
+    "primary_metric": "Report the full R=0% through 10% response for total return, CAGR, Sharpe, maximum drawdown, exposure and trade count; compare every case with a common QQQ benchmark starting at the first strategy fill.",
+    "selection_rule": "No parameter is promoted or silently selected. R=5% is predeclared only as the trade-marker display case; report the sample-best CAGR and Sharpe as descriptive extrema alongside all 11 cases.",
+    "validation_plan": "Every R case must match PyBroker and an independently coded cash/share ledger for daily cash, shares, equity, every order and every closed trade; all cases must share the same first normal buy fill.",
+    "promotion_criteria": "None in this full-sample grid. A later experiment must lock a robust region and use walk-forward or held-out evaluation before simulation.",
+    "rejection_conditions": "Reject if any case seeds a position, uses forced re-entry before a real sell, starts its benchmark on a different fill, does not require all three individual short-SMA derivatives at -0.20%, trades more than once a day, or diverges from the independent ledger."
+  }
+}

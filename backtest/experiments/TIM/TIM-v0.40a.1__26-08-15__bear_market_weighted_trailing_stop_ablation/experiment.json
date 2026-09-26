@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "experiment_id": "bear_market_weighted_trailing_stop_ablation_v1",
+  "created_at_utc": "2026-08-15T00:00:00+00:00",
+  "status": "specification_frozen",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "BEAR_EVENT_WEIGHTED_STOPS"
+  ],
+  "excluded_symbols": {
+    "Q": "延续父实验的用户约束，完全排除。",
+    "duplicate_LMT": "用户名单同时出现LMT与LMT*；按确认结果去重为一个LMT，并采用星标双坑位。"
+  },
+  "strategy": {
+    "name": "bear_market_weighted_trailing_stop_ablation",
+    "description": "只在既有12段事后峰值至谷底熊市窗口内交易15个固定候选。所有case使用SMA200上下3%滞回且取消成交价10%锁：熊市起点以Close高于SMA200×1.03的水平条件建仓，途中空仓标的必须先处于上轨之下再严格上穿上轨才可进入，持仓标的Close低于SMA200×0.97退出。以每次真实状态进入成交价和随后完成Close的最高值维护持仓峰值；比较关闭强制退出和从峰值严格回撤超过6%、8%、10%、12%时退出。另比较全部标的一坑与五个星标标的双坑的完整二维消融。熊市之间全现金。",
+    "buy_rule": "每段start完成Close后，SMA200已形成且Close>SMA200×1.03的标的产生初始进入信号。熊市途中，空仓标的只有在本次空仓期曾观察到Close<=SMA200×1.03后，后续完成Close严格上穿SMA200×1.03才进入；强制卖出后同样必须完成这一重新武装过程，不能立即买回。信号下一共同交易日Open执行。",
+    "sell_rule": "持仓标的在完成Close<SMA200×0.97时普通退出；启用强制退出的case还在完成Close低于本次持仓运行峰值×(1-6%/8%/10%/12%)时退出，强制退出优先于普通SMA原因但同一标的同日只产生一笔卖单。每段end完成Close后无条件清仓。所有卖出下一共同交易日Open执行。",
+    "signal_time": "只使用当日常规时段已完成Close、当日及更早SMA200、此前实际状态进入成交和此前完成Close形成的运行峰值。熊市start/end为外生事后oracle，不宣称当时可知。",
+    "execution_time": "所有Close确认目标在下一共同交易日按拆股及股息调整Open成交；同日先卖后买，代码字母序执行，单边成本通过买高卖低的成交价冲击计入。",
+    "positioning": "long-only、允许小数股、不融资、总目标权重不超过100%。普通标的坑位乘数1；EQT/GIS/LMT/ORLY/AZO在star_on时乘数2。起点按活跃坑位归一化；途中新进入标的按其坑位数除以最终活跃坑位总数取得预算，原持仓按当时市值比例腾仓；退出释放的资金按幸存持仓当时市值比例分配。被动缩放不重置该标的运行峰值。",
+    "trailing_peak": "每次标的由空仓真实进入并成交后，以成本后Open成交价初始化运行峰值；随后每个持仓日用已完成Close更新max。被动再平衡成交不重置峰值；状态退出后清空，下一次真实进入重新初始化。",
+    "initial_position": "每段熊市start的Close之前均为空仓；start信号下一共同Open才建立初始组合。"
+  },
+  "parameters": {
+    "analysis_start": "2000-03-24",
+    "analysis_end": "2026-03-31",
+    "bear_interval_source": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+    "universe": [
+      "WEC",
+      "LMT",
+      "EQT",
+      "GIS",
+      "WRB",
+      "ORLY",
+      "HSY",
+      "GILD",
+      "HRL",
+      "GLD",
+      "ED",
+      "SO",
+      "COR",
+      "TLT",
+      "AZO"
+    ],
+    "starred_symbols": [
+      "EQT",
+      "GIS",
+      "LMT",
+      "ORLY",
+      "AZO"
+    ],
+    "slot_multipliers": {
+      "star_off": {
+        "default": 1,
+        "starred": 1
+      },
+      "star_on": {
+        "default": 1,
+        "starred": 2
+      }
+    },
+    "star_modes": [
+      "star_off",
+      "star_on"
+    ],
+    "trailing_stop_drawdown_pct": [
+      null,
+      6.0,
+      8.0,
+      10.0,
+      12.0
+    ],
+    "formal_cases": [
+      "star_off__stop_off",
+      "star_off__stop_06",
+      "star_off__stop_08",
+      "star_off__stop_10",
+      "star_off__stop_12",
+      "star_on__stop_off",
+      "star_on__stop_06",
+      "star_on__stop_08",
+      "star_on__stop_10",
+      "star_on__stop_12"
+    ],
+    "sma_window": 200,
+    "entry_buffer_pct": 3.0,
+    "exit_buffer_pct": 3.0,
+    "entry_semantics": "start使用严格水平条件；途中和强制退出后要求先观察上轨之下，再严格上穿上轨",
+    "state_change_lock_band_pct": null,
+    "trailing_peak_price": "max(actual state-entry cost-adjusted Open fill, subsequent completed adjusted Close values)",
+    "trailing_stop_comparison": "strictly below peak times one minus threshold; equality does not trigger",
+    "forced_exit_priority": "trailing stop before SMA exit; record both active reasons but emit one sell target",
+    "same_day_transition_order": "remove exits then add all entries simultaneously",
+    "common_calendar_policy": "以SPY日历为基础；标的上市前缺席不影响日历，任何标的上市后缺少Open/Close的日期从全部case共同剔除，禁止填造价格或在非共同日成交；熊市start/end必须保留。",
+    "interval_liquidation": "end_close_signal_next_common_open",
+    "fractional_shares": true,
+    "numerical_zero_order_notional_usd": 1e-09
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "initial_cash": 100000,
+  "financing": "disabled; cash between bear intervals earns zero interest",
+  "benchmark": "主机制基准为star_off__stop_off；star_on__stop_off隔离双坑位效应；每个star模式内的stop_off分别作为6/8/10/12%强制退出的配对基准。父实验TIM-v0.40仅作历史背景，不改写其validated结果。",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "reuse_review": "复用v4的标题后完整冻结策略卡、自包含Plotly、可见区间缩放和性能控件；本实验专属增加双因素消融、大小熊、星标家族、单标的贡献和强制退出诊断。"
+  },
+  "research": {
+    "stage": "retrospective_event_conditioned_exploratory_backtest",
+    "hypothesis": "在固定15标的与事后熊市窗口内，五个星标标的双坑位能提高组合熊市收益；从持仓最高完成Close回撤6%至12%的强制退出能相对无补丁路径改善尾部风险，且效果不会只来自单一阈值或单一熊市类别。",
+    "primary_metric": "单边5bps下全部12段熊市复合收益；分别报告star_on相对star_off的配对差、每个star模式下各止损阈值相对stop_off的配对差。强制同时报告6段大熊、6段小熊、最差单段、最大回撤、现金占比、换手、订单、星标家族与每只标的的收益和组合贡献。",
+    "selection_rule": "保存2种星标模式×5种止损模式的全部10个case及0/5bps结果，不按历史最高点删除case或改阈值。只有至少两个相邻止损阈值在star_on与star_off下都同方向改善总熊结果，且大熊/小熊没有完全相反的系统性恶化，才称为描述性稳定区间；不提名未来最优阈值。",
+    "validation_plan": "对20条连续事件账户路径使用PyBroker共享现金账户与独立多标的参考账本核对逐日现金、净值、逐标的股数、订单日期/方向/股数/成交价。单测覆盖LMT去重、双坑位初始与途中分配、3%起点水平与途中重新上穿、运行峰值更新、严格阈值、强制退出后重新武装、被动再平衡不重置峰值、未来数据不可回写、次日Open和无10%锁。保存逐段收益、逐标的现金流贡献、价格收益、持仓率、止损次数、来源/产物哈希，并运行完整测试、目录生成、工作区审计、validate_run和真实Chrome门禁。",
+    "promotion_criteria": "本实验因熊市边界和候选池均为事后信息，永不直接晋级模拟盘。若双坑位效应在5bps下对总熊和至少一个大小熊类别稳定为正，且至少两个相邻止损阈值在两种权重下都改善总熊并降低最差单段或最大回撤，才值得建立使用实时可知熊市状态和前瞻候选池的新实验。",
+    "rejection_conditions": "若星标效应只由单一熊市或成本前结果驱动，所有止损阈值在任一权重模式下都不如stop_off，止损阈值只形成孤立单点，目标权重超过100%，同日Close成交，强制退出后未重新武装即买回，未来价格改变既有信号，validated父run被修改，或PyBroker与独立账本任一差异超过1e-6，则拒绝对应机制或实现。"
+  }
+}

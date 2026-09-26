@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_sma_recovery_probation_role_grid_2000_2015_v1",
+  "created_at_utc": "2026-08-22T00:00:00+00:00",
+  "status": "exploratory",
+  "symbols": [
+    "QQQ"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_two_sma_recovery_probation_role_constrained_selection",
+    "description": "QQQ 初始空仓，以较短的卖出 SMA 负责下跌时快速退出，以较长的买入 SMA 负责熊市后的恢复入场。普通买入必须由完成收盘确认从长均线下方向上穿越，并在下一交易日 Open 成交；任何新买入先进入试探持仓。普通买入若在站上短均线前完成收盘重新落到长均线下方，则下一 Open 失败退出。短均线卖出后的 3% 强制买回每个熊市阶段最多一次；其试探持仓若在完成普通长均线上穿前收盘跌回原短均线卖出计成本成交价下方，则下一 Open 失败退出。试探持仓完成收盘站上短均线后升级为确认多头，之后按盘前可知的动态短均线向下穿越快速卖出并开启新的熊市阶段。完整计算80至450日的全部买卖周期对，但只有买入周期严格长于卖出周期的组合可以参与选参和统计门禁。",
+    "buy_rule": "空仓时，普通买入要求 prior_close <= prior_buy_sma 且 current_close > current_buy_sma；该收盘信号在下一交易日 Open 全仓买入。若最近一次确认多头由 sell-SMA 向下穿越卖出后，本熊市阶段尚未使用 c，则同时保留一次 last_confirmed_sell_effective_fill×1.03 的盘中强制买回线；没有已确认普通买入信号时，次日 Open 已越过该线按 Open 买入，否则 High 触线时按理论线买入。普通收盘信号优先于同日可执行的 c 计划。失败退出不得生成或刷新 c 锚。选参时强制 buy_window > sell_window。",
+    "sell_rule": "每次买入先进入试探持仓。普通长均线买入的试探持仓若完成 Close < current_buy_sma，则生成普通恢复失败信号并在下一 Open 清仓。c 买回的试探持仓若在完成普通长均线上穿之前 Close < 原确认多头 sell-SMA 卖出的计成本成交价，则生成强制买回失败信号并在下一 Open 清仓；若其间完成普通长均线上穿，则改用长均线作为失败边界。任何试探持仓若先完成 Close >= current_sell_sma，则升级为确认多头。确认多头每天盘前以完成历史解出次日动态 sell-SMA 交叉价；Open 已在其下方按 Open 卖出，否则 Low 向下触线时按理论线卖出。失败退出优先于同一收盘的状态升级，每日最多一笔成交。",
+    "signal_time": "普通长均线买入、试探失败和试探转为确认多头均只在常规交易日 Close 完成后确认；确认多头的下一日短均线卖出线和未使用的 c 买回线在开盘前只用已完成收盘、均线与既有账户成交价冻结。",
+    "execution_time": "所有完成 Close 才确认的普通买入和试探失败信号最早在下一常规交易日 Open 成交。盘前冻结的 sell-SMA 与 c 触发线若 Open 已越线则按 Open，否则按调整后日线 Low/High 首次可判定触线的理论价成交；随后施加单边 5 bps 不利成本。每日最多一笔，不利用当日收盘结果追溯获得更早价格。",
+    "positioning": "long-only；2000-12-18 以 100,000 美元现金空仓开始；每次买入投入全部现金、每次卖出清空全部份额；允许小数股，不融资，现金不计息。",
+    "initial_position": "空仓",
+    "price_basis": "approved split-and-dividend-adjusted QQQ OHLC; an internally consistent total-return approximation, not an exact raw-price corporate-action account replay",
+    "plain_language": {
+      "summary": "用短均线尽快避开下跌，再用更长的均线寻找恢复，并把尚未站稳的买入当作可撤回的试探。",
+      "buy": "空仓后，只有收盘真正从较长买入均线下方回到上方，才在下一交易日开盘买入；短均线卖出后另保留一次上涨3%的纠错买回机会。",
+      "sell": "新买入在站上较短卖出均线前若重新跌破自己的失败边界就退出；站上短均线后，下一次盘中向下穿过短均线时正常卖出。",
+      "execution": "收盘确认的买入和失败退出都在下一交易日开盘成交；预先算好的短均线卖出和3%纠错线可在次日跳空或盘中触线成交，每天最多一笔。",
+      "position": "每次买入使用全部现金，每次卖出全部清仓，允许小数股，不借钱，空仓现金不计利息。"
+    }
+  },
+  "parameters": {
+    "requested_data_start": "1999-03-10",
+    "analysis_start": "2000-12-18",
+    "analysis_end": "2015-12-31",
+    "warmup_policy": "Use approved QQQ history from 1999-03-10. All cases start flat on 2000-12-18, the first common session with completed SMA450 inputs; signals before the common start are ignored.",
+    "buy_sma_window_range": {
+      "start": 80,
+      "stop": 450,
+      "step": 10,
+      "count": 38
+    },
+    "sell_sma_window_range": {
+      "start": 80,
+      "stop": 450,
+      "step": 10,
+      "count": 38
+    },
+    "forced_rebuy_pct": 3.0,
+    "stop_loss_pct": null,
+    "combination_count": 1444,
+    "role_consistent_pair_count": 703,
+    "selection_role_constraint": {
+      "rule": "buy_window > sell_window",
+      "meaning": "The recovery-entry SMA must be strictly longer than the confirmed-exit SMA.",
+      "execution_policy": "Calculate and retain all 1,444 cells for paired diagnostics, but reversed and equal-role cells cannot enter champions, surfaces, PBO, DSR or promotion gates."
+    },
+    "cost_bps_per_side": 5.0,
+    "max_trades_per_session": 1,
+    "forced_rebuy_attempts_per_bear_episode": 1,
+    "ordinary_entry_timing": "completed close crossing above buy SMA, next-session Open fill",
+    "confirmed_exit_timing": "pre-open dynamic sell-SMA line, next-session Open gap or intraday Low touch",
+    "ordinary_probation_failure": "completed close below current buy SMA before confirmation, next-session Open exit",
+    "forced_probation_failure": "completed close below original confirmed sell effective fill before ordinary buy-SMA recovery or confirmation, next-session Open exit",
+    "confirmation_rule": "a probation position becomes confirmed when a completed Close is at or above the current sell SMA",
+    "same_close_priority": "probation failure before confirmation or forced-to-ordinary transition",
+    "fixed_subperiods": [
+      {
+        "period_id": "P1_2000_2005",
+        "start": "2000-12-18",
+        "end": "2005-12-30"
+      },
+      {
+        "period_id": "P2_2006_2010",
+        "start": "2006-01-03",
+        "end": "2010-12-31"
+      },
+      {
+        "period_id": "P3_2011_2015",
+        "start": "2011-01-03",
+        "end": "2015-12-31"
+      }
+    ],
+    "subperiod_state_policy": "Run one continuous strategy path. At each fixed subperiod boundary inherit cash, position, probation state, bear-episode anchor and c-use state; rebase equity only for subperiod metrics.",
+    "identifiability_gate": {
+      "minimum_ordinary_buy_count": 3,
+      "minimum_confirmed_sell_count": 3,
+      "minimum_probation_failure_count": 3,
+      "purpose": "Require the strict long-buy/short-sell role relation, both SMA events and the new failed-recovery mechanism before interpreting a parameter pair."
+    },
+    "surface_selection": {
+      "primary_metric": "minimum CAGR across the three fixed inherited-state subperiods",
+      "top_quantile": 0.9,
+      "connectivity": "four-neighbor adjacency at one 10-session step within buy_window > sell_window",
+      "minimum_component_cells": 9,
+      "minimum_buy_window_span": 20,
+      "minimum_sell_window_span": 20,
+      "boundary_policy": "A component touching buy=450, sell=80 or the semantic diagonal buy=sell+10 is reported but cannot nominate a stable region.",
+      "representative_rule": "Within the largest eligible top-decile component require a complete role-consistent and event-identifiable 3x3 neighborhood; maximize local median primary metric minus 0.5 times local standard deviation, then break ties by full-history Sharpe, full-history CAGR, distance to component centroid and lower turnover.",
+      "supplementary_champions": [
+        "full-history CAGR among role-consistent identifiable cells",
+        "full-history Sharpe among role-consistent identifiable cells",
+        "least-negative maximum drawdown among role-consistent identifiable cells"
+      ]
+    },
+    "semantic_parent": {
+      "experiment_id": "qqq_sma_recovery_probation_grid_2000_2015_v1",
+      "run_id": "run_20260821T161353Z_a44cfa59",
+      "finding": "The unrestricted representative buy270/sell390 reversed the intended SMA roles, so it is a rejection diagnostic rather than a valid candidate."
+    },
+    "parent_control": {
+      "experiment_id": "qqq_intraday_sma_period_cross_grid_1999_2015_v1",
+      "run_id": "run_20260814T190632Z_a8335cff",
+      "correction_mode": "c3_doff",
+      "anchor_buy_window": 310,
+      "anchor_sell_window": 190,
+      "comparison": "Compare all matching 38x38 cells and the old/new 310/190 paths without modifying the validated parent run; selection and statistical gates use only buy_window > sell_window."
+    },
+    "multiple_testing": {
+      "pbo_block_count": 12,
+      "pbo_metric": "Annualized daily Sharpe from the selected six-block training half and its complement across role-consistent identifiable cases only.",
+      "pbo_maximum": 0.2,
+      "dsr_minimum_probability": 0.95,
+      "trial_count_policy": "Report correlation-adjusted effective trials and the conservative full eligible role-consistent case count; apply DSR only after the constrained surface representative is frozen."
+    },
+    "formal_reconciliation": {
+      "anchors": "SMA200/SMA200 is retained as an intentionally role-ineligible execution control; SMA310/SMA190 is the inherited valid anchor.",
+      "surface_representative": "Reconcile the deterministic role-constrained local-stability representative even when a structural or statistical gate fails.",
+      "objective_champions": "Deduplicated role-consistent full-history CAGR, Sharpe and maximum-drawdown champions.",
+      "requirement": "Every one of the 1,444 calculated cases must match two independently structured compiled ledgers within 1e-9; all formal candidates must match PyBroker and the Python reference ledger in dates, sides, shares, fills, cash and equity within 1e-6."
+    }
+  },
+  "cost_scenarios_bps_per_side": [
+    5
+  ],
+  "initial_cash": 100000.0,
+  "financing": "disabled; flat cash earns zero interest",
+  "benchmark": "Invest the same 100,000 USD at the 2000-12-18 regular-session Open with 5 bps adverse entry cost and hold QQQ through 2015-12-31.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse interactive_research_v5 unchanged and supply constrained-state, old/new surface, PBO/DSR and formal-ledger figures through the shared renderer."
+  },
+  "research": {
+    "stage": "exploratory",
+    "hypothesis": "After repairing false-recovery entries, a stable risk-return region should still exist inside the economically intended domain where the recovery-entry SMA is longer than the fast-exit SMA; excluding reversed roles should recover a valid neighborhood near or comparable with 310/190 rather than nominate a different strategy by swapping the two jobs.",
+    "primary_metric": "Minimum inherited-state CAGR across the same three frozen 2000-2015 subperiods among buy_window > sell_window cases, subject to event-count and constrained two-dimensional plateau gates.",
+    "selection_rule": "Calculate the complete 38x38 grid for diagnostics, then make buy_window > sell_window a hard eligibility gate before champions, top-decile threshold, connected components, PBO and DSR. Report 310/190, the deterministic valid representative, role-consistent CAGR/Sharpe/drawdown champions, the ineligible 200/200 execution control and per-cell deltas versus validated TIM-v0.50 c3/d-off.",
+    "validation_plan": "Save all 1,444 metrics and the 703-cell role mask, inherited-state subperiods, state/event counts, parent deltas, constrained surface geometry, PBO splits and DSR inputs. Cross-check all cells through two compiled ledgers; reconcile predefined anchors, constrained representative and objective champions through PyBroker and an independent Python ledger; require approved-data hash, tests, catalog rebuild, workspace audit, interactive Chrome and PDF gates.",
+    "promotion_criteria": "No direct promotion from this reused exploration period. A role-consistent region may be retained only if it is event-identifiable, has a complete valid 3x3 neighborhood, is connected and away from the global and semantic boundaries, has positive primary metric, PBO<=20%, effective-trials DSR>=95%, and improves drawdown or worst-subperiod behavior versus the matching old semantic region without disproportionate turnover.",
+    "rejection_conditions": "Reject a unique parameter claim if the representative violates buy_window > sell_window, no qualifying constrained two-dimensional plateau exists, the dominant region touches buy=450, sell=80 or buy=sell+10, either SMA role or probation failure is underidentified, improvement is isolated or single-period, PBO exceeds20%, DSR is below95%, turnover rises without material risk improvement, or any timing, accounting, hash, test, catalog, report or browser gate fails. The previously viewed2016-2026 path is diagnostic and cannot be reused as pristine locked evidence."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

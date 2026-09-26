@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "experiment_id": "qqq_full_position_sma_trend_quality_boundary_expansion_2000_2015_v1",
+  "created_at_utc": "2026-08-15T00:30:00+00:00",
+  "status": "specification_frozen",
+  "active_run_id": null,
+  "latest_validated_run_id": null,
+  "symbols": [
+    "QQQ"
+  ],
+  "traded_symbol": "QQQ",
+  "factor_only_symbol": "SPY",
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "qqq_full_position_sma_long_slope_short_trend_quality_boundary_expansion",
+    "description": "完全复用父实验P24的QQQ 0%/100%状态策略，只扩展父训练代表触及边界的四个参数：长期SMA窗口L、长期斜率回看K、F2每日斜率门槛和短期SMA窗口S。基础状态要求完成Close高于SMA_L；F2=((SMA_L(t)/SMA_L(t-K))-1)/K×100严格高于门槛；F4对最近W个完成log(SMA_S)做OLS，以每日斜率×R²×100衡量短趋势质量并严格高于门槛。W=10、F4门槛=0、连续入场确认C=2保持父代表不变。F5不参与扩边选参，只在新P24代表冻结后以R=120作固定消融。",
+    "buy_rule": "空仓且完成Close>SMA_L、F2严格高于门槛、F4严格高于0；三个状态连续2个完成交易日全部成立后产生买入信号，下一QQQ/SPY共同交易日Open用全部现金买入QQQ。F2与F4公式、严格比较和状态式再入场语义与父实验完全相同。",
+    "sell_rule": "持仓时，只要Close<=SMA_L、F2<=门槛或F4<=0中的任一项成立，当日完成Close后产生卖出信号，下一QQQ/SPY共同交易日Open全部清仓。退出不等待2日确认；不使用3%或8%止损。固定F5消融case额外在QQQ/SPY 120日对数相对强弱<=0时退出。",
+    "signal_time": "所有SMA、长期斜率、短趋势回归和固定F5消融只使用当日常规时段完成Close及更早数据；当日Close完成后才能形成信号。",
+    "execution_time": "所有信号最早在下一QQQ/SPY共同交易日的拆股及股息调整Open成交；每边成本作为买高卖低的成交价冲击，禁止同日Close成交和PyBroker默认middle price。",
+    "positioning": "long-only；初始100,000美元；QQQ仓位只能为0%或100%，每次买入使用全部现金、每次卖出清空全部份额；允许小数股，不融资、不做空，现金不计息。SPY只用于固定F5消融，从不交易。",
+    "initial_position": "2000-03-17前为空仓；1999-03-10起的数据只用于指标预热，不继承仓位、现金或确认计数。",
+    "reentry": "卖出后，只要全部启用状态重新连续2日成立即可下一Open满仓买回；不强制等待新的Close上穿SMA事件。"
+  },
+  "parameters": {
+    "warmup_start": "1999-03-10",
+    "training_window": {
+      "start": "2000-03-17",
+      "end": "2015-12-31",
+      "parent_actual_start_preserved": true
+    },
+    "robustness_subwindows": [
+      {
+        "window_id": "W1_2000_2003",
+        "start": "2000-03-17",
+        "end": "2003-12-31"
+      },
+      {
+        "window_id": "W2_2004_2007",
+        "start": "2004-01-01",
+        "end": "2007-12-31"
+      },
+      {
+        "window_id": "W3_2008_2011",
+        "start": "2008-01-01",
+        "end": "2011-12-31"
+      },
+      {
+        "window_id": "W4_2012_2015",
+        "start": "2012-01-01",
+        "end": "2015-12-31"
+      }
+    ],
+    "parent_representative": {
+      "long_sma_window": 180,
+      "long_slope_lookback": 10,
+      "long_slope_threshold_daily_pct": 0.02,
+      "short_sma_window": 20,
+      "short_regression_window": 10,
+      "short_quality_threshold_daily_pct": 0.0,
+      "entry_confirmation_sessions": 2,
+      "relative_strength_lookback": 120
+    },
+    "fixed_parameters": {
+      "short_regression_window": 10,
+      "short_quality_threshold_daily_pct": 0.0,
+      "entry_confirmation_sessions": 2,
+      "relative_strength_lookback": 120
+    },
+    "expanded_grid": {
+      "long_sma_window": [
+        120,
+        130,
+        140,
+        150,
+        160,
+        170,
+        180,
+        190,
+        200
+      ],
+      "long_slope_lookback": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        10,
+        15,
+        20
+      ],
+      "long_slope_threshold_daily_pct": [
+        0.01,
+        0.015,
+        0.02,
+        0.025,
+        0.03,
+        0.04,
+        0.05
+      ],
+      "short_sma_window": [
+        8,
+        10,
+        12,
+        15,
+        18,
+        20,
+        25,
+        30
+      ],
+      "combination_count": 4032
+    },
+    "selection": {
+      "minimum_cagr_pct": 2.0,
+      "minimum_closed_trades": 6,
+      "require_positive_exposure_in_every_subwindow": true,
+      "plateau_drawdown_tolerance_pct_points": 1.0,
+      "minimum_connected_component_cases": 5,
+      "minimum_representative_plateau_neighbors": 2,
+      "prefer_non_boundary_candidate": true,
+      "primary": "maximize the minimum max_drawdown_pct across the four independently reset subwindows",
+      "secondary": [
+        "largest four-dimensional Manhattan-connected one-percentage-point plateau",
+        "non-boundary candidate when the chosen component contains one",
+        "lower full-period ulcer_index_pct",
+        "higher worst_63_session_return_pct",
+        "shorter maximum drawdown duration",
+        "higher losing_month_avoidance_pct",
+        "distance to the selected component coordinate median"
+      ]
+    },
+    "fixed_f5_ablation": {
+      "enabled": true,
+      "relative_strength_lookback": 120,
+      "threshold_log_return": 0.0,
+      "core_parameters_frozen_before_ablation": true
+    },
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero interest",
+  "benchmark": "QQQ buy and hold from 2000-03-17, with the same initial cash and per-side cost assumption",
+  "reporting": {
+    "template_id": "interactive_research_v4",
+    "template_path": "backtest/report_templates/interactive_research_v4",
+    "reuse_review": "复用v4的策略卡置顶、自包含Plotly、可见区间缩放、净值选择和性能控件；新增内容只限本实验四维扩边平台、代表切片、父子参数与固定F5消融。"
+  },
+  "research": {
+    "stage": "exploratory_in_sample_boundary_expansion",
+    "hypothesis": "父实验P24代表在L、K、F2门槛和S四维触边；沿触边方向扩展后，若风险改善来自真实参数平台而非搜索截断，应出现包含非边界点的四维连通1pp平台，同时保持低回撤与正CAGR。",
+    "primary_metric": "四个预声明子窗口中最差最大回撤；其次为四维1pp平台连通性、非边界性、完整期Ulcer Index、最差63日收益、水下持续时间和亏损月份比例。",
+    "selection_rule": "只在2000-03-17至2015-12-31对四个触边维度运行4,032个完整P24组合，其他参数固定为父代表；K向下扩至合法自然下限1。候选必须CAGR>=2%、至少6笔闭合交易且四窗均有持仓。先取四窗最差最大回撤最优值的1个百分点带，在四维离散网格上以单维相邻索引定义Manhattan连边，选择case数最大的连通分量；若该分量存在非边界case则排除边界case，再依次按Ulcer Index、最差63日收益、水下时间、亏损月份规避率和到分量坐标中位数距离选择代表。5bps负责选择，0bps只复跑同一网格与冻结代表。P24代表冻结后才运行R120固定F5消融。",
+    "validation_plan": "独立因果状态机保存4,032个完整P24结果、平台分量与邻接诊断；父P24、新代表B0/B2/B4/P24和新代表P245-R120由PyBroker与独立账本在0/5bps下核对逐日现金、份额、净值、订单日期/方向/份额/成交价和闭合交易。单测覆盖网格数量、父代表包含、四维相邻关系、连通分量、非边界优先和代表邻居计数。2016年以后保持未读取。",
+    "promotion_criteria": "只有5bps代表不触及任何扩展网格边界、所在1pp连通分量至少5个case且至少有2个直接平台邻居、CAGR>=2%、四窗最差回撤不比父代表差超过1个百分点、Ulcer Index不比父代表差超过1个百分点、0bps不反转方向且全部工程门禁通过，才值得新建独立2016–2026锁定测试。F5只有同时改善冻结P24的最差分段回撤与Ulcer Index并保持正CAGR，才作为该锁定测试的独立消融携带。",
+    "rejection_conditions": "若没有联合case通过活动门禁，最大1pp连通分量少于5个case，代表仍触及任一扩展边界或直接平台邻居不足2个，风险改善依赖孤立点，5bps成本反转结论，F5参与核心选参，使用2016年后数据、未完成Close、同日Close成交、非0%/100%仓位，或PyBroker与独立账本差异超过1e-8，则拒绝晋级；负结果仍作为有效validated研究保存。"
+  }
+}

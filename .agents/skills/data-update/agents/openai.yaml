@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Update"
+  short_description: "Check and safely operate Quant market-data workflows"
+  default_prompt: "Use $data-update to check Quant data freshness, capability gaps, and run the safe update workflow."

@@ -1,0 +1,1 @@
+"""Canonical market-data contracts."""

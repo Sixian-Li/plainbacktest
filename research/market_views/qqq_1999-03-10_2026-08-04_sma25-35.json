@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "view_id": "close_sma_cluster_derivative_v3",
+  "symbol": "QQQ",
+  "requested_start": "1999-03-10",
+  "requested_end": "2026-08-04",
+  "actual_start": "1999-03-10",
+  "actual_end": "2026-08-04",
+  "trading_sessions": 6893,
+  "price_field": "close",
+  "price_adjustment": "split_and_dividend_adjusted canonical Close",
+  "sma_windows": [
+    25,
+    30,
+    35
+  ],
+  "sma_calculation": "daily rolling mean of Close over full canonical history before interval filtering",
+  "sma_average": "arithmetic mean of all selected SMA series; valid only when every selected SMA is available",
+  "derivative_formula": "(current / previous trading session - 1) * 100",
+  "derivative_series": [
+    "sma25_change_pct",
+    "sma30_change_pct",
+    "sma35_change_pct",
+    "sma_average_change_pct"
+  ],
+  "initial_warmup_gaps_preserved": true,
+  "source": "data/processed/daily/QQQ.csv",
+  "source_sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df",
+  "output": "research/market_views/qqq_1999-03-10_2026-08-04_sma25-35.html",
+  "output_sha256": "6737f6a174015ee83c565f571c2b41014e2edcd64a868c691c36f31917acb300"
+}

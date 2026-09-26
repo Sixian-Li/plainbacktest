@@ -1,0 +1,434 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-16T14:36:45+00:00",
+  "build_id": "dacf68c4e40d893a66692115d1d9d1b4382dde70bc29f8713067fbc0369a2b61",
+  "calendar_analysis": {
+    "calendar_status": "suspect",
+    "calendar_suspect_dates": [
+      {
+        "date": "2023-06-19",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Monday"
+      },
+      {
+        "date": "2024-06-19",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Wednesday"
+      },
+      {
+        "date": "2025-01-26",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Sunday"
+      },
+      {
+        "date": "2025-06-19",
+        "calendar_flag": "trading",
+        "evidence": "absent_from_all_covered_datasets",
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Thursday"
+      },
+      {
+        "date": "2023-06-20",
+        "calendar_flag": "closed",
+        "evidence": "data_present_for_all_covered_datasets",
+        "symbols_with_data": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "covered_symbols": [
+          "QQQ",
+          "RKLB",
+          "SPY",
+          "VOO"
+        ],
+        "weekday": "Tuesday"
+      }
+    ],
+    "dataset_specific_missing_dates": [
+      {
+        "date": "2015-04-09",
+        "missing_symbols": [
+          "VOO"
+        ],
+        "peer_symbols_with_data": [
+          "QQQ",
+          "SPY"
+        ],
+        "weekday": "Thursday"
+      }
+    ]
+  },
+  "reports": [
+    {
+      "symbol": "QQQ",
+      "registered_status": "approved",
+      "quality_status": "passed",
+      "effective_status": "approved",
+      "role": "primary_backtest_input",
+      "rows_written": 6893,
+      "rows_rejected": 0,
+      "start": "1999-03-10",
+      "end": "2026-08-04",
+      "source_headers": [
+        "Date",
+        "CompanyName",
+        "Symbol",
+        "Open",
+        "High",
+        "Low",
+        "Close",
+        "Volume",
+        "Unadjusted Close"
+      ],
+      "issue_counts": {
+        "missing_required_value": 0,
+        "bad_date": 0,
+        "bad_number": 0,
+        "wrong_symbol": 0,
+        "duplicate_date": 0,
+        "nonpositive_price": 0,
+        "invalid_ohlc": 0,
+        "unexpected_coverage": 0,
+        "nonpositive_volume": 0,
+        "outlier_close_return": 0,
+        "source_order_violation": 0,
+        "missing_trading_date": 4,
+        "nontrading_calendar_date": 1
+      },
+      "blocking_counts": {},
+      "issues": {
+        "missing_required_value": [],
+        "bad_date": [],
+        "bad_number": [],
+        "wrong_symbol": [],
+        "duplicate_date": [],
+        "nonpositive_price": [],
+        "invalid_ohlc": [],
+        "unexpected_coverage": [],
+        "nonpositive_volume": [],
+        "outlier_close_return": [],
+        "source_order_violation": [],
+        "missing_trading_date": [
+          {
+            "date": "2023-06-19"
+          },
+          {
+            "date": "2024-06-19"
+          },
+          {
+            "date": "2025-01-26"
+          },
+          {
+            "date": "2025-06-19"
+          }
+        ],
+        "nontrading_calendar_date": [
+          {
+            "date": "2023-06-20"
+          }
+        ]
+      },
+      "exclusions": {},
+      "known_issues": [
+        "Adjusted prices approximate dividend reinvestment; no independent corporate-action cash ledger is available.",
+        "Vendor-adjusted volume is not raw exchange volume and must not drive liquidity or fill assumptions."
+      ]
+    },
+    {
+      "symbol": "VOO",
+      "registered_status": "provisional",
+      "quality_status": "failed",
+      "effective_status": "quality_failed",
+      "role": "future_trade_asset",
+      "rows_written": 3998,
+      "rows_rejected": 0,
+      "start": "2010-09-09",
+      "end": "2026-08-04",
+      "source_headers": [
+        "日期",
+        "代码",
+        "开盘价",
+        "收盘价",
+        "最高价",
+        "最低价",
+        "成交量",
+        "成交额",
+        "振幅",
+        "涨跌幅",
+        "涨跌额",
+        "换手率"
+      ],
+      "issue_counts": {
+        "missing_required_value": 0,
+        "bad_date": 0,
+        "bad_number": 0,
+        "wrong_symbol": 0,
+        "duplicate_date": 0,
+        "nonpositive_price": 0,
+        "invalid_ohlc": 1,
+        "unexpected_coverage": 0,
+        "nonpositive_volume": 0,
+        "outlier_close_return": 0,
+        "source_order_violation": 0,
+        "missing_trading_date": 5,
+        "nontrading_calendar_date": 1
+      },
+      "blocking_counts": {
+        "invalid_ohlc": 1
+      },
+      "issues": {
+        "missing_required_value": [],
+        "bad_date": [],
+        "bad_number": [],
+        "wrong_symbol": [],
+        "duplicate_date": [],
+        "nonpositive_price": [],
+        "invalid_ohlc": [
+          {
+            "row": 2063,
+            "date": "2018-11-15",
+            "open": 218.706,
+            "high": 222.575,
+            "low": 218.918,
+            "close": 222.097
+          }
+        ],
+        "unexpected_coverage": [],
+        "nonpositive_volume": [],
+        "outlier_close_return": [],
+        "source_order_violation": [],
+        "missing_trading_date": [
+          {
+            "date": "2015-04-09"
+          },
+          {
+            "date": "2023-06-19"
+          },
+          {
+            "date": "2024-06-19"
+          },
+          {
+            "date": "2025-01-26"
+          },
+          {
+            "date": "2025-06-19"
+          }
+        ],
+        "nontrading_calendar_date": [
+          {
+            "date": "2023-06-20"
+          }
+        ]
+      },
+      "exclusions": {},
+      "known_issues": [
+        "2018-11-15 has an invalid OHLC relationship: vendor open is below vendor low.",
+        "The vendor's exact qfq formula has not been independently verified.",
+        "This dataset must not be promoted to approved until the anomalous row is verified from an independent source."
+      ]
+    },
+    {
+      "symbol": "SPY",
+      "registered_status": "approved",
+      "quality_status": "passed",
+      "effective_status": "approved",
+      "role": "long_history_proxy_and_validation",
+      "rows_written": 8435,
+      "rows_rejected": 0,
+      "start": "1993-01-29",
+      "end": "2026-08-04",
+      "source_headers": [
+        "Date",
+        "CompanyName",
+        "Symbol",
+        "Open",
+        "High",
+        "Low",
+        "Close",
+        "Volume",
+        "Unadjusted Close"
+      ],
+      "issue_counts": {
+        "missing_required_value": 0,
+        "bad_date": 0,
+        "bad_number": 0,
+        "wrong_symbol": 0,
+        "duplicate_date": 0,
+        "nonpositive_price": 0,
+        "invalid_ohlc": 0,
+        "unexpected_coverage": 0,
+        "nonpositive_volume": 0,
+        "outlier_close_return": 0,
+        "source_order_violation": 0,
+        "missing_trading_date": 4,
+        "nontrading_calendar_date": 1
+      },
+      "blocking_counts": {},
+      "issues": {
+        "missing_required_value": [],
+        "bad_date": [],
+        "bad_number": [],
+        "wrong_symbol": [],
+        "duplicate_date": [],
+        "nonpositive_price": [],
+        "invalid_ohlc": [],
+        "unexpected_coverage": [],
+        "nonpositive_volume": [],
+        "outlier_close_return": [],
+        "source_order_violation": [],
+        "missing_trading_date": [
+          {
+            "date": "2023-06-19"
+          },
+          {
+            "date": "2024-06-19"
+          },
+          {
+            "date": "2025-01-26"
+          },
+          {
+            "date": "2025-06-19"
+          }
+        ],
+        "nontrading_calendar_date": [
+          {
+            "date": "2023-06-20"
+          }
+        ]
+      },
+      "exclusions": {},
+      "known_issues": [
+        "SPY is a proxy and validation series, not a price segment to splice directly into VOO.",
+        "Adjusted prices approximate dividend reinvestment; no independent corporate-action cash ledger is available.",
+        "Vendor-adjusted volume is not raw exchange volume and must not drive liquidity or fill assumptions."
+      ]
+    },
+    {
+      "symbol": "RKLB",
+      "registered_status": "approved",
+      "quality_status": "passed",
+      "effective_status": "approved",
+      "role": "single_asset_backtest_input",
+      "rows_written": 1240,
+      "rows_rejected": 0,
+      "start": "2021-08-25",
+      "end": "2026-08-04",
+      "source_headers": [
+        "Date",
+        "CompanyName",
+        "Symbol",
+        "Open",
+        "High",
+        "Low",
+        "Close",
+        "Volume",
+        "Unadjusted Close",
+        "InIndex"
+      ],
+      "issue_counts": {
+        "missing_required_value": 0,
+        "bad_date": 0,
+        "bad_number": 0,
+        "wrong_symbol": 0,
+        "duplicate_date": 0,
+        "nonpositive_price": 0,
+        "invalid_ohlc": 0,
+        "unexpected_coverage": 0,
+        "nonpositive_volume": 0,
+        "outlier_close_return": 3,
+        "source_order_violation": 0,
+        "missing_trading_date": 4,
+        "nontrading_calendar_date": 1
+      },
+      "blocking_counts": {},
+      "issues": {
+        "missing_required_value": [],
+        "bad_date": [],
+        "bad_number": [],
+        "wrong_symbol": [],
+        "duplicate_date": [],
+        "nonpositive_price": [],
+        "invalid_ohlc": [],
+        "unexpected_coverage": [],
+        "nonpositive_volume": [],
+        "outlier_close_return": [
+          {
+            "date": "2021-09-09",
+            "return_pct": 37.309476474
+          },
+          {
+            "date": "2025-01-21",
+            "return_pct": 30.291666667
+          },
+          {
+            "date": "2026-05-08",
+            "return_pct": 34.219903283
+          }
+        ],
+        "source_order_violation": [],
+        "missing_trading_date": [
+          {
+            "date": "2023-06-19"
+          },
+          {
+            "date": "2024-06-19"
+          },
+          {
+            "date": "2025-01-26"
+          },
+          {
+            "date": "2025-06-19"
+          }
+        ],
+        "nontrading_calendar_date": [
+          {
+            "date": "2023-06-20"
+          }
+        ]
+      },
+      "exclusions": {
+        "before_canonical_start": {
+          "rows": 187,
+          "source_start": "2020-11-24",
+          "source_end": "2021-08-24",
+          "canonical_start": "2021-08-25",
+          "reason": "Exclude the pre-combination VACQ SPAC period; SEC evidence states RKLB trading began on 2021-08-25."
+        }
+      },
+      "known_issues": [
+        "Rows before 2021-08-25 describe the VACQ SPAC predecessor period and are explicitly excluded from canonical RKLB history.",
+        "The primary source and the full-market vendor qfq source have identical dates, closes, and daily close returns throughout the canonical range.",
+        "Adjusted prices approximate total return; no independent corporate-action cash ledger is available.",
+        "Vendor-adjusted volume must not drive liquidity or fill assumptions."
+      ]
+    }
+  ]
+}

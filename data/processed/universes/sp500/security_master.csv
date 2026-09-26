@@ -1,0 +1,1300 @@
+instrument_id,symbol,company_name,source_member,price_start,price_end,price_rows,membership_runs,first_row_in_index,last_row_in_index,active_on_vendor_snapshot,current_official_member,current_official_identifier,current_official_sedol,current_link_method,quality_status,member_price_coverage_status
+A,A,Agilent Technologies Inc Common,A.csv,1999-11-18,2026-08-04,6716,1,false,true,true,true,00846U101,2520153,exact_ticker_adjacent_snapshot,passed,complete
+AABA-201910,AABA-201910,Altaba Inc Common,AABA-201910.csv,1996-04-12,2019-10-02,5909,1,false,false,false,false,,,,passed,complete
+AAL,AAL,American Airlines Group Inc Common,AAL.csv,2013-12-09,2026-08-04,3181,1,false,false,false,false,,,,passed,complete
+AAL-199702,AAL-199702,Alexander & Alexander Services Inc Common,AAL-199702.csv,1990-01-02,1997-02-21,1806,1,true,false,false,false,,,,passed,gaps_reported
+AAMRQ-201312,AAMRQ-201312,AMR Corp Common,AAMRQ-201312.csv,1990-01-02,2013-12-06,6032,1,true,false,false,false,,,,passed,complete
+AAP,AAP,Advance Auto Parts Inc Common,AAP.csv,2001-11-29,2026-08-04,6208,1,false,false,false,false,,,,passed,complete
+AAPL,AAPL,Apple Inc Common,AAPL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,037833100,2046251,exact_ticker_adjacent_snapshot,passed,complete
+AAV-199901,AAV-199901,Avatex Corp Common,AAV-199901.csv,1990-01-02,1999-01-29,2292,1,true,false,false,false,,,,passed,complete
+ABBV,ABBV,AbbVie Inc Common,ABBV.csv,2012-12-10,2026-08-04,3432,1,false,true,true,true,00287Y109,B92SR70,exact_ticker_adjacent_snapshot,passed,complete
+ABI-200811,ABI-200811,Applied Biosystems Inc Common,ABI-200811.csv,1990-01-02,2008-11-21,4765,1,true,true,false,false,,,,passed,complete
+ABKFQ-201304,ABKFQ-201304,Ambac Financial Group Inc Common,ABKFQ-201304.csv,1991-07-11,2013-04-30,5494,1,false,false,false,false,,,,passed,complete
+ABMD-202212,ABMD-202212,ABIOMED Inc Common,ABMD-202212.csv,1990-01-02,2022-12-21,8259,1,false,true,false,false,,,,passed,complete
+ABNB,ABNB,Airbnb Inc Class A Common,ABNB.csv,2020-12-10,2026-08-04,1417,1,false,true,true,true,009066101,BMGYYH4,exact_ticker_adjacent_snapshot,passed,complete
+ABS-200606,ABS-200606,Albertson's Inc Common,ABS-200606.csv,1990-01-02,2006-06-01,4140,1,true,true,false,false,,,,passed,complete
+ABT,ABT,Abbott Laboratories Common,ABT.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,002824100,2002305,exact_ticker_adjacent_snapshot,passed,complete
+ACAS-201701,ACAS-201701,American Capital Ltd Common,ACAS-201701.csv,1997-08-29,2017-01-03,4866,1,false,false,false,false,,,,passed,complete
+ACGL,ACGL,Arch Capital Group Ltd Common,ACGL.csv,1995-09-14,2026-08-04,7731,1,false,true,true,true,G0450A105,2740542,exact_ticker_adjacent_snapshot,passed,complete
+ACKH-200712,ACKH-200712,Armstrong Holdings Inc Common,ACKH-200712.csv,1990-01-02,2007-12-12,4522,1,true,false,false,false,,,,passed,complete
+ACN,ACN,Accenture Plc Class A Common,ACN.csv,2001-07-19,2026-08-04,6297,1,false,true,true,true,G1151C101,B4BNMY3,exact_ticker_adjacent_snapshot,passed,complete
+ACS-201002,ACS-201002,Affiliated Computer Services Class A Common,ACS-201002.csv,1994-09-27,2010-02-05,3862,1,false,true,false,false,,,,passed,complete
+ACV-201105,ACV-201105,Alberto-Culver Co Class B Common,ACV-201105.csv,1990-01-02,2011-05-10,5384,1,true,false,false,false,,,,passed,complete
+ACY-199411,ACY-199411,American Cyanamid Co Common,ACY-199411.csv,1990-01-02,1994-11-22,1239,1,true,false,false,false,,,,passed,complete
+ADBE,ADBE,Adobe Inc Common,ADBE.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,00724F101,2008154,exact_ticker_adjacent_snapshot,passed,complete
+ADCT-201012,ADCT-201012,ADC Telecommunications Inc Common,ADCT-201012.csv,1990-01-02,2010-12-09,5280,1,false,false,false,false,,,,passed,complete
+ADI,ADI,Analog Devices Inc Common,ADI.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,032654105,2032067,exact_ticker_adjacent_snapshot,passed,complete
+ADM,ADM,Archer-Daniels-Midland Co Common,ADM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,039483102,2047317,exact_ticker_adjacent_snapshot,passed,complete
+ADP,ADP,Automatic Data Processing Inc Common,ADP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,053015103,2065308,exact_ticker_adjacent_snapshot,passed,complete
+ADSK,ADSK,Autodesk Inc Common,ADSK.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,052769106,2065159,exact_ticker_adjacent_snapshot,passed,complete
+ADT-201604,ADT-201604,ADT Corp Common,ADT-201604.csv,2012-09-17,2016-04-29,910,1,false,true,false,false,,,,passed,complete
+AEE,AEE,Ameren Corp Common,AEE.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,023608102,2050832,exact_ticker_adjacent_snapshot,passed,complete
+AEP,AEP,American Electric Power Company Inc Common,AEP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,025537101,2026242,exact_ticker_adjacent_snapshot,passed,complete
+AES,AES,AES Corp Common,AES.csv,1991-06-26,2026-08-04,8839,1,false,true,true,true,00130H105,2002479,exact_ticker_adjacent_snapshot,passed,complete
+AET-201811,AET-201811,Aetna Inc Common,AET-201811.csv,1990-01-02,2018-11-28,7286,1,true,true,false,false,,,,passed,complete
+AFL,AFL,Aflac Inc Common,AFL.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,001055102,2026361,exact_ticker_adjacent_snapshot,passed,complete
+AFS-200011,AFS-200011,Associates First Capital Corp Class A Common,AFS-200011.csv,1996-05-08,2000-11-30,1154,1,false,true,false,false,,,,passed,complete
+AGC-200108,AGC-200108,American General Corp Common,AGC-200108.csv,1990-01-02,2001-08-28,2946,1,true,true,false,false,,,,passed,complete
+AGN-201503,AGN-201503,Allergan Inc Common,AGN-201503.csv,1990-01-02,2015-03-16,6351,1,false,true,false,false,,,,passed,complete
+AGN-202005,AGN-202005,Allergan plc Common,AGN-202005.csv,1993-02-17,2020-05-08,6857,1,false,true,false,false,,,,passed,complete
+AHM-199810,AHM-199810,H. F. Ahmanson & Company Common,AHM-199810.csv,1990-01-02,1998-10-01,2213,1,true,false,false,false,,,,passed,complete
+AIG,AIG,American International Group Inc Common,AIG.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,026874784,2027342,exact_ticker_adjacent_snapshot,passed,complete
+AIT-199910,AIT-199910,Ameritech Corp Common,AIT-199910.csv,1990-01-02,1999-10-08,2470,1,true,true,false,false,,,,passed,complete
+AIV,AIV,Apartment Investment and Management Company Class A Common,AIV.csv,1994-07-22,2026-08-04,8062,1,false,false,false,false,,,,passed,complete
+AIZ,AIZ,Assurant Inc Common,AIZ.csv,2004-02-05,2026-08-04,5659,1,false,true,true,true,04621X108,2331430,exact_ticker_adjacent_snapshot,passed,complete
+AJG,AJG,Arthur J. Gallagher & Co Common,AJG.csv,1990-01-02,2026-08-04,9152,1,false,true,true,true,363576109,2359506,exact_ticker_adjacent_snapshot,passed,complete
+AKAM,AKAM,Akamai Technologies Inc Common,AKAM.csv,1999-10-29,2026-08-04,6730,1,false,true,true,true,00971T101,2507457,exact_ticker_adjacent_snapshot,passed,complete
+AKS-202003,AKS-202003,AK Steel Holding Corp Common,AKS-202003.csv,1994-03-30,2020-03-12,6534,1,false,false,false,false,,,,passed,complete
+AL-200711,AL-200711,Alcan Inc Common,AL-200711.csv,1990-01-02,2007-11-14,4507,1,true,false,false,false,,,,passed,complete
+ALB,ALB,Albemarle Corp Common,ALB.csv,1994-02-22,2026-08-04,8166,1,false,true,true,true,012653101,2046853,exact_ticker_adjacent_snapshot,passed,complete
+ALGN,ALGN,Align Technology Inc Common,ALGN.csv,2001-01-26,2026-08-04,6417,1,false,true,true,true,016255101,2679204,exact_ticker_adjacent_snapshot,passed,complete
+ALK,ALK,Alaska Air Group Inc Common,ALK.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+ALL,ALL,Allstate Corp Common,ALL.csv,1993-06-03,2026-08-04,8349,1,false,true,true,true,020002101,2019952,exact_ticker_adjacent_snapshot,passed,complete
+ALLE,ALLE,Allegion Public Ltd Co Common,ALLE.csv,2013-11-18,2026-08-04,3195,1,false,true,true,true,G0176J109,BFRT3W7,exact_ticker_adjacent_snapshot,passed,complete
+ALTR-201512,ALTR-201512,Altera Corp Common,ALTR-201512.csv,1990-01-02,2015-12-24,6549,1,false,true,false,false,,,,passed,complete
+ALXN-202107,ALXN-202107,Alexion Pharmaceuticals Inc Common,ALXN-202107.csv,1996-02-28,2021-07-20,6391,1,false,true,false,false,,,,passed,complete
+AM-201308,AM-201308,American Greetings Corp Class A Common,AM-201308.csv,1990-01-02,2013-08-08,5949,1,true,false,false,false,,,,passed,complete
+AMAT,AMAT,Applied Materials Inc Common,AMAT.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,038222105,2046552,exact_ticker_adjacent_snapshot,passed,complete
+AMCC-201701,AMCC-201701,Applied Micro Circuits Corp Common,AMCC-201701.csv,1997-11-25,2017-01-26,4823,1,false,false,false,false,,,,passed,complete
+AMCR,AMCR,Amcor PLC Common,AMCR.csv,2019-06-11,2026-08-04,1797,1,true,true,true,true,G0250X149,BV7DQ55,exact_ticker_adjacent_snapshot,passed,complete
+AMD,AMD,Advanced Micro Devices Inc Common,AMD.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,007903107,2007849,exact_ticker_adjacent_snapshot,passed,complete
+AME,AME,AMETEK Inc Common,AME.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,031100100,2089212,exact_ticker_adjacent_snapshot,passed,complete
+AMG,AMG,Affiliated Managers Group Inc Common,AMG.csv,1997-11-21,2026-08-04,7217,1,false,false,false,false,,,,passed,complete
+AMGN,AMGN,Amgen Inc Common,AMGN.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,031162100,2023607,exact_ticker_adjacent_snapshot,passed,complete
+AMH-199709,AMH-199709,Amdahl Corp Common,AMH-199709.csv,1990-01-02,1997-09-18,1952,1,true,false,false,false,,,,passed,complete
+AMP,AMP,Ameriprise Financial Inc Common,AMP.csv,2005-09-15,2026-08-04,5253,1,false,true,true,true,03076C106,B0J7D57,exact_ticker_adjacent_snapshot,passed,complete
+AMP-199904,AMP-199904,AMP Inc Common,AMP-199904.csv,1990-01-02,1999-04-01,2338,1,true,true,false,false,,,,passed,complete
+AMT,AMT,American Tower Corp Common,AMT.csv,1998-02-27,2026-08-04,7152,1,false,true,true,true,03027X100,B7FBFL2,exact_ticker_adjacent_snapshot,passed,complete
+AMT-199607,AMT-199607,Acme Cleveland Corp Common,AMT-199607.csv,1990-01-02,1996-07-02,1643,1,true,false,false,false,,,,passed,gaps_reported
+AMTM,AMTM,Amentum Holdings Inc Common,AMTM.csv,2024-09-24,2026-08-04,466,1,false,false,false,false,,,,passed,complete
+AMX-199311,AMX-199311,Amax Inc Common,AMX-199311.csv,1990-01-02,1993-11-15,981,1,true,false,false,false,,,,passed,complete
+AMZN,AMZN,Amazon.com Inc Common,AMZN.csv,1997-05-15,2026-08-04,7350,1,false,true,true,true,023135106,2000019,exact_ticker_adjacent_snapshot,passed,complete
+AN,AN,AutoNation Inc Common,AN.csv,1990-05-11,2026-08-04,9109,1,false,false,false,false,,,,passed,complete
+AN-199812,AN-199812,Amoco Corp Common,AN-199812.csv,1990-01-02,1998-12-31,2276,1,true,true,false,false,,,,passed,complete
+ANDV-201809,ANDV-201809,Andeavor Common,ANDV-201809.csv,1990-01-02,2018-09-28,7241,1,false,true,false,false,,,,passed,complete
+ANDW-200712,ANDW-200712,Andrew Corp Common,ANDW-200712.csv,1990-01-02,2007-12-27,4536,1,true,false,false,false,,,,passed,complete
+ANET,ANET,Arista Networks Inc Common,ANET.csv,2014-06-06,2026-08-04,3058,1,false,true,true,true,040413205,BL9XPM3,exact_ticker_adjacent_snapshot,passed,complete
+ANF,ANF,Abercrombie & Fitch Co Class A Common,ANF.csv,1996-09-26,2026-08-04,7510,1,false,false,false,false,,,,passed,complete
+ANRZQ-201607,ANRZQ-201607,Alpha Natural Resources Inc Common,ANRZQ-201607.csv,2005-02-15,2016-07-26,2880,1,false,false,false,false,,,,passed,complete
+ANSS-202507,ANSS-202507,ANSYS Inc Common,ANSS-202507.csv,1996-06-20,2025-07-16,7310,1,false,true,false,false,,,,passed,complete
+ANV-199904,ANV-199904,Aeroquip Vickers Inc Common,ANV-199904.csv,1990-01-02,1999-04-09,2343,1,true,true,false,false,,,,passed,complete
+AON,AON,Aon Plc Class A Common,AON.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,G0403H108,BLP1HW5,exact_ticker_adjacent_snapshot,passed,complete
+AOS,AOS,A. O. Smith Corp Common,AOS.csv,1990-01-02,2026-08-04,9133,1,false,true,true,true,831865209,2816023,exact_ticker_adjacent_snapshot,passed,complete
+APA,APA,APA Corp Common,APA.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,03743Q108,BNNF1C1,exact_ticker_adjacent_snapshot,passed,complete
+APC-201908,APC-201908,Anadarko Petroleum Corp Common,APC-201908.csv,1990-01-02,2019-08-08,7459,1,false,true,false,false,,,,passed,complete
+APCC-200702,APCC-200702,American Power Conversion Corp Common,APCC-200702.csv,1990-01-02,2007-02-14,4317,1,false,true,false,false,,,,passed,complete
+APD,APD,Air Products and Chemicals Inc Common,APD.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,009158106,2011602,exact_ticker_adjacent_snapshot,passed,complete
+APH,APH,Amphenol Corporation Class A Common,APH.csv,1991-11-08,2026-08-04,8742,1,false,true,true,true,032095101,2145084,exact_ticker_adjacent_snapshot,passed,complete
+APO,APO,Apollo Global Management Inc Common,APO.csv,2011-03-30,2026-08-04,3859,1,false,true,true,true,03769M106,BN44JF6,exact_ticker_adjacent_snapshot,passed,complete
+APOL-201702,APOL-201702,Apollo Education Group Inc Class A Common,APOL-201702.csv,1994-12-06,2017-02-01,5579,1,false,false,false,false,,,,passed,complete
+APP,APP,AppLovin Corp Class A Common,APP.csv,2021-04-15,2026-08-04,1332,1,false,true,true,true,03831W108,BMV3LG4,exact_ticker_adjacent_snapshot,passed,complete
+APTV,APTV,Aptiv PLC Common,APTV.csv,2011-11-17,2026-08-04,3697,1,false,true,true,true,G3265R107,BTDN8H1,exact_ticker_adjacent_snapshot,passed,complete
+AR-199911,AR-199911,Asarco Inc Common,AR-199911.csv,1990-01-02,1999-11-17,2498,1,true,false,false,false,,,,passed,complete
+ARC-200004,ARC-200004,Atlantic Richfield Co Common,ARC-200004.csv,1990-01-02,2000-04-17,2602,1,true,true,false,false,,,,passed,complete
+ARE,ARE,Alexandria Real Estate Equities Inc Common,ARE.csv,1997-05-28,2026-08-04,7341,1,false,true,true,true,015271109,2009210,exact_ticker_adjacent_snapshot,passed,complete
+ARES,ARES,Ares Management Corp Common,ARES.csv,2014-05-02,2026-08-04,3082,1,false,true,true,true,03990B101,BF14BT1,exact_ticker_adjacent_snapshot,passed,complete
+ARG-201605,ARG-201605,Airgas Inc Common,ARG-201605.csv,1990-01-02,2016-05-20,6648,1,false,true,false,false,,,,passed,complete
+AS-199909,AS-199909,Armco Inc Common,AS-199909.csv,1990-01-02,1999-09-30,2464,1,true,false,false,false,,,,passed,complete
+ASC-199906,ASC-199906,American Stores Co Common,ASC-199906.csv,1990-01-02,1999-06-23,2395,1,true,true,false,false,,,,passed,complete
+ASH,ASH,Ashland Inc Common,ASH.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+ASN-200710,ASN-200710,Archstone Smith Trust Common,ASN-200710.csv,1990-01-02,2007-10-05,4455,1,false,true,false,false,,,,passed,complete
+ASND-199906,ASND-199906,Ascend Communications Inc Common,ASND-199906.csv,1994-05-13,1999-06-24,1292,1,false,true,false,false,,,,passed,complete
+ASO-200611,ASO-200611,Amsouth Bancorp Common,ASO-200611.csv,1990-01-02,2006-11-03,4249,1,false,true,false,false,,,,passed,complete
+AT-200711,AT-200711,Alltel Corp Common,AT-200711.csv,1990-01-02,2007-11-16,4509,1,false,true,false,false,,,,passed,complete
+ATI,ATI,ATI Inc Common,ATI.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+ATI-199906,ATI-199906,Airtouch Communications Common,ATI-199906.csv,1993-12-03,1999-06-29,1406,1,false,true,false,false,,,,passed,complete
+ATO,ATO,Atmos Energy Corp Common,ATO.csv,1990-01-02,2026-08-04,9209,1,false,true,true,true,049560105,2315359,exact_ticker_adjacent_snapshot,passed,complete
+ATVI-202310,ATVI-202310,Activision Blizzard Inc Common,ATVI-202310.csv,1990-01-02,2023-10-12,7790,1,false,true,false,false,,,,passed,complete
+AV-200710,AV-200710,Avaya Inc Common,AV-200710.csv,2000-09-18,2007-10-25,1786,1,false,true,false,false,,,,passed,complete
+AVB,AVB,AvalonBay Communities Inc Common,AVB.csv,1994-03-11,2026-08-04,8152,1,false,true,true,false,,,,passed,complete
+AVGO,AVGO,Broadcom Inc Common,AVGO.csv,2009-08-06,2026-08-04,4274,1,false,true,true,true,11135F101,BDZ78H9,exact_ticker_adjacent_snapshot,passed,complete
+AVP-202001,AVP-202001,Avon Products Inc Common,AVP-202001.csv,1990-01-02,2020-01-03,7561,1,true,false,false,false,,,,passed,complete
+AVY,AVY,Avery Dennison Corp Common,AVY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,053611109,2066408,exact_ticker_adjacent_snapshot,passed,complete
+AW-200812,AW-200812,Allied Waste Industries Inc Common,AW-200812.csv,1991-09-10,2008-12-05,4337,1,false,false,false,false,,,,passed,complete
+AWE-200410,AWE-200410,AT&T Wireless Common,AWE-200410.csv,2000-04-27,2004-10-26,1130,1,false,true,false,false,,,,passed,complete
+AWK,AWK,American Water Works Co Inc Common,AWK.csv,2008-04-23,2026-08-04,4599,1,false,true,true,true,030420103,B2R3PV1,exact_ticker_adjacent_snapshot,passed,complete
+AXON,AXON,Axon Enterprise Inc Common,AXON.csv,2001-06-07,2026-08-04,6326,1,false,true,true,true,05464C101,BDT5S35,exact_ticker_adjacent_snapshot,passed,complete
+AXP,AXP,American Express Co Common,AXP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,025816109,2026082,exact_ticker_adjacent_snapshot,passed,complete
+AYE-201102,AYE-201102,Allegheny Energy Inc Common,AYE-201102.csv,1990-01-02,2011-02-25,5333,1,false,true,false,false,,,,passed,complete
+AYI,AYI,Acuity Inc Common,AYI.csv,2001-11-28,2026-08-04,6209,1,false,false,false,false,,,,passed,complete
+AZA-200106,AZA-200106,Alza Corp Class A Common,AZA-200106.csv,1990-01-02,2001-06-22,2900,1,false,true,false,false,,,,passed,complete
+AZO,AZO,AutoZone Inc Common,AZO.csv,1991-04-02,2026-08-04,8899,1,false,true,true,true,053332102,2065955,exact_ticker_adjacent_snapshot,passed,complete
+B,B,Barrick Mining Corp Common,B.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+BA,BA,Boeing Co Common,BA.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,097023105,2108601,exact_ticker_adjacent_snapshot,passed,complete
+BAC,BAC,Bank of America Corp Common,BAC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,060505104,2295677,exact_ticker_adjacent_snapshot,passed,complete
+BAC-199809,BAC-199809,Bankamerica Corp Common,BAC-199809.csv,1990-01-02,1998-09-30,2212,1,true,true,false,false,,,,passed,complete
+BALL,BALL,Ball Corp Common,BALL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,058498106,2073022,exact_ticker_adjacent_snapshot,passed,complete
+BAX,BAX,Baxter International Inc Common,BAX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,071813109,2085102,exact_ticker_adjacent_snapshot,passed,complete
+BAY-199808,BAY-199808,Bay Networks Inc Common,BAY-199808.csv,1991-07-31,1998-08-28,1791,1,false,true,false,false,,,,passed,complete
+BBBYQ-202309,BBBYQ-202309,Bed Bath & Beyond Inc Common,BBBYQ-202309.csv,1992-06-05,2023-09-29,7888,1,false,false,false,false,,,,passed,complete
+BBI-199801,BBI-199801,Barnett Banks Inc Common,BBI-199801.csv,1990-01-02,1998-01-09,2030,1,true,true,false,false,,,,passed,complete
+BBWI,BBWI,Bath & Body Works Inc Common,BBWI.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+BBY,BBY,Best Buy Co Inc Common,BBY.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,086516101,2094670,exact_ticker_adjacent_snapshot,passed,complete
+BC,BC,Brunswick Corp Common,BC.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+BCO,BCO,Brink's Co Common,BCO.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+BCR-201712,BCR-201712,C R Bard Inc Common,BCR-201712.csv,1990-01-02,2017-12-28,7055,1,true,true,false,false,,,,passed,complete
+BDK-201003,BDK-201003,Black & Decker Common,BDK-201003.csv,1990-01-02,2010-03-12,5091,1,true,true,false,false,,,,passed,complete
+BDX,BDX,Becton Dickinson and Co Common,BDX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,075887109,2087807,exact_ticker_adjacent_snapshot,passed,complete
+BEAM-201404,BEAM-201404,Beam Suntory Inc Common,BEAM-201404.csv,1990-01-02,2014-04-30,6131,1,true,true,false,false,,,,passed,complete
+BEN,BEN,Franklin Resources Inc Common,BEN.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,354613101,2350684,exact_ticker_adjacent_snapshot,passed,complete
+BEV-200603,BEV-200603,Beverly Enterprises Inc Common,BEV-200603.csv,1990-01-02,2006-03-14,4085,1,true,false,false,false,,,,passed,complete
+BF.B,BF.B,Brown-Forman Corporation Class B Common,BF.B.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,115637209,2146838,exact_ticker_adjacent_snapshot,passed,complete
+BFH,BFH,Bread Financial Holdings Inc Common,BFH.csv,2001-06-08,2026-08-04,6325,1,false,false,false,false,,,,passed,complete
+BFI-199907,BFI-199907,Browning-Ferris Industries Inc Common,BFI-199907.csv,1990-01-02,1999-07-30,2421,1,true,true,false,false,,,,passed,complete
+BFO-200010,BFO-200010,Bestfoods Common,BFO-200010.csv,1990-01-02,2000-10-04,2720,1,true,false,false,false,,,,passed,complete
+BG,BG,Bunge Global SA Common,BG.csv,2001-08-02,2026-08-04,6287,1,false,true,true,true,H11356104,BQ6BPG9,exact_ticker_adjacent_snapshot,passed,complete
+BGEN-200311,BGEN-200311,Biogen Common,BGEN-200311.csv,1990-01-02,2003-11-12,3499,1,false,true,false,false,,,,passed,complete
+BGGSQ-202101,BGGSQ-202101,Briggs & Stratton Corp Common,BGGSQ-202101.csv,1990-01-02,2021-01-06,7814,1,true,false,false,false,,,,passed,complete
+BHF,BHF,Brighthouse Financial Inc Common,BHF.csv,2017-07-17,2026-08-04,2274,1,false,false,false,false,,,,passed,complete
+BHMSQ-200401,BHMSQ-200401,Bethlehem Steel Corp Common,BHMSQ-200401.csv,1990-01-02,2004-01-05,3532,1,true,false,false,false,,,,passed,complete
+BIGGQ,BIGGQ,Former BL Stores Inc Common,BIGGQ.csv,1990-01-02,2026-08-04,9205,1,false,false,false,false,,,,passed,complete
+BIIB,BIIB,Biogen Inc Common,BIIB.csv,1991-09-17,2026-08-04,8776,1,false,true,true,true,09062X103,2455965,exact_ticker_adjacent_snapshot,passed,gaps_reported
+BIO,BIO,Bio-Rad Laboratories Inc Class A Common,BIO.csv,1990-01-02,2026-08-04,9205,1,false,false,false,false,,,,passed,complete
+BJS-201004,BJS-201004,BJ Services Co Common,BJS-201004.csv,1990-07-20,2010-04-28,4981,1,false,true,false,false,,,,passed,complete
+BKB-199909,BKB-199909,Bankboston Corp Common,BKB-199909.csv,1990-01-02,1999-09-30,2464,1,true,true,false,false,,,,passed,complete
+BKNG,BKNG,Booking Holdings Inc Common,BKNG.csv,1999-03-30,2026-08-04,6879,1,false,true,true,true,09857L108,BDRXDB4,exact_ticker_adjacent_snapshot,passed,complete
+BKR,BKR,Baker Hughes Company Class A Common,BKR.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,05722G100,BDHLTQ5,exact_ticker_adjacent_snapshot,passed,complete
+BLDR,BLDR,Builders FirstSource Inc Common,BLDR.csv,2005-06-22,2026-08-04,5312,1,false,true,true,true,12008R107,B0BV2M7,exact_ticker_adjacent_snapshot,passed,complete
+BLK,BLK,BlackRock Inc Common,BLK.csv,1999-10-01,2026-08-04,6750,1,false,true,true,true,09290D101,BMZBBT7,exact_ticker_adjacent_snapshot,passed,complete
+BLS-200612,BLS-200612,BellSouth Corp Common,BLS-200612.csv,1990-01-02,2006-12-29,4287,1,true,true,false,false,,,,passed,complete
+BLY-199612,BLY-199612,Bally Entertainment Corp Common,BLY-199612.csv,1990-01-02,1996-12-18,1763,1,true,true,false,false,,,,passed,complete
+BMC-201309,BMC-201309,BMC Software Inc Common,BMC-201309.csv,1990-01-02,2013-09-10,5971,1,false,true,false,false,,,,passed,complete
+BMET-200709,BMET-200709,Biomet Inc Common,BMET-200709.csv,1990-01-02,2007-09-25,4471,1,false,false,false,false,,,,passed,complete
+BMG-200101,BMG-200101,Battle Mountain Gold Co Class A Common,BMG-200101.csv,1990-01-02,2001-01-10,2787,1,false,false,false,false,,,,passed,complete
+BMS-201906,BMS-201906,Bemis Company Inc Common,BMS-201906.csv,1990-01-02,2019-06-10,7417,1,true,false,false,false,,,,passed,complete
+BMY,BMY,Bristol-Myers Squibb Co Common,BMY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,110122108,2126335,exact_ticker_adjacent_snapshot,passed,complete
+BN-199503,BN-199503,Borden Inc Common,BN-199503.csv,1990-01-02,1995-03-14,1315,1,true,false,false,false,,,,passed,complete
+BNI-201002,BNI-201002,Burlington Northern Santa Fe Corp Common,BNI-201002.csv,1990-01-02,2010-02-12,5072,1,true,true,false,false,,,,passed,complete
+BNL-199806,BNL-199806,Beneficial Corp Common,BNL-199806.csv,1990-01-02,1998-06-30,2148,1,true,true,false,false,,,,passed,complete
+BNSSA-201206,BNSSA-201206,BNS Holding Class A Common,BNSSA-201206.csv,1990-01-02,2012-06-19,4321,1,true,false,false,false,,,,passed,gaps_reported
+BNY,BNY,Bank of New York Mellon Corp Common,BNY.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,064058100,B1Z77F6,exact_ticker_adjacent_snapshot,passed,complete
+BOAT-199701,BOAT-199701,Boatmen's Bancshares Inc Common,BOAT-199701.csv,1990-01-02,1997-01-06,1774,1,false,true,false,false,,,,passed,complete
+BOL-200710,BOL-200710,Bausch & Lomb Inc Common,BOL-200710.csv,1990-01-02,2007-10-26,4494,1,true,true,false,false,,,,passed,complete
+BR,BR,Broadridge Financial Solutions Inc Common,BR.csv,2007-03-22,2026-08-04,4873,1,false,true,true,true,11133T103,B1VP7R6,exact_ticker_adjacent_snapshot,passed,complete
+BR-200603,BR-200603,Burlington Resources Common,BR-200603.csv,1990-01-02,2006-03-31,4098,1,false,true,false,false,,,,passed,complete
+BRCM-201601,BRCM-201601,Broadcom Corp Class A Common,BRCM-201601.csv,1998-04-17,2016-01-29,4476,1,false,true,false,false,,,,passed,complete
+BRK.B,BRK.B,Berkshire Hathaway Inc Class B Common,BRK.B.csv,1996-05-09,2026-08-04,7607,1,false,true,true,true,084670702,2073390,exact_ticker_adjacent_snapshot,passed,complete
+BRL-200812,BRL-200812,Barr Pharmaceuticals Inc Common,BRL-200812.csv,1990-01-02,2008-12-22,4763,1,false,true,false,false,,,,passed,complete
+BRNO-199508,BRNO-199508,Bruno's Inc Common,BRNO-199508.csv,1990-01-02,1995-08-17,1424,1,false,true,false,false,,,,passed,complete
+BRO,BRO,Brown & Brown Inc Common,BRO.csv,1990-01-03,2026-08-04,8860,1,false,true,true,true,115236101,2692687,exact_ticker_adjacent_snapshot,passed,complete
+BSC-200805,BSC-200805,Bear Stearns Companies Common,BSC-200805.csv,1990-01-02,2008-05-30,4642,1,false,true,false,false,,,,passed,complete
+BSET,BSET,Bassett Furniture Industries Inc Common,BSET.csv,1990-01-02,2026-08-04,9210,1,true,false,false,false,,,,passed,gaps_reported
+BSX,BSX,Boston Scientific Corp Common,BSX.csv,1992-05-19,2026-08-04,8612,1,false,true,true,true,101137107,2113434,exact_ticker_adjacent_snapshot,passed,complete
+BT-199906,BT-199906,Bankers Trust Corp Common,BT-199906.csv,1990-01-02,1999-06-03,2381,1,true,true,false,false,,,,passed,complete
+BTUUQ-201704,BTUUQ-201704,Peabody Energy Corp Common,BTUUQ-201704.csv,2001-05-22,2017-04-03,3990,1,false,false,false,false,,,,passed,complete
+BUD-200811,BUD-200811,Anheuser Busch Co Common,BUD-200811.csv,1990-01-02,2008-11-17,4761,1,true,true,false,false,,,,passed,complete
+BV-199409,BV-199409,Blockbuster Entertainment Corp Common,BV-199409.csv,1990-01-02,1994-09-29,1201,1,false,true,false,false,,,,passed,complete
+BVSN-202005,BVSN-202005,BroadVision Inc Common,BVSN-202005.csv,1996-06-21,2020-05-18,5946,1,false,false,false,false,,,,passed,complete
+BWA,BWA,BorgWarner Inc Common,BWA.csv,1993-08-13,2026-08-04,8299,1,false,false,false,false,,,,passed,complete
+BWY-199510,BWY-199510,Broadway Stores Inc Common,BWY-199510.csv,1990-01-02,1995-10-11,1462,1,true,false,false,false,,,,passed,complete
+BX,BX,Blackstone Inc Common,BX.csv,2007-06-22,2026-08-04,4809,1,false,true,true,true,09260D107,BKF2SL7,exact_ticker_adjacent_snapshot,passed,complete
+BXLT-201606,BXLT-201606,Baxalta Inc Common,BXLT-201606.csv,2015-06-15,2016-06-02,245,1,false,true,false,false,,,,passed,complete
+BXP,BXP,BXP Inc Common,BXP.csv,1997-06-18,2026-08-04,7327,1,false,true,true,true,101121101,2019479,exact_ticker_adjacent_snapshot,passed,complete
+C,C,Citigroup Inc Common,C.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,172967424,2297907,exact_ticker_adjacent_snapshot,passed,complete
+C-199811,C-199811,Chrysler Corp Common,C-199811.csv,1990-01-02,1998-11-12,2243,1,true,true,false,false,,,,passed,complete
+CA-201811,CA-201811,CA Inc Common,CA-201811.csv,1990-01-02,2018-11-02,7269,1,true,true,false,false,,,,passed,complete
+CAG,CAG,Conagra Brands Inc Common,CAG.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+CAH,CAH,Cardinal Health Inc Common,CAH.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,14149Y108,2175672,exact_ticker_adjacent_snapshot,passed,complete
+CAL,CAL,Caleres Inc Common,CAL.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+CAM-201604,CAM-201604,Cameron International Corp Common,CAM-201604.csv,1995-07-05,2016-04-01,5223,1,false,true,false,false,,,,passed,complete
+CAR,CAR,Avis Budget Group Inc Common,CAR.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+CARR,CARR,Carrier Global Corp Common,CARR.csv,2020-03-19,2026-08-04,1602,1,false,true,true,true,14448C104,BK4N0D7,exact_ticker_adjacent_snapshot,passed,complete
+CASY,CASY,Casey's General Stores Inc Common,CASY.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,147528103,2179414,exact_ticker_adjacent_snapshot,passed,complete
+CAT,CAT,Caterpillar Inc Common,CAT.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,149123101,2180201,exact_ticker_adjacent_snapshot,passed,complete
+CB,CB,Chubb Ltd Common,CB.csv,1993-03-25,2026-08-04,8397,2,false,true,true,true,H1467J104,B3BQMF6,exact_ticker_adjacent_snapshot,passed,complete
+CB-201601,CB-201601,Chubb Corp Common,CB-201601.csv,1990-01-02,2016-01-14,6562,1,true,true,false,false,,,,passed,complete
+CBB-199801,CBB-199801,Caliber System Inc Common,CBB-199801.csv,1990-01-02,1998-01-27,2041,1,true,true,false,false,,,,passed,complete
+CBE-201211,CBE-201211,Cooper Industries PLC Common,CBE-201211.csv,1990-01-02,2012-11-30,5777,2,true,true,false,false,,,,passed,complete
+CBH-200803,CBH-200803,Commerce Bancorp Common,CBH-200803.csv,1990-01-02,2008-03-28,4547,1,false,true,false,false,,,,passed,complete
+CBL-199010,CBL-199010,Corroon & Black Corp Common,CBL-199010.csv,1990-01-02,1990-10-08,195,1,true,false,false,false,,,,passed,complete
+CBOE,CBOE,Cboe Global Markets Inc Common,CBOE.csv,2010-06-15,2026-08-04,4059,1,false,true,true,true,12503M108,B5834C5,exact_ticker_adjacent_snapshot,passed,complete
+CBRE,CBRE,CBRE Group Inc Class A Common,CBRE.csv,2004-06-10,2026-08-04,5572,1,false,true,true,true,12504L109,B6WVMH3,exact_ticker_adjacent_snapshot,passed,complete
+CBS-199511,CBS-199511,CBS Inc Common,CBS-199511.csv,1990-01-02,1995-11-24,1493,1,true,true,false,false,,,,passed,complete
+CBS-200005,CBS-200005,CBS Corp Common,CBS-200005.csv,1990-01-02,2000-05-03,2613,1,true,true,false,false,,,,passed,complete
+CBSS-200709,CBSS-200709,Compass Bancshares Inc. Common,CBSS-200709.csv,1990-01-02,2007-09-06,4456,1,false,true,false,false,,,,passed,complete
+CCB-199602,CCB-199602,Capital Cities ABC Inc Common,CCB-199602.csv,1990-01-02,1996-02-09,1546,1,true,true,false,false,,,,passed,complete
+CCEP,CCEP,Coca-Cola Europacific Partners plc Common,CCEP.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+CCI,CCI,Crown Castle Inc Common,CCI.csv,1998-08-18,2026-08-04,7033,1,false,true,true,true,22822V101,BTGQCX1,exact_ticker_adjacent_snapshot,passed,complete
+CCI-199810,CCI-199810,Citicorp Common,CCI-199810.csv,1990-01-02,1998-10-07,2217,1,true,true,false,false,,,,passed,complete
+CCK,CCK,Crown Holdings Inc Common,CCK.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+CCL,CCL,Carnival Corporation Ltd Common,CCL.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,G2004J103,BVV7RC7,exact_ticker_adjacent_snapshot,passed,complete
+CCTYQ-201109,CCTYQ-201109,Circuit City Stores Inc Common,CCTYQ-201109.csv,1990-01-02,2011-09-27,5481,1,true,false,false,false,,,,passed,complete
+CCU-200807,CCU-200807,Clear Channel Communications Inc Common,CCU-200807.csv,1990-01-02,2008-07-30,4510,1,false,true,false,false,,,,passed,complete
+CDNS,CDNS,Cadence Design Systems Inc Common,CDNS.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,127387108,2302232,exact_ticker_adjacent_snapshot,passed,complete
+CDW,CDW,CDW Corp Common,CDW.csv,2013-06-27,2026-08-04,3295,1,false,true,true,true,12514G108,BBM5MD6,exact_ticker_adjacent_snapshot,passed,complete
+CE,CE,Celanese Corp Common,CE.csv,2005-01-21,2026-08-04,5417,1,false,false,false,false,,,,passed,complete
+CE-200402,CE-200402,Concord EFS Inc Common,CE-200402.csv,1990-01-02,2004-02-26,3554,1,false,true,false,false,,,,passed,complete
+CEG,CEG,Constellation Energy Corp Common,CEG.csv,2022-01-19,2026-08-04,1139,1,false,true,true,true,21037T109,BMH4FS1,exact_ticker_adjacent_snapshot,passed,complete
+CEG-201203,CEG-201203,Constellation Energy Group Inc Common,CEG-201203.csv,1990-01-02,2012-03-12,5595,1,true,true,false,false,,,,passed,complete
+CELG-201911,CELG-201911,Celgene Corp Common,CELG-201911.csv,1990-01-02,2019-11-20,7526,1,false,true,false,false,,,,passed,complete
+CEN-200711,CEN-200711,Ceridian Corp Common,CEN-200711.csv,1990-01-02,2007-11-08,4503,1,true,false,false,false,,,,passed,complete
+CEPH-201110,CEPH-201110,Cephalon Inc Common,CEPH-201110.csv,1991-04-25,2011-10-13,5157,1,false,true,false,false,,,,passed,complete
+CERN-202206,CERN-202206,Cerner Corp Common,CERN-202206.csv,1990-01-02,2022-06-07,8142,1,false,true,false,false,,,,passed,complete
+CF,CF,CF Industries Holdings Inc Common,CF.csv,2005-08-11,2026-08-04,5277,1,false,true,true,true,125269100,B0G4K50,exact_ticker_adjacent_snapshot,passed,complete
+CF-200408,CF-200408,Charter One Financial Inc Common,CF-200408.csv,1990-01-02,2004-08-31,3698,1,false,true,false,false,,,,passed,complete
+CFC-200806,CFC-200806,Countrywide Financial Corp Common,CFC-200806.csv,1990-01-02,2008-06-30,4663,1,false,true,false,false,,,,passed,complete
+CFG,CFG,Citizens Financial Group Inc Common,CFG.csv,2014-09-24,2026-08-04,2982,1,false,true,true,true,174610105,BQRX1X3,exact_ticker_adjacent_snapshot,passed,complete
+CFL-199804,CFL-199804,Corestates Financial Corp Common,CFL-199804.csv,1990-01-02,1998-04-27,2103,1,false,true,false,false,,,,passed,complete
+CFN-201503,CFN-201503,CareFusion Corp Common,CFN-201503.csv,2009-08-21,2015-03-16,1400,1,false,true,false,false,,,,passed,complete
+CG-200011,CG-200011,Columbia Energy Group Common,CG-200011.csv,1990-01-02,2000-11-01,2740,1,true,true,false,false,,,,passed,complete
+CGP-200101,CGP-200101,Coastal Corp Common,CGP-200101.csv,1990-01-02,2001-01-29,2799,1,true,true,false,false,,,,passed,complete
+CHA-200006,CHA-200006,Champion International Corp Common,CHA-200006.csv,1990-01-02,2000-06-20,2646,1,true,false,false,false,,,,passed,complete
+CHD,CHD,Church & Dwight Co Inc Common,CHD.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,171340102,2195841,exact_ticker_adjacent_snapshot,passed,complete
+CHIR-200604,CHIR-200604,Chiron Corp Common,CHIR-200604.csv,1990-01-02,2006-04-19,4108,1,false,true,false,false,,,,passed,complete
+CHKAQ-202102,CHKAQ-202102,Chesapeake Energy Corp Common,CHKAQ-202102.csv,1993-02-05,2021-02-09,7038,1,false,false,false,false,,,,passed,complete
+CHRS-201206,CHRS-201206,Charming Shoppes Common,CHRS-201206.csv,1990-01-02,2012-06-14,5661,1,true,false,false,false,,,,passed,complete
+CHRW,CHRW,C.H. Robinson Worldwide Inc Common,CHRW.csv,1997-10-15,2026-08-04,7244,1,false,true,true,true,12541W209,2116228,exact_ticker_adjacent_snapshot,passed,complete
+CHTR,CHTR,Charter Communications Inc Class A Common,CHTR.csv,2009-12-02,2026-08-04,4167,1,false,true,true,true,16119P108,BZ6VT82,exact_ticker_adjacent_snapshot,passed,complete
+CI,CI,Cigna Group Common,CI.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,125523100,BHJ0775,exact_ticker_adjacent_snapshot,passed,complete
+CIC-199505,CIC-199505,Continental Corp Common,CIC-199505.csv,1990-01-02,1995-05-10,1355,1,true,false,false,false,,,,passed,complete
+CIEN,CIEN,Ciena Corp Common,CIEN.csv,1997-02-07,2026-08-04,7417,2,false,true,true,true,171779309,B1FLZ21,exact_ticker_adjacent_snapshot,passed,complete
+CIN-200603,CIN-200603,Cinergy Corp Common,CIN-200603.csv,1990-01-02,2006-03-31,4098,1,false,true,false,false,,,,passed,complete
+CINF,CINF,Cincinnati Financial Corp Common,CINF.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,172062101,2196888,exact_ticker_adjacent_snapshot,passed,complete
+CIT-200106,CIT-200106,CIT Group Inc Class A Common,CIT-200106.csv,1997-11-13,2001-06-01,894,1,false,true,false,false,,,,passed,complete
+CITGQ-200912,CITGQ-200912,CIT Group Inc Common,CITGQ-200912.csv,2002-07-02,2009-12-09,1875,1,false,false,false,false,,,,passed,complete
+CKL-199505,CKL-199505,Clark Equipment Co Common,CKL-199505.csv,1990-01-02,1995-05-25,1366,1,true,false,false,false,,,,passed,complete
+CL,CL,Colgate-Palmolive Co Common,CL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,194162103,2209106,exact_ticker_adjacent_snapshot,passed,complete
+CLF,CLF,Cleveland-Cliffs Inc Common,CLF.csv,1990-01-02,2026-08-04,9213,1,false,false,false,false,,,,passed,complete
+CLX,CLX,Clorox Co Common,CLX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,189054109,2204026,exact_ticker_adjacent_snapshot,passed,complete
+CMA-202601,CMA-202601,Comerica Inc Common,CMA-202601.csv,1990-01-02,2026-01-30,9087,1,false,false,false,false,,,,passed,complete
+CMB-199603,CMB-199603,Chase Manhattan Corp Common,CMB-199603.csv,1990-01-02,1996-03-29,1580,1,true,true,false,false,,,,passed,complete
+CMCSA,CMCSA,Comcast Corporation Class A Common,CMCSA.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,20030N101,2044545,exact_ticker_adjacent_snapshot,passed,complete
+CMCSK-201512,CMCSK-201512,Comcast Corp Class A Special Non-Voting Common,CMCSK-201512.csv,1990-01-02,2015-12-11,6540,1,false,true,false,false,,,,passed,complete
+CME,CME,CME Group Inc Class A Common,CME.csv,2002-12-06,2026-08-04,5951,1,false,true,true,true,12572Q105,2965839,exact_ticker_adjacent_snapshot,passed,complete
+CMG,CMG,Chipotle Mexican Grill Inc Common,CMG.csv,2006-01-26,2026-08-04,5162,1,false,true,true,true,169656105,B0X7DZ3,exact_ticker_adjacent_snapshot,passed,complete
+CMI,CMI,Cummins Inc Common,CMI.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,231021106,2240202,exact_ticker_adjacent_snapshot,passed,complete
+CMS,CMS,CMS Energy Corp Common,CMS.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,125896100,2219224,exact_ticker_adjacent_snapshot,passed,complete
+CMVT-201302,CMVT-201302,Comverse Technology Common,CMVT-201302.csv,1990-01-02,2013-02-04,5820,1,false,false,false,false,,,,passed,complete
+CMX-200703,CMX-200703,Caremark Rx Common,CMX-200703.csv,1995-02-22,2007-03-21,3041,1,false,true,false,false,,,,passed,complete
+CNA,CNA,CNA Financial Corp Common,CNA.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+CNC,CNC,Centene Corp Common,CNC.csv,2001-12-13,2026-08-04,6198,1,false,true,true,true,15135B101,2807061,exact_ticker_adjacent_snapshot,passed,complete
+CNCEQ-200309,CNCEQ-200309,Conseco Inc Common,CNCEQ-200309.csv,1990-01-02,2003-09-10,3452,1,false,false,false,false,,,,passed,complete
+CNG-200001,CNG-200001,Consolidated Natural Gas Co Common,CNG-200001.csv,1990-01-02,2000-01-28,2547,1,true,true,false,false,,,,passed,complete
+CNP,CNP,CenterPoint Energy Inc Common,CNP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,15189T107,2440637,exact_ticker_adjacent_snapshot,passed,complete
+CNW-201510,CNW-201510,Con-way Inc Common,CNW-201510.csv,1990-01-02,2015-10-29,6510,1,true,false,false,false,,,,passed,complete
+CNX,CNX,CNX Resources Corp Common,CNX.csv,1999-04-30,2026-08-04,6857,1,false,false,false,false,,,,passed,complete
+CNXT-201104,CNXT-201104,Conexant Systems Common,CNXT-201104.csv,1998-12-09,2011-04-18,3109,1,false,false,false,false,,,,passed,complete
+COC-200208,COC-200208,Conoco Inc Common,COC-200208.csv,1999-07-13,2002-08-30,789,1,false,true,false,false,,,,passed,complete
+COF,COF,Capital One Financial Corp Common,COF.csv,1994-11-16,2026-08-04,7980,1,false,true,true,true,14040H105,2654461,exact_ticker_adjacent_snapshot,passed,complete
+COHR,COHR,Coherent Corp Common,COHR.csv,1990-01-02,2026-08-04,8890,1,false,true,true,true,19247G107,BNG8Z81,exact_ticker_adjacent_snapshot,passed,complete
+COIN,COIN,Coinbase Global Inc Class A Common,COIN.csv,2021-04-14,2026-08-04,1333,1,false,true,true,true,19260Q107,BMC9P69,exact_ticker_adjacent_snapshot,passed,complete
+COL-201811,COL-201811,Rockwell Collins Inc Common,COL-201811.csv,2001-06-15,2018-11-26,4390,1,false,true,false,false,,,,passed,complete
+COMS-201004,COMS-201004,3Com Corporation Common,COMS-201004.csv,1990-01-02,2010-04-09,5110,1,false,false,false,false,,,,passed,complete
+COO,COO,Cooper Companies Inc Common,COO.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,216648501,BQPDXR3,exact_ticker_adjacent_snapshot,passed,complete
+COP,COP,ConocoPhillips Common,COP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,20825C104,2685717,exact_ticker_adjacent_snapshot,passed,complete
+COR,COR,Cencora Inc Common,COR.csv,1995-04-04,2026-08-04,7885,1,false,true,true,true,03073E105,2795393,exact_ticker_adjacent_snapshot,passed,complete
+COST,COST,Costco Wholesale Corp Common,COST.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,22160K105,2701271,exact_ticker_adjacent_snapshot,passed,complete
+COTY,COTY,Coty Inc Class A Common,COTY.csv,2013-06-13,2026-08-04,3305,1,false,false,false,false,,,,passed,complete
+COV-201501,COV-201501,Covidien PLC Common,COV-201501.csv,2007-06-14,2015-01-26,1918,2,false,true,false,false,,,,passed,complete
+CPAY,CPAY,Corpay Inc Common,CPAY.csv,2010-12-15,2026-08-04,3931,1,false,true,true,true,219948106,BMX5GK7,exact_ticker_adjacent_snapshot,passed,complete
+CPB,CPB,Campbell's Co Common,CPB.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+CPGX-201606,CPGX-201606,Columbia Pipeline Group Inc Common,CPGX-201606.csv,2015-06-17,2016-06-30,263,1,false,true,false,false,,,,passed,complete
+CPNLQ-200802,CPNLQ-200802,Calpine Corp Common,CPNLQ-200802.csv,1996-09-20,2008-02-01,2860,1,false,false,false,false,,,,passed,complete
+CPPRQ-202102,CPPRQ-202102,Old Copper Company Inc Common,CPPRQ-202102.csv,1990-01-02,2021-02-01,7832,1,true,false,false,false,,,,passed,complete
+CPQ-200205,CPQ-200205,Compaq Computer Corp Common,CPQ-200205.csv,1990-01-02,2002-05-03,3113,1,true,true,false,false,,,,passed,complete
+CPRI,CPRI,Capri Holdings Ltd Common,CPRI.csv,2011-12-15,2026-08-04,3678,1,false,false,false,false,,,,passed,complete
+CPRT,CPRT,Copart Inc Common,CPRT.csv,1994-03-17,2026-08-04,8139,1,false,true,true,true,217204106,2208073,exact_ticker_adjacent_snapshot,passed,complete
+CPT,CPT,Camden Property Trust Common,CPT.csv,1993-07-22,2026-08-04,8315,1,false,true,true,true,133131102,2166320,exact_ticker_adjacent_snapshot,passed,complete
+CPWR-201412,CPWR-201412,Compuware Corp Common,CPWR-201412.csv,1992-12-16,2014-12-15,5541,1,false,false,false,false,,,,passed,complete
+CRH,CRH,CRH plc Common,CRH.csv,2003-10-28,2026-08-04,2678,1,false,true,true,true,G25508105,B01ZKD6,exact_ticker_adjacent_snapshot,passed,complete
+CRL,CRL,Charles River Laboratories International Inc Common,CRL.csv,2000-06-23,2026-08-04,6566,1,false,true,true,true,159864107,2604336,exact_ticker_adjacent_snapshot,passed,complete
+CRM,CRM,Salesforce Inc Common,CRM.csv,2004-06-23,2026-08-04,5564,1,false,true,true,true,79466L302,2310525,exact_ticker_adjacent_snapshot,passed,complete
+CRR-199706,CRR-199706,Conrail Inc Common,CRR-199706.csv,1990-01-02,1997-06-02,1876,1,true,false,false,false,,,,passed,complete
+CRWD,CRWD,CrowdStrike Holdings Inc Class A Common,CRWD.csv,2019-06-12,2026-08-04,1796,1,false,true,true,true,22788C105,BJJP138,exact_ticker_adjacent_snapshot,passed,complete
+CSCO,CSCO,Cisco Systems Inc Common,CSCO.csv,1990-02-16,2026-08-04,9181,1,false,true,true,true,17275R102,2198163,exact_ticker_adjacent_snapshot,passed,complete
+CSE-199911,CSE-199911,Case Corp Common,CSE-199911.csv,1994-06-24,1999-11-12,1362,1,false,true,false,false,,,,passed,complete
+CSGP,CSGP,CoStar Group Inc Common,CSGP.csv,1998-07-01,2026-08-04,7058,1,false,true,true,true,22160N109,2262864,exact_ticker_adjacent_snapshot,passed,complete
+CSR-200006,CSR-200006,Central & South West Corp Common,CSR-200006.csv,1990-01-02,2000-06-15,2643,1,true,true,false,false,,,,passed,complete
+CSRA-201804,CSRA-201804,CSRA Inc Common,CSRA-201804.csv,2015-11-16,2018-04-03,598,1,false,true,false,false,,,,passed,complete
+CSX,CSX,CSX Corp Common,CSX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,126408103,2160753,exact_ticker_adjacent_snapshot,passed,complete
+CTAS,CTAS,Cintas Corp Common,CTAS.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,172908105,2197137,exact_ticker_adjacent_snapshot,passed,complete
+CTB-202106,CTB-202106,Cooper Tire & Rubber Co Common,CTB-202106.csv,1990-01-02,2021-06-04,7918,1,false,false,false,false,,,,passed,complete
+CTCO-199110,CTCO-199110,Cross & Trecker Corp Common,CTCO-199110.csv,1990-01-02,1991-10-31,465,1,true,true,false,false,,,,passed,complete
+CTLT-202412,CTLT-202412,Catalent Inc Common,CTLT-202412.csv,2014-07-31,2024-12-17,2614,1,false,true,false,false,,,,passed,complete
+CTRA-202605,CTRA-202605,Coterra Energy Inc Common,CTRA-202605.csv,1990-02-08,2026-05-06,9091,1,false,true,false,false,,,,passed,complete
+CTSH,CTSH,Cognizant Technology Solutions Corporation Class A Common,CTSH.csv,1998-06-19,2026-08-04,7074,1,false,true,true,true,192446102,2257019,exact_ticker_adjacent_snapshot,passed,complete
+CTVA,CTVA,Corteva Inc Common,CTVA.csv,2019-05-24,2026-08-04,1808,1,false,true,true,true,22052L104,BK73B42,exact_ticker_adjacent_snapshot,passed,complete
+CTX-200908,CTX-200908,Centex Corp Common,CTX-200908.csv,1990-01-02,2009-08-18,4949,1,true,true,false,false,,,,passed,complete
+CTXS-202209,CTXS-202209,Citrix Systems Inc Common,CTXS-202209.csv,1995-12-08,2022-09-29,6749,1,false,true,false,false,,,,passed,complete
+CUE-199309,CUE-199309,Quantum Chemical Corporation Common,CUE-199309.csv,1990-01-02,1993-09-30,949,1,true,true,false,false,,,,passed,complete
+CVC-201606,CVC-201606,Cablevision Systems Corp Class A Common,CVC-201606.csv,1990-01-02,2016-06-20,6662,1,false,true,false,false,,,,passed,complete
+CVG-201810,CVG-201810,Convergys Corp Common,CVG-201810.csv,1998-08-13,2018-10-04,5070,1,false,false,false,false,,,,passed,complete
+CVGQE-200412,CVGQE-200412,Covanta Energy Corp Common,CVGQE-200412.csv,1990-01-02,2004-12-03,3755,1,true,false,false,false,,,,passed,complete
+CVH-201305,CVH-201305,Coventry Health Care Inc Common,CVH-201305.csv,1991-04-17,2013-05-06,5557,1,false,true,false,false,,,,passed,complete
+CVN-199112,CVN-199112,C&S Sovran Corp Common,CVN-199112.csv,1990-09-04,1991-12-31,336,1,true,true,false,false,,,,passed,complete
+CVNA,CVNA,Carvana Co Class A Common,CVNA.csv,2017-04-28,2026-08-04,2329,1,false,true,true,true,146869102,BYQHPG3,exact_ticker_adjacent_snapshot,passed,complete
+CVS,CVS,CVS Health Corp Common,CVS.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,126650100,2577609,exact_ticker_adjacent_snapshot,passed,complete
+CVSA,CVSA,Covista Inc Common,CVSA.csv,1991-06-21,2026-08-04,8806,1,false,false,false,false,,,,passed,complete
+CVX,CVX,Chevron Corp Common,CVX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,166764100,2838555,exact_ticker_adjacent_snapshot,passed,complete
+CXO-202101,CXO-202101,Concho Resources Inc Common,CXO-202101.csv,2007-08-03,2021-01-15,3388,1,false,true,false,false,,,,passed,complete
+CXT,CXT,Crane NXT Co Common,CXT.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+CYM-199912,CYM-199912,Cyprus Amax Minerals Co Common,CYM-199912.csv,1990-01-02,1999-12-02,2508,1,true,false,false,false,,,,passed,complete
+CYR-199606,CYR-199606,Cray Research Inc Common,CYR-199606.csv,1990-01-02,1996-06-28,1643,1,true,false,false,false,,,,passed,complete
+CZR,CZR,Caesars Entertainment Inc Common,CZR.csv,1992-12-07,2026-08-04,8469,1,false,false,false,false,,,,passed,complete
+D,D,Dominion Energy Inc Common,D.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,25746U109,2542049,exact_ticker_adjacent_snapshot,passed,complete
+DAL,DAL,Delta Air Lines Inc Common,DAL.csv,2007-04-26,2026-08-04,4849,1,false,true,true,true,247361702,B1W9D46,exact_ticker_adjacent_snapshot,passed,complete
+DALRQ-200704,DALRQ-200704,Delta Air Lines Common,DALRQ-200704.csv,1990-01-02,2007-04-27,4367,1,true,false,false,false,,,,passed,complete
+DASH,DASH,DoorDash Inc Class A Common,DASH.csv,2020-12-09,2026-08-04,1418,1,false,true,true,true,25809K105,BN13P03,exact_ticker_adjacent_snapshot,passed,complete
+DAY-202602,DAY-202602,Dayforce Inc Common,DAY-202602.csv,2018-04-26,2026-02-03,1954,1,false,true,false,false,,,,passed,complete
+DCNAQ-200801,DCNAQ-200801,Dana Corp Common,DCNAQ-200801.csv,1990-01-02,2008-01-31,4559,1,true,false,false,false,,,,passed,complete
+DD,DD,DuPont de Nemours Inc Common,DD.csv,2017-09-01,2026-08-04,2241,1,true,true,true,true,26614N201,BW60F13,exact_ticker_adjacent_snapshot,passed,complete
+DD-201708,DD-201708,E I du Pont de Nemours and Co Common,DD-201708.csv,1990-01-02,2017-08-31,6973,1,true,true,false,false,,,,passed,complete
+DDOG,DDOG,Datadog Inc Class A Common,DDOG.csv,2019-09-19,2026-08-04,1727,1,false,true,true,true,23804L103,BKT9Y49,exact_ticker_adjacent_snapshot,passed,complete
+DDS,DDS,Dillard's Inc Class A Common,DDS.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+DE,DE,Deere & Co Common,DE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,244199105,2261203,exact_ticker_adjacent_snapshot,passed,complete
+DEC-199806,DEC-199806,Digital Equipment Corp Common,DEC-199806.csv,1990-01-02,1998-06-11,2135,1,true,true,false,false,,,,passed,complete
+DECK,DECK,Deckers Outdoor Corp Common,DECK.csv,1993-10-15,2026-08-04,8218,1,false,true,true,true,243537107,2267278,exact_ticker_adjacent_snapshot,passed,complete
+DELL,DELL,Dell Technologies Inc Class C Common,DELL.csv,2016-08-17,2026-08-04,2504,1,false,true,true,true,24703L202,BHKD3S6,exact_ticker_adjacent_snapshot,passed,complete
+DELL-201310,DELL-201310,Dell Inc Common,DELL-201310.csv,1990-01-02,2013-10-29,6006,1,false,false,false,false,,,,passed,complete
+DFODQ-202106,DFODQ-202106,Dean Foods Co Common,DFODQ-202106.csv,1996-04-17,2021-06-02,6300,1,false,false,false,false,,,,passed,complete
+DFS-202505,DFS-202505,Discover Financial Services Common,DFS-202505.csv,2007-06-14,2025-05-16,4511,1,false,true,false,false,,,,passed,complete
+DG,DG,Dollar General Corp Common,DG.csv,2009-11-13,2026-08-04,4204,1,false,true,true,true,256677105,B5B1S13,exact_ticker_adjacent_snapshot,passed,complete
+DG-200707,DG-200707,Dollar General Corp Common,DG-200707.csv,1990-01-02,2007-07-06,4415,1,false,true,false,false,,,,passed,complete
+DGN-199910,DGN-199910,Data General Corp Common,DGN-199910.csv,1990-01-02,1999-10-12,2472,1,true,true,false,false,,,,passed,complete
+DGX,DGX,Quest Diagnostics Inc Common,DGX.csv,1996-12-17,2026-08-04,7453,1,false,true,true,true,74834L100,2702791,exact_ticker_adjacent_snapshot,passed,complete
+DHI,DHI,D.R. Horton Inc Common,DHI.csv,1992-06-05,2026-08-04,8588,1,false,true,true,true,23331A109,2250687,exact_ticker_adjacent_snapshot,passed,complete
+DHR,DHR,Danaher Corp Common,DHR.csv,1990-01-02,2026-08-04,9213,1,false,true,true,true,235851102,2250870,exact_ticker_adjacent_snapshot,passed,complete
+DI-199809,DI-199809,Dresser Industries Inc Common,DI-199809.csv,1990-01-02,1998-09-29,2211,1,true,true,false,false,,,,passed,complete
+DIGI-199809,DIGI-199809,DSC Communications Corp Common,DIGI-199809.csv,1990-01-02,1998-09-04,2195,1,true,false,false,false,,,,passed,complete
+DINO,DINO,HF Sinclair Corp Common,DINO.csv,1990-01-02,2026-08-04,9057,1,false,false,false,false,,,,passed,complete
+DIS,DIS,Walt Disney Co Common,DIS.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,254687106,2270726,exact_ticker_adjacent_snapshot,passed,complete
+DISCK-202204,DISCK-202204,Discovery Inc Series C Common,DISCK-202204.csv,2008-09-18,2022-04-08,3414,1,false,true,false,false,,,,passed,complete
+DISH-202312,DISH-202312,DISH Network Corp Class A Common,DISH-202312.csv,1995-06-21,2023-12-29,7182,1,false,false,false,false,,,,passed,complete
+DJ-200712,DJ-200712,Dow Jones & Company Inc Common,DJ-200712.csv,1990-01-02,2007-12-13,4527,1,true,true,false,false,,,,passed,complete
+DLR,DLR,Digital Realty Trust Inc Common,DLR.csv,2004-10-29,2026-08-04,5474,1,false,true,true,true,253868103,B03GQS4,exact_ticker_adjacent_snapshot,passed,complete
+DLTR,DLTR,Dollar Tree Inc Common,DLTR.csv,1995-03-07,2026-08-04,7905,1,false,true,true,true,256746108,2272476,exact_ticker_adjacent_snapshot,passed,complete
+DLX,DLX,Deluxe Corp Common,DLX.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+DNB-201902,DNB-201902,Dun & Bradstreet Corp Common,DNB-201902.csv,2000-09-18,2019-02-07,4626,1,false,false,false,false,,,,passed,complete
+DNRCQ-202009,DNRCQ-202009,Denbury Resources Inc Common,DNRCQ-202009.csv,1995-09-06,2020-09-18,6227,1,false,false,false,false,,,,passed,complete
+DOC,DOC,Healthpeak Properties Inc Common,DOC.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,42250P103,BJBLRK3,exact_ticker_adjacent_snapshot,passed,complete
+DOFSQ-202104,DOFSQ-202104,Diamond Offshore Drilling Inc Common,DOFSQ-202104.csv,1995-10-11,2021-04-23,6427,1,false,false,false,false,,,,passed,complete
+DOV,DOV,Dover Corp Common,DOV.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,260003108,2278407,exact_ticker_adjacent_snapshot,passed,complete
+DOW,DOW,Dow Inc Common,DOW.csv,2019-03-20,2026-08-04,1854,1,false,true,true,true,260557103,BHXCF84,exact_ticker_adjacent_snapshot,passed,complete
+DOW-201708,DOW-201708,Dow Chemical Co Common,DOW-201708.csv,1990-01-02,2017-08-31,6973,1,true,true,false,false,,,,passed,complete
+DPHIQ-200910,DPHIQ-200910,Delphi Corp Common,DPHIQ-200910.csv,1999-02-05,2009-10-07,2684,1,false,false,false,false,,,,passed,complete
+DPZ,DPZ,Domino's Pizza Inc Common,DPZ.csv,2004-07-13,2026-08-04,5551,1,false,true,true,true,25754A201,B01SD70,exact_ticker_adjacent_snapshot,passed,complete
+DRE-202209,DRE-202209,Duke Realty Common,DRE-202209.csv,1990-01-02,2022-09-30,8250,1,false,true,false,false,,,,passed,complete
+DRI,DRI,Darden Restaurants Inc Common,DRI.csv,1995-05-09,2026-08-04,7861,1,false,true,true,true,237194105,2289874,exact_ticker_adjacent_snapshot,passed,complete
+DTE,DTE,DTE Energy Co Common,DTE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,233331107,2280220,exact_ticker_adjacent_snapshot,passed,complete
+DTV-201507,DTV-201507,DIRECTV Common,DTV-201507.csv,1990-01-02,2015-07-24,6442,1,false,true,false,false,,,,passed,complete
+DUK,DUK,Duke Energy Corp Common,DUK.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,26441C204,B7VD3F2,exact_ticker_adjacent_snapshot,passed,complete
+DVA,DVA,DaVita Inc Common,DVA.csv,1995-10-31,2026-08-04,7739,1,false,true,true,true,23918K108,2898087,exact_ticker_adjacent_snapshot,passed,complete
+DVN,DVN,Devon Energy Corp Common,DVN.csv,1992-03-17,2026-08-04,8650,1,false,true,true,true,25179M103,2480677,exact_ticker_adjacent_snapshot,passed,complete
+DWD-199705,DWD-199705,Dean Witter Discover & Co Common,DWD-199705.csv,1993-02-23,1997-05-30,1080,1,false,true,false,false,,,,passed,complete
+DXC,DXC,DXC Technology Co Common,DXC.csv,1990-01-02,2026-08-04,9214,2,true,false,false,false,,,,passed,complete
+DXCM,DXCM,DexCom Inc Common,DXCM.csv,2005-04-14,2026-08-04,5359,1,false,true,true,true,252131107,B0796X4,exact_ticker_adjacent_snapshot,passed,complete
+DYHGQ-200012,DYHGQ-200012,Dynacore Holdings Corp Common,DYHGQ-200012.csv,1990-01-02,2000-12-18,2748,1,true,false,false,false,,,,passed,complete
+DYN-201804,DYN-201804,Dynegy Inc Common,DYN-201804.csv,1990-01-02,2018-04-06,7121,1,false,false,false,false,,,,passed,complete
+E-199504,E-199504,Transco Energy Co Common,E-199504.csv,1990-01-02,1995-04-28,1347,1,false,false,false,false,,,,passed,complete
+EA,EA,Electronic Arts Inc Common,EA.csv,1990-01-02,2026-08-04,9213,1,false,true,true,false,,,,passed,complete
+EBAY,EBAY,eBay Inc Common,EBAY.csv,1998-09-24,2026-08-04,7007,1,false,true,true,true,278642103,2293819,exact_ticker_adjacent_snapshot,passed,complete
+EC-200606,EC-200606,Engelhard Corp Common,EC-200606.csv,1990-01-02,2006-06-09,4146,1,true,false,false,false,,,,passed,complete
+ECH-199807,ECH-199807,Echlin Inc Common,ECH-199807.csv,1990-01-02,1998-07-09,2154,1,true,true,false,false,,,,passed,complete
+ECHO,ECHO,EchoStar Corporation Class A Common,ECHO.csv,2007-12-31,2026-08-04,4677,1,false,true,true,true,278768106,B2NC471,exact_ticker_adjacent_snapshot,passed,complete
+ECL,ECL,Ecolab Inc Common,ECL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,278865100,2304227,exact_ticker_adjacent_snapshot,passed,complete
+ECO-200301,ECO-200301,Echo Bay Mines Ltd Common,ECO-200301.csv,1990-01-02,2003-01-31,3301,1,false,false,false,false,,,,passed,complete
+ED,ED,Consolidated Edison Inc Common,ED.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,209115104,2216850,exact_ticker_adjacent_snapshot,passed,complete
+EDS-200808,EDS-200808,Electronic Data Systems Corp Common,EDS-200808.csv,1990-01-02,2008-08-25,4702,1,false,true,false,false,,,,passed,complete
+EFU-200011,EFU-200011,Eastern Enterprises Common,EFU-200011.csv,1990-01-02,2000-11-08,2745,1,true,false,false,false,,,,passed,complete
+EFX,EFX,Equifax Inc Common,EFX.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,294429105,2319146,exact_ticker_adjacent_snapshot,passed,complete
+EG,EG,Everest Group Ltd Common,EG.csv,1995-10-03,2026-08-04,7759,1,false,true,true,true,G3223R108,2556868,exact_ticker_adjacent_snapshot,passed,complete
+EHC,EHC,Encompass Health Corp Common,EHC.csv,1990-01-02,2026-08-04,9209,1,false,false,false,false,,,,passed,complete
+EIX,EIX,Edison International Common,EIX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,281020107,2829515,exact_ticker_adjacent_snapshot,passed,complete
+EKDKQ-201309,EKDKQ-201309,Eastman Kodak Co Common,EKDKQ-201309.csv,1990-01-02,2013-09-03,5966,1,true,false,false,false,,,,passed,complete
+EL,EL,Estee Lauder Companies Inc Class A Common,EL.csv,1995-11-17,2026-08-04,7726,1,false,true,true,true,518439104,2320524,exact_ticker_adjacent_snapshot,passed,complete
+ELV,ELV,Elevance Health Inc Common,ELV.csv,2001-10-30,2026-08-04,6229,1,false,true,true,true,036752103,BSPHGL4,exact_ticker_adjacent_snapshot,passed,complete
+EMC-201609,EMC-201609,EMC Corp Common,EMC-201609.csv,1990-01-02,2016-09-06,6724,1,false,true,false,false,,,,passed,complete
+EME,EME,EMCOR Group Inc Common,EME.csv,1995-12-28,2026-08-04,7677,1,false,true,true,true,29084Q100,2474164,exact_ticker_adjacent_snapshot,passed,complete
+EMN,EMN,Eastman Chemical Co Common,EMN.csv,1993-12-14,2026-08-04,8214,1,false,false,false,false,,,,passed,complete
+EMR,EMR,Emerson Electric Co Common,EMR.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,291011104,2313405,exact_ticker_adjacent_snapshot,passed,complete
+ENDPQ-202405,ENDPQ-202405,Endo International PLC Common,ENDPQ-202405.csv,1996-09-26,2024-05-01,6942,1,false,false,false,false,,,,passed,complete
+ENPH,ENPH,Enphase Energy Inc Common,ENPH.csv,2012-03-30,2026-08-04,3606,1,false,false,false,false,,,,passed,complete
+ENRNQ-200411,ENRNQ-200411,Enron Corp Common,ENRNQ-200411.csv,1990-01-02,2004-11-17,3751,1,true,false,false,false,,,,passed,complete
+ENS-199708,ENS-199708,Enserch Corp Common,ENS-199708.csv,1990-01-02,1997-08-05,1921,1,true,true,false,false,,,,passed,complete
+EOG,EOG,EOG Resources Inc Common,EOG.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,26875P101,2318024,exact_ticker_adjacent_snapshot,passed,complete
+EOP-200702,EOP-200702,Equity Office Properties Trust Common,EOP-200702.csv,1997-07-08,2007-02-09,2414,1,false,true,false,false,,,,passed,complete
+EP-201205,EP-201205,El Paso Corp Common,EP-201205.csv,1992-03-13,2012-05-24,5091,1,false,true,false,false,,,,passed,complete
+EPAM,EPAM,EPAM Systems Inc Common,EPAM.csv,2012-02-08,2026-08-04,3642,1,false,false,false,false,,,,passed,complete
+EQ-200906,EQ-200906,Embarq Corporation Common,EQ-200906.csv,2006-05-04,2009-06-30,795,1,false,true,false,false,,,,passed,complete
+EQIX,EQIX,Equinix Inc Common,EQIX.csv,2000-08-11,2026-08-04,6532,1,false,true,true,true,29444U700,BVLZX12,exact_ticker_adjacent_snapshot,passed,complete
+EQR,EQR,Equity Residential Common,EQR.csv,1993-08-12,2026-08-04,8300,1,false,true,true,false,,,,passed,complete
+EQT,EQT,EQT Corp Common,EQT.csv,1990-01-02,2026-08-04,9214,2,false,true,true,true,26884L109,2319414,exact_ticker_adjacent_snapshot,passed,complete
+ERIE,ERIE,Erie Indemnity Company Class A Common,ERIE.csv,1995-10-02,2026-08-04,7741,1,false,true,true,true,29530P102,2311711,exact_ticker_adjacent_snapshot,passed,complete
+ES,ES,Eversource Energy Common,ES.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,30040W108,BVVN4Q8,exact_ticker_adjacent_snapshot,passed,complete
+ESRX-201812,ESRX-201812,Express Scripts Holding Co Common,ESRX-201812.csv,1992-06-09,2018-12-20,6680,1,false,true,false,false,,,,passed,complete
+ESS,ESS,Essex Property Trust Inc Common,ESS.csv,1994-06-07,2026-08-04,8094,1,false,true,true,true,297178105,2316619,exact_ticker_adjacent_snapshot,passed,complete
+ESY-199505,ESY-199505,E-Systems Inc Common,ESY-199505.csv,1990-01-02,1995-05-08,1353,1,true,false,false,false,,,,passed,complete
+ETFC-202010,ETFC-202010,E*Trade Financial Corp Common,ETFC-202010.csv,1996-08-16,2020-10-01,6073,1,false,true,false,false,,,,passed,complete
+ETN,ETN,Eaton Corp Plc Common,ETN.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,G29183103,B8KQN82,exact_ticker_adjacent_snapshot,passed,complete
+ETR,ETR,Entergy Corp Common,ETR.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,29364G103,2317087,exact_ticker_adjacent_snapshot,passed,complete
+ETS-200603,ETS-200603,Enterasys Networks Common,ETS-200603.csv,1990-01-02,2006-03-01,4076,1,false,false,false,false,,,,passed,complete
+ETSY,ETSY,Etsy Inc Common,ETSY.csv,2015-04-16,2026-08-04,2842,1,false,false,false,false,,,,passed,complete
+EVHC-201810,EVHC-201810,Envision Healthcare Corp Common,EVHC-201810.csv,1997-12-03,2018-10-10,5218,1,false,true,false,false,,,,passed,complete
+EVRG,EVRG,Evergy Inc Common,EVRG.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,30034W106,BFMXGR0,exact_ticker_adjacent_snapshot,passed,complete
+EW,EW,Edwards Lifesciences Corp Common,EW.csv,2000-03-27,2026-08-04,6628,1,false,true,true,true,28176E108,2567116,exact_ticker_adjacent_snapshot,passed,complete
+EXC,EXC,Exelon Corp Common,EXC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,30161N101,2670519,exact_ticker_adjacent_snapshot,passed,complete
+EXE,EXE,Expand Energy Corp Common,EXE.csv,2021-02-10,2026-08-04,1376,1,false,true,true,true,165167735,BMZ5LZ5,exact_ticker_adjacent_snapshot,passed,complete
+EXPD,EXPD,Expeditors International of Washington Inc Common,EXPD.csv,1990-01-02,2026-08-04,9183,1,false,true,true,true,302130109,2325507,exact_ticker_adjacent_snapshot,passed,complete
+EXPE,EXPE,Expedia Group Inc Common,EXPE.csv,2005-07-20,2026-08-04,5293,1,false,true,true,true,30212P303,B748CK2,exact_ticker_adjacent_snapshot,passed,complete
+EXR,EXR,Extra Space Storage Inc Common,EXR.csv,2004-08-12,2026-08-04,5529,1,false,true,true,true,30225T102,B02HWR9,exact_ticker_adjacent_snapshot,passed,complete
+F,F,Ford Motor Co Common,F.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,345370860,2615468,exact_ticker_adjacent_snapshot,passed,complete
+FANG,FANG,Diamondback Energy Inc Common,FANG.csv,2012-10-12,2026-08-04,3470,1,false,true,true,true,25278X109,B7Y8YR3,exact_ticker_adjacent_snapshot,passed,complete
+FAST,FAST,Fastenal Co Common,FAST.csv,1990-01-02,2026-08-04,9213,1,false,true,true,true,311900104,2332262,exact_ticker_adjacent_snapshot,passed,complete
+FBF-200403,FBF-200403,Fleetboston Financial Group Inc Common,FBF-200403.csv,1990-01-02,2004-03-31,3594,1,true,true,false,false,,,,passed,complete
+FBIN,FBIN,Fortune Brands Innovations Inc Common,FBIN.csv,2011-09-16,2026-08-04,3741,1,false,false,false,false,,,,passed,complete
+FBO-199603,FBO-199603,Federal Paper Board Inc Common,FBO-199603.csv,1990-01-02,1996-03-12,1567,1,true,true,false,false,,,,passed,complete
+FCN-199810,FCN-199810,First Chicago NBD Corp Common,FCN-199810.csv,1990-01-02,1998-10-01,2213,1,true,true,false,false,,,,passed,complete
+FCX,FCX,Freeport-McMoRan Inc Common,FCX.csv,1995-07-10,2026-08-04,7819,1,false,true,true,true,35671D857,2352118,exact_ticker_adjacent_snapshot,passed,complete
+FDC-200709,FDC-200709,First Data Corp Common,FDC-200709.csv,1992-04-09,2007-09-24,3895,1,false,true,false,false,,,,passed,complete
+FDO-201507,FDO-201507,Family Dollar Stores Inc Common,FDO-201507.csv,1990-01-02,2015-07-06,6428,1,false,true,false,false,,,,passed,complete
+FDS,FDS,FactSet Research Systems Inc Common,FDS.csv,1996-06-28,2026-08-04,7562,1,false,true,true,true,303075105,2329770,exact_ticker_adjacent_snapshot,passed,complete
+FDX,FDX,FedEx Corp Common,FDX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,31428X106,2142784,exact_ticker_adjacent_snapshot,passed,complete
+FDXF,FDXF,FedEx Freight Holding Company Inc Common,FDXF.csv,2026-05-27,2026-08-04,48,1,false,true,true,true,314352105,BVSVT37,exact_ticker_adjacent_snapshot,passed,complete
+FE,FE,FirstEnergy Corp Common,FE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,337932107,2100920,exact_ticker_adjacent_snapshot,passed,complete
+FFB-199512,FFB-199512,First Fidelity Bancorp Common,FFB-199512.csv,1990-01-02,1995-12-29,1517,1,true,true,false,false,,,,passed,complete
+FFIV,FFIV,F5 Inc Common,FFIV.csv,1999-06-04,2026-08-04,6833,1,false,true,true,true,315616102,2427599,exact_ticker_adjacent_snapshot,passed,complete
+FG-199804,FG-199804,USF&G Corp Common,FG-199804.csv,1990-01-02,1998-04-24,2102,1,true,true,false,false,,,,passed,complete
+FHI,FHI,Federated Hermes Inc Class B Common,FHI.csv,1998-05-14,2026-08-04,7099,1,false,false,false,false,,,,passed,complete
+FHN,FHN,First Horizon Corp Common,FHN.csv,1990-01-02,2026-08-04,9213,1,false,false,false,false,,,,passed,complete
+FICO,FICO,Fair Isaac Corp Common,FICO.csv,1990-01-02,2026-08-04,8866,1,false,true,true,true,303250104,2330299,exact_ticker_adjacent_snapshot,passed,complete
+FIS,FIS,Fidelity National Information Services Inc Common,FIS.csv,2001-06-20,2026-08-04,6317,1,false,true,true,true,31620M106,2769796,exact_ticker_adjacent_snapshot,passed,complete
+FISV,FISV,Fiserv Inc Common,FISV.csv,1990-01-02,2026-08-04,9210,1,false,true,true,true,337738108,2342034,exact_ticker_adjacent_snapshot,passed,complete
+FITB,FITB,Fifth Third Bancorp Common,FITB.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,316773100,2336747,exact_ticker_adjacent_snapshot,passed,complete
+FIX,FIX,Comfort Systems USA Inc Common,FIX.csv,1997-06-27,2026-08-04,7320,1,false,true,true,true,199908104,2036047,exact_ticker_adjacent_snapshot,passed,complete
+FJ-200011,FJ-200011,Fort James Corp Common,FJ-200011.csv,1990-01-02,2000-11-27,2757,1,true,false,false,false,,,,passed,complete
+FJCC-200809,FJCC-200809,Fedders Corp Common,FJCC-200809.csv,1990-01-02,2008-09-05,4686,1,true,false,false,false,,,,passed,complete
+FL-202509,FL-202509,Foot Locker Inc Common,FL-202509.csv,1990-01-02,2025-09-05,8986,2,true,false,false,false,,,,passed,complete
+FLEX,FLEX,Flex Ltd Common,FLEX.csv,1994-03-18,2026-08-04,8145,1,false,true,true,true,Y2573F102,2353058,exact_ticker_adjacent_snapshot,passed,complete
+FLIR-202105,FLIR-202105,FLIR Systems Inc Common,FLIR-202105.csv,1993-06-22,2021-05-13,7022,1,false,true,false,false,,,,passed,complete
+FLMIQ-200408,FLMIQ-200408,Fleming Companies Inc Common,FLMIQ-200408.csv,1990-01-02,2004-08-23,3691,1,true,false,false,false,,,,passed,complete
+FLR,FLR,Fluor Corp Common,FLR.csv,2000-12-01,2026-08-04,6454,1,false,false,false,false,,,,passed,complete
+FLS,FLS,Flowserve Corp Common,FLS.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+FLTWQ-200907,FLTWQ-200907,Fleetwood Enterprises Inc Common,FLTWQ-200907.csv,1990-01-02,2009-07-27,4933,1,true,false,false,false,,,,passed,complete
+FMC,FMC,FMC Corp Common,FMC.csv,1990-01-02,2026-08-04,9214,2,true,false,false,false,,,,passed,complete
+FMCC,FMCC,Freddie Mac Common,FMCC.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+FMY-199905,FMY-199905,Fred Meyer Inc Common,FMY-199905.csv,1990-01-02,1999-05-27,2376,1,false,true,false,false,,,,passed,complete
+FNB-199511,FNB-199511,First Chicago Corp Common,FNB-199511.csv,1990-01-02,1995-11-30,1497,1,true,true,false,false,,,,passed,complete
+FNMA,FNMA,Federal National Mortgage Association Common,FNMA.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+FOSL,FOSL,Fossil Group Inc Common,FOSL.csv,1993-04-08,2026-08-04,8386,1,false,false,false,false,,,,passed,complete
+FOX,FOX,Fox Corporation Class B Common,FOX.csv,2019-03-13,2026-08-04,1859,1,false,true,true,true,35137L204,BJJMGY5,exact_ticker_adjacent_snapshot,passed,complete
+FOXA,FOXA,Fox Corporation Class A Common,FOXA.csv,2019-03-12,2026-08-04,1860,1,false,true,true,true,35137L105,BJJMGL2,exact_ticker_adjacent_snapshot,passed,complete
+FPC-200011,FPC-200011,Florida Progress Corp Common,FPC-200011.csv,1990-01-02,2000-11-30,2760,1,false,true,false,false,,,,passed,complete
+FRCB,FRCB,First Republic Bank Common,FRCB.csv,2010-12-09,2026-08-04,3933,1,false,false,false,false,,,,passed,gaps_reported
+FRM-199612,FRM-199612,First Mississippi Corp Common,FRM-199612.csv,1990-01-02,1996-12-23,1766,1,true,false,false,false,,,,passed,complete
+FRO-199909,FRO-199909,Frontier Corp Common,FRO-199909.csv,1990-01-02,1999-09-28,2462,1,false,true,false,false,,,,passed,complete
+FRT,FRT,Federal Realty Investment Trust Common,FRT.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,313745101,BN7P9B2,exact_ticker_adjacent_snapshot,passed,complete
+FRX-201406,FRX-201406,Forest Laboratories Inc Common,FRX-201406.csv,1990-01-02,2014-06-30,6173,1,false,true,false,false,,,,passed,complete
+FSH-200611,FSH-200611,Fisher Scientific International Common,FSH-200611.csv,1991-12-18,2006-11-09,3753,1,false,true,false,false,,,,passed,complete
+FSL.B-200612,FSL.B-200612,Freescale Semiconductor Inc Class B Common,FSL.B-200612.csv,2004-11-23,2006-12-01,511,1,false,true,false,false,,,,passed,complete
+FSLR,FSLR,First Solar Inc Common,FSLR.csv,2006-11-17,2026-08-04,4956,2,false,true,true,true,336433107,B1HMF22,exact_ticker_adjacent_snapshot,passed,complete
+FTI,FTI,TechnipFMC plc Common,FTI.csv,2017-01-17,2026-08-04,2400,1,true,false,false,false,,,,passed,complete
+FTI-201701,FTI-201701,FMC Technologies Inc Common,FTI-201701.csv,2001-06-14,2017-01-13,3921,1,false,true,false,false,,,,passed,complete
+FTL-200004,FTL-200004,Fruit of The Loom Inc Class A Common,FTL-200004.csv,1990-01-02,2000-04-20,2604,1,false,false,false,false,,,,passed,complete
+FTNT,FTNT,Fortinet Inc Common,FTNT.csv,2009-11-18,2026-08-04,4201,1,false,true,true,true,34959E109,B5B2106,exact_ticker_adjacent_snapshot,passed,complete
+FTRCQ-202104,FTRCQ-202104,Frontier Communications Corp Common,FTRCQ-202104.csv,1990-01-02,2021-04-30,7894,1,false,false,false,false,,,,passed,complete
+FTV,FTV,Fortive Corp Common,FTV.csv,2016-06-13,2026-08-04,2547,1,false,true,true,true,34959J108,BYT3MK1,exact_ticker_adjacent_snapshot,passed,complete
+FWLT-201412,FWLT-201412,Foster Wheeler AG Common,FWLT-201412.csv,1990-01-02,2014-12-03,6282,1,true,false,false,false,,,,passed,complete
+G-200509,G-200509,Gillette Common,G-200509.csv,1990-01-02,2005-09-30,3973,1,true,true,false,false,,,,passed,complete
+GAP,GAP,Gap Inc Common,GAP.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+GAPTQ-201203,GAPTQ-201203,Great Atlantic & Pacific Tea Company Inc Common,GAPTQ-201203.csv,1990-01-02,2012-03-14,5596,1,true,false,false,false,,,,passed,complete
+GAS-201112,GAS-201112,Nicor Common,GAS-201112.csv,1990-01-02,2011-12-09,5533,1,true,true,false,false,,,,passed,complete
+GAS-201606,GAS-201606,AGL Resources Inc Common,GAS-201606.csv,1990-01-02,2016-06-30,6678,1,false,true,false,false,,,,passed,complete
+GBLXQ-200312,GBLXQ-200312,Global Crossing Ltd Common,GBLXQ-200312.csv,1998-08-14,2003-12-09,1338,1,false,false,false,false,,,,passed,complete
+GCO,GCO,Genesco Inc Common,GCO.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+GD,GD,General Dynamics Corp Common,GD.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,369550108,2365161,exact_ticker_adjacent_snapshot,passed,complete
+GDDY,GDDY,GoDaddy Inc Class A Common,GDDY.csv,2015-04-01,2026-08-04,2852,1,false,true,true,true,380237107,BWFRFC6,exact_ticker_adjacent_snapshot,passed,complete
+GDT-200604,GDT-200604,Guidant Corp Common,GDT-200604.csv,1994-12-14,2006-04-21,2859,1,false,true,false,false,,,,passed,complete
+GDW-200609,GDW-200609,Golden West Financial Common,GDW-200609.csv,1990-01-02,2006-09-29,4224,1,true,true,false,false,,,,passed,complete
+GE,GE,GE Aerospace Common,GE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,369604301,BL59CR9,exact_ticker_adjacent_snapshot,passed,complete
+GEB-199408,GEB-199408,Gerber Products Co Common,GEB-199408.csv,1990-01-02,1994-08-24,1176,1,true,false,false,false,,,,passed,complete
+GEHC,GEHC,GE Healthcare Technologies Inc Common,GEHC.csv,2022-12-15,2026-08-04,910,1,false,true,true,true,36266G107,BL6JPG8,exact_ticker_adjacent_snapshot,passed,complete
+GEN,GEN,Gen Digital Inc Common,GEN.csv,1990-01-02,2026-08-04,9213,1,false,true,true,true,668771108,BJN4XN5,exact_ticker_adjacent_snapshot,passed,complete
+GENZ-201104,GENZ-201104,Genzyme Corp Common,GENZ-201104.csv,1990-01-02,2011-04-08,5363,1,false,false,false,false,,,,passed,complete
+GEV,GEV,GE Vernova Inc Common,GEV.csv,2024-03-27,2026-08-04,590,1,false,true,true,true,36828A101,BP6H4Y1,exact_ticker_adjacent_snapshot,passed,complete
+GFS.A-199810,GFS.A-199810,Giant Food Inc Common,GFS.A-199810.csv,1990-01-02,1998-10-30,2234,1,true,false,false,false,,,,passed,complete
+GGP-201808,GGP-201808,GGP Inc Common,GGP-201808.csv,1993-04-08,2018-08-27,6394,2,false,true,false,false,,,,passed,complete
+GHC,GHC,Graham Holdings Co Class B Common,GHC.csv,1990-01-02,2026-08-04,9211,1,false,false,false,false,,,,passed,complete
+GHC-199308,GHC-199308,Galen Health Care Inc Common,GHC-199308.csv,1993-02-19,1993-08-31,135,1,false,true,false,false,,,,passed,complete
+GIC-200001,GIC-200001,General Instrument Corp Common,GIC-200001.csv,1992-06-10,2000-01-05,1914,1,false,true,false,false,,,,passed,complete
+GIDL-199709,GIDL-199709,Giddings & Lewis Inc Common,GIDL-199709.csv,1990-01-02,1997-09-29,1959,1,false,false,false,false,,,,passed,complete
+GILD,GILD,Gilead Sciences Inc Common,GILD.csv,1992-01-22,2026-08-04,8691,1,false,true,true,true,375558103,2369174,exact_ticker_adjacent_snapshot,passed,complete
+GIS,GIS,General Mills Inc Common,GIS.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,370334104,2367026,exact_ticker_adjacent_snapshot,passed,complete
+GL,GL,Globe Life Inc Common,GL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,37959E102,BK6YKG1,exact_ticker_adjacent_snapshot,passed,complete
+GLD-199705,GLD-199705,Santa Fe Pacific Gold Corp Common,GLD-199705.csv,1994-06-16,1997-05-05,730,1,false,true,false,false,,,,passed,complete
+GLK-200507,GLK-200507,Great Lakes Chemical Corp Common,GLK-200507.csv,1990-01-02,2005-07-01,3910,1,false,true,false,false,,,,passed,complete
+GLW,GLW,Corning Inc Common,GLW.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,219350105,2224701,exact_ticker_adjacent_snapshot,passed,complete
+GM,GM,General Motors Co Common,GM.csv,2010-11-18,2026-08-04,3949,1,false,true,true,true,37045V100,B665KZ5,exact_ticker_adjacent_snapshot,passed,complete
+GMCR-201603,GMCR-201603,Keurig Green Mountain Inc Common,GMCR-201603.csv,1993-09-21,2016-03-02,5578,1,false,true,false,false,,,,passed,complete
+GME,GME,GameStop Corp Class A Common,GME.csv,2002-02-13,2026-08-04,6157,1,false,false,false,false,,,,passed,complete
+GNE-199906,GNE-199906,Genentech Inc Common,GNE-199906.csv,1990-01-02,1999-06-16,2390,1,true,false,false,false,,,,passed,complete
+GNN-199006,GNN-199006,Great Northern Nekoosa Corp Common,GNN-199006.csv,1990-01-02,1990-06-25,122,1,true,false,false,false,,,,passed,complete
+GNRC,GNRC,Generac Holdings Inc Common,GNRC.csv,2010-02-11,2026-08-04,4144,1,false,true,true,true,368736104,B6197Q2,exact_ticker_adjacent_snapshot,passed,complete
+GNT-199806,GNT-199806,Green Tree Financial Corp Common,GNT-199806.csv,1990-01-02,1998-06-30,2148,1,false,true,false,false,,,,passed,complete
+GNW,GNW,Genworth Financial Inc Common,GNW.csv,2004-05-25,2026-08-04,5583,1,false,false,false,false,,,,passed,complete
+GOOG,GOOG,Alphabet Inc Class C Common,GOOG.csv,2014-03-27,2026-08-04,3107,1,false,true,true,true,02079K107,BYY88Y7,exact_ticker_adjacent_snapshot,passed,complete
+GOOGL,GOOGL,Alphabet Inc Class A Common,GOOGL.csv,2004-08-19,2026-08-04,5524,1,false,true,true,true,02079K305,BYVY8G0,exact_ticker_adjacent_snapshot,passed,complete
+GOSHA-200507,GOSHA-200507,Oshkosh B'Gosh Inc Common,GOSHA-200507.csv,1990-01-02,2005-07-14,3917,1,true,false,false,false,,,,passed,complete
+GP-200512,GP-200512,Georgia Pacific Corp Common,GP-200512.csv,1990-01-02,2005-12-22,4031,1,true,false,false,false,,,,passed,complete
+GPC,GPC,Genuine Parts Co Common,GPC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,372460105,2367480,exact_ticker_adjacent_snapshot,passed,complete
+GPN,GPN,Global Payments Inc Common,GPN.csv,2001-01-16,2026-08-04,6425,1,false,true,true,true,37940X102,2712013,exact_ticker_adjacent_snapshot,passed,complete
+GPU-200111,GPU-200111,GPU Inc Common,GPU-200111.csv,1990-01-02,2001-11-06,2991,1,false,true,false,false,,,,passed,complete
+GQ-199404,GQ-199404,Grumman Corp Common,GQ-199404.csv,1990-01-02,1994-04-15,1086,1,true,true,false,false,,,,passed,complete
+GR-201207,GR-201207,Goodrich Corp Common,GR-201207.csv,1990-01-02,2012-07-26,5690,1,true,true,false,false,,,,passed,complete
+GRA-202109,GRA-202109,W R Grace & Co Common,GRA-202109.csv,1990-01-02,2021-09-21,7993,1,true,false,false,false,,,,passed,complete
+GRL-199008,GRL-199008,General Instrument Corp Common,GRL-199008.csv,1990-01-02,1990-08-22,163,1,true,false,false,false,,,,passed,complete
+GRMN,GRMN,Garmin Ltd Common,GRMN.csv,2000-12-08,2026-08-04,6449,1,false,true,true,true,H2906T109,B3Z5T14,exact_ticker_adjacent_snapshot,passed,complete
+GRN-199812,GRN-199812,General Re Corp Common,GRN-199812.csv,1990-01-02,1998-12-21,2269,1,true,true,false,false,,,,passed,complete
+GS,GS,Goldman Sachs Group Inc Common,GS.csv,1999-05-04,2026-08-04,6855,1,false,true,true,true,38141G104,2407966,exact_ticker_adjacent_snapshot,passed,complete
+GSX-199810,GSX-199810,General Signal Corp Common,GSX-199810.csv,1990-01-02,1998-10-06,2216,1,true,true,false,false,,,,passed,complete
+GT,GT,Goodyear Tire & Rubber Co Common,GT.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+GTE-200006,GTE-200006,GTE Corp Common,GTE-200006.csv,1990-01-02,2000-06-30,2654,1,true,true,false,false,,,,passed,complete
+GTW-200710,GTW-200710,Gateway Inc Common,GTW-200710.csv,1993-12-08,2007-10-16,3490,1,false,false,false,false,,,,passed,complete
+GWF-199707,GWF-199707,Great Western Financial Corp Common,GWF-199707.csv,1990-01-02,1997-07-01,1897,1,true,true,false,false,,,,passed,complete
+GWOW-201009,GWOW-201009,Genesis Worldwide Inc Common,GWOW-201009.csv,1990-01-02,2010-09-17,3319,1,true,false,false,false,,,,passed,gaps_reported
+GWW,GWW,W.W. Grainger Inc Common,GWW.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,384802104,2380863,exact_ticker_adjacent_snapshot,passed,complete
+H-200107,H-200107,Harcourt General Inc Common,H-200107.csv,1990-01-02,2001-07-12,2913,1,true,false,false,false,,,,passed,complete
+H-200704,H-200704,Realogy Corp Common,H-200704.csv,2006-07-19,2007-04-09,181,1,false,true,false,false,,,,passed,complete
+HAL,HAL,Halliburton Co Common,HAL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,406216101,2405302,exact_ticker_adjacent_snapshot,passed,complete
+HAR-201703,HAR-201703,Harman International Industries Inc Common,HAR-201703.csv,1990-01-02,2017-03-10,6815,1,false,true,false,false,,,,passed,complete
+HAS,HAS,Hasbro Inc Common,HAS.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,418056107,2414580,exact_ticker_adjacent_snapshot,passed,complete
+HBAN,HBAN,Huntington Bancshares Inc Common,HBAN.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,446150104,2445966,exact_ticker_adjacent_snapshot,passed,complete
+HBI-202511,HBI-202511,Hanesbrands Inc Common,HBI-202511.csv,2006-08-16,2025-11-28,4853,1,false,false,false,false,,,,passed,complete
+HBJ-199111,HBJ-199111,Harcourt Brace Jovanovich Inc Common,HBJ-199111.csv,1990-01-02,1991-11-25,482,1,true,false,false,false,,,,passed,complete
+HBOC-199901,HBOC-199901,HBO & Co Common,HBOC-199901.csv,1990-01-02,1999-01-13,2284,1,false,false,false,false,,,,passed,complete
+HCA,HCA,HCA Healthcare Inc Common,HCA.csv,2011-03-10,2026-08-04,3873,1,false,true,true,true,40412C101,B4MGBG6,exact_ticker_adjacent_snapshot,passed,complete
+HCA-200611,HCA-200611,HCA Healthcare Company Common,HCA-200611.csv,1990-05-17,2006-11-17,4163,1,false,true,false,false,,,,passed,complete
+HCBK-201510,HCBK-201510,Hudson City Bancorp Inc Common,HCBK-201510.csv,1999-07-13,2015-10-30,4104,1,false,true,false,false,,,,passed,complete
+HCR-200712,HCR-200712,Manor Care Inc Common,HCR-200712.csv,1991-10-18,2007-12-21,4078,1,false,false,false,false,,,,passed,complete
+HD,HD,Home Depot Inc Common,HD.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,437076102,2434209,exact_ticker_adjacent_snapshot,passed,complete
+HDLM-201301,HDLM-201301,Handleman Co Common,HDLM-201301.csv,1990-01-02,2013-01-15,5562,1,true,false,false,false,,,,passed,complete
+HES-202507,HES-202507,Hess Corp Common,HES-202507.csv,1990-01-02,2025-07-17,8951,1,true,true,false,false,,,,passed,complete
+HET-200801,HET-200801,Harrah Entertainment Common,HET-200801.csv,1990-01-02,2008-01-28,4556,1,false,true,false,false,,,,passed,complete
+HFS-199712,HFS-199712,HFS Inc Common,HFS-199712.csv,1992-12-10,1997-12-17,1270,1,false,true,false,false,,,,passed,complete
+HI-200303,HI-200303,Household International Inc Common,HI-200303.csv,1990-01-02,2003-03-28,3340,1,true,true,false,false,,,,passed,complete
+HIA-199002,HIA-199002,Holiday Corp Common,HIA-199002.csv,1990-01-02,1990-02-07,27,1,true,true,false,false,,,,passed,complete
+HIG,HIG,Hartford Insurance Group Inc Common,HIG.csv,1995-12-15,2026-08-04,7707,1,false,true,true,true,416515104,2476193,exact_ticker_adjacent_snapshot,passed,complete
+HII,HII,Huntington Ingalls Industries Inc Common,HII.csv,2011-03-22,2026-08-04,3865,1,false,true,true,true,446413106,B40SSC9,exact_ticker_adjacent_snapshot,passed,complete
+HLT,HLT,Hilton Worldwide Holdings Inc Common,HLT.csv,2013-12-12,2026-08-04,3178,1,false,true,true,true,43300A203,BYVMW06,exact_ticker_adjacent_snapshot,passed,complete
+HLT-200710,HLT-200710,Hilton Hotels Corp Common,HLT-200710.csv,1990-01-02,2007-10-24,4492,1,true,true,false,false,,,,passed,complete
+HM-200112,HM-200112,Homestake Mining Co Common,HM-200112.csv,1990-01-02,2001-12-14,3018,1,true,true,false,false,,,,passed,complete
+HMA-201401,HMA-201401,Health Management Associates Inc Class A Common,HMA-201401.csv,1991-02-06,2014-01-24,5780,1,false,false,false,false,,,,passed,complete
+HNZ-201306,HNZ-201306,HJ Heinz Co Common,HNZ-201306.csv,1990-01-02,2013-06-07,5906,1,true,false,false,false,,,,passed,complete
+HOG,HOG,Harley-Davidson Inc Common,HOG.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+HOLX-202604,HOLX-202604,Hologic Inc Common,HOLX-202604.csv,1990-03-01,2026-04-06,9086,1,false,true,false,false,,,,passed,complete
+HON,HON,Honeywell Technologies Inc Common,HON.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,438516205,BN7RHC5,exact_ticker_adjacent_snapshot,passed,complete
+HON-199912,HON-199912,Honeywell Inc Common,HON-199912.csv,1990-01-02,1999-12-01,2507,1,true,true,false,false,,,,passed,complete
+HONA,HONA,Honeywell Aerospace Inc Common,HONA.csv,2026-06-16,2026-08-04,34,1,false,true,true,true,43849R105,BN7RHB4,exact_ticker_adjacent_snapshot,passed,complete
+HOOD,HOOD,Robinhood Markets Inc Class A Common,HOOD.csv,2021-07-29,2026-08-04,1259,1,false,true,true,true,770700102,BP0TQN6,exact_ticker_adjacent_snapshot,passed,complete
+HOT-201609,HOT-201609,Starwood Hotels & Resorts Worldwide Inc Common,HOT-201609.csv,1990-01-02,2016-09-22,6725,1,false,true,false,false,,,,passed,complete
+HP,HP,Helmerich & Payne Inc Common,HP.csv,1990-01-02,2026-08-04,9214,2,true,false,false,false,,,,passed,complete
+HPC-200811,HPC-200811,Hercules Inc Common,HPC-200811.csv,1990-01-02,2008-11-13,4759,1,true,true,false,false,,,,passed,complete
+HPE,HPE,Hewlett Packard Enterprise Co Common,HPE.csv,2015-10-19,2026-08-04,2713,1,false,true,true,true,42824C109,BYVYWS0,exact_ticker_adjacent_snapshot,passed,complete
+HPQ,HPQ,HP Inc Common,HPQ.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,40434L105,BYX4D52,exact_ticker_adjacent_snapshot,passed,complete
+HRB,HRB,H&R Block Inc Common,HRB.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+HRL,HRL,Hormel Foods Corp Common,HRL.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,440452100,2437264,exact_ticker_adjacent_snapshot,passed,complete
+HRZIQ-200107,HRZIQ-200107,Harnischfeger Industries Inc Common,HRZIQ-200107.csv,1990-01-02,2001-07-12,2912,1,true,false,false,false,,,,passed,complete
+HSH-201408,HSH-201408,Hillshire Brands Co Common,HSH-201408.csv,1990-01-02,2014-08-28,6215,1,true,false,false,false,,,,passed,complete
+HSIC,HSIC,Henry Schein Inc Common,HSIC.csv,1995-11-03,2026-08-04,7736,1,false,true,true,true,806407102,2416962,exact_ticker_adjacent_snapshot,passed,complete
+HSP-201509,HSP-201509,Hospira Inc Common,HSP-201509.csv,2004-04-20,2015-09-02,2864,1,false,true,false,false,,,,passed,complete
+HST,HST,Host Hotels & Resorts Inc Common,HST.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,44107P104,2567503,exact_ticker_adjacent_snapshot,passed,complete
+HSY,HSY,Hershey Co Common,HSY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,427866108,2422806,exact_ticker_adjacent_snapshot,passed,complete
+HTMXQ-201305,HTMXQ-201305,Hartmarx Corp Common,HTMXQ-201305.csv,1990-01-02,2013-05-30,5567,1,true,false,false,false,,,,passed,complete
+HUBB,HUBB,Hubbell Inc Common,HUBB.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,443510607,BDFG6S3,exact_ticker_adjacent_snapshot,passed,complete
+HUM,HUM,Humana Inc Common,HUM.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,444859102,2445063,exact_ticker_adjacent_snapshot,passed,complete
+HWM,HWM,Howmet Aerospace Inc Common,HWM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,443201108,BKLJ8V2,exact_ticker_adjacent_snapshot,passed,complete
+I-199603,I-199603,First Interstate Bancorporation Common,I-199603.csv,1990-01-02,1996-03-29,1580,1,true,true,false,false,,,,passed,complete
+IBKR,IBKR,Interactive Brokers Group Inc Class A Common,IBKR.csv,2007-05-04,2026-08-04,4843,1,false,true,true,true,45841N107,B1WT4X2,exact_ticker_adjacent_snapshot,passed,complete
+IBM,IBM,International Business Machines Corp Common,IBM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,459200101,2005973,exact_ticker_adjacent_snapshot,passed,complete
+ICE,ICE,Intercontinental Exchange Inc Common,ICE.csv,2005-11-16,2026-08-04,5209,1,false,true,true,true,45866F104,BFSSDS9,exact_ticker_adjacent_snapshot,passed,complete
+IDXX,IDXX,IDEXX Laboratories Inc Common,IDXX.csv,1991-06-21,2026-08-04,8842,1,false,true,true,true,45168D104,2459202,exact_ticker_adjacent_snapshot,passed,complete
+IEX,IEX,IDEX Corp Common,IEX.csv,1990-01-02,2026-08-04,9197,1,false,true,true,true,45167R104,2456612,exact_ticker_adjacent_snapshot,passed,complete
+IFF,IFF,International Flavors & Fragrances Inc Common,IFF.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,459506101,2464165,exact_ticker_adjacent_snapshot,passed,complete
+IGT-201504,IGT-201504,International Game Technology Common,IGT-201504.csv,1990-01-02,2015-04-06,6365,1,false,false,false,false,,,,passed,complete
+IK-199902,IK-199902,Interlake Corp Common,IK-199902.csv,1990-01-02,1999-02-10,2303,1,true,false,false,false,,,,passed,complete
+IKN-200810,IKN-200810,Ikon Office Solutions Inc Common,IKN-200810.csv,1990-01-02,2008-10-31,4750,1,true,false,false,false,,,,passed,complete
+ILMN,ILMN,Illumina Inc Common,ILMN.csv,2000-07-28,2026-08-04,6542,1,false,false,false,false,,,,passed,complete
+IMNX-200207,IMNX-200207,Immunex Corp Common,IMNX-200207.csv,1990-01-02,2002-07-15,3161,1,false,true,false,false,,,,passed,complete
+INCLF-200701,INCLF-200701,Inco Ltd Common,INCLF-200701.csv,1990-01-02,2007-01-05,4289,1,true,false,false,false,,,,passed,complete
+INCY,INCY,Incyte Corp Common,INCY.csv,1993-11-04,2026-08-04,8240,1,false,true,true,true,45337C102,2471950,exact_ticker_adjacent_snapshot,passed,complete
+INFO-202202,INFO-202202,IHS Markit Ltd Common,INFO-202202.csv,2014-06-19,2022-02-25,1937,1,false,true,false,false,,,,passed,complete
+INGR-200611,INGR-200611,Intergraph Corp Common,INGR-200611.csv,1990-01-02,2006-11-29,4266,1,true,false,false,false,,,,passed,complete
+INTC,INTC,Intel Corp Common,INTC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,458140100,2463247,exact_ticker_adjacent_snapshot,passed,complete
+INTU,INTU,Intuit Inc Common,INTU.csv,1993-03-12,2026-08-04,8406,1,false,true,true,true,461202103,2459020,exact_ticker_adjacent_snapshot,passed,complete
+INVH,INVH,Invitation Homes Inc Common,INVH.csv,2017-02-01,2026-08-04,2389,1,false,true,true,true,46187W107,BD81GW9,exact_ticker_adjacent_snapshot,passed,complete
+IP,IP,International Paper Co Common,IP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,460146103,2465254,exact_ticker_adjacent_snapshot,passed,complete
+IPG-202511,IPG-202511,Interpublic Group of Companies Inc Common,IPG-202511.csv,1990-01-02,2025-11-26,9044,1,false,true,false,false,,,,passed,complete
+IPGP,IPGP,IPG Photonics Corp Common,IPGP.csv,2006-12-13,2026-08-04,4939,1,false,false,false,false,,,,passed,complete
+IQV,IQV,IQVIA Holdings Inc Common,IQV.csv,2013-05-09,2026-08-04,3329,1,false,true,true,true,46266C105,BDR73G1,exact_ticker_adjacent_snapshot,passed,complete
+IR,IR,Ingersoll Rand Inc Common,IR.csv,2017-05-12,2026-08-04,2319,1,false,true,true,true,45687V106,BL5GZ82,exact_ticker_adjacent_snapshot,passed,complete
+IRM,IRM,Iron Mountain Inc Common,IRM.csv,1996-02-01,2026-08-04,7669,1,false,true,true,true,46284V101,BVFTF03,exact_ticker_adjacent_snapshot,passed,complete
+ISRG,ISRG,Intuitive Surgical Inc Common,ISRG.csv,2000-06-13,2026-08-04,6574,1,false,true,true,true,46120E602,2871301,exact_ticker_adjacent_snapshot,passed,complete
+ISS-199206,ISS-199206,Interco Inc Common,ISS-199206.csv,1990-01-02,1992-06-26,629,1,true,false,false,false,,,,passed,complete
+IT,IT,Gartner Inc Common,IT.csv,1993-10-05,2026-08-04,8263,1,false,true,true,true,366651107,2372763,exact_ticker_adjacent_snapshot,passed,complete
+ITT,ITT,ITT Inc Common,ITT.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+ITT-199802,ITT-199802,ITT Corp Common,ITT-199802.csv,1995-12-20,1998-02-23,549,1,true,false,false,false,,,,passed,complete
+ITW,ITW,Illinois Tool Works Inc Common,ITW.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,452308109,2457552,exact_ticker_adjacent_snapshot,passed,complete
+IVZ,IVZ,Invesco Ltd Common,IVZ.csv,1995-08-25,2026-08-04,7777,1,false,true,true,true,G491BT108,B28XP76,exact_ticker_adjacent_snapshot,passed,complete
+J,J,Jacobs Solutions Inc Common,J.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,46982L108,BNGC0D3,exact_ticker_adjacent_snapshot,passed,complete
+JAVA-201001,JAVA-201001,Sun Microsystems Common,JAVA-201001.csv,1990-01-02,2010-01-26,5059,1,false,true,false,false,,,,passed,complete
+JBHT,JBHT,J.B. Hunt Transport Services Inc Common,JBHT.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,445658107,2445416,exact_ticker_adjacent_snapshot,passed,complete
+JBL,JBL,Jabil Inc Common,JBL.csv,1993-04-29,2026-08-04,8366,2,false,true,true,true,466313103,2471789,exact_ticker_adjacent_snapshot,passed,complete
+JCI,JCI,Johnson Controls International plc Common,JCI.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,G51502105,BY7QL61,exact_ticker_adjacent_snapshot,passed,complete
+JCI-201609,JCI-201609,Johnson Controls Inc Common,JCI-201609.csv,1990-01-02,2016-09-02,6723,1,true,true,false,false,,,,passed,complete
+JEF,JEF,Jefferies Financial Group Inc Common,JEF.csv,1990-01-02,2026-08-04,9180,1,false,false,false,false,,,,passed,complete
+JH-200705,JH-200705,Harland (John H) Co Common,JH-200705.csv,1990-01-02,2007-05-01,4369,1,true,false,false,false,,,,passed,complete
+JHF-200404,JHF-200404,John Hancock Financial Services Inc Common,JHF-200404.csv,2000-01-27,2004-04-28,1068,1,false,true,false,false,,,,passed,complete
+JKHY,JKHY,Jack Henry & Associates Inc Common,JKHY.csv,1990-01-03,2026-08-04,9116,1,false,true,true,true,426281101,2469193,exact_ticker_adjacent_snapshot,passed,complete
+JNJ,JNJ,Johnson & Johnson Common,JNJ.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,478160104,2475833,exact_ticker_adjacent_snapshot,passed,complete
+JNPR-202507,JNPR-202507,Juniper Networks Inc Common,JNPR-202507.csv,1999-06-25,2025-07-01,6544,1,false,true,false,false,,,,passed,complete
+JNS-201705,JNS-201705,Janus Capital Group Inc Common,JNS-201705.csv,2000-06-26,2017-05-26,4257,1,false,false,false,false,,,,passed,complete
+JNY-201404,JNY-201404,Jones Group Inc Common,JNY-201404.csv,1991-05-16,2014-04-08,5769,1,false,false,false,false,,,,passed,complete
+JOS-200005,JOS-200005,Jostens Inc Common,JOS-200005.csv,1990-01-02,2000-05-10,2618,1,true,false,false,false,,,,passed,complete
+JOY-201704,JOY-201704,Joy Global Inc Common,JOY-201704.csv,2001-06-15,2017-04-05,3976,1,false,false,false,false,,,,passed,complete
+JP-200603,JP-200603,Jefferson-Pilot Corp Common,JP-200603.csv,1990-01-02,2006-03-31,4098,1,true,true,false,false,,,,passed,complete
+JPM,JPM,JPMorgan Chase & Co Common,JPM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,46625H100,2190385,exact_ticker_adjacent_snapshot,passed,complete
+JPM-200012,JPM-200012,J P Morgan & Co Inc Common,JPM-200012.csv,1990-01-02,2000-12-29,2780,1,true,true,false,false,,,,passed,complete
+JWN-202505,JWN-202505,Nordstrom Inc Common,JWN-202505.csv,1990-01-02,2025-05-20,8912,1,true,false,false,false,,,,passed,complete
+JWP-199310,JWP-199310,JWP Inc Common,JWP-199310.csv,1990-01-02,1993-10-08,955,1,false,true,false,false,,,,passed,complete
+K-202512,K-202512,Kellanova Common,K-202512.csv,1990-01-02,2025-12-10,9053,1,true,true,false,false,,,,passed,complete
+KATE-201707,KATE-201707,Kate Spade & Co Common,KATE-201707.csv,1990-01-02,2017-07-11,6936,1,true,false,false,false,,,,passed,complete
+KBH,KBH,KB Home Common,KBH.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+KDP,KDP,Keurig Dr Pepper Inc Common,KDP.csv,2008-04-28,2026-08-04,4596,2,false,true,true,true,49271V100,BD3W133,exact_ticker_adjacent_snapshot,passed,complete
+KEY,KEY,KeyCorp Common,KEY.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,493267108,2490911,exact_ticker_adjacent_snapshot,passed,complete
+KEYS,KEYS,Keysight Technologies Inc Common,KEYS.csv,2014-10-20,2026-08-04,2964,1,false,true,true,true,49338L103,BQZJ0Q9,exact_ticker_adjacent_snapshot,passed,complete
+KG-201102,KG-201102,King Pharmaceuticals Inc Common,KG-201102.csv,1998-06-25,2011-02-28,3190,1,false,false,false,false,,,,passed,complete
+KHC,KHC,Kraft Heinz Co Common,KHC.csv,2015-07-06,2026-08-04,2787,1,true,true,true,true,500754106,BYRY499,exact_ticker_adjacent_snapshot,passed,complete
+KIM,KIM,Kimco Realty Corp Common,KIM.csv,1991-11-22,2026-08-04,8734,1,false,true,true,true,49446R109,2491594,exact_ticker_adjacent_snapshot,passed,complete
+KKR,KKR,KKR & Co Inc Common,KKR.csv,2010-07-15,2026-08-04,4038,1,false,true,true,true,48251W104,BG1FRR1,exact_ticker_adjacent_snapshot,passed,complete
+KLAC,KLAC,KLA Corp Common,KLAC.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,482480100,2480138,exact_ticker_adjacent_snapshot,passed,complete
+KM-200212,KM-200212,K Mart Corp Common,KM-200212.csv,1990-01-02,2002-12-18,3272,1,true,false,false,false,,,,passed,complete
+KMB,KMB,Kimberly-Clark Corp Common,KMB.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,494368103,2491839,exact_ticker_adjacent_snapshot,passed,complete
+KMG-200608,KMG-200608,Kerr-Mcgee Common,KMG-200608.csv,1990-01-02,2006-08-10,4189,1,true,true,false,false,,,,passed,complete
+KMI,KMI,Kinder Morgan Inc Class P Common,KMI.csv,2011-02-11,2026-08-04,3891,1,false,true,true,true,49456B101,B3NQ4P8,exact_ticker_adjacent_snapshot,passed,complete
+KMI-200705,KMI-200705,Kinder Morgan Common,KMI-200705.csv,1990-01-02,2007-05-30,4382,1,false,true,false,false,,,,passed,complete
+KMX,KMX,CarMax Inc Common,KMX.csv,1997-02-04,2026-08-04,7420,1,false,false,false,false,,,,passed,complete
+KO,KO,Coca-Cola Co Common,KO.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,191216100,2206657,exact_ticker_adjacent_snapshot,passed,complete
+KR,KR,Kroger Co Common,KR.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,501044101,2497406,exact_ticker_adjacent_snapshot,passed,complete
+KRB-200512,KRB-200512,MBNA Corp Common,KRB-200512.csv,1991-01-22,2005-12-30,3769,1,false,true,false,false,,,,passed,complete
+KRFT-201507,KRFT-201507,Kraft Foods Group Inc Common,KRFT-201507.csv,2012-09-17,2015-07-02,702,1,false,true,false,false,,,,passed,complete
+KRI-200606,KRI-200606,Knight-Ridder Newspapers Common,KRI-200606.csv,1990-01-02,2006-06-27,4158,1,true,true,false,false,,,,passed,complete
+KSE-200708,KSE-200708,Keyspan Corp Common,KSE-200708.csv,1990-01-02,2007-08-24,4450,1,false,true,false,false,,,,passed,complete
+KSS,KSS,Kohl's Corp Common,KSS.csv,1992-05-19,2026-08-04,8612,1,false,false,false,false,,,,passed,complete
+KSU-202112,KSU-202112,Kansas City Southern Common,KSU-202112.csv,1990-01-02,2021-12-13,8051,2,false,true,false,false,,,,passed,complete
+KVUE,KVUE,Kenvue Inc Common,KVUE.csv,2023-05-04,2026-08-04,815,1,false,true,true,true,49177J102,BQ84ZQ6,exact_ticker_adjacent_snapshot,passed,complete
+KWP-199911,KWP-199911,King World Productions Inc Common,KWP-199911.csv,1990-01-02,1999-11-15,2496,1,true,true,false,false,,,,passed,complete
+L,L,Loews Corp Common,L.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,540424108,2523022,exact_ticker_adjacent_snapshot,passed,complete
+LCE-199404,LCE-199404,Lone Star Industries Inc Common,LCE-199404.csv,1990-01-02,1994-04-14,1085,1,true,false,false,false,,,,passed,complete
+LDG-200810,LDG-200810,Longs Drug Stores Inc Common,LDG-200810.csv,1990-01-02,2008-10-30,4749,1,true,false,false,false,,,,passed,complete
+LDOS,LDOS,Leidos Holdings Inc Common,LDOS.csv,2006-10-13,2026-08-04,4981,2,false,true,true,true,525327102,BDV82B8,exact_ticker_adjacent_snapshot,passed,complete
+LDW-200012,LDW-200012,Laidlaw Inc Class B Common,LDW-200012.csv,1990-01-02,2000-12-21,2775,1,false,false,false,false,,,,passed,complete
+LEG,LEG,Leggett & Platt Inc Common,LEG.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+LEHMQ-201203,LEHMQ-201203,Lehman Brothers Holdings Common,LEHMQ-201203.csv,1994-05-11,2012-03-05,4488,1,false,false,false,false,,,,passed,complete
+LEN,LEN,Lennar Corporation Class A Common,LEN.csv,1990-01-02,2026-08-04,9202,1,false,true,true,true,526057104,2511920,exact_ticker_adjacent_snapshot,passed,complete
+LH,LH,Labcorp Holdings Inc Common,LH.csv,1990-01-02,2026-08-04,9191,1,false,true,true,true,504922105,BSBK800,exact_ticker_adjacent_snapshot,passed,complete
+LHX,LHX,L3Harris Technologies Inc Common,LHX.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,502431109,BK9DTN5,exact_ticker_adjacent_snapshot,passed,complete
+LIFE-201402,LIFE-201402,Life Technologies Corp Common,LIFE-201402.csv,1999-02-26,2014-02-03,3758,1,false,false,false,false,,,,passed,complete
+LII,LII,Lennox International Inc Common,LII.csv,1999-07-29,2026-08-04,6795,1,false,true,true,true,526107107,2442053,exact_ticker_adjacent_snapshot,passed,complete
+LIN,LIN,Linde plc Common,LIN.csv,2018-10-31,2026-08-04,1948,1,true,true,true,true,G54950103,BNZHB81,exact_ticker_adjacent_snapshot,passed,complete
+LINB-199510,LINB-199510,LIN Broadcasting Corp Common,LINB-199510.csv,1990-01-02,1995-10-03,1456,1,true,false,false,false,,,,passed,complete
+LIT-200105,LIT-200105,Litton Industries Inc Common,LIT-200105.csv,1990-01-02,2001-05-30,2880,1,true,false,false,false,,,,passed,complete
+LITE,LITE,Lumentum Holdings Inc Common,LITE.csv,2015-07-23,2026-08-04,2773,1,false,true,true,true,55024U109,BYM9ZP2,exact_ticker_adjacent_snapshot,passed,complete
+LKQ,LKQ,LKQ Corp Common,LKQ.csv,2003-10-03,2026-08-04,5744,1,false,false,false,false,,,,passed,complete
+LLL-201906,LLL-201906,L3 Technologies Inc Common,LLL-201906.csv,1998-05-19,2019-06-28,5313,1,false,true,false,false,,,,passed,complete
+LLTC-201703,LLTC-201703,Linear Technology Corp Common,LLTC-201703.csv,1990-01-02,2017-03-10,6852,1,false,true,false,false,,,,passed,complete
+LLX-199710,LLX-199710,Louisiana Land & Exploration Co Common,LLX-199710.csv,1990-01-02,1997-10-22,1976,1,true,true,false,false,,,,passed,complete
+LLY,LLY,Eli Lilly and Co Common,LLY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,532457108,2516152,exact_ticker_adjacent_snapshot,passed,complete
+LM-202007,LM-202007,Legg Mason Inc Common,LM-202007.csv,1990-01-02,2020-07-31,7699,1,false,false,false,false,,,,passed,complete
+LMT,LMT,Lockheed Martin Corp Common,LMT.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,539830109,2522096,exact_ticker_adjacent_snapshot,passed,complete
+LNC,LNC,Lincoln National Corp Common,LNC.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+LNT,LNT,Alliant Energy Corp Common,LNT.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,018802108,2973821,exact_ticker_adjacent_snapshot,passed,complete
+LO-201506,LO-201506,Lorillard Inc Common,LO-201506.csv,2002-02-01,2015-06-11,3363,1,false,true,false,false,,,,passed,complete
+LOR-199604,LOR-199604,Loral Corp Common,LOR-199604.csv,1990-01-02,1996-04-29,1600,1,true,false,false,false,,,,passed,complete
+LOTS-199507,LOTS-199507,Lotus Development Corp Common,LOTS-199507.csv,1990-01-02,1995-07-05,1393,1,true,false,false,false,,,,passed,complete
+LOW,LOW,Lowe's Companies Inc Common,LOW.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,548661107,2536763,exact_ticker_adjacent_snapshot,passed,complete
+LPX,LPX,Louisiana-Pacific Corp Common,LPX.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+LRCX,LRCX,Lam Research Corp Common,LRCX.csv,1990-01-02,2026-08-04,9213,1,false,true,true,true,512807306,BSML4N7,exact_ticker_adjacent_snapshot,passed,complete
+LSI-201405,LSI-201405,LSI Corp Common,LSI-201405.csv,1990-01-02,2014-05-06,6135,1,false,true,false,false,,,,passed,complete
+LU-200611,LU-200611,Lucent Technology Common,LU-200611.csv,1996-04-04,2006-11-30,2684,1,false,true,false,false,,,,passed,complete
+LUB-202205,LUB-202205,Luby's Inc Common,LUB-202205.csv,1990-01-02,2022-05-27,8166,1,true,false,false,false,,,,passed,complete
+LULU,LULU,lululemon athletica inc. Common,LULU.csv,2007-07-27,2026-08-04,4785,1,false,true,true,true,550021109,B23FN39,exact_ticker_adjacent_snapshot,passed,complete
+LUMN,LUMN,Lumen Technologies Inc Common,LUMN.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+LUV,LUV,Southwest Airlines Co Common,LUV.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,844741108,2831543,exact_ticker_adjacent_snapshot,passed,complete
+LVLT-201710,LVLT-201710,Level 3 Communications Inc Common,LVLT-201710.csv,1998-04-01,2017-10-31,4930,1,false,false,false,false,,,,passed,complete
+LVS,LVS,Las Vegas Sands Corp Common,LVS.csv,2004-12-15,2026-08-04,5442,1,false,true,true,true,517834107,B02T2J7,exact_ticker_adjacent_snapshot,passed,complete
+LW,LW,Lamb Weston Holdings Inc Common,LW.csv,2016-11-01,2026-08-04,2450,1,false,false,false,false,,,,passed,complete
+LXK-201611,LXK-201611,Lexmark International Inc Class A Common,LXK-201611.csv,1995-11-15,2016-11-28,5296,1,false,false,false,false,,,,passed,complete
+LYB,LYB,LyondellBasell Industries NV Common,LYB.csv,2010-04-28,2026-08-04,4092,1,false,true,true,true,N53745100,B3SPXZ3,exact_ticker_adjacent_snapshot,passed,complete
+LYV,LYV,Live Nation Entertainment Inc Common,LYV.csv,2005-12-14,2026-08-04,5190,1,false,true,true,true,538034109,B0T7YX2,exact_ticker_adjacent_snapshot,passed,complete
+M,M,Macy's Inc Common,M.csv,1992-02-05,2026-08-04,8684,1,false,false,false,false,,,,passed,complete
+MA,MA,Mastercard Inc Class A Common,MA.csv,2006-05-25,2026-08-04,5079,1,false,true,true,true,57636Q104,B121557,exact_ticker_adjacent_snapshot,passed,complete
+MAA,MAA,Mid-America Apartment Communities Inc Common,MAA.csv,1994-01-28,2026-08-04,8182,1,false,true,true,true,59522J103,2589132,exact_ticker_adjacent_snapshot,passed,complete
+MAC,MAC,Macerich Co Common,MAC.csv,1994-03-10,2026-08-04,8154,1,false,false,false,false,,,,passed,complete
+MAI-199506,MAI-199506,MA-Com Inc Common,MAI-199506.csv,1990-01-02,1995-06-30,1391,1,true,true,false,false,,,,passed,complete
+MAR,MAR,Marriott International Inc Class A Common,MAR.csv,1998-03-23,2026-08-04,7136,1,false,true,true,true,571903202,2210614,exact_ticker_adjacent_snapshot,passed,complete
+MAS,MAS,Masco Corp Common,MAS.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,574599106,2570200,exact_ticker_adjacent_snapshot,passed,complete
+MAT,MAT,Mattel Inc Common,MAT.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+MAY-200508,MAY-200508,May Department Stores Common,MAY-200508.csv,1990-01-02,2005-08-29,3950,1,true,false,false,false,,,,passed,complete
+MBI,MBI,MBIA Inc Common,MBI.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+MCA-199101,MCA-199101,MCA Inc Common,MCA-199101.csv,1990-01-02,1991-01-03,255,1,true,false,false,false,,,,passed,complete
+MCAWA-199409,MCAWA-199409,McCaw Cellular Communications Inc Common,MCAWA-199409.csv,1990-01-02,1994-09-19,1193,1,false,true,false,false,,,,passed,complete
+MCD,MCD,McDonald's Corp Common,MCD.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,580135101,2550707,exact_ticker_adjacent_snapshot,passed,complete
+MCHP,MCHP,Microchip Technology Inc Common,MCHP.csv,1993-03-19,2026-08-04,8401,1,false,true,true,true,595017104,2592174,exact_ticker_adjacent_snapshot,passed,complete
+MCIC-199809,MCIC-199809,MCI Communications Corp Common,MCIC-199809.csv,1990-01-02,1998-09-14,2200,1,true,true,false,false,,,,passed,complete
+MCK,MCK,McKesson Corp Common,MCK.csv,1994-11-10,2026-08-04,7984,1,false,true,true,true,58155Q103,2378534,exact_ticker_adjacent_snapshot,passed,complete
+MCK-199411,MCK-199411,McKesson Corp Common,MCK-199411.csv,1990-01-02,1994-11-30,1244,1,true,false,false,false,,,,passed,complete
+MCO,MCO,Moody's Corp Common,MCO.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,615369105,2252058,exact_ticker_adjacent_snapshot,passed,complete
+MD-199707,MD-199707,McDonnell Douglas Corp Common,MD-199707.csv,1990-01-02,1997-07-31,1918,1,true,true,false,false,,,,passed,complete
+MDLZ,MDLZ,Mondelez International Inc Class A Common,MDLZ.csv,2001-06-13,2026-08-04,6322,1,false,true,true,true,609207105,B8CKK03,exact_ticker_adjacent_snapshot,passed,complete
+MDP-202112,MDP-202112,Meredith Corp Common,MDP-202112.csv,1990-01-02,2021-12-01,8043,1,true,false,false,false,,,,passed,complete
+MDRIQ-202006,MDRIQ-202006,McDermott International Inc Common,MDRIQ-202006.csv,1990-01-02,2020-06-30,7681,1,true,false,false,false,,,,passed,gaps_reported
+MDT,MDT,Medtronic Plc Common,MDT.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,G5960L103,BTN1Y11,exact_ticker_adjacent_snapshot,passed,complete
+MEA-200201,MEA-200201,Mead Corp Common,MEA-200201.csv,1990-01-02,2002-01-29,3047,1,true,true,false,false,,,,passed,complete
+MEDI-200706,MEDI-200706,MedImmune Inc Common,MEDI-200706.csv,1991-05-08,2007-06-18,4060,1,false,false,false,false,,,,passed,gaps_reported
+MEE-201106,MEE-201106,Massey Energy Co Common,MEE-201106.csv,1990-01-02,2011-06-01,5399,2,true,true,false,false,,,,passed,complete
+MEL-200706,MEL-200706,Mellon Financial Corp Common,MEL-200706.csv,1990-01-02,2007-06-29,4411,1,true,true,false,false,,,,passed,complete
+MER-200812,MER-200812,Merrill Lynch & Co Common,MER-200812.csv,1990-01-02,2008-12-31,4791,1,true,true,false,false,,,,passed,complete
+MERQ-200611,MERQ-200611,Mercury Interactive Corp Common,MERQ-200611.csv,1993-10-29,2006-11-08,3282,1,false,false,false,false,,,,passed,complete
+MET,MET,MetLife Inc Common,MET.csv,2000-04-05,2026-08-04,6621,1,false,true,true,true,59156R108,2573209,exact_ticker_adjacent_snapshot,passed,complete
+META,META,Meta Platforms Inc Class A Common,META.csv,2012-05-18,2026-08-04,3572,1,false,true,true,true,30303M102,B7TL820,exact_ticker_adjacent_snapshot,passed,complete
+MFE-201102,MFE-201102,McAfee Inc Common,MFE-201102.csv,1992-10-06,2011-02-28,4622,1,false,true,false,false,,,,passed,complete
+MGM,MGM,MGM Resorts International Common,MGM.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,552953101,2547419,exact_ticker_adjacent_snapshot,passed,complete
+MHC-199112,MHC-199112,Manufacturers Hanover Corp Common,MHC-199112.csv,1990-01-02,1991-12-31,506,1,true,true,false,false,,,,passed,complete
+MHK,MHK,Mohawk Industries Inc Common,MHK.csv,1992-04-01,2026-08-04,8641,1,false,false,false,false,,,,passed,complete
+MHS-201203,MHS-201203,Medco Health Solutions Inc Common,MHS-201203.csv,2003-08-20,2012-03-30,2170,1,true,true,false,false,,,,passed,complete
+MI-201107,MI-201107,Marshall & Ilsley Corp Common,MI-201107.csv,1990-01-02,2011-07-05,5422,1,false,true,false,false,,,,passed,complete
+MII-199906,MII-199906,Morton International Inc Common,MII-199906.csv,1990-01-02,1999-06-21,2393,1,true,true,false,false,,,,passed,complete
+MIL-201007,MIL-201007,Millipore Corp Common,MIL-201007.csv,1990-01-02,2010-07-14,5176,1,true,true,false,false,,,,passed,complete
+MIR-200005,MIR-200005,Mirage Resorts Inc Common,MIR-200005.csv,1990-01-02,2000-05-31,2632,1,false,true,false,false,,,,passed,complete
+MIR-201012,MIR-201012,Mirant Corporation Common,MIR-201012.csv,2000-09-27,2010-12-03,2559,1,false,false,false,false,,,,passed,complete
+MJN-201706,MJN-201706,Mead Johnson Nutrition Co Common,MJN-201706.csv,2009-02-11,2017-06-14,2100,1,false,true,false,false,,,,passed,complete
+MKC,MKC,McCormick & Company Inc Non-Vtg Common,MKC.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,579780206,2550161,exact_ticker_adjacent_snapshot,passed,complete
+MKG-200010,MKG-200010,Mallinckrodt Inc Common,MKG-200010.csv,1990-01-02,2000-10-17,2729,1,true,true,false,false,,,,passed,complete
+MKTX,MKTX,MarketAxess Holdings Inc Common,MKTX.csv,2004-11-05,2026-08-04,5469,1,false,false,false,false,,,,passed,complete
+ML-199503,ML-199503,Martin Marietta Corp Common,ML-199503.csv,1990-01-02,1995-03-15,1316,1,true,true,false,false,,,,passed,complete
+MLM,MLM,Martin Marietta Materials Inc Common,MLM.csv,1994-02-17,2026-08-04,8165,1,false,true,true,true,573284106,2572079,exact_ticker_adjacent_snapshot,passed,complete
+MMI-201205,MMI-201205,Motorola Mobility Holdings Common,MMI-201205.csv,2010-12-17,2012-05-21,359,1,false,true,false,false,,,,passed,complete
+MMM,MMM,3M Co Common,MMM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,88579Y101,2595708,exact_ticker_adjacent_snapshot,passed,complete
+MNKKQ-202206,MNKKQ-202206,Mallinckrodt PLC Common,MNKKQ-202206.csv,2013-06-17,2022-06-16,2267,1,false,false,false,false,,,,passed,complete
+MNR-199809,MNR-199809,Manor Care Inc Common,MNR-199809.csv,1990-01-02,1998-09-25,2209,1,true,true,false,false,,,,passed,complete
+MNST,MNST,Monster Beverage Corp Common,MNST.csv,1990-01-03,2026-08-04,8907,1,false,true,true,true,61174X109,BZ07BW4,exact_ticker_adjacent_snapshot,passed,complete
+MO,MO,Altria Group Inc Common,MO.csv,1990-01-02,2026-08-04,9213,1,true,true,true,true,02209S103,2692632,exact_ticker_adjacent_snapshot,passed,gaps_reported
+MOB-199911,MOB-199911,Mobil Corp Common,MOB-199911.csv,1990-01-02,1999-11-30,2506,1,true,true,false,false,,,,passed,complete
+MOH,MOH,Molina Healthcare Inc Common,MOH.csv,2003-07-02,2026-08-04,5809,1,false,false,false,false,,,,passed,complete
+MOLX-201312,MOLX-201312,Molex Inc Common,MOLX-201312.csv,1990-01-02,2013-12-06,6033,1,false,true,false,false,,,,passed,complete
+MON-201806,MON-201806,Monsanto Co Common,MON-201806.csv,2000-10-18,2018-06-06,4435,1,false,true,false,false,,,,passed,complete
+MOS,MOS,Mosaic Co Common,MOS.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,61945C103,B3NPHP6,exact_ticker_adjacent_snapshot,passed,complete
+MPC,MPC,Marathon Petroleum Corp Common,MPC.csv,2011-06-23,2026-08-04,3800,1,false,true,true,true,56585A102,B3K3L40,exact_ticker_adjacent_snapshot,passed,complete
+MPWR,MPWR,Monolithic Power Systems Inc Common,MPWR.csv,2004-11-19,2026-08-04,5459,1,false,true,true,true,609839105,B01Z7J1,exact_ticker_adjacent_snapshot,passed,complete
+MRK,MRK,Merck & Co Inc Common,MRK.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,58933Y105,2778844,exact_ticker_adjacent_snapshot,passed,complete
+MRN-199606,MRN-199606,Morrison Knudsen Corp Common,MRN-199606.csv,1990-01-02,1996-06-28,1641,1,false,false,false,false,,,,passed,complete
+MRNA,MRNA,Moderna Inc Common,MRNA.csv,2018-12-07,2026-08-04,1923,1,false,true,true,true,60770K107,BGSXTS3,exact_ticker_adjacent_snapshot,passed,complete
+MRO-202411,MRO-202411,Marathon Oil Corp Common,MRO-202411.csv,1990-01-02,2024-11-21,8791,1,true,true,false,false,,,,passed,complete
+MRSH,MRSH,Marsh & McLennan Companies Inc Common,MRSH.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,571748102,2567741,exact_ticker_adjacent_snapshot,passed,complete
+MRVL,MRVL,Marvell Technology Inc Common,MRVL.csv,2000-06-27,2026-08-04,6564,1,false,true,true,true,573874104,BNKJSM5,exact_ticker_adjacent_snapshot,passed,complete
+MS,MS,Morgan Stanley Common,MS.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,617446448,2262314,exact_ticker_adjacent_snapshot,passed,complete
+MSCI,MSCI,MSCI Inc Class A Common,MSCI.csv,2007-11-15,2026-08-04,4707,1,false,true,true,true,55354G100,B2972D2,exact_ticker_adjacent_snapshot,passed,complete
+MSFT,MSFT,Microsoft Corp Common,MSFT.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,594918104,2588173,exact_ticker_adjacent_snapshot,passed,complete
+MSI,MSI,Motorola Solutions Inc Common,MSI.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,620076307,B5BKPQ4,exact_ticker_adjacent_snapshot,passed,complete
+MST-199808,MST-199808,Mercantile Stores Inc Common,MST-199808.csv,1990-01-02,1998-08-18,2182,1,true,false,false,false,,,,passed,complete
+MTB,MTB,M&T Bank Corp Common,MTB.csv,1990-01-02,2026-08-04,9154,1,false,true,true,true,55261F104,2340168,exact_ticker_adjacent_snapshot,passed,complete
+MTCH,MTCH,Match Group Inc Common,MTCH.csv,2015-11-19,2026-08-04,2690,1,false,false,false,false,,,,passed,complete
+MTD,MTD,Mettler-Toledo International Inc Common,MTD.csv,1997-11-14,2026-08-04,7222,1,false,true,true,true,592688105,2126249,exact_ticker_adjacent_snapshot,passed,complete
+MTG,MTG,MGIC Investment Corp Common,MTG.csv,1991-08-07,2026-08-04,8810,1,false,false,false,false,,,,passed,complete
+MTL-199909,MTL-199909,Mercantile Bancorporation Inc Common,MTL-199909.csv,1990-01-02,1999-09-17,2455,1,false,true,false,false,,,,passed,complete
+MTLQQ-201103,MTLQQ-201103,Motors Liqudation Company Common,MTLQQ-201103.csv,1990-01-02,2011-03-31,5355,1,true,false,false,false,,,,passed,complete
+MTW,MTW,Manitowoc Company Inc Common,MTW.csv,1990-01-02,2026-08-04,9205,1,false,false,false,false,,,,passed,complete
+MU,MU,Micron Technology Inc Common,MU.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,595112103,2588184,exact_ticker_adjacent_snapshot,passed,complete
+MUR,MUR,Murphy Oil Corp Common,MUR.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+MWI-200402,MWI-200402,Moore Wallace Inc Common,MWI-200402.csv,1990-01-02,2004-02-27,3571,1,true,false,false,false,,,,passed,complete
+MWV-201507,MWV-201507,MeadWestvaco Corp Common,MWV-201507.csv,1990-01-02,2015-07-01,6426,1,true,true,false,false,,,,passed,complete
+MWW-201610,MWW-201610,Monster Worldwide Inc Common,MWW-201610.csv,1996-12-13,2016-10-31,4997,1,false,false,false,false,,,,passed,complete
+MXIM-202108,MXIM-202108,Maxim Integrated Products Inc Common,MXIM-202108.csv,1990-01-02,2021-08-25,7973,2,false,true,false,false,,,,passed,complete
+MXS-199506,MXS-199506,Maxus Energy Corp Common,MXS-199506.csv,1990-01-02,1995-06-08,1375,1,true,false,false,false,,,,passed,complete
+MYG-200603,MYG-200603,Maytag Corporation Common,MYG-200603.csv,1990-01-02,2006-03-31,4098,1,true,true,false,false,,,,passed,complete
+MZIAQ-201302,MZIAQ-201302,Milacron Inc Common,MZIAQ-201302.csv,1990-01-02,2013-02-15,5365,1,true,false,false,false,,,,passed,complete
+NAE-199708,NAE-199708,NorAm Energy Corp Common,NAE-199708.csv,1990-01-02,1997-08-06,1922,1,true,true,false,false,,,,passed,complete
+NAV-202106,NAV-202106,Navistar International Corp Common,NAV-202106.csv,1990-01-02,2021-06-30,7936,1,true,false,false,false,,,,passed,complete
+NAVI,NAVI,Navient Corp Common,NAVI.csv,2014-04-17,2026-08-04,3092,1,false,false,false,false,,,,passed,complete
+NBL-202010,NBL-202010,Noble Energy Inc Common,NBL-202010.csv,1990-01-02,2020-10-02,7750,1,false,true,false,false,,,,passed,complete
+NBR,NBR,Nabors Industries Ltd Common,NBR.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+NC,NC,NACCO Industries Inc Class A Common,NC.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+NCC-200812,NCC-200812,National City Corp Common,NCC-200812.csv,1990-01-02,2008-12-31,4791,1,false,true,false,false,,,,passed,complete
+NCE-200008,NCE-200008,New Century Energies Inc Common,NCE-200008.csv,1990-01-02,2000-08-18,2688,1,false,true,false,false,,,,passed,complete
+NCLH,NCLH,Norwegian Cruise Line Holdings Ltd Common,NCLH.csv,2013-01-18,2026-08-04,3405,1,false,true,true,true,G66721104,B9CGTC3,exact_ticker_adjacent_snapshot,passed,complete
+NCR-199109,NCR-199109,NCR Corp Common,NCR-199109.csv,1990-01-02,1991-09-19,435,1,true,true,false,false,,,,passed,complete
+NDAQ,NDAQ,Nasdaq Inc Common,NDAQ.csv,2002-07-01,2026-08-04,6043,1,false,true,true,true,631103108,2965107,exact_ticker_adjacent_snapshot,passed,complete
+NDSN,NDSN,Nordson Corp Common,NDSN.csv,1990-01-02,2026-08-04,9199,1,false,true,true,true,655663102,2641838,exact_ticker_adjacent_snapshot,passed,complete
+NEBLQ-202102,NEBLQ-202102,Noble Holding Corporation PLC Common,NEBLQ-202102.csv,1990-01-02,2021-02-08,7835,2,false,false,false,false,,,,passed,complete
+NEC-199706,NEC-199706,National Education Corp Common,NEC-199706.csv,1990-01-02,1997-06-10,1882,1,true,false,false,false,,,,passed,complete
+NEE,NEE,NextEra Energy Inc Common,NEE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,65339F101,2328915,exact_ticker_adjacent_snapshot,passed,complete
+NEM,NEM,Newmont Corp Common,NEM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,651639106,2636607,exact_ticker_adjacent_snapshot,passed,complete
+NEU,NEU,NewMarket Corp Common,NEU.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+NFB-200611,NFB-200611,North Fork Bancorp Common,NFB-200611.csv,1990-01-02,2006-11-30,4264,1,false,true,false,false,,,,passed,complete
+NFLX,NFLX,Netflix Inc Common,NFLX.csv,2002-05-23,2026-08-04,6088,1,false,true,true,true,64110L106,2857817,exact_ticker_adjacent_snapshot,passed,complete
+NFX-201902,NFX-201902,Newfield Exploration Co Common,NFX-201902.csv,1993-11-12,2019-02-13,6349,1,false,true,false,false,,,,passed,complete
+NGH-200012,NGH-200012,Nabisco Group Holding Corp Common,NGH-200012.csv,1991-03-21,2000-12-11,2459,1,false,true,false,false,,,,passed,complete
+NI,NI,NiSource Inc Common,NI.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,65473P105,2645409,exact_ticker_adjacent_snapshot,passed,complete
+NKE,NKE,NIKE Inc Class B Common,NKE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,654106103,2640147,exact_ticker_adjacent_snapshot,passed,complete
+NKTR,NKTR,Nektar Therapeutics Common,NKTR.csv,1994-05-03,2026-08-04,8043,1,false,false,false,false,,,,passed,complete
+NL,NL,NLI Holdings Inc Common,NL.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+NLC-199912,NLC-199912,Nalco Chemical Co Common,NLC-199912.csv,1990-01-02,1999-12-20,2520,1,false,false,false,false,,,,passed,complete
+NLSN-202210,NLSN-202210,Nielsen Holdings PLC Common,NLSN-202210.csv,2011-01-26,2022-10-11,2948,1,false,true,false,false,,,,passed,complete
+NMK-200201,NMK-200201,Niagara Mohawk Holdings Inc Common,NMK-200201.csv,1990-01-02,2002-01-31,3049,1,true,true,false,false,,,,passed,complete
+NOC,NOC,Northrop Grumman Corp Common,NOC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,666807102,2648806,exact_ticker_adjacent_snapshot,passed,complete
+NOV,NOV,NOV Inc Common,NOV.csv,1996-10-29,2026-08-04,7487,1,false,false,false,false,,,,passed,complete
+NOVL-201104,NOVL-201104,Novell Inc Common,NOVL-201104.csv,1990-01-02,2011-04-27,5375,1,false,true,false,false,,,,passed,complete
+NOW,NOW,ServiceNow Inc Common,NOW.csv,2012-06-29,2026-08-04,3543,1,false,true,true,true,81762P102,B80NXX8,exact_ticker_adjacent_snapshot,passed,complete
+NRG,NRG,NRG Energy Inc Common,NRG.csv,2003-12-02,2026-08-04,5702,1,false,true,true,true,629377508,2212922,exact_ticker_adjacent_snapshot,passed,complete
+NRT-199008,NRT-199008,Norton Co Common,NRT-199008.csv,1990-01-02,1990-08-08,153,1,true,false,false,false,,,,passed,complete
+NRTLQ-201510,NRTLQ-201510,Nortel Networks Corp Common,NRTLQ-201510.csv,1990-01-02,2015-10-13,6488,1,true,false,false,false,,,,passed,complete
+NSC,NSC,Norfolk Southern Corp Common,NSC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,655844108,2641894,exact_ticker_adjacent_snapshot,passed,complete
+NSI-200306,NSI-200306,National Service Industries Inc Common,NSI-200306.csv,1990-01-02,2003-06-12,3392,1,true,false,false,false,,,,passed,complete
+NSM-201109,NSM-201109,National Semiconductor Common,NSM-201109.csv,1990-01-02,2011-09-23,5479,1,true,true,false,false,,,,passed,complete
+NTAP,NTAP,NetApp Inc Common,NTAP.csv,1995-11-21,2026-08-04,7723,1,false,true,true,true,64110D104,2630643,exact_ticker_adjacent_snapshot,passed,complete
+NTRS,NTRS,Northern Trust Corp Common,NTRS.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,665859104,2648668,exact_ticker_adjacent_snapshot,passed,complete
+NUE,NUE,Nucor Corp Common,NUE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,670346105,2651086,exact_ticker_adjacent_snapshot,passed,complete
+NVDA,NVDA,NVIDIA Corp Common,NVDA.csv,1999-01-22,2026-08-04,6925,1,false,true,true,true,67066G104,2379504,exact_ticker_adjacent_snapshot,passed,complete
+NVLS-201206,NVLS-201206,Novellus Systems Inc Common,NVLS-201206.csv,1990-01-02,2012-06-04,5653,1,false,true,false,false,,,,passed,complete
+NVR,NVR,NVR Inc Common,NVR.csv,1990-01-02,2026-08-04,9171,1,false,true,true,true,62944T105,2637785,exact_ticker_adjacent_snapshot,passed,complete
+NWL,NWL,Newell Brands Inc Common,NWL.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+NWS,NWS,News Corporation Class B Common,NWS.csv,2013-06-19,2026-08-04,3301,1,false,true,true,true,65249B208,BBGVT51,exact_ticker_adjacent_snapshot,passed,complete
+NWSA,NWSA,News Corporation Class A Common,NWSA.csv,2013-06-19,2026-08-04,3301,1,false,true,true,true,65249B109,BBGVT40,exact_ticker_adjacent_snapshot,passed,complete
+NXPI,NXPI,NXP Semiconductors NV Common,NXPI.csv,2010-08-06,2026-08-04,4022,1,false,true,true,true,N6596X109,B505PN7,exact_ticker_adjacent_snapshot,passed,complete
+NXTL-200508,NXTL-200508,Nextel Communications Inc Class A Common,NXTL-200508.csv,1992-01-28,2005-08-12,3415,1,false,true,false,false,,,,passed,complete
+NYN-199708,NYN-199708,Nynex Corp Common,NYN-199708.csv,1990-01-02,1997-08-14,1928,1,true,true,false,false,,,,passed,complete
+NYT,NYT,New York Times Company Class A Common,NYT.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+NYX-201311,NYX-201311,NYSE Euronext Common,NYX-201311.csv,2004-08-12,2013-11-12,2331,1,false,true,false,false,,,,passed,complete
+O,O,Realty Income Corp Common,O.csv,1994-10-18,2026-08-04,8001,1,false,true,true,true,756109104,2724193,exact_ticker_adjacent_snapshot,passed,complete
+OAT-200108,OAT-200108,Quaker Oats Co Common,OAT-200108.csv,1990-01-02,2001-08-02,2928,1,true,true,false,false,,,,passed,complete
+ODFL,ODFL,Old Dominion Freight Line Inc Common,ODFL.csv,1991-10-24,2026-08-04,8351,1,false,true,true,true,679580100,2656423,exact_ticker_adjacent_snapshot,passed,complete
+ODP-202512,ODP-202512,ODP Corp Common,ODP-202512.csv,1990-01-02,2025-12-09,9052,1,false,false,false,false,,,,passed,complete
+OGN,OGN,Organon & Co Common,OGN.csv,2021-05-14,2026-08-04,1311,1,false,false,false,false,,,,passed,complete
+OI,OI,O-I Glass Inc Common,OI.csv,1991-12-11,2026-08-04,8722,2,false,false,false,false,,,,passed,complete
+OK-200103,OK-200103,Old Kent Financial Corp Common,OK-200103.csv,1990-01-02,2001-03-30,2842,1,false,true,false,false,,,,passed,complete
+OKE,OKE,ONEOK Inc Common,OKE.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,682680103,2130109,exact_ticker_adjacent_snapshot,passed,complete
+OM-199709,OM-199709,Outboard Marine Corp Common,OM-199709.csv,1990-01-02,1997-09-30,1960,1,true,false,false,false,,,,passed,complete
+OMC,OMC,Omnicom Group Inc Common,OMC.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,681919106,2279303,exact_ticker_adjacent_snapshot,passed,complete
+OMX-201311,OMX-201311,OfficeMax Inc Common,OMX-201311.csv,1990-01-02,2013-11-05,6011,1,true,false,false,false,,,,passed,complete
+ON,ON,ON Semiconductor Corp Common,ON.csv,2000-04-28,2026-08-04,6605,1,false,true,true,true,682189105,2583576,exact_ticker_adjacent_snapshot,passed,complete
+ONE-200406,ONE-200406,Bank One Common,ONE-200406.csv,1990-01-02,2004-06-30,3656,1,true,true,false,false,,,,passed,complete
+ORCL,ORCL,Oracle Corp Common,ORCL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,68389X105,2661568,exact_ticker_adjacent_snapshot,passed,complete
+ORLY,ORLY,O'Reilly Automotive Inc Common,ORLY.csv,1993-04-23,2026-08-04,8375,1,false,true,true,true,67103H107,B65LWX6,exact_ticker_adjacent_snapshot,passed,complete
+ORX-199902,ORX-199902,Oryx Energy Co Common,ORX-199902.csv,1990-01-02,1999-02-26,2314,1,true,true,false,false,,,,passed,complete
+OTIS,OTIS,Otis Worldwide Corp Common,OTIS.csv,2020-03-19,2026-08-04,1602,1,false,true,true,true,68902V107,BK531S8,exact_ticker_adjacent_snapshot,passed,complete
+OWENQ-200610,OWENQ-200610,Owens-Corning Common,OWENQ-200610.csv,1990-01-02,2006-10-31,4245,1,true,false,false,false,,,,passed,complete
+OXY,OXY,Occidental Petroleum Corp Common,OXY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,674599105,2655408,exact_ticker_adjacent_snapshot,passed,complete
+PAC-199703,PAC-199703,Pacific Telesis Group Common,PAC-199703.csv,1990-01-02,1997-03-31,1832,1,true,true,false,false,,,,passed,complete
+PALM-201006,PALM-201006,Palm Inc Common,PALM-201006.csv,2000-03-02,2010-06-30,2598,1,false,false,false,false,,,,passed,complete
+PANW,PANW,Palo Alto Networks Inc Common,PANW.csv,2012-07-20,2026-08-04,3529,1,false,true,true,true,697435105,B87ZMX0,exact_ticker_adjacent_snapshot,passed,complete
+PAS-201002,PAS-201002,Pepsiamericas Inc Common,PAS-201002.csv,1990-01-02,2010-02-26,5081,1,true,false,false,false,,,,passed,complete
+PAYC,PAYC,Paycom Software Inc Common,PAYC.csv,2014-04-15,2026-08-04,3094,1,false,false,false,false,,,,passed,complete
+PAYX,PAYX,Paychex Inc Common,PAYX.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,704326107,2674458,exact_ticker_adjacent_snapshot,passed,complete
+PBCT-202204,PBCT-202204,People's United Financial Inc Common,PBCT-202204.csv,1990-01-02,2022-04-01,8125,1,false,true,false,false,,,,passed,complete
+PBG-201002,PBG-201002,Pepsi Bottling Group Common,PBG-201002.csv,1999-03-31,2010-02-26,2745,1,false,true,false,false,,,,passed,complete
+PBI,PBI,Pitney Bowes Inc Common,PBI.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+PBY-201602,PBY-201602,Pep Boys - Manny Moe & Jack Common,PBY-201602.csv,1990-01-02,2016-02-03,6575,1,false,false,false,false,,,,passed,complete
+PCAR,PCAR,PACCAR Inc Common,PCAR.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,693718108,2665861,exact_ticker_adjacent_snapshot,passed,complete
+PCG,PCG,PG&E Corp Common,PCG.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,69331C108,2689560,exact_ticker_adjacent_snapshot,passed,complete
+PCH-202601,PCH-202601,PotlatchDeltic Corp Common,PCH-202601.csv,1990-01-02,2026-01-30,9087,1,true,false,false,false,,,,passed,complete
+PCI-199407,PCI-199407,Paramount Communications Inc Common,PCI-199407.csv,1990-01-02,1994-07-07,1142,1,true,false,false,false,,,,passed,complete
+PCL-201602,PCL-201602,Plum Creek Timber Company Common,PCL-201602.csv,1990-01-02,2016-02-19,6586,1,false,true,false,false,,,,passed,complete
+PCLB-199310,PCLB-199310,Price Co Common,PCLB-199310.csv,1990-01-02,1993-10-21,964,1,true,true,false,false,,,,passed,complete
+PCP-201601,PCP-201601,Precision Castparts Corp Common,PCP-201601.csv,1990-01-02,2016-01-29,6572,1,false,true,false,false,,,,passed,complete
+PCS-200404,PCS-200404,Sprint Corp PCS Group Common,PCS-200404.csv,1998-11-17,2004-04-22,1364,1,false,true,false,false,,,,passed,complete
+PD-200703,PD-200703,Phelps Dodge Corp Common,PD-200703.csv,1990-01-02,2007-03-19,4339,1,true,true,false,false,,,,passed,complete
+PDCO-202504,PDCO-202504,Patterson Companies Inc Common,PDCO-202504.csv,1992-10-28,2025-04-16,8174,1,false,false,false,false,,,,passed,complete
+PDG-200603,PDG-200603,Placer Dome Inc Common,PDG-200603.csv,1990-01-02,2006-03-08,4081,1,true,false,false,false,,,,passed,complete
+PDQ-199207,PDQ-199207,Prime Motor Inns Inc Common,PDQ-199207.csv,1990-01-02,1992-07-31,654,1,true,false,false,false,,,,passed,complete
+PEG,PEG,Public Service Enterprise Group Inc Common,PEG.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,744573106,2707677,exact_ticker_adjacent_snapshot,passed,complete
+PEL-199706,PEL-199706,PanEnergy Corp Common,PEL-199706.csv,1990-01-02,1997-06-18,1888,1,true,true,false,false,,,,passed,complete
+PENN,PENN,PENN Entertainment Inc Common,PENN.csv,1994-05-26,2026-08-04,8094,1,false,false,false,false,,,,passed,complete
+PEP,PEP,PepsiCo Inc Common,PEP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,713448108,2681511,exact_ticker_adjacent_snapshot,passed,complete
+PET-199806,PET-199806,Pacific Enterprises Common,PET-199806.csv,1990-01-02,1998-06-26,2146,1,true,true,false,false,,,,passed,complete
+PETM-201503,PETM-201503,PetSmart Inc Common,PETM-201503.csv,1993-07-23,2015-03-11,5448,1,false,true,false,false,,,,passed,complete
+PFE,PFE,Pfizer Inc Common,PFE.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,717081103,2684703,exact_ticker_adjacent_snapshot,passed,complete
+PFG,PFG,Principal Financial Group Inc Common,PFG.csv,2001-10-23,2026-08-04,6234,1,false,true,true,true,74251V102,2803014,exact_ticker_adjacent_snapshot,passed,complete
+PG,PG,Procter & Gamble Co Common,PG.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,742718109,2704407,exact_ticker_adjacent_snapshot,passed,complete
+PGL-200702,PGL-200702,Peoples Energy Corp Common,PGL-200702.csv,1990-01-02,2007-02-21,4321,1,true,true,false,false,,,,passed,complete
+PGN-201207,PGN-201207,Progress Energy Inc Common,PGN-201207.csv,1990-01-02,2012-07-02,5673,1,true,false,false,false,,,,passed,complete
+PGR,PGR,Progressive Corp Common,PGR.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,743315103,2705024,exact_ticker_adjacent_snapshot,passed,complete
+PH,PH,Parker-Hannifin Corp Common,PH.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,701094104,2671501,exact_ticker_adjacent_snapshot,passed,complete
+PHA-200304,PHA-200304,Pharmacia Corp Common,PHA-200304.csv,1990-01-02,2003-04-15,3352,1,true,true,false,false,,,,passed,complete
+PHB-199910,PHB-199910,Pioneer Hi-Bred International Inc Common,PHB-199910.csv,1990-01-02,1999-10-01,2465,1,false,true,false,false,,,,passed,complete
+PHL-199008,PHL-199008,Philips Industries Inc Common,PHL-199008.csv,1990-01-02,1990-08-22,163,1,true,true,false,false,,,,passed,complete
+PHM,PHM,PulteGroup Inc Common,PHM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,745867101,2708841,exact_ticker_adjacent_snapshot,passed,complete
+PIN-199410,PIN-199410,PSI Resources Inc Common,PIN-199410.csv,1990-01-02,1994-10-24,1218,1,true,true,false,false,,,,passed,complete
+PKG,PKG,Packaging Corporation of America Common,PKG.csv,2000-01-28,2026-08-04,6668,1,false,true,true,true,695156109,2504566,exact_ticker_adjacent_snapshot,passed,complete
+PLD,PLD,Prologis Inc Common,PLD.csv,1997-11-21,2026-08-04,7217,1,false,true,true,true,74340W103,B44WZD7,exact_ticker_adjacent_snapshot,passed,complete
+PLD-201106,PLD-201106,ProLogis Inc Common,PLD-201106.csv,1994-03-31,2011-06-02,4321,1,false,true,false,false,,,,passed,complete
+PLL-201508,PLL-201508,Pall Corp Common,PLL-201508.csv,1990-01-02,2015-08-28,6467,1,true,true,false,false,,,,passed,complete
+PLTR,PLTR,Palantir Technologies Inc Class A Common,PLTR.csv,2020-09-30,2026-08-04,1467,1,false,true,true,true,69608A108,BN78DQ4,exact_ticker_adjacent_snapshot,passed,complete
+PM,PM,Philip Morris International Inc Common,PM.csv,2008-03-17,2026-08-04,4625,1,false,true,true,true,718172109,B2PKRQ3,exact_ticker_adjacent_snapshot,passed,complete
+PMCS-201601,PMCS-201601,PMC-Sierra Inc Common,PMCS-201601.csv,1991-04-24,2016-01-14,6231,1,false,false,false,false,,,,passed,complete
+PMI-199911,PMI-199911,Premark International Inc Common,PMI-199911.csv,1990-01-02,1999-11-23,2502,1,true,false,false,false,,,,passed,complete
+PN-199109,PN-199109,Pan Am Corp Common,PN-199109.csv,1990-01-02,1991-09-25,439,1,true,false,false,false,,,,passed,complete
+PNC,PNC,PNC Financial Services Group Inc Common,PNC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,693475105,2692665,exact_ticker_adjacent_snapshot,passed,complete
+PNR,PNR,Pentair plc Common,PNR.csv,1990-01-02,2026-08-04,9212,1,false,true,true,true,G7S00T104,BLS09M3,exact_ticker_adjacent_snapshot,passed,complete
+PNU-200003,PNU-200003,Pharmacia & Upjohn Inc Common,PNU-200003.csv,1990-01-02,2000-03-31,2591,1,true,true,false,false,,,,passed,complete
+PNW,PNW,Pinnacle West Capital Corp Common,PNW.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,723484101,2048804,exact_ticker_adjacent_snapshot,passed,complete
+PODD,PODD,Insulet Corp Common,PODD.csv,2007-05-15,2026-08-04,4836,1,false,true,true,true,45784P101,B1XGNW4,exact_ticker_adjacent_snapshot,passed,complete
+POM-201603,POM-201603,Pepco Holdings Inc Common,POM-201603.csv,1990-01-02,2016-03-23,6609,1,false,true,false,false,,,,passed,complete
+POOL,POOL,Pool Corp Common,POOL.csv,1995-10-13,2026-08-04,7716,1,false,false,false,false,,,,passed,complete
+PPG,PPG,PPG Industries Inc Common,PPG.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,693506107,2698470,exact_ticker_adjacent_snapshot,passed,complete
+PPL,PPL,PPL Corp Common,PPL.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,69351T106,2680905,exact_ticker_adjacent_snapshot,passed,complete
+PPLI,PPLI,People Inc Common,PPLI.csv,1993-01-18,2026-08-04,8442,1,false,false,false,false,,,,passed,complete
+PPW-199911,PPW-199911,PacifiCorp Common,PPW-199911.csv,1990-01-02,1999-11-29,2505,1,true,true,false,false,,,,passed,complete
+PRD-200110,PRD-200110,Polaroid Corp Common,PRD-200110.csv,1990-01-02,2001-10-09,2971,1,true,false,false,false,,,,passed,complete
+PRGO,PRGO,Perrigo Co Plc Common,PRGO.csv,1991-12-17,2026-08-04,8718,1,false,false,false,false,,,,passed,complete
+PRSU,PRSU,Pursuit Attractions and Hospitality Inc Common,PRSU.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+PRU,PRU,Prudential Financial Inc Common,PRU.csv,2001-12-13,2026-08-04,6198,1,false,true,true,true,744320102,2819118,exact_ticker_adjacent_snapshot,passed,complete
+PSA,PSA,Public Storage Common,PSA.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,74460D109,2852533,exact_ticker_adjacent_snapshot,passed,complete
+PSFT-200501,PSFT-200501,PeopleSoft Inc Common,PSFT-200501.csv,1992-11-19,2005-01-07,3058,1,false,false,false,false,,,,passed,complete
+PSKY,PSKY,Paramount Skydance Corporation Class B Common,PSKY.csv,1990-06-14,2026-08-04,9096,1,false,true,true,true,69932A204,BSNMNQ5,exact_ticker_adjacent_snapshot,passed,complete
+PSX,PSX,Phillips 66 Common,PSX.csv,2012-04-12,2026-08-04,3598,1,false,true,true,true,718546104,B78C4Y8,exact_ticker_adjacent_snapshot,passed,complete
+PT-199505,PT-199505,Pet Inc Common,PT-199505.csv,1991-04-02,1995-05-11,1041,1,true,false,false,false,,,,passed,complete
+PTC,PTC,PTC Inc Common,PTC.csv,1990-01-02,2026-08-04,9214,2,false,true,true,true,69370C100,B95N910,exact_ticker_adjacent_snapshot,passed,complete
+PTV-201011,PTV-201011,Pactiv Corp Common,PTV-201011.csv,1999-10-27,2010-11-16,2781,1,false,true,false,false,,,,passed,complete
+PVH,PVH,PVH Corp Common,PVH.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+PVN-200509,PVN-200509,Providian Financial Corp Common,PVN-200509.csv,1990-01-02,2005-09-30,3973,1,true,true,false,false,,,,passed,complete
+PVT-199906,PVT-199906,Provident Companies Inc Common,PVT-199906.csv,1990-01-02,1999-06-30,2400,1,false,true,false,false,,,,passed,complete
+PWER-201307,PWER-201307,Power-One Inc Common,PWER-201307.csv,1997-10-01,2013-07-25,3979,1,false,false,false,false,,,,passed,complete
+PWJ-200011,PWJ-200011,Paine Webber Group Inc Common,PWJ-200011.csv,1990-01-02,2000-11-03,2742,1,false,true,false,false,,,,passed,complete
+PWR,PWR,Quanta Services Inc Common,PWR.csv,1998-02-12,2026-08-04,7162,1,false,true,true,true,74762E102,2150204,exact_ticker_adjacent_snapshot,passed,complete
+PX-201810,PX-201810,Praxair Inc Common,PX-201810.csv,1992-06-17,2018-10-30,6644,1,false,true,false,false,,,,passed,complete
+PXD-202405,PXD-202405,Pioneer Natural Resources Co Common,PXD-202405.csv,1990-01-02,2024-05-02,8650,1,false,true,false,false,,,,passed,complete
+PYPL,PYPL,PayPal Holdings Inc Common,PYPL.csv,2015-07-06,2026-08-04,2787,1,false,true,true,true,70450Y103,BYW36M8,exact_ticker_adjacent_snapshot,passed,complete
+PZE-199908,PZE-199908,Pennzenergy Co Common,PZE-199908.csv,1990-01-02,1999-08-17,2433,1,true,false,false,false,,,,passed,complete
+Q,Q,Qnity Electronics Inc Common,Q.csv,2025-10-27,2026-08-04,193,1,false,true,true,true,74743L100,BW1P234,exact_ticker_adjacent_snapshot,passed,complete
+Q-201103,Q-201103,Qwest Communications International Inc Common,Q-201103.csv,1997-06-24,2011-03-31,3466,1,false,true,false,false,,,,passed,complete
+QCOM,QCOM,QUALCOMM Inc Common,QCOM.csv,1991-12-13,2026-08-04,8720,1,false,true,true,true,747525103,2714923,exact_ticker_adjacent_snapshot,passed,complete
+QEP-202103,QEP-202103,QEP Resources Inc Common,QEP-202103.csv,2010-06-16,2021-03-16,2706,1,false,false,false,false,,,,passed,complete
+QLGC-201608,QLGC-201608,QLogic Corp Common,QLGC-201608.csv,1994-02-28,2016-08-15,5657,1,false,false,false,false,,,,passed,complete
+QRVO,QRVO,Qorvo Inc Common,QRVO.csv,2015-01-02,2026-08-04,2913,1,false,false,false,false,,,,passed,complete
+QTRN-200309,QTRN-200309,Quintiles Transnational Corp Common,QTRN-200309.csv,1994-04-21,2003-09-25,2374,1,false,true,false,false,,,,passed,complete
+R,R,Ryder System Inc Common,R.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+RADCQ-202409,RADCQ-202409,Rite Aid Corp Common,RADCQ-202409.csv,1990-01-02,2024-09-03,8733,1,true,false,false,false,,,,passed,complete
+RAI-201707,RAI-201707,Reynolds American Inc Common,RAI-201707.csv,1999-06-01,2017-07-24,4567,1,false,true,false,false,,,,passed,complete
+RAL-200112,RAL-200112,Ralston Purina Co Common,RAL-200112.csv,1990-01-02,2001-12-12,3016,1,true,true,false,false,,,,passed,complete
+RATL-200302,RATL-200302,Rational Software Corp Common,RATL-200302.csv,1990-01-02,2003-02-20,3311,1,false,true,false,false,,,,passed,complete
+RBD-199903,RBD-199903,Rubbermaid Inc Common,RBD-199903.csv,1990-01-02,1999-03-24,2332,1,true,true,false,false,,,,passed,complete
+RBK-200601,RBK-200601,Reebok International Ltd Common,RBK-200601.csv,1990-01-02,2006-01-31,4056,1,true,true,false,false,,,,passed,complete
+RCL,RCL,Royal Caribbean Group Common,RCL.csv,1993-04-28,2026-08-04,8374,1,false,true,true,true,V7780T103,2754907,exact_ticker_adjacent_snapshot,passed,complete
+RDC-201904,RDC-201904,Rowan Companies PLC Class A Common,RDC-201904.csv,1990-01-02,2019-04-10,7376,1,true,false,false,false,,,,passed,complete
+REG,REG,Regency Centers Corp Common,REG.csv,1993-10-29,2026-08-04,8237,1,false,true,true,true,758849103,2726177,exact_ticker_adjacent_snapshot,passed,complete
+REGN,REGN,Regeneron Pharmaceuticals Inc Common,REGN.csv,1991-04-02,2026-08-04,8898,1,false,true,true,true,75886F107,2730190,exact_ticker_adjacent_snapshot,passed,gaps_reported
+RF,RF,Regions Financial Corp Common,RF.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,7591EP100,B01R311,exact_ticker_adjacent_snapshot,passed,complete
+RHI,RHI,Robert Half Inc Common,RHI.csv,1990-01-02,2026-08-04,9134,1,false,false,false,false,,,,passed,complete
+RHT-201907,RHT-201907,Red Hat Inc Common,RHT-201907.csv,1999-08-11,2019-07-08,5008,1,false,true,false,false,,,,passed,complete
+RIG,RIG,Transocean Ltd Common,RIG.csv,1993-05-28,2026-08-04,8352,2,false,false,false,false,,,,passed,complete
+RJF,RJF,Raymond James Financial Inc Common,RJF.csv,1990-01-02,2026-08-04,9207,1,false,true,true,true,754730109,2718992,exact_ticker_adjacent_snapshot,passed,complete
+RL,RL,Ralph Lauren Corporation Class A Common,RL.csv,1997-06-12,2026-08-04,7331,1,false,true,true,true,751212101,B4V9661,exact_ticker_adjacent_snapshot,passed,complete
+RLM-200005,RLM-200005,Reynolds Metals Co Common,RLM-200005.csv,1990-01-02,2000-05-03,2613,1,true,true,false,false,,,,passed,complete
+RMD,RMD,ResMed Inc Common,RMD.csv,1995-06-02,2026-08-04,7834,1,false,true,true,true,761152107,2732903,exact_ticker_adjacent_snapshot,passed,complete
+RML-200608,RML-200608,Russell Corp Common,RML-200608.csv,1990-01-02,2006-08-01,4182,1,true,false,false,false,,,,passed,complete
+RNB-199912,RNB-199912,Republic New York Corp Common,RNB-199912.csv,1990-01-02,1999-12-31,2528,1,false,true,false,false,,,,passed,complete
+ROH-200904,ROH-200904,Rohm & Hass Co Common,ROH-200904.csv,1990-01-02,2009-04-01,4853,1,true,true,false,false,,,,passed,complete
+ROK,ROK,Rockwell Automation Inc Common,ROK.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,773903109,2754060,exact_ticker_adjacent_snapshot,passed,complete
+ROL,ROL,Rollins Inc Common,ROL.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,775711104,2747305,exact_ticker_adjacent_snapshot,passed,complete
+ROP,ROP,Roper Technologies Inc Common,ROP.csv,1992-02-13,2026-08-04,8675,1,false,true,true,true,776696106,2749602,exact_ticker_adjacent_snapshot,passed,complete
+ROST,ROST,Ross Stores Inc Common,ROST.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,778296103,2746711,exact_ticker_adjacent_snapshot,passed,complete
+RRC,RRC,Range Resources Corp Common,RRC.csv,1990-04-10,2026-08-04,9121,1,false,false,false,false,,,,passed,complete
+RRD-202202,RRD-202202,RR Donnelley & Sons Co Common,RRD-202202.csv,1990-01-02,2022-02-25,8102,1,true,false,false,false,,,,passed,complete
+RSG,RSG,Republic Services Inc Common,RSG.csv,1998-07-01,2026-08-04,7066,1,false,true,true,true,760759100,2262530,exact_ticker_adjacent_snapshot,passed,complete
+RSHCQ-201510,RSHCQ-201510,RadioShack Corp Common,RSHCQ-201510.csv,1990-01-02,2015-10-07,6493,1,true,false,false,false,,,,passed,complete
+RTN-202004,RTN-202004,Raytheon Co Common,RTN-202004.csv,1990-01-02,2020-04-02,7623,1,true,true,false,false,,,,passed,complete
+RTX,RTX,RTX Corp Common,RTX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,75513E101,BM5M5Y3,exact_ticker_adjacent_snapshot,passed,complete
+RVTY,RVTY,Revvity Inc Common,RVTY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,714046109,2305844,exact_ticker_adjacent_snapshot,passed,complete
+RX-201002,RX-201002,IMS Health Inc Common,RX-201002.csv,1996-10-17,2010-02-25,3361,1,false,true,false,false,,,,passed,complete
+RYAN-200610,RYAN-200610,Ryan's Restaurant Common,RYAN-200610.csv,1990-01-02,2006-10-31,4246,1,true,false,false,false,,,,passed,complete
+RYC-199908,RYC-199908,Raychem Corp Common,RYC-199908.csv,1990-01-02,1999-08-12,2430,1,true,true,false,false,,,,passed,complete
+RYI-200710,RYI-200710,Ryerson Inc Common,RYI-200710.csv,1990-01-02,2007-10-18,4488,1,true,false,false,false,,,,passed,complete
+S-200503,S-200503,Sears Roebuck & Co Common,S-200503.csv,1990-01-02,2005-03-24,3841,1,true,true,false,false,,,,passed,complete
+S-202003,S-202003,Sprint Corp Common,S-202003.csv,1990-01-02,2020-03-31,7621,1,true,false,false,false,,,,passed,complete
+SAF-200809,SAF-200809,Safeco Common,SAF-200809.csv,1990-01-02,2008-09-22,4721,1,true,true,false,false,,,,passed,complete
+SAI-199812,SAI-199812,SunAmerica Inc Common,SAI-199812.csv,1990-01-02,1998-12-31,2276,1,false,true,false,false,,,,passed,complete
+SANM,SANM,Sanmina Corp Common,SANM.csv,1993-04-14,2026-08-04,8382,1,false,false,false,false,,,,passed,complete
+SAPE-201502,SAPE-201502,Sapient Corp Common,SAPE-201502.csv,1996-04-04,2015-02-05,4741,1,false,false,false,false,,,,passed,complete
+SB-199711,SB-199711,Salomon Inc Common,SB-199711.csv,1990-01-02,1997-11-26,2001,1,true,true,false,false,,,,passed,complete
+SBAC,SBAC,SBA Communications Corp Class A Common,SBAC.csv,1999-06-16,2026-08-04,6825,1,false,true,true,true,78410G104,BZ6TS23,exact_ticker_adjacent_snapshot,passed,complete
+SBL-200701,SBL-200701,Symbol Technologies Inc Common,SBL-200701.csv,1990-01-02,2007-01-09,4292,1,false,true,false,false,,,,passed,complete
+SBNY,SBNY,Signature Bank Common,SBNY.csv,2004-03-23,2026-08-03,5592,1,false,false,false,false,,,,passed,complete
+SBUX,SBUX,Starbucks Corp Common,SBUX.csv,1992-06-26,2026-08-04,8585,1,false,true,true,true,855244109,2842255,exact_ticker_adjacent_snapshot,passed,complete
+SCG-201812,SCG-201812,SCANA Corp Common,SCG-201812.csv,1990-01-02,2018-12-31,7307,1,false,true,false,false,,,,passed,complete
+SCHW,SCHW,Charles Schwab Corp Common,SCHW.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,808513105,2779397,exact_ticker_adjacent_snapshot,passed,complete
+SCI,SCI,Service Corporation International Common,SCI.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+SDH-200106,SDH-200106,Sodexho Marriott Services Common,SDH-200106.csv,1993-10-12,2001-06-20,1942,1,true,false,false,false,,,,passed,complete
+SDS-200508,SDS-200508,Sungard Data Systems Inc Common,SDS-200508.csv,1990-01-02,2005-08-11,3938,1,false,true,false,false,,,,passed,complete
+SE-201702,SE-201702,Spectra Energy Corp Common,SE-201702.csv,2006-12-14,2017-02-24,2566,1,false,true,false,false,,,,passed,complete
+SEBL-200601,SEBL-200601,Siebel Systems Inc Common,SEBL-200601.csv,1996-06-28,2006-01-31,2414,1,false,true,false,false,,,,passed,complete
+SEDG,SEDG,SolarEdge Technologies Inc Common,SEDG.csv,2015-03-26,2026-08-04,2856,1,false,false,false,false,,,,passed,complete
+SEE-202604,SEE-202604,Sealed Air Corp Common,SEE-202604.csv,1990-01-02,2026-04-08,9129,1,false,false,false,false,,,,passed,complete
+SEG-200011,SEG-200011,Seagate Technology Common,SEG-200011.csv,1990-01-02,2000-11-21,2754,1,false,true,false,false,,,,passed,complete
+SFA-200602,SFA-200602,Scientific-Atlanta Inc Common,SFA-200602.csv,1990-01-02,2006-02-24,4073,1,true,true,false,false,,,,passed,complete
+SFS-200008,SFS-200008,Santa Fe Snyder Corp Common,SFS-200008.csv,1990-03-09,2000-08-29,2647,1,false,false,false,false,,,,passed,complete
+SFX-199509,SFX-199509,Santa Fe Pacific Corp Common,SFX-199509.csv,1990-01-02,1995-09-21,1448,1,true,true,false,false,,,,passed,complete
+SGID-200610,SGID-200610,Silicon Graphics Inc Common,SGID-200610.csv,1990-01-02,2006-10-17,4236,1,false,false,false,false,,,,passed,complete
+SGP-200911,SGP-200911,Schering-Plough Corp Common,SGP-200911.csv,1990-01-02,2009-11-03,5003,1,true,true,false,false,,,,passed,complete
+SHEL,SHEL,Shell PLC Class A ADR,SHEL.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+SHLDQ-202210,SHLDQ-202210,Sears Holdings Corp Common,SHLDQ-202210.csv,2003-04-28,2022-10-31,4909,1,false,false,false,false,,,,passed,complete
+SHOY-200204,SHOY-200204,Shoney's Inc Common,SHOY-200204.csv,1990-01-02,2002-04-11,3097,1,true,false,false,false,,,,passed,complete
+SHW,SHW,Sherwin-Williams Co Common,SHW.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,824348106,2804211,exact_ticker_adjacent_snapshot,passed,complete
+SIAL-201511,SIAL-201511,Sigma-Aldrich Corp Common,SIAL-201511.csv,1990-01-02,2015-11-17,6523,1,false,true,false,false,,,,passed,complete
+SIG,SIG,Signet Jewelers Ltd Common,SIG.csv,1990-01-02,2026-08-04,8623,1,false,false,false,false,,,,passed,complete
+SII-201008,SII-201008,Smith International Inc Common,SII-201008.csv,1990-01-02,2010-08-27,5208,1,false,false,false,false,,,,passed,complete
+SITC,SITC,SITE Centers Corp Common,SITC.csv,1993-02-02,2026-08-04,8433,1,false,false,false,false,,,,passed,complete
+SIVBQ-202411,SIVBQ-202411,SVB Financial Group Common,SIVBQ-202411.csv,1990-01-02,2024-11-07,8746,1,false,false,false,false,,,,passed,complete
+SJM,SJM,J.M. Smucker Co Common,SJM.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,832696405,2951452,exact_ticker_adjacent_snapshot,passed,complete
+SK-199805,SK-199805,Safety Kleen Corp Common,SK-199805.csv,1990-01-02,1998-05-20,2120,1,true,false,false,false,,,,passed,complete
+SK-200006,SK-200006,Safety Kleen Corp Common,SK-200006.csv,1990-01-02,2000-06-09,2637,1,true,false,false,false,,,,passed,complete
+SKY,SKY,Champion Homes Inc Common,SKY.csv,1990-01-02,2026-08-04,9210,1,true,false,false,false,,,,passed,complete
+SLB,SLB,SLB Ltd Common,SLB.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,806857108,2779201,exact_ticker_adjacent_snapshot,passed,complete
+SLG,SLG,SL Green Realty Corp Common,SLG.csv,1997-08-15,2026-08-04,7286,1,false,false,false,false,,,,passed,complete
+SLM,SLM,SLM Corp Common,SLM.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+SLR-200710,SLR-200710,Solectron Corp Common,SLR-200710.csv,1990-01-02,2007-10-01,4474,1,false,true,false,false,,,,passed,complete
+SMCI,SMCI,Super Micro Computer Inc Common,SMCI.csv,2007-03-29,2026-08-04,4868,1,false,true,true,true,86800U302,BRC3N73,exact_ticker_adjacent_snapshot,passed,complete
+SMI-200109,SMI-200109,Springs Industries Inc Common,SMI-200109.csv,1990-01-02,2001-09-05,2951,1,true,false,false,false,,,,passed,complete
+SMS-200007,SMS-200007,Shared Medical Systems Corp Common,SMS-200007.csv,1990-01-02,2000-07-05,2656,1,true,false,false,false,,,,passed,complete
+SNA,SNA,Snap-on Inc Common,SNA.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,833034101,2818740,exact_ticker_adjacent_snapshot,passed,complete
+SNC-199511,SNC-199511,Shawmut National Corp Common,SNC-199511.csv,1990-01-02,1995-11-30,1497,1,true,true,false,false,,,,passed,complete
+SNDK,SNDK,Sandisk Corp Common,SNDK.csv,2025-02-13,2026-08-04,369,1,false,true,true,true,80004C200,BSNPZV3,exact_ticker_adjacent_snapshot,passed,complete
+SNDK-201605,SNDK-201605,SanDisk Corp Common,SNDK-201605.csv,1995-11-08,2016-05-11,5162,1,false,true,false,false,,,,passed,complete
+SNI-201803,SNI-201803,Scripps Networks Interactive Inc Class A Common,SNI-201803.csv,2008-06-12,2018-03-06,2450,1,false,true,false,false,,,,passed,complete
+SNPS,SNPS,Synopsys Inc Common,SNPS.csv,1992-02-26,2026-08-04,8670,1,false,true,true,true,871607107,2867719,exact_ticker_adjacent_snapshot,passed,complete
+SNT-199910,SNT-199910,Sonat Inc Common,SNT-199910.csv,1990-01-02,1999-10-25,2481,1,true,true,false,false,,,,passed,complete
+SNV-202512,SNV-202512,Synovus Financial Corp Common,SNV-202512.csv,1990-01-02,2025-12-31,9067,1,false,false,false,false,,,,passed,complete
+SO,SO,Southern Co Common,SO.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,842587107,2829601,exact_ticker_adjacent_snapshot,passed,complete
+SOLS,SOLS,Solstice Advanced Materials Inc Common,SOLS.csv,2025-10-20,2026-08-04,198,1,false,false,false,false,,,,passed,complete
+SOLV,SOLV,Solventum Corp Common,SOLV.csv,2024-03-26,2026-08-04,591,1,false,true,true,true,83444M101,BMTQB43,exact_ticker_adjacent_snapshot,passed,complete
+SOTR-200410,SOTR-200410,Southtrust Corp Common,SOTR-200410.csv,1990-01-02,2004-10-29,3741,1,false,true,false,false,,,,passed,complete
+SOV-199008,SOV-199008,Sovran Financial Corp Common,SOV-199008.csv,1990-01-02,1990-08-31,170,1,true,true,false,false,,,,passed,complete
+SOV-200901,SOV-200901,Sovereign Bancorp Inc Common,SOV-200901.csv,1990-01-02,2009-01-29,4727,1,false,true,false,false,,,,passed,gaps_reported
+SPC-199204,SPC-199204,Security Pacific Corp Common,SPC-199204.csv,1990-01-02,1992-04-21,583,1,true,true,false,false,,,,passed,complete
+SPG,SPG,Simon Property Group Inc Common,SPG.csv,1993-12-14,2026-08-04,8214,1,false,true,true,true,828806109,2812452,exact_ticker_adjacent_snapshot,passed,complete
+SPGI,SPGI,S&P Global Inc Common,SPGI.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,78409V104,BYV2325,exact_ticker_adjacent_snapshot,passed,complete
+SPLS-201709,SPLS-201709,Staples Inc Common,SPLS-201709.csv,1990-01-02,2017-09-12,6980,1,false,true,false,false,,,,passed,complete
+SPP-199512,SPP-199512,Scott Paper Co Common,SPP-199512.csv,1990-01-02,1995-12-12,1505,1,true,true,false,false,,,,passed,complete
+SPXC,SPXC,SPX Technologies Inc Common,SPXC.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+SQD-199105,SQD-199105,Square D Co Common,SQD-199105.csv,1990-01-02,1991-05-28,355,1,true,false,false,false,,,,passed,complete
+SRCL-202411,SRCL-202411,Stericycle Inc Common,SRCL-202411.csv,1996-08-23,2024-11-01,7082,1,false,false,false,false,,,,passed,complete
+SRE,SRE,Sempra Common,SRE.csv,1998-06-29,2026-08-04,7068,1,true,true,true,true,816851109,2138158,exact_ticker_adjacent_snapshot,passed,complete
+SRR-200708,SRR-200708,Stride Rite Corp Common,SRR-200708.csv,1990-01-02,2007-08-17,4445,1,true,false,false,false,,,,passed,complete
+SSP,SSP,E. W. Scripps Company Class A Common,SSP.csv,1990-01-02,2026-08-04,9207,1,false,false,false,false,,,,passed,complete
+STE,STE,STERIS plc Common,STE.csv,1992-06-01,2026-08-04,8604,1,false,true,true,true,G8473T100,BFY8C75,exact_ticker_adjacent_snapshot,passed,complete
+STI-201912,STI-201912,SunTrust Banks Inc Common,STI-201912.csv,1990-01-02,2019-12-06,7543,1,true,true,false,false,,,,passed,complete
+STJ-201701,STJ-201701,St. Jude Medical Inc Common,STJ-201701.csv,1990-01-02,2017-01-04,6807,1,true,true,false,false,,,,passed,complete
+STLD,STLD,Steel Dynamics Inc Common,STLD.csv,1996-11-22,2026-08-04,7469,1,false,true,true,true,858119100,2849472,exact_ticker_adjacent_snapshot,passed,complete
+STO-199811,STO-199811,Stone Container Corp Common,STO-199811.csv,1990-01-02,1998-11-17,2246,1,true,true,false,false,,,,passed,complete
+STR-201609,STR-201609,Questar Corp Common,STR-201609.csv,1990-01-02,2016-09-16,6732,1,false,false,false,false,,,,passed,complete
+STT,STT,State Street Corp Common,STT.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,857477103,2842040,exact_ticker_adjacent_snapshot,passed,complete
+STX,STX,Seagate Technology Holdings PLC Common,STX.csv,2002-12-11,2026-08-04,5948,1,false,true,true,true,G7997R103,BKVD2N4,exact_ticker_adjacent_snapshot,passed,complete
+STZ,STZ,Constellation Brands Inc Class A Common,STZ.csv,1990-01-02,2026-08-04,9120,1,false,true,true,true,21036P108,2170473,exact_ticker_adjacent_snapshot,passed,complete
+SUB-200102,SUB-200102,Summit Bancorp Common,SUB-200102.csv,1990-01-02,2001-02-28,2820,1,false,true,false,false,,,,passed,complete
+SUN-201210,SUN-201210,Sunoco Inc Common,SUN-201210.csv,1990-01-02,2012-10-04,5739,1,true,true,false,false,,,,passed,complete
+SUNEQ-201712,SUNEQ-201712,SunEdison Inc Common,SUNEQ-201712.csv,1995-07-13,2017-12-29,5658,1,false,false,false,false,,,,passed,complete
+SVU-201810,SVU-201810,Supervalu Inc Common,SVU-201810.csv,1990-01-02,2018-10-19,7259,1,true,false,false,false,,,,passed,complete
+SW,SW,Smurfit Westrock PLC Common,SW.csv,2008-04-25,2026-08-04,1662,1,false,true,true,true,G8267P108,BRK49M5,exact_ticker_adjacent_snapshot,passed,complete
+SWK,SWK,Stanley Black & Decker Inc Common,SWK.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,854502101,B3Q2FJ4,exact_ticker_adjacent_snapshot,passed,complete
+SWKS,SWKS,Skyworks Solutions Inc Common,SWKS.csv,1990-01-02,2026-08-04,9150,1,false,true,true,true,83088M102,2961053,exact_ticker_adjacent_snapshot,passed,complete
+SWN-202409,SWN-202409,Southwestern Energy Co Common,SWN-202409.csv,1990-01-02,2024-09-30,8751,1,false,false,false,false,,,,passed,complete
+SWY-201501,SWY-201501,Safeway Inc Common,SWY-201501.csv,1990-04-26,2015-01-29,6240,1,false,false,false,false,,,,passed,complete
+SXCL-201702,SXCL-201702,Steel Excel Inc Common,SXCL-201702.csv,1990-01-02,2017-02-15,6677,1,false,false,false,false,,,,passed,complete
+SYF,SYF,Synchrony Financial Common,SYF.csv,2014-07-31,2026-08-04,3020,1,false,true,true,true,87165B103,BP96PS6,exact_ticker_adjacent_snapshot,passed,complete
+SYK,SYK,Stryker Corp Common,SYK.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,863667101,2853688,exact_ticker_adjacent_snapshot,passed,complete
+SYN-199410,SYN-199410,Syntex Corp Common,SYN-199410.csv,1990-01-02,1994-10-28,1222,1,true,false,false,false,,,,passed,complete
+SYY,SYY,Sysco Corp Common,SYY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,871829107,2868165,exact_ticker_adjacent_snapshot,passed,complete
+T,T,AT&T Inc Common,T.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,00206R102,2831811,exact_ticker_adjacent_snapshot,passed,complete
+T-200511,T-200511,AT&T Corp Common,T-200511.csv,1990-01-02,2005-11-18,4008,1,true,true,false,false,,,,passed,complete
+TA-199907,TA-199907,Transamerica Corp Common,TA-199907.csv,1990-01-02,1999-07-21,2414,1,true,true,false,false,,,,passed,complete
+TAP,TAP,Molson Coors Beverage Company Class B Common,TAP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,60871R209,B067BM3,exact_ticker_adjacent_snapshot,passed,complete
+TAP.B-200404,TAP.B-200404,Travelers Property Casualty Class B Common,TAP.B-200404.csv,2002-08-07,2004-04-01,417,1,false,true,false,false,,,,passed,complete
+TCOMA-199903,TCOMA-199903,Tele Communications Inc Series A Common,TCOMA-199903.csv,1990-01-02,1999-03-09,2321,1,true,true,false,false,,,,passed,complete
+TDC,TDC,Teradata Corp Common,TDC.csv,2007-09-12,2026-08-04,4753,1,false,false,false,false,,,,passed,complete
+TDG,TDG,TransDigm Group Inc Common,TDG.csv,2006-03-15,2026-08-04,5129,1,false,true,true,true,893641100,B11FJK3,exact_ticker_adjacent_snapshot,passed,complete
+TDM-199708,TDM-199708,Tandem Computers Inc Common,TDM-199708.csv,1990-01-02,1997-08-29,1939,1,true,true,false,false,,,,passed,complete
+TDY,TDY,Teledyne Technologies Inc Common,TDY.csv,1999-11-23,2026-08-04,6713,1,false,true,true,true,879360105,2503477,exact_ticker_adjacent_snapshot,passed,complete
+TE-201606,TE-201606,TECO Energy Inc Common,TE-201606.csv,1990-01-02,2016-06-30,6678,1,false,true,false,false,,,,passed,complete
+TECH,TECH,Bio-Techne Corp Common,TECH.csv,1990-01-03,2026-08-04,9211,1,false,true,true,true,09073M104,BSHZ3Q0,exact_ticker_adjacent_snapshot,passed,complete
+TEG-201506,TEG-201506,Integrys Energy Group Inc Common,TEG-201506.csv,1990-01-02,2015-06-29,6424,1,false,true,false,false,,,,passed,complete
+TEK-200711,TEK-200711,Tektronix Inc Common,TEK-200711.csv,1990-01-02,2007-11-21,4512,1,true,false,false,false,,,,passed,complete
+TEL,TEL,TE Connectivity plc Common,TEL.csv,2007-06-14,2026-08-04,4815,2,false,true,true,true,G87052109,BRC3N84,exact_ticker_adjacent_snapshot,passed,complete
+TEN-202211,TEN-202211,Tenneco Inc Class A Common,TEN-202211.csv,1990-01-02,2022-11-16,8285,1,true,false,false,false,,,,passed,complete
+TER,TER,Teradyne Inc Common,TER.csv,1990-01-02,2026-08-04,9214,2,false,true,true,true,880770102,2884183,exact_ticker_adjacent_snapshot,passed,complete
+TEX,TEX,Terex Corp Common,TEX.csv,1990-01-02,2026-08-04,9212,1,false,false,false,false,,,,passed,complete
+TFC,TFC,Truist Financial Corp Common,TFC.csv,1990-01-02,2026-08-04,9213,1,false,true,true,true,89832Q109,BKP7287,exact_ticker_adjacent_snapshot,passed,complete
+TFCF-201903,TFCF-201903,Twenty-First Century Fox Inc Class B Common,TFCF-201903.csv,1990-01-02,2019-03-19,7360,1,false,true,false,false,,,,passed,complete
+TFCFA-201903,TFCFA-201903,Twenty-First Century Fox Inc Class A Common,TFCFA-201903.csv,1994-11-03,2019-03-19,6130,1,false,true,false,false,,,,passed,complete
+TFX,TFX,Teleflex Inc Common,TFX.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+TGNA-202603,TGNA-202603,TEGNA Inc Common,TGNA-202603.csv,1990-01-02,2026-03-19,9120,1,true,false,false,false,,,,passed,complete
+TGT,TGT,Target Corp Common,TGT.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,87612E106,2259101,exact_ticker_adjacent_snapshot,passed,complete
+THC,THC,Tenet Healthcare Corp Common,THC.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+THY-199708,THY-199708,Transitional Hospitals Corp Common,THY-199708.csv,1990-01-02,1997-08-26,1936,1,true,false,false,false,,,,passed,complete
+TIC-199312,TIC-199312,Travelers Corp Common,TIC-199312.csv,1990-01-02,1993-12-31,1013,1,true,false,false,false,,,,passed,complete
+TIE-201301,TIE-201301,Titanium Metals Corp Common,TIE-201301.csv,1996-06-05,2013-01-07,4176,1,false,false,false,false,,,,passed,complete
+TIF-202101,TIF-202101,Tiffany & Co Common,TIF-202101.csv,1990-01-02,2021-01-06,7815,1,false,true,false,false,,,,passed,complete
+TIN-201202,TIN-201202,Temple-Inland Inc Common,TIN-201202.csv,1990-01-02,2012-02-10,5575,1,true,false,false,false,,,,passed,complete
+TJX,TJX,TJX Companies Inc Common,TJX.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,872540109,2989301,exact_ticker_adjacent_snapshot,passed,complete
+TKA-199108,TKA-199108,Tonka Corp Common,TKA-199108.csv,1990-01-02,1991-08-02,402,1,true,false,false,false,,,,passed,complete
+TKO,TKO,TKO Group Holdings Inc Class A Common,TKO.csv,1999-10-19,2026-08-04,6738,1,false,true,true,true,87256C101,BQBBFD1,exact_ticker_adjacent_snapshot,passed,complete
+TKR,TKR,Timken Co Common,TKR.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+TLAB-201312,TLAB-201312,Tellabs Inc Common,TLAB-201312.csv,1990-01-02,2013-12-03,6030,1,false,false,false,false,,,,passed,complete
+TMC-200006,TMC-200006,Times Mirror Co Class A Common,TMC-200006.csv,1990-01-02,2000-06-12,2640,1,true,true,false,false,,,,passed,complete
+TMO,TMO,Thermo Fisher Scientific Inc Common,TMO.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,883556102,2886907,exact_ticker_adjacent_snapshot,passed,complete
+TMUS,TMUS,T-Mobile US Inc Common,TMUS.csv,2007-04-19,2026-08-04,4854,2,false,true,true,true,872590104,B94Q9V0,exact_ticker_adjacent_snapshot,passed,complete
+TNB-201205,TNB-201205,Thomas & Betts Corp Common,TNB-201205.csv,1990-01-02,2012-05-16,5641,1,true,false,false,false,,,,passed,complete
+TNL,TNL,Travel + Leisure Co Common,TNL.csv,2006-07-19,2026-08-04,5042,1,false,false,false,false,,,,passed,complete
+TOS-200109,TOS-200109,Tosco Corp Common,TOS-200109.csv,1990-01-02,2001-09-10,2954,1,false,true,false,false,,,,passed,complete
+TOY-200507,TOY-200507,Toys R Us Inc Common,TOY-200507.csv,1990-01-02,2005-07-21,3923,1,true,true,false,false,,,,passed,complete
+TPL,TPL,Texas Pacific Land Corp Common,TPL.csv,1990-01-02,2026-08-04,9076,1,false,true,true,true,88262P102,BM99VY2,exact_ticker_adjacent_snapshot,passed,complete
+TPR,TPR,Tapestry Inc Common,TPR.csv,2000-10-05,2026-08-04,6494,1,false,true,true,true,876030107,BF09HX3,exact_ticker_adjacent_snapshot,passed,complete
+TRB-200712,TRB-200712,Tribune Co Common,TRB-200712.csv,1990-01-02,2007-12-20,4532,1,true,true,false,false,,,,passed,complete
+TRGP,TRGP,Targa Resources Corp Common,TRGP.csv,2010-12-07,2026-08-04,3937,1,false,true,true,true,87612G101,B55PZY3,exact_ticker_adjacent_snapshot,passed,complete
+TRIP,TRIP,TripAdvisor Inc Common,TRIP.csv,2011-12-07,2026-08-04,3684,1,false,false,false,false,,,,passed,complete
+TRMB,TRMB,Trimble Inc Common,TRMB.csv,1990-07-20,2026-08-04,9075,1,false,true,true,true,896239100,2903958,exact_ticker_adjacent_snapshot,passed,complete
+TROW,TROW,T. Rowe Price Group Inc Common,TROW.csv,1990-01-02,2026-08-04,9210,1,false,true,true,true,74144T108,2702337,exact_ticker_adjacent_snapshot,passed,complete
+TRV,TRV,Travelers Companies Inc Common,TRV.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,89417E109,2769503,exact_ticker_adjacent_snapshot,passed,complete
+TRW-200212,TRW-200212,TRW Inc Common,TRW-200212.csv,1990-01-02,2002-12-11,3267,1,true,true,false,false,,,,passed,complete
+TSCO,TSCO,Tractor Supply Co Common,TSCO.csv,1994-02-17,2026-08-04,8132,1,false,true,true,true,892356106,2900335,exact_ticker_adjacent_snapshot,passed,complete
+TSG-200703,TSG-200703,Sabre Holdings Corp Class A Common,TSG-200703.csv,1996-10-11,2007-03-30,2633,1,false,true,false,false,,,,passed,complete
+TSLA,TSLA,Tesla Inc Common,TSLA.csv,2010-06-29,2026-08-04,4049,1,false,true,true,true,88160R101,B616C79,exact_ticker_adjacent_snapshot,passed,complete
+TSN,TSN,Tyson Foods Inc Class A Common,TSN.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,902494103,2909730,exact_ticker_adjacent_snapshot,passed,complete
+TSS-201909,TSS-201909,Total System Services Inc Common,TSS-201909.csv,1990-01-02,2019-09-17,7426,1,false,true,false,false,,,,passed,complete
+TT,TT,Trane Technologies plc Common,TT.csv,1990-01-02,2026-08-04,9214,2,true,true,true,true,G8994E103,BK9ZQ96,exact_ticker_adjacent_snapshot,passed,complete
+TT-200806,TT-200806,Trane Inc Common,TT-200806.csv,1995-02-03,2008-06-05,3358,1,false,true,false,false,,,,passed,complete
+TTD,TTD,Trade Desk Inc Class A Common,TTD.csv,2016-09-21,2026-08-04,2480,1,false,true,true,true,88339J105,BD8FDD1,exact_ticker_adjacent_snapshot,passed,complete
+TTWO,TTWO,Take-Two Interactive Software Inc Common,TTWO.csv,1997-04-15,2026-08-04,7350,1,false,true,true,true,874054109,2122117,exact_ticker_adjacent_snapshot,passed,complete
+TUPBQ-202506,TUPBQ-202506,Tupperware Brands Corp Common,TUPBQ-202506.csv,1996-05-20,2025-06-11,7311,1,false,false,false,false,,,,passed,complete
+TWC-201605,TWC-201605,Time Warner Cable Inc Common,TWC-201605.csv,2007-01-05,2016-05-17,2358,1,false,true,false,false,,,,passed,complete
+TWTR-202210,TWTR-202210,Twitter Inc Common,TWTR-202210.csv,2013-11-07,2022-10-27,2259,1,false,true,false,false,,,,passed,complete
+TWX-200101,TWX-200101,Time Warner Inc Common,TWX-200101.csv,1990-01-02,2001-01-11,2788,1,true,true,false,false,,,,passed,complete
+TWX-201806,TWX-201806,Time Warner Inc Common,TWX-201806.csv,1992-03-19,2018-06-14,6610,1,false,true,false,false,,,,passed,complete
+TX-200110,TX-200110,Texaco Inc Common,TX-200110.csv,1990-01-02,2001-10-09,2971,1,true,true,false,false,,,,passed,complete
+TXN,TXN,Texas Instruments Inc Common,TXN.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,882508104,2885409,exact_ticker_adjacent_snapshot,passed,complete
+TXT,TXT,Textron Inc Common,TXT.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,883203101,2885937,exact_ticker_adjacent_snapshot,passed,complete
+TXU-200710,TXU-200710,TXU Corp Common,TXU-200710.csv,1990-01-02,2007-10-10,4482,1,true,false,false,false,,,,passed,complete
+TYL,TYL,Tyler Technologies Inc Common,TYL.csv,1990-01-02,2026-08-04,9192,1,false,true,true,true,902252105,2909644,exact_ticker_adjacent_snapshot,passed,complete
+UA,UA,Under Armour Inc Class C Common,UA.csv,2016-03-23,2026-08-04,2604,1,false,false,false,false,,,,passed,complete
+UAA,UAA,Under Armour Inc Class A Common,UAA.csv,2005-11-18,2026-08-04,5207,1,false,false,false,false,,,,passed,complete
+UAL,UAL,United Airlines Holdings Inc Common,UAL.csv,2006-01-25,2026-08-04,5163,1,false,true,true,true,910047109,B4QG225,exact_ticker_adjacent_snapshot,passed,complete
+UALAQ-200602,UALAQ-200602,UAL Corp Common,UALAQ-200602.csv,1990-01-02,2006-02-01,4057,1,true,false,false,false,,,,passed,complete
+UAWGQ-200303,UAWGQ-200303,US Airways Group Inc Common,UAWGQ-200303.csv,1990-01-02,2003-03-31,3340,1,true,false,false,false,,,,passed,complete
+UBER,UBER,Uber Technologies Inc Common,UBER.csv,2019-05-10,2026-08-04,1818,1,false,true,true,true,90353T100,BK6N347,exact_ticker_adjacent_snapshot,passed,complete
+UCC-199904,UCC-199904,Union Camp Corp Common,UCC-199904.csv,1990-01-02,1999-04-30,2358,1,true,true,false,false,,,,passed,complete
+UCL-200508,UCL-200508,Unocal Co Common,UCL-200508.csv,1990-01-02,2005-08-10,3937,1,true,true,false,false,,,,passed,complete
+UCM-200010,UCM-200010,Unicom Corp Holding Co Common,UCM-200010.csv,1990-01-02,2000-10-20,2732,1,true,true,false,false,,,,passed,complete
+UDR,UDR,UDR Inc Common,UDR.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,902653104,2727910,exact_ticker_adjacent_snapshot,passed,complete
+UH-200005,UH-200005,U.S. Home Corp Common,UH-200005.csv,1990-01-02,2000-05-02,2612,1,true,false,false,false,,,,passed,complete
+UHS,UHS,Universal Health Services Inc Class B Common,UHS.csv,1990-01-02,2026-08-04,9208,1,false,true,true,true,913903100,2923785,exact_ticker_adjacent_snapshot,passed,complete
+UIS,UIS,Unisys Corp Common,UIS.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+UK-200102,UK-200102,Union Carbide Corp Holding Co Common,UK-200102.csv,1990-01-02,2001-02-06,2805,1,true,true,false,false,,,,passed,complete
+ULTA,ULTA,Ulta Beauty Inc Common,ULTA.csv,2007-10-25,2026-08-04,4722,1,false,true,true,true,90384S303,B28TS42,exact_ticker_adjacent_snapshot,passed,complete
+UMG-200006,UMG-200006,MediaOne Group Inc Common,UMG-200006.csv,1995-10-27,2000-06-14,1169,1,false,true,false,false,,,,passed,complete
+UN-202011,UN-202011,Unilever NV ADR,UN-202011.csv,1990-01-02,2020-11-27,7789,1,true,false,false,false,,,,passed,complete
+UNH,UNH,UnitedHealth Group Inc Common,UNH.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,91324P102,2917766,exact_ticker_adjacent_snapshot,passed,complete
+UNM,UNM,Unum Group Common,UNM.csv,1990-01-02,2026-08-04,9214,1,false,false,false,false,,,,passed,complete
+UNP,UNP,Union Pacific Corp Common,UNP.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,907818108,2914734,exact_ticker_adjacent_snapshot,passed,complete
+UPC-200406,UPC-200406,Union Planters Corp Common,UPC-200406.csv,1990-01-02,2004-06-30,3652,1,false,true,false,false,,,,passed,complete
+UPR-200007,UPR-200007,Union Pacific Resource Group Inc Common,UPR-200007.csv,1995-10-11,2000-07-14,1202,1,false,true,false,false,,,,passed,complete
+UPS,UPS,United Parcel Service Inc Class B Common,UPS.csv,1999-11-10,2026-08-04,6722,1,false,true,true,true,911312106,2517382,exact_ticker_adjacent_snapshot,passed,complete
+URBN,URBN,Urban Outfitters Inc Common,URBN.csv,1993-11-09,2026-08-04,8228,1,false,false,false,false,,,,passed,complete
+URI,URI,United Rentals Inc Common,URI.csv,1997-12-18,2026-08-04,7199,1,false,true,true,true,911363109,2134781,exact_ticker_adjacent_snapshot,passed,complete
+USB,USB,US Bancorp Common,USB.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,902973304,2736035,exact_ticker_adjacent_snapshot,passed,complete
+USB-200102,USB-200102,US Bancorp Common,USB-200102.csv,1990-01-02,2001-02-23,2817,1,false,true,false,false,,,,passed,complete
+USBC-199708,USBC-199708,United States Bancorp Common,USBC-199708.csv,1990-01-02,1997-08-01,1919,1,false,true,false,false,,,,passed,complete
+USG-201904,USG-201904,USG Corp Common,USG-201904.csv,1990-01-02,2019-04-23,7384,1,true,false,false,false,,,,passed,complete
+USH-199706,USH-199706,USLife Corp Common,USH-199706.csv,1990-01-02,1997-06-17,1887,1,true,true,false,false,,,,passed,complete
+USHC-199607,USHC-199607,US Healthcare Inc Common,USHC-199607.csv,1990-01-02,1996-07-19,1657,1,false,false,false,false,,,,passed,complete
+USS-199810,USS-199810,United States Surgical Corp Common,USS-199810.csv,1990-01-02,1998-10-01,2213,1,false,true,false,false,,,,passed,complete
+UST-200901,UST-200901,UST Inc Common,UST-200901.csv,1990-01-02,2009-01-05,4793,1,true,true,false,false,,,,passed,complete
+USW-200006,USW-200006,US West Inc Common,USW-200006.csv,1990-01-02,2000-06-30,2654,1,true,true,false,false,,,,passed,complete
+UVN-200703,UVN-200703,Univision Communications Inc Class A Common,UVN-200703.csv,1996-09-27,2007-03-28,2641,1,false,true,false,false,,,,passed,complete
+V,V,Visa Inc Class A Common,V.csv,2008-03-19,2026-08-04,4623,1,false,true,true,true,92826C839,B2PZN04,exact_ticker_adjacent_snapshot,passed,complete
+VALPQ-202104,VALPQ-202104,Valaris PLC Class A Common,VALPQ-202104.csv,1990-01-02,2021-04-27,7888,2,false,false,false,false,,,,passed,complete
+VAR-202104,VAR-202104,Varian Medical Systems Inc Common,VAR-202104.csv,1990-01-02,2021-04-14,7882,1,false,true,false,false,,,,passed,complete
+VAT-199609,VAT-199609,Varity Corp Common,VAT-199609.csv,1990-01-02,1996-09-05,1690,1,true,true,false,false,,,,passed,complete
+VEEV,VEEV,Veeva Systems Inc Class A Common,VEEV.csv,2013-10-16,2026-08-04,3218,1,false,true,true,true,922475108,BFH3N85,exact_ticker_adjacent_snapshot,passed,complete
+VFC,VFC,V.F. Corp Common,VFC.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+VIAB-201912,VIAB-201912,Viacom Inc Class B Common,VIAB-201912.csv,2005-12-05,2019-12-04,3524,1,false,true,false,false,,,,passed,complete
+VIAV,VIAV,Viavi Solutions Inc Common,VIAV.csv,1993-11-17,2026-08-04,8205,1,false,false,false,false,,,,passed,complete
+VICI,VICI,VICI Properties Inc Common,VICI.csv,2017-10-17,2026-08-04,2207,1,false,true,true,true,925652109,BYWH073,exact_ticker_adjacent_snapshot,passed,complete
+VLO,VLO,Valero Energy Corp Common,VLO.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,91913Y100,2041364,exact_ticker_adjacent_snapshot,passed,complete
+VLTO,VLTO,Veralto Corp Common,VLTO.csv,2023-09-27,2026-08-04,715,1,false,true,true,true,92338C103,BPGMZQ5,exact_ticker_adjacent_snapshot,passed,complete
+VMC,VMC,Vulcan Materials Co Common,VMC.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,929160109,2931205,exact_ticker_adjacent_snapshot,passed,complete
+VNO,VNO,Vornado Realty Trust Common,VNO.csv,1990-01-02,2026-08-04,8979,1,false,false,false,false,,,,passed,complete
+VNT,VNT,Vontier Corp Common,VNT.csv,2020-09-24,2026-08-04,1470,1,false,false,false,false,,,,passed,complete
+VO-200012,VO-200012,Seagram Ltd Common,VO-200012.csv,1990-01-02,2000-12-08,2766,1,true,true,false,false,,,,passed,complete
+VRSK,VRSK,Verisk Analytics Inc Common,VRSK.csv,2009-10-07,2026-08-04,4231,1,false,true,true,true,92345Y106,B4P9W92,exact_ticker_adjacent_snapshot,passed,complete
+VRSN,VRSN,VeriSign Inc Common,VRSN.csv,1998-01-30,2026-08-04,7171,1,false,true,true,true,92343E102,2142922,exact_ticker_adjacent_snapshot,passed,complete
+VRT,VRT,Vertiv Holdings Co Class A Common,VRT.csv,2018-07-30,2026-08-04,1993,1,false,true,true,true,92537N108,BL3LWS8,exact_ticker_adjacent_snapshot,passed,complete
+VRTS-200507,VRTS-200507,Veritas Software Corp Common,VRTS-200507.csv,1993-12-09,2005-07-01,2891,1,false,true,false,false,,,,passed,complete
+VRTX,VRTX,Vertex Pharmaceuticals Inc Common,VRTX.csv,1991-07-24,2026-08-04,8816,1,false,true,true,true,92532F100,2931034,exact_ticker_adjacent_snapshot,passed,gaps_reported
+VST,VST,Vistra Corp Common,VST.csv,2016-10-04,2026-08-04,2470,1,false,true,true,true,92840M102,BZ8VJQ8,exact_ticker_adjacent_snapshot,passed,complete
+VSTNQ-201010,VSTNQ-201010,Visteon Corp Common,VSTNQ-201010.csv,2000-06-08,2010-10-01,2595,1,false,false,false,false,,,,passed,complete
+VTR,VTR,Ventas Inc Common,VTR.csv,1990-01-02,2026-08-04,9212,1,false,true,true,true,92276F100,2927925,exact_ticker_adjacent_snapshot,passed,complete
+VTRS,VTRS,Viatris Inc Common,VTRS.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,92556V106,BMWS3X9,exact_ticker_adjacent_snapshot,passed,complete
+VTSS-201504,VTSS-201504,Vitesse Semiconductor Corp Common,VTSS-201504.csv,1991-12-11,2015-04-27,5887,1,false,false,false,false,,,,passed,complete
+VYX,VYX,NCR Voyix Corp Common,VYX.csv,1996-12-11,2026-08-04,7457,1,false,false,false,false,,,,passed,complete
+VZ,VZ,Verizon Communications Inc Common,VZ.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,92343V104,2090571,exact_ticker_adjacent_snapshot,passed,complete
+WAB,WAB,Westinghouse Air Brake Technologies Corp Common,WAB.csv,1995-06-16,2026-08-04,7834,1,false,true,true,true,929740108,2955733,exact_ticker_adjacent_snapshot,passed,complete
+WAI-199808,WAI-199808,Western Atlas Inc Common,WAI-199808.csv,1994-03-18,1998-08-10,1110,1,true,true,false,false,,,,passed,complete
+WAMUQ-201203,WAMUQ-201203,Washington Mutual Inc Common,WAMUQ-201203.csv,1990-01-02,2012-03-20,5601,1,false,false,false,false,,,,passed,complete
+WAN.B-199309,WAN.B-199309,Wang Laboratories Inc Class B Common,WAN.B-199309.csv,1990-01-02,1993-09-21,942,1,true,false,false,false,,,,passed,complete
+WAT,WAT,Waters Corp Common,WAT.csv,1995-11-17,2026-08-04,7726,1,false,true,true,true,941848103,2937689,exact_ticker_adjacent_snapshot,passed,complete
+WB-200108,WB-200108,Wachovia Corp Common,WB-200108.csv,1990-01-02,2001-08-31,2949,1,false,true,false,false,,,,passed,complete
+WB-200812,WB-200812,Wachovia Corp Common,WB-200812.csv,1990-01-02,2008-12-31,4791,1,true,true,false,false,,,,passed,complete
+WBA-202508,WBA-202508,Walgreens Boots Alliance Inc Common,WBA-202508.csv,1990-01-02,2025-08-27,8980,1,true,true,false,false,,,,passed,complete
+WBD,WBD,Warner Bros. Discovery Inc Series A Common,WBD.csv,2005-07-06,2026-08-04,5303,1,false,true,true,true,934423104,BM8JYX3,exact_ticker_adjacent_snapshot,passed,complete
+WCG-202001,WCG-202001,WellCare Health Plans Inc Common,WCG-202001.csv,2004-07-01,2020-01-23,3918,1,false,true,false,false,,,,passed,complete
+WCOEQ-200404,WCOEQ-200404,Worldcom Inc Common,WCOEQ-200404.csv,1990-01-02,2004-04-20,3599,1,false,false,false,false,,,,passed,complete
+WDAY,WDAY,Workday Inc Class A Common,WDAY.csv,2012-10-12,2026-08-04,3470,1,false,true,true,true,98138H101,B8K6ZD1,exact_ticker_adjacent_snapshot,passed,complete
+WDC,WDC,Western Digital Corp Common,WDC.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,958102105,2954699,exact_ticker_adjacent_snapshot,passed,complete
+WEC,WEC,WEC Energy Group Inc Common,WEC.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,92939U106,BYY8XK8,exact_ticker_adjacent_snapshot,passed,complete
+WELL,WELL,Welltower Inc Common,WELL.csv,1990-01-02,2026-08-04,9214,1,false,true,true,true,95040Q104,BYVYHH4,exact_ticker_adjacent_snapshot,passed,complete
+WEN-200809,WEN-200809,Wendy's International Common,WEN-200809.csv,1990-01-02,2008-09-29,4726,1,true,true,false,false,,,,passed,complete
+WETT-199210,WETT-199210,Wetterau Inc Common,WETT-199210.csv,1990-01-02,1992-10-29,717,1,true,true,false,false,,,,passed,complete
+WFC,WFC,Wells Fargo & Co Common,WFC.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,949746101,2649100,exact_ticker_adjacent_snapshot,passed,complete
+WFC-199811,WFC-199811,Wells Fargo & Co Common,WFC-199811.csv,1990-01-02,1998-11-02,2235,1,true,true,false,false,,,,passed,complete
+WFM-201708,WFM-201708,Whole Foods Market Inc Common,WFM-201708.csv,1992-01-23,2017-08-25,6448,1,false,true,false,false,,,,passed,complete
+WFRD,WFRD,Weatherford International plc Common,WFRD.csv,1990-01-02,2026-08-04,9123,1,false,false,false,false,,,,passed,complete
+WHR,WHR,Whirlpool Corp Common,WHR.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+WINMQ-202009,WINMQ-202009,Windstream Holdings Inc Common,WINMQ-202009.csv,2005-02-09,2020-09-21,3931,1,false,false,false,false,,,,passed,complete
+WLA-200006,WLA-200006,Warner-Lambert Co Common,WLA-200006.csv,1990-01-02,2000-06-19,2645,1,true,true,false,false,,,,passed,complete
+WLBAQ-202004,WLBAQ-202004,Westmoreland Coal Co Common,WLBAQ-202004.csv,1990-01-02,2020-04-09,7479,1,true,false,false,false,,,,passed,gaps_reported
+WLL-200203,WLL-200203,Willamette Industries Inc Common,WLL-200203.csv,1990-01-02,2002-03-14,3078,1,false,false,false,false,,,,passed,complete
+WLP-200411,WLP-200411,Wellpoint Health Networks Inc Common,WLP-200411.csv,1993-01-28,2004-11-30,2984,1,false,true,false,false,,,,passed,complete
+WM,WM,Waste Management Inc Common,WM.csv,1990-01-03,2026-08-04,9194,1,false,true,true,true,94106L109,2937667,exact_ticker_adjacent_snapshot,passed,complete
+WMB,WMB,Williams Companies Inc Common,WMB.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,969457100,2967181,exact_ticker_adjacent_snapshot,passed,complete
+WMT,WMT,Walmart Inc Common,WMT.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,931142103,2936921,exact_ticker_adjacent_snapshot,passed,complete
+WMX-199807,WMX-199807,Waste Management Inc Common,WMX-199807.csv,1990-01-02,1998-07-16,2159,1,true,true,false,false,,,,passed,complete
+WNDXQ-200611,WNDXQ-200611,Winn-Dixie Stores Inc Common,WNDXQ-200611.csv,1990-01-02,2006-11-21,4260,1,true,false,false,false,,,,passed,complete
+WOR,WOR,Worthington Enterprises Inc Common,WOR.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+WPX-202101,WPX-202101,WPX Energy Inc Common,WPX-202101.csv,2011-12-12,2021-01-06,2282,1,false,false,false,false,,,,passed,complete
+WRB,WRB,W. R. Berkley Corp Common,WRB.csv,1990-01-02,2026-08-04,9204,1,false,true,true,true,084423102,2093644,exact_ticker_adjacent_snapshot,passed,complete
+WRK-202407,WRK-202407,WestRock Co Common,WRK-202407.csv,2015-06-24,2024-07-05,2272,1,false,true,false,false,,,,passed,complete
+WSM,WSM,Williams-Sonoma Inc Common,WSM.csv,1990-01-02,2026-08-04,9211,1,false,true,true,true,969904101,2967589,exact_ticker_adjacent_snapshot,passed,complete
+WST,WST,West Pharmaceutical Services Inc Common,WST.csv,1990-01-02,2026-08-04,9189,1,false,true,true,true,955306105,2950482,exact_ticker_adjacent_snapshot,passed,complete
+WTW,WTW,Willis Towers Watson Public Ltd Co Common,WTW.csv,2001-06-12,2026-08-04,6323,1,false,true,true,true,G96629103,BDB6Q21,exact_ticker_adjacent_snapshot,passed,complete
+WU,WU,Western Union Co Common,WU.csv,2006-09-20,2026-08-04,4998,1,false,false,false,false,,,,passed,complete
+WWY-200810,WWY-200810,WM Wrigley Jr Co Common,WWY-200810.csv,1990-01-02,2008-10-06,4731,1,true,true,false,false,,,,passed,complete
+WY,WY,Weyerhaeuser Co Common,WY.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,962166104,2958936,exact_ticker_adjacent_snapshot,passed,complete
+WYE-200910,WYE-200910,Wyeth Common,WYE-200910.csv,1990-01-02,2009-10-15,4990,1,true,true,false,false,,,,passed,complete
+WYNN,WYNN,Wynn Resorts Ltd Common,WYNN.csv,2002-10-25,2026-08-04,5980,1,false,true,true,true,983134107,2963811,exact_ticker_adjacent_snapshot,passed,complete
+X-202506,X-202506,United States Steel Corp Common,X-202506.csv,1991-04-12,2025-06-17,8608,1,false,false,false,false,,,,passed,complete
+XEC-202109,XEC-202109,Cimarex Energy Co Common,XEC-202109.csv,2002-09-25,2021-09-30,4788,1,false,false,false,false,,,,passed,complete
+XEL,XEL,Xcel Energy Inc Common,XEL.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,98389B100,2614807,exact_ticker_adjacent_snapshot,passed,complete
+XL-201809,XL-201809,XL Group Ltd Common,XL-201809.csv,1991-07-19,2018-09-11,6840,1,false,true,false,false,,,,passed,complete
+XLNX-202202,XLNX-202202,Xilinx Inc Common,XLNX-202202.csv,1990-06-12,2022-02-11,7981,1,false,true,false,false,,,,passed,complete
+XOM,XOM,Exxonmobil Holdings Corp Common,XOM.csv,1990-01-02,2026-08-04,9214,1,true,true,true,true,30233Q108,BVSRPD7,exact_ticker_adjacent_snapshot,passed,complete
+XRAY,XRAY,DENTSPLY SIRONA Inc Common,XRAY.csv,1990-01-02,2026-08-04,9201,1,false,false,false,false,,,,passed,complete
+XRX,XRX,Xerox Holdings Corp Common,XRX.csv,1990-01-02,2026-08-04,9214,1,true,false,false,false,,,,passed,complete
+XTO-201006,XTO-201006,XTO Energy Inc Common,XTO-201006.csv,1993-05-12,2010-06-25,4283,1,false,true,false,false,,,,passed,complete
+XYL,XYL,Xylem Inc Common,XYL.csv,2011-10-13,2026-08-04,3722,1,false,true,true,true,98419M100,B3P2CN8,exact_ticker_adjacent_snapshot,passed,complete
+XYZ,XYZ,Block Inc Class A Common,XYZ.csv,2015-11-19,2026-08-04,2690,1,false,true,true,true,852234103,BYNZGK1,exact_ticker_adjacent_snapshot,passed,complete
+YELLQ-202607,YELLQ-202607,Yellow Corp Common,YELLQ-202607.csv,1990-01-02,2026-07-01,9058,1,true,false,false,false,,,,passed,complete
+YNR-200010,YNR-200010,Young & Rubicam Inc Common,YNR-200010.csv,1998-05-12,2000-10-03,606,1,false,false,false,false,,,,passed,complete
+YUM,YUM,Yum! Brands Inc Common,YUM.csv,1997-09-12,2026-08-04,7267,1,false,true,true,true,988498101,2098876,exact_ticker_adjacent_snapshot,passed,complete
+ZBH,ZBH,Zimmer Biomet Holdings Inc Common,ZBH.csv,2001-07-25,2026-08-04,6293,1,false,true,true,true,98956P102,2783815,exact_ticker_adjacent_snapshot,passed,complete
+ZBRA,ZBRA,Zebra Technologies Corporation Class A Common,ZBRA.csv,1991-08-15,2026-08-04,8804,1,false,true,true,true,989207105,2989356,exact_ticker_adjacent_snapshot,passed,complete
+ZE-199805,ZE-199805,Zenith Electronics Corp Common,ZE-199805.csv,1990-01-02,1998-05-21,2121,1,true,false,false,false,,,,passed,complete
+ZION,ZION,Zions Bancorporation NA Common,ZION.csv,1990-01-02,2026-08-04,9178,1,false,false,false,false,,,,passed,complete
+ZRN-199806,ZRN-199806,Zurn Industries Inc Common,ZRN-199806.csv,1990-01-02,1998-06-11,2135,1,true,false,false,false,,,,passed,complete
+ZTS,ZTS,Zoetis Inc Class A Common,ZTS.csv,2013-02-01,2026-08-04,3396,1,false,true,true,true,98978V103,B95WG16,exact_ticker_adjacent_snapshot,passed,complete

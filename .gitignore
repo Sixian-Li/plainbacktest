@@ -1,0 +1,21 @@
+# Local execution state and environments
+backtest/.venv/
+_local/
+outputs/
+worktrees/
+.agent-history.md
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+node_modules/
+*.log
+
+# Distributed historical definitions have no historical runs attached.
+backtest/experiments/**/runs/
+backtest/experiments/*/*/report.html
+
+# Live-provider updates are local research evidence, not bundled baseline prices.
+data/raw/
+data/processed/updates/
+data/processed/validations/

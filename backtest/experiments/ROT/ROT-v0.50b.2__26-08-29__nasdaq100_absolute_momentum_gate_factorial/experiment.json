@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nasdaq100_pit_12_1_momentum_absolute_gate_factorial_v1",
+  "created_at_utc": "2026-08-29T00:00:00+00:00",
+  "status": "specification_frozen",
+  "symbols": [
+    "NASDAQ100_MOMENTUM_ROTATION"
+  ],
+  "excluded_symbols": {},
+  "strategy": {
+    "name": "nasdaq100_point_in_time_12_1_rank_absolute_momentum_gate_factorial",
+    "description": "在每个日历月最后一个XNYS交易日收盘后，只从滞后一个交易日可知的Nasdaq-100历史时点成分证券中排名。横截面分数沿用父实验的12-1总收益动量，即上个月末相对再往前12个月末的拆股及股息调整Close收益，并另算跳过信号月的6-1收益。实验固定比较无绝对门槛、12-1为正、6-1为正、12-1与6-1同时为正四种资格；每种资格分别运行每月强制Top10与前10进入/跌出前20退出。绝对门槛先于排名与缓冲，一只原持仓若不再通过当月门槛，即使原始12-1排名仍在前20也必须退出。数据仍是candidate_pending_review，结论只属于探索研究。",
+    "buy_rule": "月末先要求证券属于滞后一个XNYS交易日可知的Nasdaq-100成分，并拥有12-1精确端点；需要6-1门槛的路径还必须拥有6-1精确端点。按各路径门槛过滤后，再按12-1从高到低排名，security_id升序打破并列。强制版买合格前10；缓冲版买尚未持有且进入合格前10的证券。若合格证券不足10只，每只仍只分配10%，剩余资金留现金。",
+    "sell_rule": "强制版每个月末卖出不再位于本路径合格前10的证券。缓冲版允许仍通过本路径绝对门槛且排在合格前20的原持仓继续保留；未通过绝对门槛、跌出合格前20、失去有效12-1排名或离开指数都必须退出。月中成分退出沿用父实验的滞后一日确认与逐日重试。无止损、无做空。",
+    "signal_time": "所有成员资格、12-1与6-1端点、绝对门槛、排名和目标权重都在月末已完成Close后确定；成员状态使用前一XNYS交易日观察值。月中成分退出也只在完成Close后确认。",
+    "execution_time": "信号后的下一XNYS交易日按拆股及股息调整Open成交；信号Close先确定股数，成交时按稳定security_id顺序先卖后买，允许小数股，单边成本作为买高卖低的价格冲击。临时缺少真实Open时不在合成价格成交；成员退出卖单逐日重试，终止报价只允许明确标注的卖出清算代理。",
+    "positioning": "long-only、无融资。强制Top10每只目标10%；缓冲组合少于10只时每只10%，10至20只时等权，因此单股目标不超过10%。门槛导致不足10只或完全无合格证券时保留部分或全部现金；月中退出所得现金等到下个月末再分配。现金不计息。",
+    "initial_position": "1999-03-31信号收盘时全现金；八条策略路径和QQQ基准最早都在1999-04-01开盘建立仓位。",
+    "plain_language": {
+      "summary": "在历史Nasdaq-100成分中继续选12-1最强股票，但增加绝对上涨门槛，检验宁可留现金能否显著降低熊市回撤。",
+      "buy": "每个月末先排除近期或长期收益不为正的股票，再按12-1涨幅排序；强制版买前10名，缓冲版只加入新进前10名的股票。",
+      "sell": "强制版跌出合格前10就卖；缓冲版可留到跌出合格前20，但任何股票一旦不满足本路径的绝对上涨门槛就立即失去缓冲资格。",
+      "execution": "所有判断在月末收盘后确认，下一交易日开盘先卖后买；同时计算无成本和单边5个基点。",
+      "position": "最多持有20只，单只不超过10%；合格股票不足时不勉强补满，剩余资金保持现金且不计利息。"
+    }
+  },
+  "parameters": {
+    "analysis_signal_start": "1999-03-31",
+    "first_execution_date": "1999-04-01",
+    "analysis_end": "2026-08-04",
+    "momentum": {
+      "ranking_name": "12-1 calendar-month total-return momentum",
+      "ranking_formula": "Close at prior calendar month-end / Close at the same calendar month-end 12 months earlier - 1",
+      "lookback_months": 12,
+      "absolute_name": "6-1 calendar-month total-return momentum",
+      "absolute_formula": "Close at prior calendar month-end / Close at the same calendar month-end 6 months earlier - 1",
+      "absolute_lookback_months": 6,
+      "skip_recent_months": 1,
+      "endpoint_policy": "every required endpoint must be a real bar on the exact last XNYS session of its calendar month",
+      "signal_month_return_excluded": true,
+      "pre_membership_price_history_allowed": true,
+      "price_variant": "split_and_dividend_adjusted"
+    },
+    "universe": {
+      "dataset_id": "nasdaq100_point_in_time_candidate_v1",
+      "review_status": "pending_review",
+      "source_manifest_status": "candidate_pending_review",
+      "approved": false,
+      "build_id": "600a0e5e3273f89c51ea6cc06e9f6130ceeee0ffbd8bfcee2bb3ca7091d489f8",
+      "source_package_key": "split_and_dividend",
+      "source_archive_sha256": "f8ba17a64886d318e068dfbff734424c926a6858361504c2c87261eaea90ac89",
+      "membership_intervals_sha256": "fbef73e99b37e20f3226503bdcb10efb27868408c45a59e9a5b2580d5cccc967",
+      "security_master_sha256": "66dd94849793cdb5283a15ce5d712b234a064817da36e908860ad0db8cb68223",
+      "membership_decision_lag_xnys_sessions": 1,
+      "security_identity": "one source CSV equals one security_id; no unreviewed predecessor or share-class merge",
+      "historical_weights_used": false
+    },
+    "ranking": {
+      "descending": true,
+      "tie_break": "security_id ascending",
+      "entry_rank": 10,
+      "buffer_exit_rank": 20,
+      "rank_within_gate_eligible_set": true,
+      "missing_required_endpoint_is_ineligible": true,
+      "strict_positive_threshold": 0.0,
+      "absolute_gate_overrides_buffer": true
+    },
+    "formal_cases": [
+      "TOP10_REPLACE__NO_GATE",
+      "TOP10_BUFFER__NO_GATE",
+      "TOP10_REPLACE__M12_POS",
+      "TOP10_BUFFER__M12_POS",
+      "TOP10_REPLACE__M6_POS",
+      "TOP10_BUFFER__M6_POS",
+      "TOP10_REPLACE__M12_M6_POS",
+      "TOP10_BUFFER__M12_M6_POS"
+    ],
+    "absolute_gate_cases": [
+      {
+        "case_id": "TOP10_REPLACE__NO_GATE",
+        "portfolio_style": "monthly_replace",
+        "gate": "none"
+      },
+      {
+        "case_id": "TOP10_BUFFER__NO_GATE",
+        "portfolio_style": "entry10_exit20_buffer",
+        "gate": "none"
+      },
+      {
+        "case_id": "TOP10_REPLACE__M12_POS",
+        "portfolio_style": "monthly_replace",
+        "gate": "momentum_12_1_positive"
+      },
+      {
+        "case_id": "TOP10_BUFFER__M12_POS",
+        "portfolio_style": "entry10_exit20_buffer",
+        "gate": "momentum_12_1_positive"
+      },
+      {
+        "case_id": "TOP10_REPLACE__M6_POS",
+        "portfolio_style": "monthly_replace",
+        "gate": "momentum_6_1_positive"
+      },
+      {
+        "case_id": "TOP10_BUFFER__M6_POS",
+        "portfolio_style": "entry10_exit20_buffer",
+        "gate": "momentum_6_1_positive"
+      },
+      {
+        "case_id": "TOP10_REPLACE__M12_M6_POS",
+        "portfolio_style": "monthly_replace",
+        "gate": "momentum_12_1_and_6_1_positive"
+      },
+      {
+        "case_id": "TOP10_BUFFER__M12_M6_POS",
+        "portfolio_style": "entry10_exit20_buffer",
+        "gate": "momentum_12_1_and_6_1_positive"
+      }
+    ],
+    "primary_case": "TOP10_BUFFER__M12_M6_POS",
+    "primary_control_case": "TOP10_BUFFER__NO_GATE",
+    "rebalance_frequency": "last XNYS session of each calendar month",
+    "membership_exit_policy": "after the one-session-lagged membership state first becomes false, target zero after that completed Close and retry daily until filled",
+    "allocation": {
+      "monthly_replace": "10% per selected security; unused slots remain cash",
+      "entry10_exit20_buffer": "if N<10 use 10% each and keep residual cash; if 10<=N<=20 use 1/N each",
+      "maximum_single_security_weight": 0.1,
+      "off_cycle_exit_cash": "remain cash until the next monthly rebalance"
+    },
+    "signal_sizing": "target shares are calculated from completed signal Close and account equity; next Open is never used to choose or size a signal",
+    "execution_order": "sell excess first by security_id, then buy deficits by security_id with available cash",
+    "temporary_unavailability_policy": "never buy or rebalance on a synthetic carry bar; freeze that security for the event and reconsider at the next monthly rebalance, except forced membership exits retry daily",
+    "terminal_price_policy": "after a historical security's final vendor row, carry the final adjusted OHLC only for valuation and a sell-only terminal settlement proxy; never buy on it",
+    "fractional_shares": true,
+    "cash_interest_pct": 0.0,
+    "numerical_zero_order_notional_usd": 1e-09,
+    "rolling_diagnostic_years": 5,
+    "stress_windows": {
+      "DOTCOM_2000_2002": [
+        "2000-01-03",
+        "2002-12-31"
+      ],
+      "GFC_2008": [
+        "2008-01-02",
+        "2008-12-31"
+      ],
+      "COVID_2020": [
+        "2020-01-02",
+        "2020-12-31"
+      ],
+      "RATE_SHOCK_2022": [
+        "2022-01-03",
+        "2022-12-30"
+      ]
+    },
+    "benchmark": "QQQ Buy & Hold enters on 1999-04-01 Open under the same cost scenario"
+  },
+  "cost_scenarios_bps_per_side": [
+    0,
+    5
+  ],
+  "primary_cost_bps_per_side": 5,
+  "initial_cash": 100000,
+  "financing": "disabled; cash earns zero interest",
+  "benchmark": "QQQ Buy & Hold from the same 1999-04-01 Open; the two no-gate cases reproduce the parent strategy controls and every path uses the same 0 or 5bps one-sided price impact.",
+  "reporting": {
+    "template_id": "interactive_research_v5",
+    "template_path": "backtest/report_templates/interactive_research_v5",
+    "reuse_review": "Reuse v5 with a compact eight-case metric table, separate forced/buffer equity panels, drawdown, rolling five-year, cash exposure and stress-window diagnostics. Exact gate definitions stay in the folded appendix."
+  },
+  "research": {
+    "stage": "exploratory_candidate_point_in_time_rotation",
+    "hypothesis": "Cross-sectional 12-1 ranking remains invested even when the whole universe is weak. Requiring positive 12-1, positive 6-1, or both before ranking may trade some upside for materially lower drawdown; the predesignated dual-positive buffered path should provide the cleanest test of a deliberately selective, cash-permitted portfolio.",
+    "primary_metric": "At 5bps compare TOP10_BUFFER__M12_M6_POS with TOP10_BUFFER__NO_GATE on CAGR, Sharpe, maximum drawdown, annualized turnover, average cash, invested-day share and rolling five-year outcomes. Single-gate cases attribute which horizon matters; forced-Top10 cases test whether conclusions depend on the entry10/exit20 buffer. Zero cost is only a friction ablation.",
+    "selection_rule": "No parameter is optimized and no full-sample winner will be selected. The primary candidate is frozen in advance as TOP10_BUFFER__M12_M6_POS. Call the dual-positive gate structurally useful only if, versus TOP10_BUFFER__NO_GATE at 5bps, maximum drawdown improves by at least 10 percentage points, Sharpe does not decline, CAGR loses no more than 1.0 percentage point, and annualized turnover rises by no more than 25%. The two single-gate paths are explanatory ablations and cannot replace the primary candidate merely because one has the highest full-sample CAGR.",
+    "validation_plan": "Test exact calendar-month 12-1 and 6-1 endpoints, exclusion of the signal month, missing-endpoint eligibility, strict greater-than-zero semantics, rank recomputation within each gate, gate priority over buffer retention, all-cash monthly targets, lagged membership, deterministic ties, Top10/Top20 capacities, weights and unavailable-bar handling. Reconcile all sixteen formal cost-case paths between PyBroker and an independently structured FIFO multi-asset ledger within 1e-6; save full metrics, cash exposure, rolling five-year and four frozen stress-window diagnostics, then run full tests, hashes, catalog/audit, real Chrome, PDF and validate_run gates.",
+    "promotion_criteria": "Passing the structural gate can only nominate the frozen dual-positive buffer for a separately designed walk-forward experiment. No path may advance to simulation or live use while the Nasdaq-100 source remains pending_review; source approval and a continuous time-ordered out-of-sample equity curve are mandatory first.",
+    "rejection_conditions": "Reject claims of approved, out-of-sample or future-optimal evidence; reject post-run substitution of a single-gate winner for the predesignated primary case; reject current-constituent lookback, same-Close fills, signal-month returns, unlagged membership, rank before gate filtering, buffer retention after gate failure, forced filling when fewer than10 qualify, buys on synthetic or terminal bars, holdings above20, weights above10%, an incomplete sixteen-path matrix, non-finite accounts or any ledger mismatch above1e-6. PBO and DSR are not applicable because this is a fixed mechanism ablation rather than parameter selection."
+  },
+  "active_run_id": null,
+  "latest_validated_run_id": null
+}

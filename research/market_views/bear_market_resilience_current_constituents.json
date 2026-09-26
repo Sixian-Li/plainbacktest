@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "view_id": "bear_market_resilience_current_constituents_v1",
+  "builder": {
+    "path": "research/scripts/build_bear_market_resilience.py",
+    "sha256": "33fd1a7b1a89876a85ae6bf2d6a2018442b70a19468d3864a324182a9ff4ba22"
+  },
+  "generated_at_utc": "2026-08-13T18:15:13.590939Z",
+  "study_type": "retrospective_event_study",
+  "universe_policy": "current_constituents_mvp",
+  "snapshots": {
+    "sp500_official": "2026-08-11",
+    "nasdaq100_vendor": "2026-08-04"
+  },
+  "return_policy": "split-and-dividend-adjusted close-to-close total return approximation",
+  "aggregation_policy": "compound available bear-interval returns only; gaps between intervals excluded",
+  "selection_rule": "at least one available bear interval return > 0 and all available bear intervals compound return > 0",
+  "risk_policy": "worst single bear return is reported but is not a screen",
+  "counts": {
+    "sp500_current": 503,
+    "sp500_price_available": 502,
+    "nasdaq100_current": 103,
+    "equity_overlap": 87,
+    "equity_union": 519,
+    "reference_assets": 4,
+    "analyzed_assets": 523,
+    "assets_with_any_available_interval": 519,
+    "screened_assets": 13,
+    "intervals": 12
+  },
+  "sources": {
+    "intervals": {
+      "path": "research/market_views/subjective_spy_qqq_bear_markets_peak_to_trough.json",
+      "sha256": "70cf21d0fab4fa9abc7b9c17fa1185abd6d949262a1f59f33951191992bb7f4a"
+    },
+    "sp500_security_master": {
+      "path": "data/processed/universes/sp500/security_master.csv",
+      "sha256": "566fd82931fd41e99157597fc3a9024bc199f5821c119c3ba67f5d524a5e32d8"
+    },
+    "sp500_current": {
+      "path": "data/processed/universes/sp500/current_constituents.csv",
+      "sha256": "68492193991c37ef54fd7f0837cadcf4d8e1694dd4ce12945f1a372917544e9f"
+    },
+    "sp500_manifest": {
+      "path": "data/processed/universes/sp500/manifest.json",
+      "sha256": "8ab67df58e120094acf35d211ca0b8272b751f5737eb894442626d588c79af97"
+    },
+    "nasdaq100_archive": {
+      "path": "data/2026-08-05多个数据包_rethink/纳斯达克 100 成分股/纳斯达克 100 成分股-拆股及股息调整_20260805.zip",
+      "sha256": "f8ba17a64886d318e068dfbff734424c926a6858361504c2c87261eaea90ac89"
+    },
+    "tlt": {
+      "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/国债系列 ETF/TLT - 美国 20 年以上国债 ETF iShares/TLT_1day_拆股股息调整_20260805.csv",
+      "sha256": "ac5c3e9018c7e162cf3a657f0519b883a0b36cb79aecc9ff6d3f6400dc2bd863"
+    },
+    "gld": {
+      "path": "data/2026-08-05多个数据包_rethink/核心 ETF 日线数据/核心商品 ETF/GLD - 黄金 ETF SPDR/GLD_1day_拆股股息调整_20260805.csv",
+      "sha256": "1c491b264c04816fc2e442928b96acb535eff5cf4a922df27fc3fa7be999ef52"
+    },
+    "spy": {
+      "path": "data/processed/daily/SPY.csv",
+      "sha256": "6b07e1636b1ecc276f17d6d474bb9ec864f7efe829d955c1f83d9f84088f4313"
+    },
+    "qqq": {
+      "path": "data/processed/daily/QQQ.csv",
+      "sha256": "32bc10140c4f2956a71bba3698a32e0db0d299f2b41e55e7b5f856b8f1fed1df"
+    }
+  },
+  "limitations": [
+    "Current-constituent universe has survivorship bias.",
+    "Assets with different available interval counts are not directly comparable without coverage context.",
+    "Adjusted OHLC approximates dividend reinvestment and is not an exact cash corporate-action ledger.",
+    "S&P 500 and Nasdaq-100 may contain multiple share classes, so constituent counts can exceed 500 and 100."
+  ],
+  "outputs": {
+    "summary_csv": "research/market_views/bear_market_resilience_current_constituents_summary.csv",
+    "detail_csv": "research/market_views/bear_market_resilience_current_constituents_detail.csv",
+    "metadata_json": "research/market_views/bear_market_resilience_current_constituents.json",
+    "interactive_html": "research/market_views/bear_market_resilience_current_constituents.html"
+  }
+}

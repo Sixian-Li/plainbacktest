@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "dataset_id": "sp500_point_in_time_candidate_v1",
+  "index_display_name": "S&P 500",
+  "description": "Reproducible audit and pending-review candidate contract for the purchased S&P 500 historical constituent packages. Existing approved S&P outputs are not modified, source prices are not copied, and no output is approved automatically.",
+  "review_status": "pending_review",
+  "production_writes_enabled": false,
+  "builder": "backtest/quantkit/nasdaq100_data.py",
+  "source_root": "data/2026-08-05多个数据包_rethink/标普 500 成分股",
+  "provider": "unknown",
+  "license_or_authorization": "unknown",
+  "acquired_date": "unknown",
+  "filename_snapshot_token": "20260804",
+  "snapshot_token_interpretation": "pending_review; the filename token is not treated as proven acquisition or market as-of metadata",
+  "security_id_prefix": "SPX-CAND",
+  "active_snapshot_date": "2026-08-04",
+  "nominal_company_count": 500,
+  "sample_dates": [
+    "1990-01-02",
+    "2000-01-03",
+    "2010-01-04",
+    "2020-01-02",
+    "2026-08-04"
+  ],
+  "calendar": {
+    "source": "exchange_calendars",
+    "name": "XNYS",
+    "start": "1990-01-01",
+    "end": "2026-12-31",
+    "reason": "The checked-in XNYS.csv begins in 1993, while this source has membership observations from 1990."
+  },
+  "packages": {
+    "split_only": {
+      "path": "data/2026-08-05多个数据包_rethink/标普 500 成分股/标普 500 成分股-仅拆股调整_20260804.zip",
+      "sha256": "d6685ff021eead4b488bbadf9b601fb34ebb72d87c50a514234af6c2d458c918",
+      "size_bytes": 209113238,
+      "archive_members": 1299,
+      "uncompressed_bytes": 668251190,
+      "declared_adjustment_from_filename": "split_adjusted",
+      "adjustment_status": "pending_review"
+    },
+    "split_and_dividend": {
+      "path": "data/2026-08-05多个数据包_rethink/标普 500 成分股/标普 500 成分股-拆股及股息调整_20260804.zip",
+      "sha256": "e1a9635755580470ff2dbf062dc56f15c0bfbe1fc222700608592dec88593299",
+      "size_bytes": 272551496,
+      "archive_members": 1299,
+      "uncompressed_bytes": 749010248,
+      "declared_adjustment_from_filename": "split_and_dividend_adjusted",
+      "adjustment_status": "pending_review"
+    }
+  },
+  "extracted_evidence": null,
+  "source_root_other_evidence": [
+    {
+      "path": "data/2026-08-05多个数据包_rethink/标普 500 成分股/扫码添加企微，获取更多优惠.jpg",
+      "size_bytes": 154643,
+      "sha256": "45da56c477ca94e26f0944349c181445d77ae75d660e756c999f5e56e1ab111e",
+      "treatment": "immutable_external_evidence; not interpreted as provider or license metadata"
+    }
+  ],
+  "source_schema": [
+    "Date",
+    "CompanyName",
+    "Symbol",
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "Volume",
+    "Unadjusted Close",
+    "InIndex"
+  ],
+  "membership_contract": {
+    "source_field": "InIndex",
+    "allowed_values": [0, 1],
+    "interval_representation": "Maximal runs of observed InIndex=1 rows, preserving gaps in price observations as reported quality warnings.",
+    "point_in_time_use": "Use the membership state known before the decision timestamp; absent independent announcement-time evidence, lag observed effective membership by one XNYS session.",
+    "left_censoring": "The first observed 1 on 1990-01-02 does not prove the true admission date and this package does not cover the full index history.",
+    "right_censoring": "A final observed 1 is only valid through the source coverage end.",
+    "daily_representation": "The checked-in membership_intervals.csv plus the registry-bounded exchange_calendars XNYS schedule unambiguously generates each daily member set.",
+    "historical_weights_available": false
+  },
+  "identity_contract": {
+    "primary_record": "Each source CSV member is a separate candidate security record.",
+    "security_id": "Deterministic SHA256-derived ID from the exact source filename; IDs do not imply corporate continuity.",
+    "dated_suffix": "A trailing -YYYYMM is preserved in source_symbol and source_file and removed only for display_ticker. It describes the final price month in this package, not necessarily the index exit month.",
+    "rename_policy": "Do not create predecessor/successor links, including ticker changes, mergers, bankruptcies, or reused tickers, without primary evidence and explicit review.",
+    "share_class_policy": "Keep separate files and share classes separate, including GOOG/GOOGL, BRK.B and BF.B. Same company name is not a merge key."
+  },
+  "identity_special_cases": {
+    "BRK.B": {
+      "status": "separate_share_class",
+      "note": "Berkshire Hathaway B line retained exactly as supplied; no BRK.A record is fabricated."
+    },
+    "BF.B": {
+      "status": "separate_share_class",
+      "note": "Brown-Forman B line retained exactly as supplied; share-class continuity remains pending review."
+    },
+    "ECHO": {
+      "status": "vendor_ticker_identity_pending_review",
+      "note": "The source uses ECHO for EchoStar while the March 2026 S&P announcement used SATS; no automatic ticker-history rewrite is made."
+    }
+  },
+  "identity_review_special_cases": {
+    "GOOG_GOOGL": "kept as separate Alphabet share-class securities",
+    "META_FB": "META source identity retained; no FB record fabricated from backfilled source fields",
+    "BKNG_PCLN": "BKNG source identity retained; no PCLN record fabricated from backfilled source fields",
+    "BRK.B": "retained as a separate supplied share line; BRK.A is not fabricated",
+    "BF.B": "retained as a separate supplied share line",
+    "ECHO_SATS": "source ECHO and official-announcement SATS difference remains an explicit identity review",
+    "dated_suffixes": "preserved in source_symbol; display ticker is presentation-only and suffix month is not treated as index exit"
+  },
+  "member_count_warning_keys": {
+    "below": "daily_member_count_below_500",
+    "above": "daily_member_count_above_500"
+  },
+  "member_count_explanation": "S&P 500 的名义目标是 500 家公司，不等于任何时点都必须正好有 500 条上市证券线。S&P DJI 允许符合条件的公开多股类分别纳入，公司行动和过渡日期也可能临时增加或减少证券线。因此本包的 498–507 只不能直接判为错误；但所有非 500 区间和未能与公司行动对应的日期仍需保留为待审证据，不能用方法论一概豁免。",
+  "quality_policy": {
+    "ohlc_relative_tolerance": 1e-09,
+    "outlier_abs_close_return_pct": 50.0,
+    "max_issue_examples": 24,
+    "blocking_checks": [
+      "archive_integrity_failure",
+      "archive_member_set_mismatch",
+      "archive_member_count_mismatch",
+      "archive_uncompressed_size_mismatch",
+      "extracted_content_mismatch",
+      "package_row_key_mismatch",
+      "package_in_index_mismatch",
+      "package_unadjusted_close_mismatch",
+      "unexpected_schema",
+      "empty_file",
+      "bad_encoding",
+      "bad_row",
+      "bad_date",
+      "duplicate_date",
+      "source_order_violation",
+      "unstable_symbol",
+      "filename_symbol_mismatch",
+      "unstable_company_name",
+      "bad_number",
+      "nonpositive_price",
+      "invalid_ohlc",
+      "negative_volume",
+      "nonpositive_unadjusted_close",
+      "bad_in_index",
+      "never_in_index",
+      "source_mutated_during_build"
+    ],
+    "warning_checks": [
+      "missing_in_index_session",
+      "zero_volume",
+      "outlier_close_return",
+      "member_outlier_close_return",
+      "reentered_index",
+      "filename_suffix_not_last_in_index_month",
+      "daily_member_count_below_500",
+      "daily_member_count_above_500",
+      "left_censored_history"
+    ]
+  },
+  "official_cross_checks": [
+    {
+      "effective_date": "2024-03-18",
+      "previous_session": "2024-03-15",
+      "expected_additions": ["DECK", "SMCI"],
+      "expected_deletions": ["WHR", "ZION"],
+      "url": "https://press.spglobal.com/2024-03-01-Super-Micro-Computer-and-Deckers-Outdoor-Set-to-Join-S-P-500-Others-to-Join-S-P-100%2C-S-P-MidCap-400-and-S-P-SmallCap-600"
+    },
+    {
+      "effective_date": "2024-06-24",
+      "previous_session": "2024-06-21",
+      "expected_additions": ["CRWD", "GDDY", "KKR"],
+      "expected_deletions": ["CMA", "ILMN", "RHI"],
+      "url": "https://press.spglobal.com/2024-06-07-KKR%2C-CrowdStrike-Holdings-and-GoDaddy-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600"
+    },
+    {
+      "effective_date": "2024-09-23",
+      "previous_session": "2024-09-20",
+      "expected_additions": ["DELL", "ERIE", "PLTR"],
+      "expected_deletions": ["AAL", "BIO", "ETSY"],
+      "url": "https://press.spglobal.com/2024-09-06-Palantir-Technologies%2C-Dell-Technologies%2C-and-Erie-Indemnity-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600"
+    },
+    {
+      "effective_date": "2025-03-24",
+      "previous_session": "2025-03-21",
+      "expected_additions": ["DASH", "EXE", "TKO", "WSM"],
+      "expected_deletions": ["BWA", "CE", "FMC", "TFX"],
+      "url": "https://press.spglobal.com/2025-03-07-DoorDash%2C-TKO-Group-Holdings%2C-Williams-Sonoma-and-Expand-Energy-Set-to-Join-S-P-500-Others-to-Join-S-P-100%2C-S-P-MidCap-400-and-S-P-SmallCap-600"
+    },
+    {
+      "effective_date": "2025-09-22",
+      "previous_session": "2025-09-19",
+      "expected_additions": ["APP", "EME", "HOOD"],
+      "expected_deletions": ["CZR", "ENPH", "MKTX"],
+      "url": "https://press.spglobal.com/2025-09-05-AppLovin%2C-Robinhood-Markets-and-Emcor-Group-Set-to-Join-S-P-500-Others-to-Join-S-P-100%2C-S-P-MidCap-400-and-S-P-SmallCap-600"
+    },
+    {
+      "effective_date": "2026-03-23",
+      "previous_session": "2026-03-20",
+      "expected_additions": ["COHR", "ECHO", "LITE", "VRT"],
+      "expected_deletions": ["LW", "MOH", "MTCH", "PAYC"],
+      "official_ticker_difference": {"SATS": "source uses ECHO; identity pending review"},
+      "url": "https://press.spglobal.com/2026-03-06-Vertiv-Holdings%2C-Lumentum-Holdings%2C-Coherent%2C-and-EchoStar-Set-to-Join-S-P-500-Others-to-Join-S-P-100%2C-S-P-MidCap-400%2C-and-S-P-SmallCap-600"
+    },
+    {
+      "effective_date": "2026-06-22",
+      "previous_session": "2026-06-18",
+      "expected_additions": ["FLEX", "MRVL"],
+      "expected_deletions": ["CPB", "POOL"],
+      "url": "https://press.spglobal.com/2026-06-05-Marvell-Technology-and-Flex-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600"
+    }
+  ],
+  "official_primary_sources": [
+    {
+      "topic": "S&P U.S. Indices Methodology",
+      "url": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-us-indices.pdf",
+      "reviewed_points": [
+        "S&P 500 targets 500 constituent companies",
+        "publicly listed multiple share-class lines may be included separately",
+        "spin-offs and index committee maintenance can create security-line transitions"
+      ]
+    },
+    {
+      "topic": "S&P 500 official index page",
+      "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+      "reviewed_points": ["official description says the index includes 500 leading companies"]
+    }
+  ],
+  "outputs": {
+    "directory": "data/processed/universes/sp500/pending_review",
+    "security_master": "data/processed/universes/sp500/pending_review/security_master.csv",
+    "membership_intervals": "data/processed/universes/sp500/pending_review/membership_intervals.csv",
+    "membership_daily_counts": "data/processed/universes/sp500/pending_review/membership_daily_counts.csv",
+    "membership_changes": "data/processed/universes/sp500/pending_review/membership_changes.csv",
+    "source_manifest": "data/processed/universes/sp500/pending_review/source_manifest.json",
+    "quality_report_json": "data/processed/universes/sp500/pending_review/quality_report.json",
+    "quality_report_markdown": "data/processed/universes/sp500/pending_review/quality_report.md"
+  },
+  "promotion_policy": {
+    "auto_promote_to_approved": false,
+    "requires_manual_provider_review": true,
+    "requires_manual_license_review": true,
+    "requires_manual_acquisition_metadata_review": true,
+    "requires_identity_review": true,
+    "requires_explicit_user_authorization": true
+  }
+}
