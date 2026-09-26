@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 ROOT_MARKDOWN = {"AGENTS.md", "catalog.md", "log.md"}
-OPTIONAL_ROOT_MARKDOWN = {"README.md", "THIRD_PARTY_NOTICES.md"}
+OPTIONAL_ROOT_MARKDOWN = {"README.md", "README.zh-CN.md", "THIRD_PARTY_NOTICES.md"}
 FORBIDDEN_ROOT_ENTRIES = {"experiments", "quantkit", "scripts", "tests", ".venv"}
 RUN_STATUSES = {"running", "completed_unvalidated", "validated", "failed", "interrupted"}
 CATALOG_REQUIRED_PATHS = (

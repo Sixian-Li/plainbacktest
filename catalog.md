@@ -2,7 +2,8 @@
 
 ```text
 quant-research/
-├── README.md                                      # 项目介绍、安装、离线示例、Skill 与许可入口。
+├── README.md                                      # 默认英文项目介绍、安装、离线示例和语言切换入口。
+├── README.zh-CN.md                                # 中文项目介绍与快速上手，可切回英文首页。
 ├── LICENSE                                        # 自有代码、Skill 和文档的 MIT 许可。
 ├── THIRD_PARTY_NOTICES.md                          # 依赖许可与 PyBroker Commons Clause 声明。
 ├── .agents/skills/                                # 随项目分发的 quant-backtest、data-update、quant-tidy。

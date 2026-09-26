@@ -1,19 +1,21 @@
 # Quant Research
 
-一个由 Agent 和项目内 Skill 驱动的自然语言策略回测框架：把策略想法整理成明确规则，再执行回测、用独立账本核对结果，并生成可追溯的交互报告。
+**English** | [中文](README.zh-CN.md)
 
-源码与随包数据：[Sixian-Li/quant-research](https://github.com/Sixian-Li/quant-research)。
+A natural-language strategy backtesting framework powered by an agent and project-local Skills. Turn a trading idea into explicit rules, run the backtest, reconcile it against an independent ledger, and produce an interactive report with traceable inputs and results.
+
+Source code and bundled data: [Sixian-Li/quant-research](https://github.com/Sixian-Li/quant-research).
 
 ```text
-自然语言策略 → Skill + Agent 澄清规则 → 冻结实验定义
-→ 数据门禁 → PyBroker 执行 + 独立账本核对 → 交互报告与研究记录
+Strategy in natural language → Agent + Skill clarify the rules → Freeze the experiment
+→ Data checks → PyBroker execution + independent ledger → Report and research record
 ```
 
-自然语言的理解与代码实现由你使用的 Agent 完成；Python 部分负责可重复的计算和验证。仓库自带三个 Skill、整理后的本地数据、研究代码及 83 份实验定义，可以先离线跑通一个示例，再让 Agent 接续研究。
+Your agent interprets the strategy and implements its rules; the Python framework handles reproducible calculation and validation. The repository includes three Skills, curated local data, research code, and 83 experiment definitions. Start with an offline example, then use your agent to continue the research.
 
-## 跑通第一个示例
+## Run your first example
 
-在项目根目录执行。当前验证环境是 macOS、Python 3.13；安装依赖需要网络，示例运行不需要行情 API、密钥或在线数据。
+Clone the repository and run the following commands. The verified environment is macOS with Python 3.13. Installing dependencies requires an internet connection; running the example needs no market-data API, credentials, or live data.
 
 ```bash
 git clone https://github.com/Sixian-Li/quant-research.git
@@ -24,47 +26,49 @@ backtest/.venv/bin/python backtest/scripts/release_data.py check
 backtest/.venv/bin/python backtest/scripts/quickstart.py
 ```
 
-打开最后打印的 `outputs/example_…/report.html`。每次执行创建新目录，同时保存输入数据、规则快照、逐日账户、逐笔订单、指标、代码/数据哈希和核对结果。
+Open the `outputs/example_…/report.html` path printed at the end. Each execution creates a new directory containing the input data, frozen rules, daily account state, orders, metrics, code and data hashes, and reconciliation results.
 
-默认示例使用 QQQ：2016-01-01 至 2026-08-04，SMA20 高于 SMA100 时持仓，否则空仓；收盘确认信号，下一交易日开盘成交，单边成本 5 bps。初始资金 10 万美元，允许零碎股，不融资。它复用框架的 PyBroker 执行器、独立账本和 v5 报告模板。
+The default example uses QQQ from 2016-01-01 through 2026-08-04. It holds QQQ when SMA20 is above SMA100 and stays in cash otherwise. Signals are confirmed at the close and executed at the next session's open, with a cost of 5 bps per side. Initial capital is $100,000; fractional shares are allowed, with no leverage. The example uses the framework's PyBroker execution engine, independent ledger, and v5 report template.
 
-可以换参数或批准标的：
+Change the parameters or choose another approved symbol:
 
 ```bash
 backtest/.venv/bin/python backtest/scripts/quickstart.py --symbol SPY --fast 50 --slow 200
 ```
 
-这是用于检查安装、执行与对账链路的探索性示例。它不会把原有实验标记为 validated，也不代替参数稳健性或样本外验证。均线使用区间前的历史预热；复权 OHLC 是总回报近似，不是逐笔现金分红账本。
+This exploratory example checks installation, execution, and reconciliation. It does not mark existing experiments as validated or replace parameter robustness and out-of-sample analysis. Moving averages use earlier history for warmup. Adjusted OHLC prices approximate total returns without modeling individual cash dividend payments.
 
-## 用自然语言开展研究
+## Research with natural language
 
-用支持项目 Skill 的 Agent 打开本目录，先读 [AGENTS.md](AGENTS.md)，再提出策略，例如：
+Open this directory with an agent that supports project Skills. Have it read [AGENTS.md](AGENTS.md), then describe a strategy. For example:
 
-> 使用 quant-backtest。研究 QQQ 的 SMA20/SMA100 择时：收盘短均线高于长均线则下一日开盘全仓买入，否则卖出。先明确数据范围、成本、预热和基准，再实现、对账并解释结果。
+> Use quant-backtest to study QQQ with an SMA20/SMA100 rule. If the fast SMA is above the slow SMA at the close, hold a fully invested position from the next session's open; otherwise, exit to cash. Define the data range, costs, warmup, and benchmark before implementing the strategy, reconciling the ledgers, and explaining the results.
 
-三个 Skill 随仓库保存，入口均为 `SKILL.md`：
+The project overview and quickstart are available in English and Chinese. Detailed research documents and report text are currently mainly in Chinese.
 
-| Skill | 用途 |
+All three Skills are versioned with the repository, each with a `SKILL.md` entry point:
+
+| Skill | Purpose |
 | --- | --- |
-| [quant-backtest](.agents/skills/quant-backtest/SKILL.md) | 把策略描述变成实验、执行、独立对账、报告和研究记录 |
-| [data-update](.agents/skills/data-update/SKILL.md) | 检查数据快照，按需操作隔离的数据更新与候选审核 |
-| [quant-tidy](.agents/skills/quant-tidy/SKILL.md) | 维护目录、实验谱系和工作区结构 |
+| [quant-backtest](.agents/skills/quant-backtest/SKILL.md) | Turn a strategy description into an experiment, execution, independent reconciliation, report, and research record |
+| [data-update](.agents/skills/data-update/SKILL.md) | Inspect data snapshots and manage isolated updates and candidate review when needed |
+| [quant-tidy](.agents/skills/quant-tidy/SKILL.md) | Maintain directories, experiment lineage, and workspace structure |
 
-Skill 是本项目的组成部分。支持 `.agents/skills` 的 Agent 可直接发现；其他 Agent 可读取对应 `SKILL.md` 和其中引用的文件，不需要依赖作者的全局 Skill。正式研究的 Git 溯源、run 生命周期、门禁与工作树约定见 [研究架构](backtest/docs/architecture.md)；下载 ZIP 后也能直接运行上面的示例。
+These Skills are part of the project. Agents that support `.agents/skills` can discover them directly; other agents can read the relevant `SKILL.md` and its references. They do not depend on the author's global Skill installation. See the [research architecture](backtest/docs/architecture.md) for Git provenance, run lifecycles, validation gates, and worktree conventions used in formal research. The example also works from a downloaded source ZIP.
 
-## 随包内容
+## What's included
 
-- `backtest/quantkit/`、`scripts/`、`tests/`：执行、账本、策略、指标、数据和验证代码。
-- `backtest/report_templates/`：自包含 Plotly 报告，默认 v5，先讲清策略再展示结果。
-- `backtest/experiments/`：DER / ROT / TIM 三条研究线的 83 份定义与谱系。
-- `data/`：1,303 个标准日线 CSV、交易日历、成员表、质量证据，以及两份 Nasdaq-100 原始 ZIP；详情见 [数据说明](data/README.md)。
-- `research/`：不含策略账户的指标与市场观察工具。
+- `backtest/quantkit/`, `scripts/`, and `tests/`: execution, ledgers, strategies, metrics, data handling, and validation.
+- `backtest/report_templates/`: self-contained Plotly reports. The default v5 template explains the strategy before presenting results.
+- `backtest/experiments/`: 83 definitions and their lineage across three research programs: DER, ROT, and TIM.
+- `data/`: 1,303 canonical daily-price CSVs, trading calendars, membership tables, quality evidence, and two original Nasdaq-100 ZIP archives. See the [data documentation](data/README.md).
+- `research/`: indicator and market-observation tools without strategy account ledgers.
 
-这是独立发布快照。历史 run 和大批旧报告没有随包复制；实验的 active/latest run 指针已清空，不能把源工作区的历史结论当作在这里重新验证过的结果。部分历史实验还需要旧训练产物或未附带的原始包，入口与限制见 [发布范围](backtest/docs/release/scope.md)。源代码版本和复制时的数据哈希记录在 [source_snapshot.json](backtest/docs/release/source_snapshot.json)。
+This is an independent distribution snapshot. Historical runs and large collections of old reports are not bundled, and the active/latest run pointers have been cleared. Historical findings from the source workspace have not been revalidated here. Some experiments require earlier training artifacts or original archives that are not included; see the [distribution scope](backtest/docs/release/scope.md). The source revision and data hashes at the time of copying are recorded in [source_snapshot.json](backtest/docs/release/source_snapshot.json).
 
-本版本优先使用随包数据。`yfinance` 已是 PyBroker 的间接依赖，但尚未作为本项目的默认数据供应器接入；快速示例不会调用 Yahoo。现有影子更新工具是可选高级功能。
+This version uses the bundled data by default. `yfinance` is a transitive dependency of PyBroker, but it has not been integrated as this project's default data provider. The quickstart does not call Yahoo. The existing shadow-update tools are optional advanced features.
 
-## 验证和已有实验台
+## Validation and optional labs
 
 ```bash
 backtest/.venv/bin/python -m pip check
@@ -75,19 +79,19 @@ cd backtest
 .venv/bin/python -m scripts.audit_workspace --workspace ..
 ```
 
-只适用于未附带原始档案的测试会明确报告 skip，不把缺失档案算作通过；具体结果见 [验证记录](backtest/docs/release/verification.md)。测试不会隐式重建随包标准数据。
+Tests that require original archives absent from this distribution report an explicit skip, not a pass. See the [verification record](backtest/docs/release/verification.md) for results. The distributed test suite does not implicitly rebuild the bundled canonical data.
 
-已有两个可选 Streamlit 实验台，在项目根目录启动：
+Two optional Streamlit labs are included. Launch either from the project root:
 
 ```bash
 backtest/.venv/bin/python -m streamlit run backtest/dual_sma_lab/app.py
 backtest/.venv/bin/python -m streamlit run research/indicator_lab/app.py
 ```
 
-浏览器交互验证和 PDF 导出另需 Node.js 与 Chrome/Chromium，可通过 `QUANT_CHROME_PATH` 指定浏览器路径。普通示例和 Python 测试不依赖它们。其他操作系统尚未进行完整验证。
+Browser interaction checks and PDF export also require Node.js and Chrome/Chromium. Set `QUANT_CHROME_PATH` to use a specific browser executable. The standard example and Python tests do not require them. Other operating systems have not yet been fully verified.
 
-## 许可证
+## Licensing
 
-自有代码、Skill 和文档采用 [MIT](LICENSE)；`data/` 中随本版本提供的数据采用 [CC BY 4.0](data/LICENSE)，署名方式见 [数据说明](data/README.md)。数据权利人已确认所有权并授权该许可。
+Original project code, Skills, and documentation are licensed under [MIT](LICENSE). The bundled data under `data/` is licensed under [CC BY 4.0](data/LICENSE); attribution details are in the [data documentation](data/README.md). The data rights holder has confirmed ownership and authorized this license.
 
-第三方依赖保留各自许可证。尤其 PyBroker 1.2.12 使用 **Apache 2.0 with Commons Clause**，包含销售限制，不能把整个依赖栈描述成纯 MIT；原文随附于 [第三方声明](THIRD_PARTY_NOTICES.md)。
+Third-party dependencies retain their own licenses. In particular, PyBroker 1.2.12 uses **Apache 2.0 with Commons Clause**, which includes a restriction on selling the software as defined in that license. The dependency stack is therefore not entirely MIT-licensed. See [third-party notices](THIRD_PARTY_NOTICES.md) for the original terms.
