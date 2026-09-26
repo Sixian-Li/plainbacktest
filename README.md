@@ -1,10 +1,12 @@
-# Quant Research
+# PlainBacktest
 
 **English** | [中文](README.zh-CN.md)
 
-A natural-language strategy backtesting framework powered by an agent and project-local Skills. Turn a trading idea into explicit rules, run the backtest, reconcile it against an independent ledger, and produce an interactive report with traceable inputs and results.
+**Rigorous backtesting in plain language.**
 
-Source code and bundled data: [Sixian-Li/quant-research](https://github.com/Sixian-Li/quant-research).
+Describe your trading strategy in everyday language. PlainBacktest works with your coding agent to turn it into explicit rules, run the backtest, and reconcile orders and daily account balances against an independent ledger. Explicit execution timing, recorded data and code hashes, and reproducible reports make the calculation open to inspection.
+
+Source code and bundled data: [Sixian-Li/plainbacktest](https://github.com/Sixian-Li/plainbacktest).
 
 ```text
 Strategy in natural language → Agent + Skill clarify the rules → Freeze the experiment
@@ -18,8 +20,8 @@ Your agent interprets the strategy and implements its rules; the Python framewor
 Clone the repository and run the following commands. The verified environment is macOS with Python 3.13. Installing dependencies requires an internet connection; running the example needs no market-data API, credentials, or live data.
 
 ```bash
-git clone https://github.com/Sixian-Li/quant-research.git
-cd quant-research
+git clone https://github.com/Sixian-Li/plainbacktest.git
+cd plainbacktest
 python3.13 -m venv backtest/.venv
 backtest/.venv/bin/python -m pip install -r backtest/requirements.lock
 backtest/.venv/bin/python backtest/scripts/release_data.py check

@@ -1,4 +1,4 @@
-# Quant Research：Agent 入口
+# PlainBacktest：Agent 入口
 
 本项目是自然语言策略回测框架。先读 `README.md`、`catalog.md`、`log.md`、`backtest/docs/architecture.md` 和 `backtest/experiments/lineage.json`。
 

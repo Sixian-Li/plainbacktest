@@ -16,3 +16,5 @@
 `github_ready_refactor_plan.md` 是源工作区曾讨论的长期工程路线图，不是本版本的发布前置清单。当前不扩展聊天网页、自动化自然语言服务、券商连接或默认在线行情下载。
 
 正式 run 仍要求 Git 版本、干净工作区、数据门禁和完整验证。快速示例采用独立输出目录，只证明此版本的执行和对账链路可用，不绕过原有 `validate_run` 门禁。
+
+项目现名 **PlainBacktest**。快照最初以 `quant-research` 整理，`source_snapshot.json` 中的原始名称与复制哈希作为历史记录保留。

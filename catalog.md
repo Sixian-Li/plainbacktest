@@ -1,7 +1,7 @@
 # Quant 文件目录
 
 ```text
-quant-research/
+plainbacktest/
 ├── README.md                                      # 默认英文项目介绍、安装、离线示例和语言切换入口。
 ├── README.zh-CN.md                                # 中文项目介绍与快速上手，可切回英文首页。
 ├── LICENSE                                        # 自有代码、Skill 和文档的 MIT 许可。

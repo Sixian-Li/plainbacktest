@@ -1,10 +1,12 @@
-# Quant Research
+# PlainBacktest
 
 [English](README.md) | **中文**
 
-一个由 Agent 和项目内 Skill 驱动的自然语言策略回测框架：把策略想法整理成明确规则，再执行回测、用独立账本核对结果，并生成可追溯的交互报告。
+**说清策略，严谨回测。**
 
-源码与随包数据：[Sixian-Li/quant-research](https://github.com/Sixian-Li/quant-research)。
+用日常语言说清策略，让 Agent 把想法变成明确的交易规则并执行回测。PlainBacktest 用独立账本核对逐笔订单和每日账户，保留成交时序、数据与代码哈希，以及可复现的报告，让结果经得起检查。
+
+源码与随包数据：[Sixian-Li/plainbacktest](https://github.com/Sixian-Li/plainbacktest)。
 
 ```text
 自然语言策略 → Skill + Agent 澄清规则 → 冻结实验定义
@@ -18,8 +20,8 @@
 在项目根目录执行。当前验证环境是 macOS、Python 3.13；安装依赖需要网络，示例运行不需要行情 API、密钥或在线数据。
 
 ```bash
-git clone https://github.com/Sixian-Li/quant-research.git
-cd quant-research
+git clone https://github.com/Sixian-Li/plainbacktest.git
+cd plainbacktest
 python3.13 -m venv backtest/.venv
 backtest/.venv/bin/python -m pip install -r backtest/requirements.lock
 backtest/.venv/bin/python backtest/scripts/release_data.py check

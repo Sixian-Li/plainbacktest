@@ -86,5 +86,5 @@
     "check": "passed"
   },
   "workspace_audit": "passed",
-  "distribution": "Published at https://github.com/Sixian-Li/quant-research; verification results are local, not remote CI."
+  "distribution": "Published at https://github.com/Sixian-Li/plainbacktest; verification results are local, not remote CI."
 }

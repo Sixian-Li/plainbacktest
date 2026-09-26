@@ -29,10 +29,12 @@ backtest/.venv/bin/python backtest/scripts/release_data.py check
 
 ## 复用与署名
 
-许可原文：[Creative Commons Attribution 4.0 International](LICENSE)。署名名称为 **Quant Research data contributors**，数据集名称为 **Quant Research market-data snapshot (2026-09-26)**。
+许可原文：[Creative Commons Attribution 4.0 International](LICENSE)。署名名称为 **PlainBacktest data contributors**，数据集名称为 **PlainBacktest market-data snapshot (2026-09-26)**。
+
+旧版本中的 Quant Research 数据署名对应同一组贡献者，保留在 `distribution.json` 中。
 
 建议在复用项目中保留以下说明，并添加你对数据所作修改的描述：
 
-> Data: Quant Research market-data snapshot (2026-09-26), Quant Research data contributors. Licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/ . Source: https://github.com/Sixian-Li/quant-research . Changes: [describe changes, or state unchanged].
+> Data: PlainBacktest market-data snapshot (2026-09-26), PlainBacktest data contributors. Licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/ . Source: https://github.com/Sixian-Li/plainbacktest . Changes: [describe changes, or state unchanged].
 
-来源仓库为 [Sixian-Li/quant-research](https://github.com/Sixian-Li/quant-research)；引用具体快照时同时保留 commit 或版本号。今后另行下载的数据需要单独记录来源与许可，不自动继承本次授权。
+来源仓库为 [Sixian-Li/plainbacktest](https://github.com/Sixian-Li/plainbacktest)；引用具体快照时同时保留 commit 或版本号。今后另行下载的数据需要单独记录来源与许可，不自动继承本次授权。
