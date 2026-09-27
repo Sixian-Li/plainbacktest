@@ -2,7 +2,7 @@
 
 **English** | [中文](README.zh-CN.md)
 
-**Rigorous backtesting in plain language.**
+**Say It Simply, Test It Properly.**
 
 Describe your trading strategy in everyday language. PlainBacktest works with your coding agent to turn it into explicit rules, run the backtest, and reconcile orders and daily account balances against an independent ledger. Explicit execution timing, recorded data and code hashes, and reproducible reports make the calculation open to inspection.
 
